@@ -48,12 +48,12 @@ public class MemberController {
 		}
 		return mav;
 	}
-	@RequestMapping(value = "member/login", method = RequestMethod.GET) //URL로 검색해서 들어왔을때
+	@RequestMapping(value = "login", method = RequestMethod.GET) //URL로 검색해서 들어왔을때
 	public String loginForm() {
 		return "member/loginpage";
 	}
 	
-	@RequestMapping(value = "member/login", method = RequestMethod.POST) //id,pw입력해서 로그인 누를때
+	@RequestMapping(value = "login", method = RequestMethod.POST) //id,pw입력해서 로그인 누를때
 	public ModelAndView loginForm(@Valid Member member, BindingResult bindingResult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
@@ -78,5 +78,15 @@ public class MemberController {
 			mav.setViewName("member/loginpage");
 		}
 		return mav;
-	}	
+	}
+	
+	@RequestMapping(value="logout") //세션을 끊고 리다이렉트만 해주면 되서 String, redirect사용
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect: main.sms";
+	}
+	@RequestMapping(value="personal_info", method=RequestMethod.GET)
+	public ModelAndView personal_info(String id, HttpSession session) {
+		return new ModelAndView("member/loginpage");
+	}
 }
