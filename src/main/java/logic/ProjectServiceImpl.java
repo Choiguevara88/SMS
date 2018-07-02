@@ -138,12 +138,22 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	@Override
 	public int reserveCount(String id, String searchType, String searchContent) {
-		return reDao.count(searchType, searchContent);
+		return reDao.count(id, searchType, searchContent);
 	}
-
+	
+	@Override
+	public int hostReserveCount(Integer sNo, String searchType, String searchContent) {
+		return reDao.hostCount(sNo, searchType, searchContent);
+	}
+	
 	@Override
 	public List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum, int limit) {
 		return reDao.list(id, searchType, searchContent, pageNum, limit);
+	}
+	
+	@Override
+	public int hostBuildCount(String hostName) {
+		return buDao.hostBuildCnt(hostName);
 	}
 	
 	@Override
@@ -152,10 +162,10 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
-	public List<Reserve> selectHostReserveList(String id, String searchType, String searchContent, Integer pageNum, int limit) {
-		return reDao.hostlist(id, searchType, searchContent, pageNum, limit);
+	public List<Reserve> selectHostReserveList(Integer sNo, String searchType, String searchContent, Integer pageNum, int limit) {
+		return reDao.hostlist(sNo, searchType, searchContent, pageNum, limit);
 	}
-	
+
 	@Override
 	public void reserveInsert(Reserve reserve) {
 		reserve.setReNo(reserve.getSrNo() + (int)new Date().getTime());
@@ -194,5 +204,6 @@ public class ProjectServiceImpl implements ProjectService {
 	public void updateMember(Member member) {
 		memDao.updateMember(member);
 	}
+
 
 } // ProjectServiceImpl end

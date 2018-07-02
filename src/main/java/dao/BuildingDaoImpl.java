@@ -24,4 +24,11 @@ public class BuildingDaoImpl implements BuildingDao {
 		return sqlSession.selectList(NS + "hostList", map);
 	}
 
+	@Override
+	public int hostBuildCnt(String hostName) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id", hostName);
+		return sqlSession.selectOne(NS + "hostCount", map);
+	}
+
 }

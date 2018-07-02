@@ -21,7 +21,7 @@
 
 <body>
 	<table class="w3-table w3-striped w3-hoverable">
-		<c:if test="${buildingcnt == 0 }">
+		<c:if test="${buildingcnt == 0}">
 			<td>등록된 건물이 없습니다.<a href="main.sms">[등록하러 가기]</a></td>
 		</c:if>
 			
@@ -38,9 +38,9 @@
 				<tr>
 					<td>${build.sNo}</td>
 					<td>${build.sName}</td>
-					<td>[${bulid.boCnt}]</td>
-					<td>[${bulid.reCnt}]</td>
-					<td><a href="hostResList.sms?sNo=${build.sNo}"></a>[확인하러가기]</td>			
+					<td>[${build.boCnt}]</td>
+					<td>[${build.reCnt}]</td>
+					<td><a href="hostResList.sms?sNo=${build.sNo}">[확인하러가기]</a></td>			
 				</tr>
 			</c:forEach>
 		</c:if>

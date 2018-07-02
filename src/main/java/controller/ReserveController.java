@@ -92,18 +92,19 @@ public class ReserveController {
 	@RequestMapping(value="reserve/hostResInfo", method=RequestMethod.GET)
 	public ModelAndView hostReserveInfo(String hostName) {
 		 
-		ModelAndView mav = new ModelAndView(); 
-		
+		ModelAndView mav = new ModelAndView();
+		int buildCnt = service.hostBuildCount(hostName);
 		List<Building> list = service.selectHostReserveInfo(hostName);
 		mav.addObject("list", list);
+		mav.addObject("buildCnt", buildCnt);
 		
 		return mav;
 	}
 	
 	
-	// 예약 리스트를 확인할 때 호출되는 메서드 (Guest계정용)
+	// 예약 리스트를 확인할 때 호출되는 메서드 (Host계정용)
 	@RequestMapping(value="reserve/hostResList", method=RequestMethod.GET)
-	public ModelAndView hostReserveList(String hostName, Integer pageNum, String searchType, String searchContent) {
+	public ModelAndView hostReserveList(Integer sNo, Integer pageNum, String searchType, String searchContent) {
 		
 		if(pageNum == null || pageNum.toString().equals("")) {
 			pageNum = 1;
@@ -112,10 +113,10 @@ public class ReserveController {
 		ModelAndView mav = new ModelAndView();
 		
 		int limit = 100;		// 한 페이지에 나올 게시글의 숫자
-		int listcount = service.reserveCount(hostName, searchType, searchContent);	// 표시될 총 게시글의 수
+		int listcount = service.hostReserveCount(sNo, searchType, searchContent);	// 표시될 총 게시글의 수
 		
-		if (hostName != null) {
-		List<Reserve> reservelist = service.selectHostReserveList(hostName, searchType, searchContent, pageNum, limit);
+		
+		List<Reserve> reservelist = service.selectHostReserveList(sNo, searchType, searchContent, pageNum, limit);
 		
 		int maxpage = (int)((double)listcount/limit + 0.95);
 		int startpage = ((int)((pageNum/10.0 + 0.9) - 1)) * 10 + 1; // 시작페이지
@@ -129,9 +130,6 @@ public class ReserveController {
 		mav.addObject("listcount",listcount);
 		mav.addObject("list",reservelist);
 		mav.addObject("reservecnt",reservecnt);
-		System.out.println(reservelist.size());
-		System.out.println(reservecnt);
-		}
 				
 		return mav;
 	}
