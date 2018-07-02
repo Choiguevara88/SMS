@@ -53,8 +53,8 @@
 	</tr>
 	<tr class="content" id="${i.count}-view">
   		<td colspan="3" align="center" class="content">
-		<a href="../notice/update.sms?bNo=${board.bNo}">[수정]</a>
-		<a href="../notice/delete.sms?bNo=${board.bNo}">[삭제]</a><br>
+		<a href="../notice/update.sms?bNo=${board.bNo}&pageNum=${pageNum}">[수정]</a>
+		<a href="../notice/delete.sms?bNo=${board.bNo}&pageNum=${pageNum}">[삭제]</a><br>
    		 ${board.content}
  	 </td>
 </tr>

@@ -2,8 +2,10 @@
 <!-- main/resources/dao/mapper/Board.xml -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.mapper.BoardMapper">
+	
 	<select id="list" resultType="Board" parameterType="map">
 		select * from board
+		
 		<if test="searchType != null and searchContent != null">
 			where ${searchType} like '%${searchContent}%'
 		</if>
@@ -14,6 +16,7 @@
 		<if test="bNo != null">
 			where bNo = #{bNo}
 		</if>
+		
 	</select>
 	
 	<select id="count" resultType="Integer" parameterType="map">

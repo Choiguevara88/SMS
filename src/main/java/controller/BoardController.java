@@ -23,7 +23,7 @@ public class BoardController {
 	private ProjectService service;
 	
 	@RequestMapping("board/listex")
-	public ModelAndView list (Integer pageNum, String searchType, String searchContent) {
+	public ModelAndView list (Integer pageNum, String searchType, String searchContent,Integer kind) {
 		
 		if(pageNum == null || pageNum.toString().equals("")) {
 			pageNum = 1;
@@ -47,6 +47,7 @@ public class BoardController {
 		mav.addObject("listcount",listcount);
 		mav.addObject("boardlist",boardlist);
 		mav.addObject("boardcnt",boardcnt);
+		mav.addObject("kind",kind);
 				
 		return mav;
 	}

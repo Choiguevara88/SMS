@@ -24,7 +24,6 @@ public class Reserve {
 	 *   	3 : 환불완료
 	 */
 	
-	
 	public Integer getReNo() {
 		return reNo;
 	}

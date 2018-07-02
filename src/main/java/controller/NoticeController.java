@@ -22,7 +22,9 @@ import logic.ProjectService;
 public class NoticeController {
 	@Autowired
 	private ProjectService service;
+	int kind = 1;
 
+	
 	@ModelAttribute
 	public Board getBoard() {
 		return new Board();
@@ -54,12 +56,12 @@ public class NoticeController {
 		mav.addObject("listcount", listcount);
 		mav.addObject("boardlist", boardlist);
 		mav.addObject("boardcnt", boardcnt);
-
+		mav.addObject("kind",kind);
 		return mav;
 	}
 
 	@RequestMapping(value = "notice/write", method = RequestMethod.POST) // 게시글 작성 시 호출되는 메서드
-	public ModelAndView write(@Valid Board board, BindingResult bindingResult, HttpServletRequest request) {
+	public ModelAndView write(@Valid Board board, BindingResult bindingResult, HttpServletRequest request, Integer pageNum) {
 
 		ModelAndView mav = new ModelAndView();
 		
@@ -71,16 +73,17 @@ public class NoticeController {
 
 		try {
 			service.boardWrite(board, request);
-			mav.setViewName("redirect:/notice/list.sms");
+			mav.setViewName("redirect:/notice/list.sms?pageNum="+pageNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ProjectException("오류가 발생하였습니다.", "redirect:/notice/list.sms");
 		}
+		mav.addObject("kind",kind);
 		return mav;
 	}
 
 	@RequestMapping(value = "notice/update", method = RequestMethod.POST) // 게시글 작성 시 호출되는 메서드
-	public ModelAndView update(@Valid Board board, BindingResult bindingResult, HttpServletRequest request) {
+	public ModelAndView update(@Valid Board board, BindingResult bindingResult, HttpServletRequest request, Integer pageNum) {
 
 		ModelAndView mav = new ModelAndView();
 
@@ -90,11 +93,11 @@ public class NoticeController {
 		}
 		try {
 			service.boardUpdate(board, request);
-			mav.setViewName("redirect:/notice/list.sms");
+			mav.setViewName("redirect:/notice/list.sms?pageNum="+pageNum);
 		} catch (Exception e) {
 			throw new ProjectException("오류가 발생하였습니다.", "list.sms");
 		}
-
+		mav.addObject("kind",kind);
 		return mav;
 	}
 
@@ -104,10 +107,11 @@ public class NoticeController {
 		ModelAndView mav = new ModelAndView();
 		try {
 			service.boardDelete(bNo);
-			mav.setViewName("redirect:/notice/list.sms");
+			mav.setViewName("redirect:/notice/list.sms?pageNum="+pageNum);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
+		mav.addObject("kind",kind);
 		return mav;
 	}
 
@@ -122,6 +126,8 @@ public class NoticeController {
 				service.updateReadCnt(bNo);
 			}
 		}
+		mav.addObject("kind",kind);
+		mav.addObject("pageNum",1);
 		mav.addObject("board", board);
 		return mav;
 	}
