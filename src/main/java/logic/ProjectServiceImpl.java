@@ -133,6 +133,11 @@ public class ProjectServiceImpl implements ProjectService {
 		return reDao.getReserve(reNo);
 	}
 	
+	@Override
+	public Room getRoom(Integer srNo) {
+		return roomDao.getRoom(srNo);
+	}
+	
 
 	@Override
 	public List<Reserve> getReserveList(String id) {
@@ -211,12 +216,6 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void insertRoom(Room room) {
 		roomDao.insertRoom(room);
-		
 	}
-
-	
-	
-
-
 
 } // ProjectServiceImpl end

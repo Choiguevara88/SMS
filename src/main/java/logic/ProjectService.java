@@ -48,8 +48,7 @@ public interface ProjectService {
 
 	int hostBuildCount(String hostName);
 
+	Room getRoom(Integer srNo);
+
 	void insertRoom(Room room);
-
-
-
 }
