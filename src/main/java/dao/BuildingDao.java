@@ -8,4 +8,6 @@ public interface BuildingDao {
 
 	List<Building> resList(String hostName);
 
+	int hostBuildCnt(String hostName);
+
 }

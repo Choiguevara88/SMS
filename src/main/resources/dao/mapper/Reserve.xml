@@ -5,9 +5,28 @@
 
 	<select id="count" resultType="Integer" parameterType="map">
 		select count(*) from reserve 
+		
 		<if test="searchType != null and searchContent != null">
 			where ${searchType} like '%${searchContent}%'	
 		</if>
+		
+		<if test="id != null">
+			where id = #{id}
+		</if>
+		
+	</select>
+	
+	<select id="hostCount" resultType="Integer" parameterType="map">
+		select count(*) from reserve 
+		
+		<if test="searchType != null and searchContent != null">
+			where ${searchType} like '%${searchContent}%'	
+		</if>
+		
+		<if test="sNo != null">
+			where sNo = #{sNo}
+		</if>
+		
 	</select>
 	
 	<select id="selectOne" resultType="Reserve" parameterType="map">
@@ -28,8 +47,8 @@
 			order by ReNo desc limit #{startrow}, #{limit}	
 		</if> -->
 		
-		<if test="id != null">
-			where id = #{id}
+		<if test="sNo != null">
+			where sNo = #{sNo}
 		</if>
 	</select>
 	

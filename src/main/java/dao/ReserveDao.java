@@ -10,12 +10,14 @@ public interface ReserveDao {
 
 	List<Reserve> getReserveList(String id);
 
-	int count(String searchType, String searchContent);
+	int count(String id, String searchType, String searchContent);
 
 	List<Reserve> list(String id, String searchType, String searchContent, Integer pageNum, int limit);
 
 	void insert(Reserve reserve);
 
-	List<Reserve> hostlist(String id, String searchType, String searchContent, Integer pageNum, int limit);
+	List<Reserve> hostlist(Integer sNo, String searchType, String searchContent, Integer pageNum, int limit);
+
+	int hostCount(Integer sNo, String searchType, String searchContent);
 
 }
