@@ -35,6 +35,8 @@ public class BoardDaoImpl implements BoardDao{
 	public List<Board> list(String searchType, String searchContent, Integer pageNum, int limit) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		if(searchType==null || searchType.equals("")) searchType=null;
+		if(searchContent==null||searchContent.equals("")) searchContent=null;
 		
 		int startrow = (pageNum - 1) * limit;
 		
@@ -43,6 +45,7 @@ public class BoardDaoImpl implements BoardDao{
 		map.put("searchType", searchType);
 		map.put("searchContent",searchContent);
 
+		
 		return sqlSession.selectList(NS + "list", map);
 	}
 
