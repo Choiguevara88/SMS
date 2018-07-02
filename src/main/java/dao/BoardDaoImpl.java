@@ -41,10 +41,8 @@ public class BoardDaoImpl implements BoardDao{
 		map.put("startrow", startrow);
 		map.put("limit", limit);
 		
-		if(!(searchType.equals("")) || !(searchType == null)) {
-			map.put("searchType", searchType);
-			map.put("searchContent",searchContent);
-		}
+		map.put("searchType", searchType);
+		map.put("searchContent",searchContent);
 		
 		
 		return sqlSession.selectList(NS + "list", map);
