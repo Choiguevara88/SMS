@@ -24,7 +24,8 @@ public class BoardDaoImpl implements BoardDao{
 	public int count(String searchType, String searchContent) {
 	
 		Map<String,String> map = new HashMap<String,String>();
-		
+		if(searchType==null || searchType.equals("")) searchType=null;
+		if(searchContent==null||searchContent.equals("")) searchContent=null;
 		map.put("searchType", searchType);
 		map.put("searchContent",searchContent);
 		
@@ -35,17 +36,15 @@ public class BoardDaoImpl implements BoardDao{
 	public List<Board> list(String searchType, String searchContent, Integer pageNum, int limit) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		if(searchType==null || searchType.equals("")) searchType=null;
+		if(searchContent==null||searchContent.equals("")) searchContent=null;
 		
 		int startrow = (pageNum - 1) * limit;
 		
 		map.put("startrow", startrow);
 		map.put("limit", limit);
-		
-		if(!(searchType.equals("")) || !(searchType == null)) {
-			map.put("searchType", searchType);
-			map.put("searchContent",searchContent);
-		}
-		
+		map.put("searchType", searchType);
+		map.put("searchContent",searchContent);
 		
 		return sqlSession.selectList(NS + "list", map);
 	}

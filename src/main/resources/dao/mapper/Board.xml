@@ -14,6 +14,7 @@
 		<if test="bNo != null">
 			where bNo = #{bNo}
 		</if>
+		
 	</select>
 	
 	<select id="count" resultType="Integer" parameterType="map">
