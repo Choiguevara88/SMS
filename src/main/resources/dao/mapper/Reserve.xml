@@ -2,9 +2,16 @@
 <!-- main/resources/dao/mapper/Building.xml -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.mapper.ReserveMapper">
+
+	<select id="count" resultType="Integer" parameterType="map">
+		select count(*) from reserve 
+		<if test="searchType != null and searchContent != null">
+			where ${searchType} like '%${searchContent}%'	
+		</if>
+	</select>
 	
 	<select id="selectOne" resultType="Reserve" parameterType="map">
-		select * from Reserve
+		select * from reserve
 		<if test="reNo != null">
 			where reNo = #{reNo}
 		</if>
@@ -17,9 +24,9 @@
 			where ${searchType} like '%${searchContent}%'
 		</if>
 		
-		<if test="startrow != null and limit != null">
+		<!-- <if test="startrow != null and limit != null">
 			order by ReNo desc limit #{startrow}, #{limit}	
-		</if>
+		</if> -->
 		
 		<if test="id != null">
 			where id = #{id}

@@ -24,6 +24,8 @@ public class ReserveController {
 	@RequestMapping(value="reserve/roomReserve", method=RequestMethod.POST)
 	public ModelAndView roomReserve(Reserve reserve) {
 		
+		System.out.println(reserve.getReDate());
+		
 		ModelAndView mav = new ModelAndView();
 		
 		try {
@@ -56,7 +58,7 @@ public class ReserveController {
 	
 	
 	// 예약 리스트를 확인할 때 호출되는 메서드
-	@RequestMapping(value="reserve/list", method=RequestMethod.GET)
+	@RequestMapping(value="reserve/resList", method=RequestMethod.GET)
 	public ModelAndView reserveList(String id, Integer pageNum, String searchType, String searchContent) {
 		
 		if(pageNum == null || pageNum.toString().equals("")) {
@@ -67,6 +69,7 @@ public class ReserveController {
 		
 		int limit = 100;		// 한 페이지에 나올 게시글의 숫자
 		int listcount = service.reserveCount(id, searchType, searchContent);	// 표시될 총 게시글의 수
+		
 		if (id != null) {
 		List<Reserve> reservelist = service.selectReserveList(id, searchType, searchContent, pageNum, limit);
 		
@@ -80,8 +83,10 @@ public class ReserveController {
 		mav.addObject("startpage", startpage);
 		mav.addObject("endpage", endpage);
 		mav.addObject("listcount",listcount);
-		mav.addObject("reserlist",reservelist);
+		mav.addObject("list",reservelist);
 		mav.addObject("reservecnt",reservecnt);
+		System.out.println(reservelist.size());
+		System.out.println(reservecnt);
 		}
 				
 		return mav;

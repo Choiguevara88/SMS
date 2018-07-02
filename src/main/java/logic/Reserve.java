@@ -2,11 +2,15 @@ package logic;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Reserve {
 	private Integer reNo;			// 예약관리번호
 	private String id;				// 예약자ID
 	private Integer srNo;			// Room번호
-	private Integer reDate;			// 예약 일자
+	
+	@DateTimeFormat(pattern="yyyyMMddHH") // 입력받은 문자열을 정해진 포맷으로 날짜자료형으로 변환해주는 어노테이션
+	private Date reDate;			// 예약 일자
 	private Date regDate;			// 예약 관리 일자
 	private Integer totPrice;		// 금액
 	private Integer reCnt;			// 수량
@@ -37,10 +41,10 @@ public class Reserve {
 	public void setSrNo(Integer sRNo) {
 		this.srNo = sRNo;
 	}
-	public Integer getReDate() {
+	public Date getReDate() {
 		return reDate;
 	}
-	public void setReDate(Integer reDate) {
+	public void setReDate(Date reDate) {
 		this.reDate = reDate;
 	}
 	public Date getRegDate() {

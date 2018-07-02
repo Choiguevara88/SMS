@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2018-06-21 16:04:45</creation_date>
-			<updated_date>2018-06-29 17:22:20</updated_date>
+			<updated_date>2018-07-02 11:20:08</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -554,7 +554,7 @@
 			<description>상품의 예약 날짜</description>
 			<logical_name>예약일자</logical_name>
 			<physical_name>ReDate</physical_name>
-			<type>integer</type>
+			<type>datetime</type>
 		</word>
 		<word>
 			<id>24</id>
@@ -3438,7 +3438,7 @@
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>integer</type>
+					<type>datetime</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>

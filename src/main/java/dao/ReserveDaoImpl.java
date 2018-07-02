@@ -29,7 +29,7 @@ public class ReserveDaoImpl implements ReserveDao {
 	public List<Reserve> getReserveList(String id) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
-		return sqlSession.selectList(NS + "list", map);
+		return sqlSession.selectList(NS + "selectList", map);
 	}
 	
 	@Override
@@ -60,6 +60,6 @@ public class ReserveDaoImpl implements ReserveDao {
 		map.put("searchType", searchType);
 		map.put("searchContent", searchContent);
 
-		return sqlSession.selectList(NS + "list", map);
+		return sqlSession.selectList(NS + "selectList", map);
 	}
 }

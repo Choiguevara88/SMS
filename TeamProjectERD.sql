@@ -176,7 +176,7 @@ CREATE TABLE Reserve
 	-- 세부공간관리번호
 	SRNo int COMMENT '세부공간관리번호',
 	-- 상품의 예약 날짜
-	ReDate int NOT NULL COMMENT '상품의 예약 날짜',
+	ReDate datetime NOT NULL COMMENT '상품의 예약 날짜',
 	-- 상품 예약을 등록한 일시
 	-- 
 	RegDate datetime NOT NULL COMMENT '상품 예약을 등록한 일시
