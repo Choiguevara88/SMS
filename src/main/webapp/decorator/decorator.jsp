@@ -14,6 +14,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+.mySlides {display:none;}
+</style>
 <title>
 <decorator:title/>
 </title>
@@ -37,50 +40,45 @@
   	<hr size="1">
   	<a href="wishlist.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>내가 찜한 공간 !</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id }">
-  <hr size="1">
-  <a href="${path }/terms_and_condition" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>이용약관 !</a></c:if>
+  	<hr size="1">
+  	<a href="wishlist.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공간 등록하기 !</a></c:if>
   <hr size="1">
   <a href="${path }/notice/list.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공지사항 !</a>
+  <hr size="1">
+  <a href="${path }/terms_and_condition" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>이용약관 !</a>
   <hr size="1">
   <c:if test="${!empty sessionScope.loginMember.id }"><a href="logout.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>로그아웃..ㅜ</a></c:if>
 </div>
 
 
-<div class="w3-purple" style="height:100px" >
+<div class="w3-purple" style="height:450px" >
    <div>
-   		<h1><strong><a href="${path }/main.sms">Share My Space</a></strong></h1>
-   		<button class="w3-button w3-purple w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button>
+   		<h1><strong><a href="${path }/main.sms">Share My Space</a></strong>
+   			<button class="w3-button w3-purple w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button></h1>
+   		
+  <div class="w3-content w3-section" style="max-width:500px">
+	  <img class="mySlides" src="./picture/mainimage.jpg" style="width:100%">
+	  <img class="mySlides" src="./picture/mainimage2.jpg" style="width:100%">
+	  <img class="mySlides" src="./picture/mainimage3.jpg" style="width:100%">
+  	<img class="mySlides" src="./picture/mainimage4.jpg" style="width:100%">
+  	<img class="mySlides" src="./picture/mainimage5.jpg" style="width:100%">
+	</div>  	
 	</div>
 </div>
-  <div class="w3-content w3-display-container w3-red" style="height:350px">
-  <img class="mySlides" src="../picture/mainimage.jpg" style="width:50%">
-  <img class="mySlides" src="../picture/mainimage2.jpg" style="width:50%">
-  <img class="mySlides" src="../picture/mainimage3.jpg" style="width:50%">
-  <img class="mySlides" src="../picture/mainimage4.jpg" style="width:50%">
-  <img class="mySlides" src="../picture/mainimage5.jpg" style="width:50%">
-
-  <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
-  </div>
-
 <script>
-//메인화면 위에 탑부분 이미지
-var slideIndex = 1;
-showDivs(slideIndex);
+var myIndex = 0;
+carousel();
 
-function plusDivs(n) {
-  showDivs(slideIndex += n);
-}
-
-function showDivs(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  if (n > x.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = x.length}
-  for (i = 0; i < x.length; i++) {
-     x[i].style.display = "none";  
-  }
-  x[slideIndex-1].style.display = "block";  
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 3000); // Change image every 2 seconds
 }
 </script>
 
