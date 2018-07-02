@@ -142,7 +142,6 @@ public class ReserveController {
 		ModelAndView mav = new ModelAndView();
 		
 		Reserve reserve = service.getReserve(reNo);
-		System.out.println(reserve.getSrNo());
 		Room room = service.getRoom(reserve.getSrNo());
 		
 		mav.addObject("reserve",reserve);

@@ -25,8 +25,12 @@
 	<p>예약수량 : ${reserve.reCnt}시간</p>
 	<p>예약금액 : ${reserve.totPrice}</p>
 	</div>
-  	
 </div>
+
+<c:if test="${reserve.reStat == 0}"><a href="">[예약취소]</a></c:if>
+<c:if test="${reserve.reStat == 1}"><a href="">[예약취소신청]</a></c:if>
+<c:if test="${reserve.reStat == 2}"><a href="">[환불확인:예약취소확정]</a></c:if>
+<c:if test="${reserve.reStat == 3}">[환불완료]</c:if>
 
 </body>
 </html>
