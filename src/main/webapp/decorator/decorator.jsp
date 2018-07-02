@@ -26,29 +26,63 @@
   	<i class="fa fa-arrow-circle-right"></i>로그인/회원가입!</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id }">
   	<hr size="1">
-  	<a href="personal_info.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>나의 소중한 정보 !</a></c:if>
+  	<a href="${path }/personal_info.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>나의 소중한 정보 !</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id }">
   	<hr size="1">
-  	<a href="reserve/resList.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>나의 예약정보 !</a></c:if>
+  	<a href="${path }/reserve/resList.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>나의 예약정보 !</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id }">
   	<hr size="1">
-  	<a href="space_reservation" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공간 예약관리 !</a></c:if>
+  	<a href="space_reservation.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공간 예약관리 !</a></c:if>
+  <c:if test="${!empty sessionScope.loginMember.id }">
+  	<hr size="1">
+  	<a href="wishlist.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>내가 찜한 공간 !</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id }">
   <hr size="1">
-  <a href="terms_and_condition" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>이용약관 !</a></c:if>
+  <a href="${path }/terms_and_condition" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>이용약관 !</a></c:if>
   <hr size="1">
-  <a href="../notice/list.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공지사항 !</a>
+  <a href="${path }/notice/list.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공지사항 !</a>
   <hr size="1">
   <c:if test="${!empty sessionScope.loginMember.id }"><a href="logout.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>로그아웃..ㅜ</a></c:if>
 </div>
 
 
-<div class="w3-purple">
-  <button class="w3-button w3-purple w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button>
-  <div class="w3-container">
-    <h1><a href="main.sms">Space</a></h1>
-  </div>
+<div class="w3-purple" style="height:100px" >
+   <div>
+   		<h1><strong><a href="${path }/main.sms">Share My Space</a></strong></h1>
+   		<button class="w3-button w3-purple w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button>
+	</div>
 </div>
+  <div class="w3-content w3-display-container w3-red" style="height:350px">
+  <img class="mySlides" src="../picture/mainimage.jpg" style="width:50%">
+  <img class="mySlides" src="../picture/mainimage2.jpg" style="width:50%">
+  <img class="mySlides" src="../picture/mainimage3.jpg" style="width:50%">
+  <img class="mySlides" src="../picture/mainimage4.jpg" style="width:50%">
+  <img class="mySlides" src="../picture/mainimage5.jpg" style="width:50%">
+
+  <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+  </div>
+
+<script>
+//메인화면 위에 탑부분 이미지
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+</script>
 
 <script>
 //메뉴바 열고 닫기
