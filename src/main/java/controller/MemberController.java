@@ -27,7 +27,7 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping(value="member/joinForm") //회원가입 폼으로 
+	@RequestMapping(value="joinForm") //회원가입 폼으로 
 	public String joinForm() {
 		return "member/joinForm";
 	}
@@ -85,8 +85,30 @@ public class MemberController {
 		session.invalidate();
 		return "redirect: main.sms";
 	}
-	@RequestMapping(value="personal_info", method=RequestMethod.GET)
+	@RequestMapping(value="personal_info")
 	public ModelAndView personal_info(String id, HttpSession session) {
-		return new ModelAndView("member/loginpage");
+		ModelAndView mav = new ModelAndView();
+		Member member = (Member)session.getAttribute("loginMember");
+		mav.addObject("member");
+		mav.setViewName("member/personal_info");
+		return mav;
+	}
+	@RequestMapping(value="personal_info_update")
+	public ModelAndView personal_info_update(String id, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/update");
+		return mav;
+	}
+	@RequestMapping(value="personal_info_new")
+	public ModelAndView personal_info_new(@Valid Member member, BindingResult bindingResult, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		if(bindingResult.hasErrors()) {
+			mav.getModel().putAll(bindingResult.getModel());
+			mav.setViewName("personal_info_update");
+			return mav;
+		}
+		service.updateMember(member);
+		mav.setViewName("redirect: personal_info.sms?id=" + member.getId());
+		return mav;
 	}
 }

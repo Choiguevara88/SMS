@@ -42,4 +42,6 @@ public interface ProjectService {
 
 	List<Building> selectHostReserveInfo(String hostName);
 
+	void updateMember(Member member);
+
 }

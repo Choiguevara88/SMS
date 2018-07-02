@@ -6,4 +6,6 @@ public interface MemberDao {
 	Member select(String id);
 
 	void joinsms(Member member);
+
+	void updateMember(Member member);
 }

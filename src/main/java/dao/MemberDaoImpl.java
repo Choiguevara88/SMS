@@ -30,4 +30,10 @@ public class MemberDaoImpl implements MemberDao{
 	public void joinsms(Member member) {
 		sqlSession.getMapper(MemberMapper.class).insert(member);
 	}
+
+
+	@Override
+	public void updateMember(Member member) {
+		sqlSession.getMapper(MemberMapper.class).update(member);
+	}
 }
