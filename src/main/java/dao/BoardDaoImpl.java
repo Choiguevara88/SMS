@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import dao.mapper.BoardMapper;
 import logic.Board;
+import logic.Building;
 
 
 @Repository
@@ -75,4 +76,5 @@ public class BoardDaoImpl implements BoardDao{
 	public List<Map<String, Object>> graph() {
 		return null;
 	}
+
 }

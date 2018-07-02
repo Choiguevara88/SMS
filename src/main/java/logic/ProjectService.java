@@ -40,4 +40,6 @@ public interface ProjectService {
 
 	List<Reserve> selectHostReserveList(String id, String searchType, String searchContent, Integer pageNum, int limit);
 
+	List<Building> selectHostReserveInfo(String hostName);
+
 }

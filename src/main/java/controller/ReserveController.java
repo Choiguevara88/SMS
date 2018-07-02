@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.ProjectException;
+import logic.Building;
 import logic.ProjectService;
 import logic.Reserve;
 
@@ -84,6 +85,18 @@ public class ReserveController {
 		mav.addObject("reservecnt",reservecnt);
 		}
 				
+		return mav;
+	}
+	
+	// 신규예약정보에 대해 확인할 때 호출되는 메서드 (Host계정용)
+	@RequestMapping(value="reserve/hostResInfo", method=RequestMethod.GET)
+	public ModelAndView hostReserveInfo(String hostName) {
+		 
+		ModelAndView mav = new ModelAndView(); 
+		
+		List<Building> list = service.selectHostReserveInfo(hostName);
+		mav.addObject("list", list);
+		
 		return mav;
 	}
 	

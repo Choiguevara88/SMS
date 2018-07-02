@@ -27,6 +27,8 @@ public class Building {
 	private String sAddress;			// 빌딩 주소
 	private Integer sStat;				// 승인 여부
 	private List<Room> room;				// 화면에 표시할 Room 객체들
+	private Integer boCnt;					// 아직 읽지 않은 문의 갯수
+	private Integer reCnt;					// 아직 확인 안 된 예약 갯수
 	
 	public Integer getsNo() {
 		return sNo;
@@ -160,6 +162,18 @@ public class Building {
 	public void setRoom(List<Room> room) {
 		this.room = room;
 	}
+	public Integer getBoCnt() {
+		return boCnt;
+	}
+	public void setBoCnt(Integer boCnt) {
+		this.boCnt = boCnt;
+	}
+	public Integer getReCnt() {
+		return reCnt;
+	}
+	public void setReCnt(Integer reCnt) {
+		this.reCnt = reCnt;
+	}
 	
 	@Override
 	public String toString() {
@@ -168,6 +182,6 @@ public class Building {
 				+ ", sTagList=" + sTagList + ", sInfoSubList=" + sInfoSubList + ", sRuleList=" + sRuleList + ", sBHour="
 				+ sBHour + ", sHDay=" + sHDay + ", sImg1=" + sImg1 + ", sImg1File=" + sImg1File + ", sImg2=" + sImg2
 				+ ", sImg2Files=" + sImg2Files + ", sImg2Name=" + sImg2Name + ", sAddress=" + sAddress + ", sStat="
-				+ sStat + ", room=" + room + "]";
+				+ sStat + ", room=" + room + ", boCnt=" + boCnt + ", reCnt=" + reCnt + "]";
 	}
 }
