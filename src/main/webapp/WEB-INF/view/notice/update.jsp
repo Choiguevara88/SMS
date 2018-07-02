@@ -21,14 +21,14 @@
   <input type="hidden" name="kind" value="${board.kind}">
   <table border="1" cellpadding="0" cellspacing="0" align="center">
   <caption>공지사항 수정</caption>
- <tr><td align="center">제목</td><td><form:input path="id" value="${board.id}"/>
-  		<font color="red"><form:errors path="id"/></font></td></tr>
+ <tr><td align="center">제목</td><td><form:input path="subject" value="${board.subject}"/>
+  		<font color="red"><form:errors path="subject"/></font></td></tr>
   	<tr><td align="center">내용</td>
   		<td><form:textarea rows="15" cols="80" path="content" value="${board.content}"/>
   		<font color="red"><form:errors path="content"/></font></td></tr>
   	<tr><td align="center" colspan="2">
   		<a href="javascript:document.f.submit()">[수정]</a>
-  		<a href="list.shop">[목록]</a>
+  		<a href="list.sms">[목록]</a>
   	</td></tr></table></form:form>
 </body>
 </html>

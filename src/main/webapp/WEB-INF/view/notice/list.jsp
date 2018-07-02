@@ -1,58 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/view/jspHeader.jsp" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>목록보기</title>
+<script type="text/javascript">
+	function list(pageNum) {
+		if(searchType == null || searchType.length == 0) {
+			document.searchform.searchContent.value = "";
+			document.searchform.pageNum.value = "1";
+			location.href="list.sms?pageNum=" + pageNum;
+		}else{
+			document.searchform.pageNum.value = pageNum;
+			documetn.searchform.submit();
+			return true;
+		}
+		return false;
+	}
+</script>
+<style type="text/css">
+	
+</style>
 </head>
 <body>
-<table>
+<div align="center"><a href="../notice/write.sms">[작성]</a></div>
+<table width="80%" align="center" border="1" style="margin-top:10px">
 	<tr><td colspan="5" align="center">
-		<form action="list.sms" method="post" name="sdearchform" onsubmit="return list(1)">
+		<form action="list.sms" method="post" name="sdearchform" onsubmit="return list(1)" >
 			<label for="notice_txt">공지사항 검색</label>
 			<input type="hidden" name="pageNum" value="1">
 			<select name="searchType" id="searchType">
 				<option value="">선택하세요</option>
 				<option value="subject">제목</option>
-				<option value="name">글쓴이</option>
 				<option value="content">내용</option>
 			</select>&nbsp;
 		<script type="text/javascript">
-			if('${param.searchType}' != ''){
+			if('${param.searchType}' != '') {
 				document.getElememntById("searchType").value='${param.searchType}'
 			}
 		</script>
 <input type="text" name="searchContent" value="${param.searchContent}">
 <input type="submit" value="검색">
-		</form></td></tr>
-
-<tr class="tr_active" data-id="87">
-	                        <td class="subject">공지사항</td>
-	                        <td class="td_question">
-	                            <a class="p_view_detail" href="javascript:void(0);">
-	                                <p class="p_question">[추천키워드] 테마별로 공간을 쉽게 찾아보세요. </p>
-	                                <span class="date">2016-05-20</span>
-	                                <i class="sp_icon ico_view_detail">상세보기</i>
-	                            </a>
-	                        </td>
-	                    </tr>
-<tr class="tr_view tr_active" data-id="87">
-  <td colspan="2">
-    <div class="view_box">
-      <div class="p_answer">
-      <span class="date">2016-05-20</span>
-      <p>
-      <span style="font-size: 12pt;">﻿안녕하세요. 스페이스클라우드 운영팀 입니다.&nbsp;</span>&nbsp;</p>
-      <p>
-      <span style="font-size: 12pt;">오늘 스페이스클라우드 (PC)에 새로운 기능이 추가 되었어요.&nbsp;</span></p><p><span style="font-size: 12pt;">&nbsp;</span></p><p><span style="font-size: 12pt; color: rgb(120, 32, 185);"><b>바로 #추천키워드 인데요.&nbsp;</b></span></p><p><span style="font-size: 12pt;">모바일에서는 이미 구현되어 편리하게 사용된 기능 입니다.&nbsp;</span></p><p><span style="font-size: 12pt; line-height: 20px;">#추천키워드는 스페이스클라우드에 등록된 2000여개의</span></p><p><span style="font-size: 12pt; line-height: 20px;">공간 정보 및 예약 서비스를 보다 쉽게 찾을 수 있도록</span></p><p><span style="font-size: 12pt; line-height: 20px;">테마별 큐레이션 된 정보를 제공하는 기능 입니다.&nbsp;</span></p><p><span style="font-size: 13.3333px; line-height: 20px;">&nbsp;</span></p><p><span style="font-size: 12pt; line-height: 20px;">앞으로도 스페이스클라우드를 통해서 빠르고, 쉽고, 편리하게</span></p><p><span style="font-size: 12pt; line-height: 20px;">필요하신 공간을 찾으실 수 있도록 계속해서 발전시켜 갈게요.&nbsp;</span></p><p><span style="font-size: 12pt; line-height: 20px;">&nbsp;</span></p><p><span style="font-size: 12pt; line-height: 20px;">감사합니다.&nbsp;</span></p><p><span style="font-size: 13.3333px; line-height: 20px;">&nbsp;</span></p><p><span style="font-size: 13.3333px; line-height: 20px;"><br style="clear:both;">&nbsp;</span>
-      </p>
-      </div>
-  </div>
-  </td>
+		</form></td></tr></table>
+<table border="1" style="margin-top:30px" width="80%" align="center">
+<c:if test="${listcount > 0}">
+<c:forEach var="board" items="${boardlist}" varStatus="i">
+	<tr class="subject" id="${i.count}">
+		<td width="10%" align="center">공지사항</td>
+		<td width="80%" align="center">
+		<a href="javascript:onclick()"><div style="float:center; display: inline;">${board.subject}</div>
+		<span style="float:right"><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd"/></span></a></td>
+		
+	</tr>
+	<tr class="content" id="${i.count}-view">
+  		<td colspan="3" align="center" class="content">
+		<a href="../notice/update.sms?bNo=${board.bNo}">[수정]</a>
+		<a href="../notice/delete.sms?bNo=${board.bNo}">[삭제]</a><br>
+   		 ${board.content}
+ 	 </td>
 </tr>
+</c:forEach>
+<tr align="center" height="26"><td colspan="5">
+		<c:if test="${pageNum >1 }">
+			<a href="javascript:list(${pageNum -1 })"> [이전]</a>
+		</c:if>&nbsp;
+		<c:if test="${pageNum <= 1}">[이전]</c:if>&nbsp;
+		<c:forEach var="a" begin="${startpage }" end="${endpage}"> 
+			<c:if test="${a == pageNum}">[${a}]</c:if>
+			<c:if test="${a != pageNum}">
+				<a href="javascript:list(${a})">[${a}]</a></c:if>
+		</c:forEach>
+			<c:if test="${pageNum < maxpage}">
+				<a href="javascript:list(${pageNum+1})">[다음]</a>
+			</c:if>&nbsp;
+			<c:if test="${pageNum >= maxpage}">[다음]</c:if>&nbsp;
+			</td></tr>
+	</c:if>
+<c:if test="${listcount == 0}">
+	 <tr><td colspan="5">등록된 게시물이 없습니다.</td></tr>
+	 </c:if>
 </table>
-
-
 </body>
 </html>

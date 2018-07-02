@@ -46,9 +46,9 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-	public Board getBoard(Integer num) {
+	public Board getBoard(Integer bNo) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("bNo", num);
+		map.put("bNo", bNo);
 		return sqlSession.selectOne(NS + "list", map);
 	}
 	
@@ -67,8 +67,8 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-	public void delete(Integer num) {
-		sqlSession.getMapper(BoardMapper.class).delete(num);
+	public void delete(Integer bNo) {
+		sqlSession.getMapper(BoardMapper.class).delete(bNo);
 	}
 
 	@Override

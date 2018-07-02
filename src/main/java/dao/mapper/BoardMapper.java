@@ -12,14 +12,14 @@ public interface BoardMapper {
 	@Select("select ifnull(max(bNo),0) from board")
 	int maxNum();
 	
-	@Insert("insert into board(bNo, sNo, id, email, content, qType, regDate, ref, refLevel, score, img1, img2, img3, img4, kind) "
-			+ "values(#{bNo}, #{sNo}, #{id}, #{email}, #{content}, #{qType}, now(), #{ref}, #{refLevel}, #{score}, "
+	@Insert("insert into board(bNo, sNo, id, email, subject, content, qType, regDate, ref, refLevel, score, img1, img2, img3, img4, kind) "
+			+ "values(#{bNo}, #{sNo}, #{id}, #{email},#{subject}, #{content}, #{qType}, now(), #{ref}, #{refLevel}, #{score}, "
 			+ "#{img1}, #{img2}, #{img3}, #{img4}, #{kind})")
 	void insert(Board board);
 
-	@Update("update board set content=#{content}, qType=#{qType}, regDate=now(), score=#{score} where bNo=#{bNo}")
+	@Update("update board set content=#{content}, qType=#{qType}, regDate=now(), score=#{score}, subject=#{subject} where bNo=#{bNo}")
 	void update(Board board);
 
-	@Delete("delete from board where bNo=#{value}")
-	void delete(Integer num);
+	@Delete("delete from board where bNo=#{bNo}")
+	void delete(Integer bNo);
 }

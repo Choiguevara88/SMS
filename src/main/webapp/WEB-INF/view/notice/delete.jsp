@@ -12,7 +12,11 @@
 	<input type="hidden" name="bNo"	value="${param.bNo}">
 	<input type="hidden" name="pageNum"	value="${param.pageNum}">
 	<table border="1" cellspacing="0" cellpadding="0" align="center">
-	<tr><td>삭제하시면 복구 불가능합니다. 그래도 지우시겠습니까? </td>
+	 <tr>
+	 	<td align="center">제목: ${board.subject}</td>
+  	</tr>
+	<tr>
+		<td>삭제하시면 복구 불가능합니다. 그래도 지우시겠습니까? </td>
 	</tr>
 	<tr><td align="center">
 		<a href="javascript:document.f.submit()">[삭제]</a>
