@@ -14,21 +14,18 @@
 			location.href="list.sms?pageNum=" + pageNum;
 		}else{
 			document.searchform.pageNum.value = pageNum;
-			documetn.searchform.submit();
+			document.searchform.submit();
 			return true;
 		}
 		return false;
 	}
 </script>
-<style type="text/css">
-	
-</style>
 </head>
 <body>
 <div align="center"><a href="../notice/write.sms">[작성]</a></div>
 <table width="80%" align="center" border="1" style="margin-top:10px">
 	<tr><td colspan="5" align="center">
-		<form action="list.sms" method="post" name="sdearchform" onsubmit="return list(1)" >
+		<form action="list.sms" method="post" name="searchform" onsubmit="return list(1)" >
 			<label for="notice_txt">공지사항 검색</label>
 			<input type="hidden" name="pageNum" value="1">
 			<select name="searchType" id="searchType">
@@ -73,7 +70,7 @@
 				<a href="javascript:list(${a})">[${a}]</a></c:if>
 		</c:forEach>
 			<c:if test="${pageNum < maxpage}">
-				<a href="javascript:list(${pageNum+1})">[다음]</a>
+				<a href="javascript:list(${pageNum+1 })">[다음]</a>
 			</c:if>&nbsp;
 			<c:if test="${pageNum >= maxpage}">[다음]</c:if>&nbsp;
 			</td></tr>
@@ -82,5 +79,6 @@
 	 <tr><td colspan="5">등록된 게시물이 없습니다.</td></tr>
 	 </c:if>
 </table>
+
 </body>
 </html>

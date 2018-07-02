@@ -26,7 +26,7 @@
 <table width="100%" border="1" cellpadding="0" cellspacing="0">
 <!--  글 위 검색부분 -->
 	<tr><td colspan="5" align="center">
-		<form action="list.sms" method="post" name="sdearchform" onsubmit="return list(1)">
+		<form action="list.sms" method="post" name="searchform" onsubmit="return list(1)">
 			<input type="hidden" name="pageNum" value="1">
 			<select name="searchType" id="searchType">
 				<option value="">선택하세요</option>

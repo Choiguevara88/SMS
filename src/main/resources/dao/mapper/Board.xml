@@ -11,7 +11,6 @@
 		<if test="startrow != null and limit != null">
 			order by ref desc limit #{startrow}, #{limit}	
 		</if>
-		
 		<if test="bNo != null">
 			where bNo = #{bNo}
 		</if>
