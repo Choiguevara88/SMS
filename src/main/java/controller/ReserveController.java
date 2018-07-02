@@ -136,19 +136,17 @@ public class ReserveController {
 
 	
 	
-	// 예약업무 관련하여 Default 호출값으로 지정한 메서드 : 특정 예약보기, 예약 등록화면, 수정화면
+	// 예약업무 관련하여 Default 호출값으로 지정한 메서드 : 특정 예약 보기, 예약 등록 화면
 	@RequestMapping(value="reserve/*", method=RequestMethod.GET) 
-	public ModelAndView detailReserve(Reserve res, HttpServletRequest request) {
+	public ModelAndView detailReserve(Integer reNo, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		Reserve reserve = new Reserve();
 		
 		// 예약이 있다면 해당 예약정보를 보여주기 위한 조건식
-		if(res != null) {
-			if(res.getReNo() != null) {
-				service.getReserve(res.getReNo());
-			}
+		if(reNo != null) {
+			reserve = service.getReserve(reNo);
 		}
 		
 		mav.addObject("reserve", reserve);
