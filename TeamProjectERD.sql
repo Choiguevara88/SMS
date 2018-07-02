@@ -173,6 +173,8 @@ CREATE TABLE Reserve
 	ReNo int NOT NULL COMMENT '한 거래당 발생하는 거래관리고유번호',
 	-- 회원 ID
 	ID varchar(30) COMMENT '회원 ID',
+	-- 건물관리고유번호
+	SNo int COMMENT '건물관리고유번호',
 	-- 세부공간관리번호
 	SRNo int COMMENT '세부공간관리번호',
 	-- 상품의 예약 날짜

@@ -62,4 +62,19 @@ public class ReserveDaoImpl implements ReserveDao {
 
 		return sqlSession.selectList(NS + "selectList", map);
 	}
+
+	@Override
+	public List<Reserve> hostlist(String hostName, String searchType, String searchContent, Integer pageNum, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int startrow = (pageNum - 1) * limit;
+		
+		map.put("hostName", hostName);
+		map.put("startrow", startrow);
+		map.put("limit", limit);
+		map.put("searchType", searchType);
+		map.put("searchContent", searchContent);
+		
+		return sqlSession.selectList(NS + "selectHostList", map);
+	}
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import dao.BoardDao;
+import dao.BuildingDao;
 import dao.MemberDao;
 import dao.ReserveDao;
 
@@ -23,6 +24,8 @@ public class ProjectServiceImpl implements ProjectService {
 	private BoardDao boDao;
 	@Autowired
 	private ReserveDao reDao;
+	@Autowired
+	private BuildingDao buDao;
 
 	@Override
 	public Member getMember(String id) {
@@ -141,6 +144,16 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum, int limit) {
 		return reDao.list(id, searchType, searchContent, pageNum, limit);
+	}
+	
+	@Override
+	public List<Building> selectHostReserveInfo(String hostName) {
+		return buDao.resList(hostName);
+	}
+	
+	@Override
+	public List<Reserve> selectHostReserveList(String id, String searchType, String searchContent, Integer pageNum, int limit) {
+		return reDao.hostlist(id, searchType, searchContent, pageNum, limit);
 	}
 	
 	@Override

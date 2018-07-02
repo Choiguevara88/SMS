@@ -32,4 +32,15 @@
 			where id = #{id}
 		</if>
 	</select>
+	
+	<select id="selectHostList" resultType="Reserve" parameterType="map">
+		select re.ReNo, re.srNo, re.id, re.ReDate, re.RegDate, re.TotPrice, re.ReCnt, re.ReStat, bu.id 'HostName' 
+		from Reserve re, building bu 
+		where re.sNo = bu.sNo
+		
+		<if test="hostName != null">
+			and bu.id = #{hostName} 
+		</if> 	
+	</select>
+	
 </mapper>

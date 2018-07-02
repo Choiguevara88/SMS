@@ -3,26 +3,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.mapper.BuildingMapper">
 	
-	<select id="count" resultType="Integer" parameterType="map">
-		select count(*) from building 
-		<if test="searchType != null and searchContent != null">
-			where ${searchType} like '%${searchContent}%'	
-		</if>
-	</select>
-	
 	<select id="list" resultType="Building" parameterType="map">
-		select * from building
-		
-		<if test="searchType != null and searchContent != null">
-			where ${searchType} like '%${searchContent}%'	
+		select sNo, sName, 
+		(select count(*) from Reserve r ,Board b where r.sNo = b.sNo) 'boCnt',
+		(select count(*) from Reserve r ,Building b where r.sNo = b.sNo and r.reStat = 0) 'reCnt',
+		from Building
+
+		<if test="id != null">
+			where id = #{id}	
 		</if>
 		
-		<if test="startrow != null and limit != null">
-			order by ref desc, refstep asc limit #{startrow}, #{limit}	
-		</if>
-		
-		<if test="sNo != null">
-			where sNo = #{sNo}	
-		</if>
 	</select>
 </mapper>

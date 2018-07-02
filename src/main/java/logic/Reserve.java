@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Reserve {
 	private Integer reNo;			// 예약관리번호
 	private String id;				// 예약자ID
+	private Integer sNo;			// 건물관리번호
 	private Integer srNo;			// Room번호
 	
 	@DateTimeFormat(pattern="yyyyMMddHH") // 입력받은 문자열을 정해진 포맷으로 날짜자료형으로 변환해주는 어노테이션
@@ -15,6 +16,7 @@ public class Reserve {
 	private Integer totPrice;		// 금액
 	private Integer reCnt;			// 수량
 	private Integer reStat;			// 예약 구매 상태
+	
 	/* 	reStat : 예약/구매 상태
 	 *  	0 : 예약&결제대기
 	 *   	1 : 결제완료
@@ -34,6 +36,12 @@ public class Reserve {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public Integer getSNo() {
+		return sNo;
+	}
+	public void setSNo(Integer sNo) {
+		this.sNo = sNo;
 	}
 	public Integer getSrNo() {
 		return srNo;
@@ -74,7 +82,7 @@ public class Reserve {
 	
 	@Override
 	public String toString() {
-		return "Reserve [reNo=" + reNo + ", id=" + id + ", srNo=" + srNo + ", reDate=" + reDate + ", regDate=" + regDate
-				+ ", totPrice=" + totPrice + ", reCnt=" + reCnt + ", reStat=" + reStat + "]";
+		return "Reserve [reNo=" + reNo + ", id=" + id + ", sNo=" + sNo + ", srNo=" + srNo + ", reDate=" + reDate
+				+ ", regDate=" + regDate + ", totPrice=" + totPrice + ", reCnt=" + reCnt + ", reStat=" + reStat + "]";
 	}
 }
