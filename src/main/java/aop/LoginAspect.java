@@ -17,7 +17,8 @@ public class LoginAspect {
 	// MemberController.mypage(String id, HttpSession session) 메서드 호출 전에
 	// memberLoginCheck(..)메서드 호출
 	
-	@Around("execution(* controller.Member*.my*(..))")
+	//개인정보 보기 눌렀을때 실행되는 aop
+	@Around("execution(* controller.Member*.personal*(..))")
 	public Object memberLoginCheck(ProceedingJoinPoint joinPoint) throws Throwable {
 
 		String id = null;
@@ -35,9 +36,9 @@ public class LoginAspect {
 
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		
-		if (loginMember == null) {throw new ProjectException("로그인 후 거래하세요.", "../main.test");}
+		if (loginMember == null) {throw new ProjectException("로그인 안한거 다 알아요~ 로그인 하세요~ ><", "main.sms");}
 		if (!id.equals(loginMember.getId()) && !loginMember.getId().equals("admin")) {
-			throw new ProjectException("본인만 거래 가능합니다.", "../main.test");
+			throw new ProjectException("본인 아닌거 다 알아여~ 본인꺼만 쓰세여~ ><", "main.sms");
 		}
 		
 		Object ret = joinPoint.proceed(); // CoreAlgolism 실행

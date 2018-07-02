@@ -5,7 +5,7 @@
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.math.BigInteger" %>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
+<c:set var="path" value="${pageContext.request.contextPath}"/> <!-- 어느 곳에서나 login.sms할수 있도록 할려고 경로를 만들어 준 것-->
 <%-- /WebContent/decorator/decorator_test_bar.jsp --%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -22,24 +22,22 @@
 <body>
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none;right:0;" id="rightMenu">
   <button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
-  <c:if test="${empty sessionScope.loginMember.id}"><a href="login.sms" class="w3-bar-item w3-button">
+  <c:if test="${empty sessionScope.loginMember.id}"><a href="${path }/login.sms" class="w3-bar-item w3-button">
   	<i class="fa fa-arrow-circle-right"></i>로그인/회원가입!</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id }">
   	<hr size="1">
   	<a href="personal_info.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>나의 소중한 정보 !</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id }">
   	<hr size="1">
-  	<a href="my_reservation" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>나의 예약정보 !</a></c:if>
+  	<a href="reserve/resList.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>나의 예약정보 !</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id }">
   	<hr size="1">
   	<a href="space_reservation" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공간 예약관리 !</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id }">
-  	<hr size="1">
-  	<a href="#" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i></a></c:if>
   <hr size="1">
-  <a href="terms_and_condition" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>이용약관 !</a>
+  <a href="terms_and_condition" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>이용약관 !</a></c:if>
   <hr size="1">
-  <a href="announcement" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공지사항 !</a>
+  <a href="notice/list.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공지사항 !</a>
   <hr size="1">
   <c:if test="${!empty sessionScope.loginMember.id }"><a href="logout.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>로그아웃..ㅜ</a></c:if>
 </div>

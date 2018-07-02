@@ -177,4 +177,9 @@ public class ProjectServiceImpl implements ProjectService {
 		memDao.joinsms(member);
 	}
 
+	@Override
+	public void updateMember(Member member) {
+		memDao.updateMember(member);
+	}
+
 } // ProjectServiceImpl end
