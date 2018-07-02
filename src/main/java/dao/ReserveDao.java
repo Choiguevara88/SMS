@@ -16,4 +16,6 @@ public interface ReserveDao {
 
 	void insert(Reserve reserve);
 
+	List<Reserve> hostlist(String id, String searchType, String searchContent, Integer pageNum, int limit);
+
 }

@@ -13,6 +13,7 @@
 	<table border="1" cellpadding="0" cellspacing="0">
 		<caption>예약등록하기</caption>
 		<tr><td align="center">회원</td><td><form:input path="id"/></tr>
+		<tr><td align="center">건물번호</td><td><form:input path="sNo"/></tr>
 		<tr><td align="center">Room번호</td><td><form:input path="srNo"/></tr>
 		<tr><td align="center">수량</td><td><form:input path="reCnt"/></tr>
 		<tr><td align="center">대금</td><td><form:input path="totPrice"/></tr>

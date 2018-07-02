@@ -144,6 +144,11 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
+	public List<Reserve> selectHostReserveList(String id, String searchType, String searchContent, Integer pageNum, int limit) {
+		return reDao.hostlist(id, searchType, searchContent, pageNum, limit);
+	}
+	
+	@Override
 	public void reserveInsert(Reserve reserve) {
 		reserve.setReNo(reserve.getSrNo() + (int)new Date().getTime());
 		reDao.insert(reserve);
