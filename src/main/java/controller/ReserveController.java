@@ -14,6 +14,7 @@ import exception.ProjectException;
 import logic.Building;
 import logic.ProjectService;
 import logic.Reserve;
+import logic.Room;
 
 @Controller
 public class ReserveController {
@@ -132,6 +133,23 @@ public class ReserveController {
 		mav.addObject("reservecnt",reservecnt);
 				
 		return mav;
+	}
+	
+	// 예약 정보 확인 후 구매/취소여부 확인할 때 사용하는 메서드
+	@RequestMapping(value="reserve/resDetail", method=RequestMethod.GET)
+	public ModelAndView detailReserve2(Integer reNo) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		Reserve reserve = service.getReserve(reNo);
+		System.out.println(reserve.getSrNo());
+		Room room = service.getRoom(reserve.getSrNo());
+		
+		mav.addObject("reserve",reserve);
+		mav.addObject("room",room);	// 세부공간에 대한 세부정보
+		
+		return mav;
+		
 	}
 
 	

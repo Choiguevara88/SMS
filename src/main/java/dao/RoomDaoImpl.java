@@ -1,8 +1,28 @@
 package dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import logic.Room;
 
 @Repository
 public class RoomDaoImpl implements RoomDao{
+	
+
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	private final String NS = "dao.mapper.RoomMapper.";
+	
+	
+	@Override
+	public Room getRoom(Integer srNo) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("srNo", srNo);
+		return sqlSession.selectOne(NS + "selectOne", map);
+	}
 
 }

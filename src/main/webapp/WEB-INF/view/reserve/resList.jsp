@@ -97,7 +97,7 @@ select {width: 200px; /* 원하는 너비설정 */
 				<c:forEach var="res" items="${list}">
 					<tr>
 
-						<td class="td_1" style="text-align:center;">${res.reNo}</td>
+						<td class="td_1" style="text-align:center;"><a href="resDetail.sms?reNo=${res.reNo}">${res.reNo}</a></td>
 						<td class="td_2" style="text-align:center;">[${res.srNo}]</td>
 						
 						<jsp:useBean id="today" class="java.util.Date" />

@@ -20,88 +20,88 @@ public class Room {
 	private List<MultipartFile> sRImgList;	// Room 이미지파일 View 전달용 리스트 객체
 	private List<String> sRImgNameList;		// Room 이미지파일명 View 전달용 리스트 객체
 	
-	public Integer getsNo() {
+	public Integer getSNo() {
 		return sNo;
 	}
-	public void setsNo(Integer sNo) {
+	public void setSNo(Integer sNo) {
 		this.sNo = sNo;
 	}
-	public Integer getsRNo() {
+	public Integer getSrNo() {
 		return sRNo;
 	}
-	public void setsRNo(Integer sRNo) {
+	public void setSrNo(Integer sRNo) {
 		this.sRNo = sRNo;
 	}
-	public String getsRName() {
+	public String getSrName() {
 		return sRName;
 	}
-	public void setsRName(String sRName) {
+	public void setSrName(String sRName) {
 		this.sRName = sRName;
 	}
-	public String getsRType() {
+	public String getSrType() {
 		return sRType;
 	}
-	public void setsRType(String sRType) {
+	public void setSrType(String sRType) {
 		this.sRType = sRType;
 	}
-	public List<String> getsRTypeList() {
+	public List<String> getSrTypeList() {
 		return sRTypeList;
 	}
-	public void setsRTypeList(List<String> sRTypeList) {
+	public void setSrTypeList(List<String> sRTypeList) {
 		this.sRTypeList = sRTypeList;
 	}
-	public String getsRContent() {
+	public String getSrContent() {
 		return sRContent;
 	}
-	public void setsRContent(String sRContent) {
+	public void setSrContent(String sRContent) {
 		this.sRContent = sRContent;
 	}
-	public String getsRInfo() {
+	public String getSrInfo() {
 		return sRInfo;
 	}
-	public void setsRInfo(String sRInfo) {
+	public void setSrInfo(String sRInfo) {
 		this.sRInfo = sRInfo;
 	}
-	public List<String> getsRInfoList() {
+	public List<String> getSrInfoList() {
 		return sRInfoList;
 	}
-	public void setsRInfoList(List<String> sRInfoList) {
+	public void setSrInfoList(List<String> sRInfoList) {
 		this.sRInfoList = sRInfoList;
 	}
-	public Integer getsResType() {
+	public Integer getSresType() {
 		return sResType;
 	}
-	public void setsResType(Integer sResType) {
+	public void setSresType(Integer sResType) {
 		this.sResType = sResType;
 	}
-	public String getsRPersonLimit() {
+	public String getSrPersonLimit() {
 		return sRPersonLimit;
 	}
-	public void setsRPersonLimit(String sRPersonLimit) {
+	public void setSrPersonLimit(String sRPersonLimit) {
 		this.sRPersonLimit = sRPersonLimit;
 	}
-	public Integer getsPrice() {
+	public Integer getSprice() {
 		return sPrice;
 	}
-	public void setsPrice(Integer sPrice) {
+	public void setSprice(Integer sPrice) {
 		this.sPrice = sPrice;
 	}
-	public String getsRImg() {
+	public String getSrImg() {
 		return sRImg;
 	}
-	public void setsRImg(String sRImg) {
+	public void setSrImg(String sRImg) {
 		this.sRImg = sRImg;
 	}
-	public List<MultipartFile> getsRImgList() {
+	public List<MultipartFile> getSrImgList() {
 		return sRImgList;
 	}
-	public void setsRImgList(List<MultipartFile> sRImgList) {
+	public void setSrImgList(List<MultipartFile> sRImgList) {
 		this.sRImgList = sRImgList;
 	}
-	public List<String> getsRImgNameList() {
+	public List<String> getSrImgNameList() {
 		return sRImgNameList;
 	}
-	public void setsRImgNameList(List<String> sRImgNameList) {
+	public void setSrImgNameList(List<String> sRImgNameList) {
 		this.sRImgNameList = sRImgNameList;
 	}
 	

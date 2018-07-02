@@ -20,6 +20,10 @@
 	<p>예약일자 : <fmt:formatDate value="${reserve.reDate}"  pattern="yyyy-MM-dd HH시" /></p>
 	<p>예약수량 : ${reserve.reCnt}시간</p>
 	<p>예약금액 : ${reserve.totPrice}</p>
+	<p>Room이름 : ${room.srName}</p>
+	<p>Room한줄평 : ${room.srInfo}</p>
+	<p>예약수량 : ${reserve.reCnt}시간</p>
+	<p>예약금액 : ${reserve.totPrice}</p>
 	</div>
   	
 </div>
