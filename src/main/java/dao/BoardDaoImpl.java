@@ -45,7 +45,7 @@ public class BoardDaoImpl implements BoardDao{
 		map.put("searchType", searchType);
 		map.put("searchContent",searchContent);
 
-		
+			
 		return sqlSession.selectList(NS + "list", map);
 	}
 

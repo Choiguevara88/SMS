@@ -6,4 +6,8 @@ public interface RoomDao {
 
 	Room getRoom(Integer srNo);
 
+	void insertRoom(Room room);
+
+	
+
 }

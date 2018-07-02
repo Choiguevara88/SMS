@@ -50,4 +50,5 @@ public interface ProjectService {
 
 	Room getRoom(Integer srNo);
 
+	void insertRoom(Room room);
 }

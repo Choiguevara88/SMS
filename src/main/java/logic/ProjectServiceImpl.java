@@ -28,7 +28,7 @@ public class ProjectServiceImpl implements ProjectService {
 	@Autowired
 	private BuildingDao buDao;
 	@Autowired
-	private RoomDao roDao;
+	private RoomDao roomDao;
 
 	@Override
 	public Member getMember(String id) {
@@ -135,7 +135,7 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	@Override
 	public Room getRoom(Integer srNo) {
-		return roDao.getRoom(srNo);
+		return roomDao.getRoom(srNo);
 	}
 	
 
@@ -211,6 +211,11 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void updateMember(Member member) {
 		memDao.updateMember(member);
+	}
+
+	@Override
+	public void insertRoom(Room room) {
+		roomDao.insertRoom(room);
 	}
 
 } // ProjectServiceImpl end

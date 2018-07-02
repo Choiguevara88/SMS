@@ -18,6 +18,6 @@
 		<tr><td align="center" colspan="2"><a href="javascript:document.f.submit()">[게시물등록]</a>&nbsp;&nbsp;<a href="listex.sms">[게시판목록]</a></td></tr>
 	</table>
 </form:form>
-
+   
 </body>
 </html>
