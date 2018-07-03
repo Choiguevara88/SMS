@@ -237,6 +237,11 @@ public class ProjectServiceImpl implements ProjectService {
 		return buDao.hostHaveBuildsNo(hostId);
 	}
 
+	@Override
+	public void hostPaymentConfirm(Integer reNo) {
+		reDao.hostPaymentConfirm(reNo);		
+	}
+
 
 
 } // ProjectServiceImpl end

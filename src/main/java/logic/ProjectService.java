@@ -59,4 +59,6 @@ public interface ProjectService {
 	List<Reserve> selectHostReserveList(Integer sNo, String hostName, String searchType, String searchContent, Integer pageNum, int limit);
 
 	List<Integer> hostHaveBuildsNo(String hostId);
+
+	void hostPaymentConfirm(Integer reNo);
 }

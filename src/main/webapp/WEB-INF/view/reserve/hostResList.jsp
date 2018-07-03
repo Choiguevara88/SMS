@@ -121,7 +121,7 @@ select {width: 200px; /* 원하는 너비설정 */
 
 						<td style="text-align:center;"></td> 
 						<td style="text-align:center;">
-							<c:if test="${res.reStat == 0}">예약요청 : <a href="">[결제확인하기]</a></c:if>
+							<c:if test="${res.reStat == 0}">예약요청 : <a href="hostResConfirm.sms?reNo=${res.reNo}">[결제확인하기]</a></c:if>
 							<c:if test="${res.reStat == 1}">
 								
 								<c:if test="${today1 > redate}">
@@ -161,9 +161,8 @@ select {width: 200px; /* 원하는 너비설정 */
 					</c:if>
 						</c:forEach>
 						
-						<c:if test="${pageNum >= maxpage }">&nbsp;</c:if>
-						
-						<c:if test="${pageNum < maxpage }"><a href="javascript:pageGo(${pageNum+1})">[다음]</a></c:if>
+						<c:if test="${pageNum >= maxpage}">&nbsp;</c:if>
+						<c:if test="${pageNum < maxpage}"><a href="javascript:pageGo(${pageNum+1})">[다음]</a></c:if>
 				</td>
 				</tr>
 			</c:if>

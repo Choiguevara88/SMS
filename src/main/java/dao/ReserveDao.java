@@ -22,4 +22,6 @@ public interface ReserveDao {
 
 	List<Reserve> hostlist(Integer sNo, String hostName, String searchType, String searchContent, Integer pageNum, int limit);
 
+	void hostPaymentConfirm(Integer reNo);
+
 }
