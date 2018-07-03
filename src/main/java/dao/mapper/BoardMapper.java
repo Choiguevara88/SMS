@@ -17,7 +17,9 @@ public interface BoardMapper {
 			+ "#{img1}, #{img2}, #{img3}, #{img4}, #{kind})")
 	void insert(Board board);
 
-	@Update("update board set content=#{content}, qType=#{qType}, regDate=now(), score=#{score}, subject=#{subject} where bNo=#{bNo}")
+	@Update("update board set content=#{content}, regDate=now(), score=#{score},"
+			+ " subject=#{subject}, img1=#{img1}, img2=#{img2}, img3={img3}, img4=#{img4}, "
+			+ " where bNo=#{bNo}")
 	void update(Board board);
 
 	@Delete("delete from board where bNo=#{bNo}")

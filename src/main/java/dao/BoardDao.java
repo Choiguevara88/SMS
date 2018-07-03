@@ -23,5 +23,9 @@ public interface BoardDao {
 
 	List<Map<String,Object>>graph();
 
+	int count(Integer kind, int sNo);
+
+	List<Board> list(Integer kind, int sNo, Integer pageNum, int limit);
+
 }
 

@@ -67,8 +67,6 @@ public class ProjectServiceImpl implements ProjectService {
 			String img = uploadImgCreate(board.getImg1File(),request);
 			if(img != null) board.setImg1(img);
 		}
-
-		System.out.println(boDao.hashCode());
 		int num = boDao.maxNum();
 		
 		board.setbNo(++num);
@@ -160,6 +158,11 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
+	public void reserveCancel(Integer reNo, Integer reStat) {
+		reDao.cancel(reNo, reStat);
+	}
+	
+	@Override
 	public int hostBuildCount(String hostName) {
 		return buDao.hostBuildCnt(hostName);
 	}
@@ -214,8 +217,21 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
+	public int boardcount(Integer kind, int sNo) {
+		return boDao.count(kind, sNo);
+	}
+
+	@Override
+	public List<Board> boardList(Integer kind, int sNo, Integer pageNum, int limit) {
+		return boDao.list(kind, sNo, pageNum, limit);
+	}
+
+
+	@Override
 	public void insertRoom(Room room) {
 		roomDao.insertRoom(room);
 	}
+
+
 
 } // ProjectServiceImpl end
