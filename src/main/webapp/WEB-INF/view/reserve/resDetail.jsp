@@ -28,9 +28,19 @@
 </div>
 
 <c:if test="${reserve.reStat == 0}"><a href="resCancel.sms?reNo=${reserve.reNo}&reStat=${reserve.reStat}">[예약취소]</a></c:if>
-<c:if test="${reserve.reStat == 1}"><a href="resCancel.sms?reNo=${reserve.reNo}&reStat=${reserve.reStat}">[예약취소신청]</a></c:if>
+<c:if test="${reserve.reStat == 1}">[예약취소신청상태]</c:if>
 <c:if test="${reserve.reStat == 2}"><a href="resCancel.sms?reNo=${reserve.reNo}&reStat=${reserve.reStat}">[환불확인:예약취소확정]</a></c:if>
 <c:if test="${reserve.reStat == 3}">[환불완료]</c:if>
+
+<jsp:useBean id="today" class="java.util.Date" />
+<fmt:formatDate var="today1" value="${today}" type="date" />
+<fmt:formatDate var="regdate" value="${reserve.reDate }" type="date" />
+
+<c:if test="${reserve.reStat==1 && today1 > regdate}">
+	<a href="../review/write.sms?sNo=${room.sNo}">[리뷰작성]</a>
+</c:if>
+
+<c:if test="${reserve.reStat==5}">[작성된 리뷰 보러가기]</c:if>
 
 </body>
 </html>
