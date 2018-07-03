@@ -31,7 +31,7 @@ public class Board {
 	private MultipartFile img2File;			// ...
 	private MultipartFile img3File;			// ...
 	private MultipartFile img4File;			// 사진파일4
-	private Integer kind;					// 게시글 타입 (0:리뷰, 1:상품문의, 2:관리자에게 문의)
+	private Integer kind;					// 게시글 타입 (1:공지사항, 2:리뷰, 3:문의, 4:관리자에게 문의)
 	
 	public Integer getbNo() {
 		return bNo;
