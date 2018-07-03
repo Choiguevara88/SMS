@@ -36,6 +36,11 @@ public class ReserveDaoImpl implements ReserveDao {
 	public void insert(Reserve reserve) {
 		sqlSession.getMapper(ReserveMapper.class).insert(reserve);
 	}
+	
+	@Override
+	public void update(Reserve reserve) {
+		sqlSession.getMapper(ReserveMapper.class).update(reserve);
+	}
 
 
 	@Override

@@ -24,4 +24,6 @@ public interface ReserveDao {
 
 	void hostPaymentConfirm(Integer reNo);
 
+	void update(Reserve reserve);
+
 }

@@ -40,6 +40,10 @@
 	<a href="../review/write.sms?sNo=${room.sNo}">[리뷰작성]</a>
 </c:if>
 
+<c:if test="${reserve.reStat==0 && today1 < regdate}">
+	<a href="resUpdate.sms?reNo=${reserve.reNo}">[예약정보수정]</a>
+</c:if>
+
 <c:if test="${reserve.reStat==5}">[작성된 리뷰 보러가기]</c:if>
 
 </body>

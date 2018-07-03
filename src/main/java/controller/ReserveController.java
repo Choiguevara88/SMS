@@ -41,17 +41,17 @@ public class ReserveController {
 	}
 
 	// 예약을 수정할 때 호출되는 메서드
-	@RequestMapping(value = "", method = RequestMethod.POST)
+	@RequestMapping(value = "reserve/resUpdate", method = RequestMethod.POST)
 	public ModelAndView updateReserve(Reserve reserve, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
 
 		try {
 			service.reserveUpdate(reserve);
-			mav.setViewName("redirect:reserve/detail.sms");
+			mav.setViewName("redirect:resDetail.sms?reNo=" + reserve.getReNo());
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new ProjectException("오류가 발생하였습니다.", "reserve/detail.sms");
+			throw new ProjectException("오류가 발생하였습니다.", "resUpdate.sms?reNo=" + reserve.getReNo());
 		}
 
 		return mav;
@@ -182,17 +182,11 @@ public class ReserveController {
 			List<Integer> hostSNoList = service.hostHaveBuildsNo(hostId);
 
 			for (Integer hostSNo : hostSNoList) {
-				
 				if (hostSNo.intValue() == dbSNo.intValue()) {
-					System.out.println("이건 작동하냐???");
 					service.hostPaymentConfirm(reNo);
 					mav.setViewName("redirect:/reserve/hostResInfo.sms");
-					
 				}
 			}
-			
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ProjectException("오류가 발생하였습니다.", "redirect:/reserve/hostResInfo.sms");

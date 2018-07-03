@@ -175,7 +175,7 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	@Override
 	public void reserveUpdate(Reserve reserve) {
-		
+		reDao.update(reserve);
 	}
 
 	private String uploadImgCreate(MultipartFile picture, HttpServletRequest request) { // imgUploadMethod()
