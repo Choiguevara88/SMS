@@ -6,8 +6,10 @@ import logic.Building;
 
 public interface BuildingDao {
 
-	List<Building> resList(String hostName);
-
 	int hostBuildCnt(String hostName);
+
+	List<Integer> hostHaveBuildsNo(String hostId);
+
+	Building resInfo(String hostName, Integer sNo);
 
 }

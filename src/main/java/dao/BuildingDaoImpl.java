@@ -18,10 +18,14 @@ public class BuildingDaoImpl implements BuildingDao {
 	private final String NS = "dao.mapper.BuildingMapper.";
 
 	@Override
-	public List<Building> resList(String hostName) {
-		Map<String, String> map = new HashMap<String, String>();
+	public Building resInfo(String hostName, Integer sNo) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		map.put("id", hostName);
-		return sqlSession.selectList(NS + "hostList", map);
+		map.put("sNo", sNo);
+		
+		return sqlSession.selectOne(NS + "hostInfo", map);
 	}
 
 	@Override
@@ -29,6 +33,13 @@ public class BuildingDaoImpl implements BuildingDao {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("id", hostName);
 		return sqlSession.selectOne(NS + "hostCount", map);
+	}
+
+	@Override
+	public List<Integer> hostHaveBuildsNo(String hostId) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id", hostId);
+		return sqlSession.selectList(NS+"hostHaveBuildsNo", map);
 	}
 
 }

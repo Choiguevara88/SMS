@@ -120,23 +120,10 @@ select {width: 200px; /* 원하는 너비설정 */
 
 						<td style="text-align:center;">${res.reCnt}</td> 
 						<td style="text-align:center;">
-						
-						<c:if test="${res.reStat == 0}">
-							[결제대기]
-						</c:if>
-						
-						<c:if test="${res.reStat == 1}">
-							[결제완료]
-						</c:if>
-						
-						<c:if test="${res.reStat == 2}">
-							환불 예정 : <a href="buyComplete.sms">[환불 확인]</a>
-						</c:if>
-						
-						<c:if test="${res.reStat == 3}">
-							[환불완료]
-						</c:if>
-						
+							<c:if test="${res.reStat == 0}">[결제대기]</c:if>
+							<c:if test="${res.reStat == 1}">[결제완료]	</c:if>
+							<c:if test="${res.reStat == 2}">환불 예정 : <a href="buyComplete.sms">[환불 확인]</a></c:if>
+							<c:if test="${res.reStat == 3}">[환불완료]	</c:if>
 						</td>
 					</tr>
 				</c:forEach>

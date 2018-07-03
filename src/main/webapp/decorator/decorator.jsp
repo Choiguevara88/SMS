@@ -38,7 +38,7 @@
   	<a href="${path }/reserve/resList.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>나의 예약정보 !</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id }">
   	<hr size="1">
-  	<a href="space_reservation.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공간 예약관리 !</a></c:if>
+  	<a href="${path }/reserve/hostResInfo.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공간 예약관리 !</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id }">
   	<hr size="1">
   	<a href="wishlist.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>내가 찜한 공간 !</a></c:if>
