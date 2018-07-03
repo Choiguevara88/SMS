@@ -20,91 +20,176 @@ public class Room {
 	private List<MultipartFile> sRImgList;	// Room 이미지파일 View 전달용 리스트 객체
 	private List<String> sRImgNameList;		// Room 이미지파일명 View 전달용 리스트 객체
 	
+	
+	
 	public Integer getsNo() {
 		return sNo;
 	}
+
+
+
 	public void setsNo(Integer sNo) {
 		this.sNo = sNo;
 	}
+
+
+
 	public Integer getsRNo() {
 		return sRNo;
 	}
+
+
+
 	public void setsRNo(Integer sRNo) {
 		this.sRNo = sRNo;
 	}
+
+
+
 	public String getsRName() {
 		return sRName;
 	}
+
+
+
 	public void setsRName(String sRName) {
 		this.sRName = sRName;
 	}
+
+
+
 	public String getsRType() {
 		return sRType;
 	}
+
+
+
 	public void setsRType(String sRType) {
 		this.sRType = sRType;
 	}
+
+
+
 	public List<String> getsRTypeList() {
 		return sRTypeList;
 	}
+
+
+
 	public void setsRTypeList(List<String> sRTypeList) {
 		this.sRTypeList = sRTypeList;
 	}
+
+
+
 	public String getsRContent() {
 		return sRContent;
 	}
+
+
+
 	public void setsRContent(String sRContent) {
 		this.sRContent = sRContent;
 	}
+
+
+
 	public String getsRInfo() {
 		return sRInfo;
 	}
+
+
+
 	public void setsRInfo(String sRInfo) {
 		this.sRInfo = sRInfo;
 	}
+
+
+
 	public List<String> getsRInfoList() {
 		return sRInfoList;
 	}
+
+
+
 	public void setsRInfoList(List<String> sRInfoList) {
 		this.sRInfoList = sRInfoList;
 	}
+
+
+
 	public Integer getsResType() {
 		return sResType;
 	}
+
+
+
 	public void setsResType(Integer sResType) {
 		this.sResType = sResType;
 	}
+
+
+
 	public String getsRPersonLimit() {
 		return sRPersonLimit;
 	}
+
+
+
 	public void setsRPersonLimit(String sRPersonLimit) {
 		this.sRPersonLimit = sRPersonLimit;
 	}
+
+
+
 	public Integer getsPrice() {
 		return sPrice;
 	}
+
+
+
 	public void setsPrice(Integer sPrice) {
 		this.sPrice = sPrice;
 	}
+
+
+
 	public String getsRImg() {
 		return sRImg;
 	}
+
+
+
 	public void setsRImg(String sRImg) {
 		this.sRImg = sRImg;
 	}
+
+
+
 	public List<MultipartFile> getsRImgList() {
 		return sRImgList;
 	}
+
+
+
 	public void setsRImgList(List<MultipartFile> sRImgList) {
 		this.sRImgList = sRImgList;
 	}
+
+
+
 	public List<String> getsRImgNameList() {
 		return sRImgNameList;
 	}
+
+
+
 	public void setsRImgNameList(List<String> sRImgNameList) {
 		this.sRImgNameList = sRImgNameList;
 	}
-	
+
+
+
 	@Override
 	public String toString() {
 		return "Room [sNo=" + sNo + ", sRNo=" + sRNo + ", sRName=" + sRName + ", sRType=" + sRType + ", sRTypeList="

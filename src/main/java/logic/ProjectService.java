@@ -52,4 +52,9 @@ public interface ProjectService {
 
 	List<Board> boardList(Integer kind, int sNo, Integer pageNum, int limit);
 
+	Room getRoom(Integer srNo);
+
+	void insertRoom(Room room);
+
+	void reserveCancel(Integer reNo, Integer reStat);
 }

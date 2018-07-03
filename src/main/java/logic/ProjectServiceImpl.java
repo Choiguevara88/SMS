@@ -14,6 +14,7 @@ import dao.BoardDao;
 import dao.BuildingDao;
 import dao.MemberDao;
 import dao.ReserveDao;
+import dao.RoomDao;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -26,6 +27,8 @@ public class ProjectServiceImpl implements ProjectService {
 	private ReserveDao reDao;
 	@Autowired
 	private BuildingDao buDao;
+	@Autowired
+	private RoomDao roomDao;
 
 	@Override
 	public Member getMember(String id) {
@@ -128,6 +131,11 @@ public class ProjectServiceImpl implements ProjectService {
 		return reDao.getReserve(reNo);
 	}
 	
+	@Override
+	public Room getRoom(Integer srNo) {
+		return roomDao.getRoom(srNo);
+	}
+	
 
 	@Override
 	public List<Reserve> getReserveList(String id) {
@@ -147,6 +155,11 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum, int limit) {
 		return reDao.list(id, searchType, searchContent, pageNum, limit);
+	}
+	
+	@Override
+	public void reserveCancel(Integer reNo, Integer reStat) {
+		reDao.cancel(reNo, reStat);
 	}
 	
 	@Override
@@ -211,6 +224,12 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<Board> boardList(Integer kind, int sNo, Integer pageNum, int limit) {
 		return boDao.list(kind, sNo, pageNum, limit);
+	}
+
+
+	@Override
+	public void insertRoom(Room room) {
+		roomDao.insertRoom(room);
 	}
 
 

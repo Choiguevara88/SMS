@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import exception.ProjectException;
 import logic.Building;
 import logic.ProjectService;
 import logic.Reserve;
+import logic.Room;
 
 @Controller
 public class ReserveController {
@@ -23,7 +25,7 @@ public class ReserveController {
 	
 	// 예약을 등록할 때 호출되는 메서드
 	@RequestMapping(value="reserve/roomReserve", method=RequestMethod.POST)
-	public ModelAndView roomReserve(Reserve reserve) {
+	public ModelAndView roomReserve(Reserve reserve, HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -39,7 +41,7 @@ public class ReserveController {
 	
 	// 예약을 수정할 때 호출되는 메서드
 	@RequestMapping(value="", method=RequestMethod.POST)
-	public ModelAndView updateReserve(Reserve reserve) {
+	public ModelAndView updateReserve(Reserve reserve, HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -57,7 +59,7 @@ public class ReserveController {
 	
 	// 예약 리스트를 확인할 때 호출되는 메서드 (Guest계정용)
 	@RequestMapping(value="reserve/resList", method=RequestMethod.GET)
-	public ModelAndView reserveList(String id, Integer pageNum, String searchType, String searchContent) {
+	public ModelAndView reserveList(String id, Integer pageNum, String searchType, String searchContent, HttpSession session) {
 		
 		if(pageNum == null || pageNum.toString().equals("")) {
 			pageNum = 1;
@@ -90,7 +92,7 @@ public class ReserveController {
 	
 	// 신규예약정보에 대해 확인할 때 호출되는 메서드 (Host계정용)
 	@RequestMapping(value="reserve/hostResInfo", method=RequestMethod.GET)
-	public ModelAndView hostReserveInfo(String hostName) {
+	public ModelAndView hostReserveInfo(String hostName, HttpSession session) {
 		 
 		ModelAndView mav = new ModelAndView();
 		int buildCnt = service.hostBuildCount(hostName);
@@ -104,7 +106,7 @@ public class ReserveController {
 	
 	// 예약 리스트를 확인할 때 호출되는 메서드 (Host계정용)
 	@RequestMapping(value="reserve/hostResList", method=RequestMethod.GET)
-	public ModelAndView hostReserveList(Integer sNo, Integer pageNum, String searchType, String searchContent) {
+	public ModelAndView hostReserveList(Integer sNo, Integer pageNum, String searchType, String searchContent, HttpSession session) {
 		
 		if(pageNum == null || pageNum.toString().equals("")) {
 			pageNum = 1;
@@ -133,22 +135,52 @@ public class ReserveController {
 				
 		return mav;
 	}
+	
+	// 예약 정보 확인 후 구매/취소여부 확인할 때 사용하는 메서드
+	@RequestMapping(value="reserve/resDetail", method=RequestMethod.GET)
+	public ModelAndView detailReserve2(Integer reNo, HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		Reserve reserve = service.getReserve(reNo);
+		Room room = service.getRoom(reserve.getSrNo());
+		
+		mav.addObject("reserve",reserve);
+		mav.addObject("room",room);	// 세부공간에 대한 세부정보
+		
+		return mav;
+		
+	}
+	
+	// 예약 취소 작업시 호출되는 메서드
+	@RequestMapping(value="reserve/resCancel", method=RequestMethod.GET)
+	public ModelAndView reserveCancel(Integer reNo, Integer reStat, HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		try {
+			service.reserveCancel(reNo, reStat);
+			mav.setViewName("redirect:/main.sms");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ProjectException("오류가 발생하였습니다." , "reserve/list.sms");
+		}
+		return mav;
+	}
 
 	
 	
-	// 예약업무 관련하여 Default 호출값으로 지정한 메서드 : 특정 예약보기, 예약 등록화면, 수정화면
+	// 예약업무 관련하여 Default 호출값으로 지정한 메서드 : 특정 예약 보기, 예약 등록 화면
 	@RequestMapping(value="reserve/*", method=RequestMethod.GET) 
-	public ModelAndView detailReserve(Reserve res, HttpServletRequest request) {
+	public ModelAndView detailReserve(Integer reNo, HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		Reserve reserve = new Reserve();
 		
 		// 예약이 있다면 해당 예약정보를 보여주기 위한 조건식
-		if(res != null) {
-			if(res.getReNo() != null) {
-				service.getReserve(res.getReNo());
-			}
+		if(reNo != null) {
+			reserve = service.getReserve(reNo);
 		}
 		
 		mav.addObject("reserve", reserve);

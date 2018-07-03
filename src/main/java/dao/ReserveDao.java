@@ -20,4 +20,6 @@ public interface ReserveDao {
 
 	int hostCount(Integer sNo, String searchType, String searchContent);
 
+	void cancel(Integer reNo, Integer reStat);
+
 }
