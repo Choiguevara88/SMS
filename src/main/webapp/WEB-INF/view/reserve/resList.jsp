@@ -90,6 +90,7 @@ select {width: 200px; /* 원하는 너비설정 */
 					<th style="text-align:center;">건물번호</th>
 					<th style="text-align:center;">예약일자</th>
 					<th style="text-align:center;">등록일자</th>
+					<th style="text-align:center;">가격</th>
 					<th style="text-align:center;">수량</th>
 					<th style="text-align:center;">비고</th>
 				</tr>
@@ -120,23 +121,11 @@ select {width: 200px; /* 원하는 너비설정 */
 
 						<td style="text-align:center;">${res.reCnt}</td> 
 						<td style="text-align:center;">
-						
-						<c:if test="${res.reStat == 0}">
-							[결제대기]
-						</c:if>
-						
-						<c:if test="${res.reStat == 1}">
-							[결제완료]
-						</c:if>
-						
-						<c:if test="${res.reStat == 2}">
-							환불 예정 : <a href="buyComplete.sms">[환불 확인]</a>
-						</c:if>
-						
-						<c:if test="${res.reStat == 3}">
-							[환불완료]
-						</c:if>
-						
+							<c:if test="${res.reStat == 0}">[결제대기]</c:if>
+							<c:if test="${res.reStat == 1}">[결제완료]	</c:if>
+							<c:if test="${res.reStat == 2}">환불 예정 : <a href="resCancel.sms?reNo=${res.reNo}&reStat=${res.reStat}">[환불 확인]</a></c:if>
+							<c:if test="${res.reStat == 3}">[환불완료]	</c:if>
+							<c:if test="${res.reStat == 4}">[예약취소]	</c:if>
 						</td>
 					</tr>
 				</c:forEach>

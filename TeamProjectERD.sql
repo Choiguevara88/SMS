@@ -119,8 +119,7 @@ ex ) img.png\timg2.jpg\t',
 	SStat int NOT NULL COMMENT '미승인 : 0
 승인 : 1
 반려 : 2',
-	PRIMARY KEY (SNo),
-	UNIQUE (ID)
+	PRIMARY KEY (SNo)
 );
 
 
@@ -163,7 +162,8 @@ Admin = 2',
 	Tel varchar(30) COMMENT 'Host계정 전환 시 대표번호로 사용',
 	-- 은행명 + \t + 계좌번호 + \t + 예금주
 	AccountNo varchar(40) COMMENT '은행명 + \t + 계좌번호 + \t + 예금주',
-	PRIMARY KEY (ID)
+	PRIMARY KEY (ID),
+	UNIQUE (ID)
 );
 
 

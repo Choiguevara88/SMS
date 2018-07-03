@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import logic.Building;
@@ -20,7 +21,7 @@ public class BuildingController {
 	private ProjectService service;
 	
 	@RequestMapping(value="building/buildingForm")
-	public ModelAndView buildindForm(Integer num, HttpServletRequest request) {
+	public ModelAndView buildingForm() {
 		Building building = new Building();
 		List<String> sTypeNames = new ArrayList<String>();
 		sTypeNames.add("½ºÅÍµð·ë");
@@ -35,6 +36,15 @@ public class BuildingController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("sTypeNames",sTypeNames);
 		mav.addObject("building", building);
+		return mav;
+	}
+	
+	@RequestMapping(value="building/buildingReg", method=RequestMethod.POST)
+	public ModelAndView buildingReg(Building building, HttpServletRequest request) {
+		
+		System.out.println(building);		
+		ModelAndView mav = new ModelAndView();
+
 		return mav;
 	}
 }

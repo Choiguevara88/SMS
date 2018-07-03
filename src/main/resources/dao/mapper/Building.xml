@@ -3,15 +3,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.mapper.BuildingMapper">
 	
-	<select id="hostList" resultType="Building" parameterType="map">
+	<select id="hostInfo" resultType="Building" parameterType="map">
 		select sNo, sName, 
 		(select count(*) from Reserve r ,Board b where r.sNo = b.sNo) 'boCnt',
-		(select count(*) from Reserve r ,Building b where r.sNo = b.sNo and r.reStat = 0) 'reCnt'
+		(select count(*) from Reserve where sNo = #{sNo} and reStat = 0) 'reCnt'
+		
 		from Building
 
 		<if test="id != null">
-			where id = #{id}	
+			where id = #{id} and sNo = #{sNo}
 		</if>
+	</select>
+	
+	<select id="hostHaveBuildsNo" resultType="Integer" parameterType="map">
+		select sNo from Building where id = #{id}
 	</select>
 	
 	<select id="hostCount" resultType="Integer" parameterType="map">

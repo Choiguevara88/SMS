@@ -48,24 +48,24 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override // board Write Method()
 	public void boardWrite(Board board, HttpServletRequest request) {
 		
-		if (board.getImg1File() != null && !board.getImg1File().isEmpty()) { 
+		if (board.getImg1File() != null) { 
 			String img = uploadImgCreate(board.getImg1File(),request);	
 			if(img != null) board.setImg1(img); 
 		}
 		
-		if (board.getImg2File() != null && !board.getImg2File().isEmpty()) { 
+		if (board.getImg2File() != null) { 
 			String img = uploadImgCreate(board.getImg2File(),request);
 			if(img != null) board.setImg2(img);
 		}
 		
-		if (board.getImg3File() != null && !board.getImg3File().isEmpty()) { 
+		if (board.getImg3File() != null) { 
 			String img = uploadImgCreate(board.getImg3File(),request);
 			if(img != null) board.setImg3(img);
 		}
 		
-		if (board.getImg4File() != null && !board.getImg4File().isEmpty()) { 
+		if (board.getImg4File() != null) { 
 			String img = uploadImgCreate(board.getImg1File(),request);
-			if(img != null) board.setImg1(img);
+			if(img != null) board.setImg4(img);
 		}
 		int num = boDao.maxNum();
 		
@@ -84,31 +84,33 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void boardReply(Board board) {
-		// TODO Auto-generated method stub
-
+		int num = boDao.maxNum();
+		board.setbNo(++num);
+		board.setRefLevel(board.getRefLevel()+1);
+		boDao.insert(board);
 	}
 
 	@Override // board Update Method()
 	public void boardUpdate(Board board, HttpServletRequest request) {	
 		
-		if (board.getImg1File() != null && !board.getImg1File().isEmpty()) { // img1  
+		if (board.getImg1File() != null) { // img1  
 			String img = uploadImgCreate(board.getImg1File(),request);	// img1 upload & img1Name setting 
 			if(img != null) board.setImg1(img); // img1Name input
 		}
 		
-		if (board.getImg2File() != null && !board.getImg2File().isEmpty()) { 
+		if (board.getImg2File() != null) { 
 			String img = uploadImgCreate(board.getImg2File(),request);
 			if(img != null) board.setImg2(img);
 		}
 		
-		if (board.getImg3File() != null && !board.getImg3File().isEmpty()) { 
+		if (board.getImg3File() != null) { 
 			String img = uploadImgCreate(board.getImg3File(),request);
 			if(img != null) board.setImg3(img);
 		}
 		
-		if (board.getImg4File() != null && !board.getImg4File().isEmpty()) { 
-			String img = uploadImgCreate(board.getImg1File(),request);
-			if(img != null) board.setImg1(img);
+		if (board.getImg4File() != null) { 
+			String img = uploadImgCreate(board.getImg4File(),request);
+			if(img != null) board.setImg4(img);
 		}
 		
 		boDao.update(board);
@@ -148,11 +150,6 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
-	public int hostReserveCount(Integer sNo, String searchType, String searchContent) {
-		return reDao.hostCount(sNo, searchType, searchContent);
-	}
-	
-	@Override
 	public List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum, int limit) {
 		return reDao.list(id, searchType, searchContent, pageNum, limit);
 	}
@@ -168,15 +165,10 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
-	public List<Building> selectHostReserveInfo(String hostName) {
-		return buDao.resList(hostName);
+	public Building selectHostReserveInfo(String hostName, Integer sNo) {
+		return buDao.resInfo(hostName, sNo);
 	}
 	
-	@Override
-	public List<Reserve> selectHostReserveList(Integer sNo, String searchType, String searchContent, Integer pageNum, int limit) {
-		return reDao.hostlist(sNo, searchType, searchContent, pageNum, limit);
-	}
-
 	@Override
 	public void reserveInsert(Reserve reserve) {
 		reserve.setReNo(reserve.getSrNo() + (int)new Date().getTime());
@@ -185,19 +177,15 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	@Override
 	public void reserveUpdate(Reserve reserve) {
-		
+		reDao.update(reserve);
 	}
 
 	private String uploadImgCreate(MultipartFile picture, HttpServletRequest request) { // imgUploadMethod()
-
+		String uploadPath = request.getServletContext().getRealPath("/") + "/picture/"; // upload path setting
 		Date date = new Date();
-
+		String orgFile = date.getTime() + picture.getOriginalFilename(); // imgFileName setting
 		try {
-			
-			String uploadPath = request.getServletContext().getRealPath("/") + "/picture/"; // upload path setting
-			String orgFile = date.getTime() + picture.getOriginalFilename(); // imgFileName setting
 			picture.transferTo(new File(uploadPath + orgFile)); // new File(uploadPath + orgFile) : img upload complite
-			
 			return orgFile; // imgFileName Return
 			
 		} catch (Exception e) {
@@ -232,6 +220,30 @@ public class ProjectServiceImpl implements ProjectService {
 		roomDao.insertRoom(room);
 	}
 
+	@Override
+	public int hostReserveCount(String hostName, Integer sNo, String searchType, String searchContent) {
+		return reDao.hostCount(sNo, hostName, searchType, searchContent);
+	}
+
+	@Override
+	public List<Reserve> selectHostReserveList(Integer sNo, String hostName, String searchType, String searchContent, Integer pageNum, int limit) {
+		return reDao.hostlist(sNo, hostName, searchType, searchContent, pageNum, limit);
+	}
+
+	@Override
+	public List<Integer> hostHaveBuildsNo(String hostId) {
+		return buDao.hostHaveBuildsNo(hostId);
+	}
+
+	@Override
+	public void hostPaymentConfirm(Integer reNo) {
+		reDao.hostPaymentConfirm(reNo);		
+	}
+	
+	@Override
+	public List<Board> boardList(Integer kind, int sNo) {
+		return boDao.list(kind, sNo);
+	}
 
 
 

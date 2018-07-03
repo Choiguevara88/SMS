@@ -10,14 +10,16 @@ public class Building {
 	private String sName;				// 빌딩의 이름
 	private String sPreview;			// 빌딩의 한줄소개
 	private String sContent;			// 빌딩 설명 내용
-	private String sType;				// 빌딩 유형 (연습실, 세미나실, 회의실 등등)
-	private String sTag;				// 빌딩 태그
-	private String sInfoSub;			// 기타 시설 안내 (시설안내는 개별적으로 Room에 설정)
-	private String sRule;				// 이용 규칙
-	private List<String> sTagList;		// STag List
-	private List<String> sInfoSubList;	// SInfoSub List
-	private List<String> sRuleList;		// SRule List
-	private String sBHour;				// 운영 시간
+	private List<String> sTypeList;	    // 빌딩 유형 (연습실, 세미나실, 회의실 등등)
+	private String sType;               // 빌딩 유형 DB추가용 변수
+	private List<String> sTagList;		// 빌딩 태그
+	private String sTag;                // 빌딩 태그 DB 추가용 변수
+	private List<String> sInfoSubList;	// 기타 시설 안내 (시설안내는 개별적으로 Room에 설정)
+	private String sInfoSub;            // 기타 시설 안내 DB추가용 변수
+	private List<String> sRuleList;		// 이용 규칙
+	private String sRule;               // 이용 규칙 DB 추가용 변수
+	private List<String> sBHourList;	// 운영 시간 list0=시작시간 list1=종료시간 
+	private String sBHour;              // 운영 시간 DB 추가용 변수
 	private String sHDay;				// 휴무요일
 	private String sImg1;					// 대표이미지파일명을 DB에 저장하기 위한 객체
 	private MultipartFile sImg1File;		// 대표이미지파일을 업로드 하기 위한 객체
@@ -29,7 +31,6 @@ public class Building {
 	private List<Room> room;				// 화면에 표시할 Room 객체들
 	private Integer boCnt;					// 아직 읽지 않은 문의 갯수
 	private Integer reCnt;					// 아직 확인 안 된 예약 갯수
-	
 	public Integer getsNo() {
 		return sNo;
 	}
@@ -60,29 +61,17 @@ public class Building {
 	public void setsContent(String sContent) {
 		this.sContent = sContent;
 	}
+	public List<String> getsTypeList() {
+		return sTypeList;
+	}
+	public void setsTypeList(List<String> sTypeList) {
+		this.sTypeList = sTypeList;
+	}
 	public String getsType() {
 		return sType;
 	}
 	public void setsType(String sType) {
 		this.sType = sType;
-	}
-	public String getsTag() {
-		return sTag;
-	}
-	public void setsTag(String sTag) {
-		this.sTag = sTag;
-	}
-	public String getsInfoSub() {
-		return sInfoSub;
-	}
-	public void setsInfoSub(String sInfoSub) {
-		this.sInfoSub = sInfoSub;
-	}
-	public String getsRule() {
-		return sRule;
-	}
-	public void setsRule(String sRule) {
-		this.sRule = sRule;
 	}
 	public List<String> getsTagList() {
 		return sTagList;
@@ -90,17 +79,41 @@ public class Building {
 	public void setsTagList(List<String> sTagList) {
 		this.sTagList = sTagList;
 	}
+	public String getsTag() {
+		return sTag;
+	}
+	public void setsTag(String sTag) {
+		this.sTag = sTag;
+	}
 	public List<String> getsInfoSubList() {
 		return sInfoSubList;
 	}
 	public void setsInfoSubList(List<String> sInfoSubList) {
 		this.sInfoSubList = sInfoSubList;
 	}
+	public String getsInfoSub() {
+		return sInfoSub;
+	}
+	public void setsInfoSub(String sInfoSub) {
+		this.sInfoSub = sInfoSub;
+	}
 	public List<String> getsRuleList() {
 		return sRuleList;
 	}
 	public void setsRuleList(List<String> sRuleList) {
 		this.sRuleList = sRuleList;
+	}
+	public String getsRule() {
+		return sRule;
+	}
+	public void setsRule(String sRule) {
+		this.sRule = sRule;
+	}
+	public List<String> getsBHourList() {
+		return sBHourList;
+	}
+	public void setsBHourList(List<String> sBHourList) {
+		this.sBHourList = sBHourList;
 	}
 	public String getsBHour() {
 		return sBHour;
@@ -174,14 +187,16 @@ public class Building {
 	public void setReCnt(Integer reCnt) {
 		this.reCnt = reCnt;
 	}
-	
 	@Override
 	public String toString() {
 		return "Building [sNo=" + sNo + ", id=" + id + ", sName=" + sName + ", sPreview=" + sPreview + ", sContent="
-				+ sContent + ", sType=" + sType + ", sTag=" + sTag + ", sInfoSub=" + sInfoSub + ", sRule=" + sRule
-				+ ", sTagList=" + sTagList + ", sInfoSubList=" + sInfoSubList + ", sRuleList=" + sRuleList + ", sBHour="
-				+ sBHour + ", sHDay=" + sHDay + ", sImg1=" + sImg1 + ", sImg1File=" + sImg1File + ", sImg2=" + sImg2
-				+ ", sImg2Files=" + sImg2Files + ", sImg2Name=" + sImg2Name + ", sAddress=" + sAddress + ", sStat="
-				+ sStat + ", room=" + room + ", boCnt=" + boCnt + ", reCnt=" + reCnt + "]";
+				+ sContent + ", sTypeList=" + sTypeList + ", sType=" + sType + ", sTagList=" + sTagList + ", sTag="
+				+ sTag + ", sInfoSubList=" + sInfoSubList + ", sInfoSub=" + sInfoSub + ", sRuleList=" + sRuleList
+				+ ", sRule=" + sRule + ", sBHourList=" + sBHourList + ", sBHour=" + sBHour + ", sHDay=" + sHDay
+				+ ", sImg1=" + sImg1 + ", sImg1File=" + sImg1File + ", sImg2=" + sImg2 + ", sImg2Files=" + sImg2Files
+				+ ", sImg2Name=" + sImg2Name + ", sAddress=" + sAddress + ", sStat=" + sStat + ", room=" + room
+				+ ", boCnt=" + boCnt + ", reCnt=" + reCnt + "]";
 	}
+	
+	
 }
