@@ -84,8 +84,10 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void boardReply(Board board) {
-		// TODO Auto-generated method stub
-
+		int num = boDao.maxNum();
+		board.setbNo(++num);
+		board.setRefLevel(board.getRefLevel()+1);
+		boDao.insert(board);
 	}
 
 	@Override // board Update Method()
@@ -237,7 +239,11 @@ public class ProjectServiceImpl implements ProjectService {
 	public void hostPaymentConfirm(Integer reNo) {
 		reDao.hostPaymentConfirm(reNo);		
 	}
-
+	
+	@Override
+	public List<Board> boardList(Integer kind, int sNo) {
+		return boDao.list(kind, sNo);
+	}
 
 
 } // ProjectServiceImpl end

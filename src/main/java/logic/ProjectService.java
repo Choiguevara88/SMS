@@ -61,4 +61,6 @@ public interface ProjectService {
 	List<Integer> hostHaveBuildsNo(String hostId);
 
 	void hostPaymentConfirm(Integer reNo);
+	
+	List<Board> boardList(Integer kind, int sNo);
 }
