@@ -27,9 +27,9 @@
 	</div>
 </div>
 
-<c:if test="${reserve.reStat == 0}"><a href="">[예약취소]</a></c:if>
-<c:if test="${reserve.reStat == 1}"><a href="">[예약취소신청]</a></c:if>
-<c:if test="${reserve.reStat == 2}"><a href="">[환불확인:예약취소확정]</a></c:if>
+<c:if test="${reserve.reStat == 0}"><a href="resCancel.sms?reNo=${reserve.reNo}&reStat=${reserve.reStat}">[예약취소]</a></c:if>
+<c:if test="${reserve.reStat == 1}"><a href="resCancel.sms?reNo=${reserve.reNo}&reStat=${reserve.reStat}">[예약취소신청]</a></c:if>
+<c:if test="${reserve.reStat == 2}"><a href="resCancel.sms?reNo=${reserve.reNo}&reStat=${reserve.reStat}">[환불확인:예약취소확정]</a></c:if>
 <c:if test="${reserve.reStat == 3}">[환불완료]</c:if>
 
 </body>

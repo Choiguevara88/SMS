@@ -160,6 +160,11 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
+	public void reserveCancel(Integer reNo, Integer reStat) {
+		reDao.cancel(reNo, reStat);
+	}
+	
+	@Override
 	public int hostBuildCount(String hostName) {
 		return buDao.hostBuildCnt(hostName);
 	}
@@ -217,5 +222,7 @@ public class ProjectServiceImpl implements ProjectService {
 	public void insertRoom(Room room) {
 		roomDao.insertRoom(room);
 	}
+
+
 
 } // ProjectServiceImpl end

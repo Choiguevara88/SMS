@@ -57,7 +57,7 @@ $(document).ready(function() { //이메일 자동 완성
 </script>
 </head>
 <body>
-<form:form modelAttribute="member" action="join.sms" method="post">
+<form:form modelAttribute="member" action="member/join.sms" method="post">
 	<spring:hasBindErrors name="member">
 		<font color="tomato">
 			<c:forEach items="${errors.globalErrors }" var="error">

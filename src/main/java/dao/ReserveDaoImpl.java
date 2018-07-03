@@ -90,4 +90,15 @@ public class ReserveDaoImpl implements ReserveDao {
 		
 		return sqlSession.selectList(NS + "selectHostList", map);
 	}
+
+	@Override
+	public void cancel(Integer reNo, Integer reStat) {
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		map.put("reNo", reNo);
+		map.put("reStat", reStat);
+		
+		sqlSession.update(NS + "cancel", map);
+	}
 }

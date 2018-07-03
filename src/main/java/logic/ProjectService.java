@@ -51,4 +51,6 @@ public interface ProjectService {
 	Room getRoom(Integer srNo);
 
 	void insertRoom(Room room);
+
+	void reserveCancel(Integer reNo, Integer reStat);
 }
