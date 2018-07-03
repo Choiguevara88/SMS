@@ -24,7 +24,7 @@ public class ReViewController {
 	int kind = 2;
 	
 	@RequestMapping("review/list")
-	public ModelAndView list (Integer pageNum, Integer kind) {
+	public ModelAndView list (Integer pageNum, Integer kind, Integer sNo) {
 		
 		if(pageNum == null || pageNum.toString().equals("")) {
 			pageNum = 1;
@@ -32,13 +32,10 @@ public class ReViewController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		Board board = new Board();
-		int sNo = board.getsNo();
-		
 		int limit = 5;		// 한 페이지에 나올 게시글의 숫자
 		int listcount = service.boardcount(kind,sNo);	// 표시될 총 게시글의 수
 		List<Board> boardlist = service.boardList(kind,sNo,pageNum, limit);
-		
+		double avg = boardlist.stream().mapToInt(Board :: getScore).average().getAsDouble();
 		int maxpage = (int)((double)listcount/limit + 0.95);
 		int startpage = ((int)((pageNum/5.0 + 0.9) - 1)) * 5 + 1; // 시작페이지
 		int endpage = startpage + 4;	// 마지막 페이지
@@ -52,6 +49,8 @@ public class ReViewController {
 		mav.addObject("boardlist",boardlist);
 		mav.addObject("boardcnt",boardcnt);
 		mav.addObject("kind",kind);
+		mav.addObject("avgScore",avg);
+		mav.addObject("sNo",sNo);
 				
 		return mav;
 	}
@@ -62,6 +61,7 @@ public class ReViewController {
 		
 		ModelAndView mav = new ModelAndView();
 		int sNo = Integer.parseInt(request.getParameter("sNo"));
+		
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
@@ -85,6 +85,7 @@ public class ReViewController {
 	public ModelAndView update(@Valid Board board, BindingResult bindingResult, HttpServletRequest request) {
 			
 			ModelAndView mav = new ModelAndView();
+			int sNo = board.getsNo();
 			
 			if(bindingResult.hasErrors()) {
 				mav.getModel().putAll(bindingResult.getModel());
@@ -94,9 +95,11 @@ public class ReViewController {
 				service.boardUpdate(board, request);
 				mav.setViewName("redirect:/review/list.sms");
 			} catch (Exception e) {
+				e.printStackTrace();
 				throw new ProjectException("오류가 발생하였습니다." , "/review/list.sms");
 			}
 			mav.addObject("kind",kind);
+			mav.addObject("sNo",sNo);
 			return mav;
 		}
 	
@@ -112,7 +115,7 @@ public class ReViewController {
 		
 		try {
 			service.boardReply(board);
-			mav.setViewName("redirect:/review/list.shop");
+			mav.setViewName("redirect:/building/buildingDetail.sms");
 		} catch (Exception e) {
 			throw new ProjectException("오류가 발생하였습니다." , "/review/list.shop");
 		}
@@ -121,19 +124,17 @@ public class ReViewController {
 	}
 	
 	@RequestMapping(value="review/delete", method=RequestMethod.POST)
-	public ModelAndView delete(Integer bNo, Member mem, Integer pageNum) {
+	public ModelAndView delete(Integer bNo, Integer pageNum,Integer sNo,Integer kind) {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		Board dbBoard = service.getBoard(bNo);
-		
-		 if(dbBoard.getId().equals(mem.getId())) {	
+		 //if(dbBoard.getId().equals(mem.getId())) {	
 			service.boardDelete(bNo);
-			mav.setViewName("redirect:/board/listex.sms?pageNum=" + pageNum);
+			mav.setViewName("redirect:/review/list.sms?sNo="+sNo+"&kind="+kind);
 			return mav;
-		} else {
+		/*} else {
 			throw new ProjectException("비밀번호 오류","delete.sms?bNo=" + bNo + "&pageNum=" + pageNum);
-		}
+		}*/
 	}
 	
 	

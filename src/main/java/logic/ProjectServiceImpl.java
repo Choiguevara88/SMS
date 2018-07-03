@@ -48,24 +48,24 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override // board Write Method()
 	public void boardWrite(Board board, HttpServletRequest request) {
 		
-		if (board.getImg1File() != null && !board.getImg1File().isEmpty()) { 
+		if (board.getImg1File() != null) { 
 			String img = uploadImgCreate(board.getImg1File(),request);	
 			if(img != null) board.setImg1(img); 
 		}
 		
-		if (board.getImg2File() != null && !board.getImg2File().isEmpty()) { 
+		if (board.getImg2File() != null) { 
 			String img = uploadImgCreate(board.getImg2File(),request);
 			if(img != null) board.setImg2(img);
 		}
 		
-		if (board.getImg3File() != null && !board.getImg3File().isEmpty()) { 
+		if (board.getImg3File() != null) { 
 			String img = uploadImgCreate(board.getImg3File(),request);
 			if(img != null) board.setImg3(img);
 		}
 		
-		if (board.getImg4File() != null && !board.getImg4File().isEmpty()) { 
+		if (board.getImg4File() != null) { 
 			String img = uploadImgCreate(board.getImg1File(),request);
-			if(img != null) board.setImg1(img);
+			if(img != null) board.setImg4(img);
 		}
 		int num = boDao.maxNum();
 		
@@ -91,24 +91,24 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override // board Update Method()
 	public void boardUpdate(Board board, HttpServletRequest request) {	
 		
-		if (board.getImg1File() != null && !board.getImg1File().isEmpty()) { // img1  
+		if (board.getImg1File() != null) { // img1  
 			String img = uploadImgCreate(board.getImg1File(),request);	// img1 upload & img1Name setting 
 			if(img != null) board.setImg1(img); // img1Name input
 		}
 		
-		if (board.getImg2File() != null && !board.getImg2File().isEmpty()) { 
+		if (board.getImg2File() != null) { 
 			String img = uploadImgCreate(board.getImg2File(),request);
 			if(img != null) board.setImg2(img);
 		}
 		
-		if (board.getImg3File() != null && !board.getImg3File().isEmpty()) { 
+		if (board.getImg3File() != null) { 
 			String img = uploadImgCreate(board.getImg3File(),request);
 			if(img != null) board.setImg3(img);
 		}
 		
-		if (board.getImg4File() != null && !board.getImg4File().isEmpty()) { 
-			String img = uploadImgCreate(board.getImg1File(),request);
-			if(img != null) board.setImg1(img);
+		if (board.getImg4File() != null) { 
+			String img = uploadImgCreate(board.getImg4File(),request);
+			if(img != null) board.setImg4(img);
 		}
 		
 		boDao.update(board);
@@ -189,15 +189,11 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	private String uploadImgCreate(MultipartFile picture, HttpServletRequest request) { // imgUploadMethod()
-
+		String uploadPath = request.getServletContext().getRealPath("/") + "/picture/"; // upload path setting
 		Date date = new Date();
-
+		String orgFile = date.getTime() + picture.getOriginalFilename(); // imgFileName setting
 		try {
-			
-			String uploadPath = request.getServletContext().getRealPath("/") + "/picture/"; // upload path setting
-			String orgFile = date.getTime() + picture.getOriginalFilename(); // imgFileName setting
 			picture.transferTo(new File(uploadPath + orgFile)); // new File(uploadPath + orgFile) : img upload complite
-			
 			return orgFile; // imgFileName Return
 			
 		} catch (Exception e) {

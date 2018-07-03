@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>게시판 글 수정</title>
+
 </head>
 <body>
 <form:form modelAttribute="board" action="update.sms?bNo=${board.bNo}&pageNum=${param.pageNum}" method="post" enctype="multipart/form-data" name="f">

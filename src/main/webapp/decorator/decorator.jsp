@@ -57,11 +57,11 @@
    			<button class="w3-button w3-purple w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button></h1>
    		
   <div class="w3-content w3-section" style="max-width:500px">
-	  <img class="mySlides" src="./picture/mainimage.jpg" style="width:100%">
-	  <img class="mySlides" src="./picture/mainimage2.jpg" style="width:100%">
-	  <img class="mySlides" src="./picture/mainimage3.jpg" style="width:100%">
-  	<img class="mySlides" src="./picture/mainimage4.jpg" style="width:100%">
-  	<img class="mySlides" src="./picture/mainimage5.jpg" style="width:100%">
+	  <img class="mySlides" src="${path }/picture/mainimage.jpg" style="width:100%">
+	  <img class="mySlides" src="${path }/picture/mainimage2.jpg" style="width:100%">
+	  <img class="mySlides" src="${path }/picture/mainimage3.jpg" style="width:100%">
+  	<img class="mySlides" src="${path }/picture/mainimage4.jpg" style="width:100%">
+  	<img class="mySlides" src="${path }/picture/mainimage5.jpg" style="width:100%">
 	</div>  	
 	</div>
 </div>
