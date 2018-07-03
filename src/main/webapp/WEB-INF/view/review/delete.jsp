@@ -8,9 +8,12 @@
 <title>게시물 삭제</title>
 </head>
 <body>
-<form name="f" method="post" action="delete.sms?pageNum=${param.pageNum}&bNO=${board.bNo}">
+<form name="f" method="post" action="delete.sms">
 	<input type="hidden" name="bNo"	value="${param.bNo}">
+	<input type="hidden" name="sNo"	value="${board.sNo}">
+	<input type="hidden" name="kind" value="${board.kind}">
 	<input type="hidden" name="pageNum"	value="${param.pageNum}">
+	
 	<table border="1" cellspacing="0" cellpadding="0" align="center">
 	 <tr>
 	 	<td align="center">제목: ${board.subject}</td>
