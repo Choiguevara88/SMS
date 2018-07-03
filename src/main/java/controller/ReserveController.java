@@ -1,8 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import exception.ProjectException;
 import logic.Building;
+import logic.Member;
 import logic.ProjectService;
 import logic.Reserve;
 import logic.Room;
@@ -92,11 +93,22 @@ public class ReserveController {
 	
 	// 신규예약정보에 대해 확인할 때 호출되는 메서드 (Host계정용)
 	@RequestMapping(value="reserve/hostResInfo", method=RequestMethod.GET)
-	public ModelAndView hostReserveInfo(String hostName, HttpSession session) {
+	public ModelAndView hostReserveInfo(HttpSession session) {
 		 
 		ModelAndView mav = new ModelAndView();
-		int buildCnt = service.hostBuildCount(hostName);
-		List<Building> list = service.selectHostReserveInfo(hostName);
+		
+		String hostId = ((Member)session.getAttribute("loginMember")).getId();
+		
+		List<Integer> hostHaveBuild = service.hostHaveBuildsNo(hostId);
+		
+		List<Building> list = new ArrayList<Building>();
+		
+		for(Integer sNo : hostHaveBuild) {
+			list.add(service.selectHostReserveInfo(hostId, sNo));
+		}
+		
+		int buildCnt = service.hostBuildCount(hostId);
+		
 		mav.addObject("list", list);
 		mav.addObject("buildCnt", buildCnt);
 		
@@ -108,6 +120,7 @@ public class ReserveController {
 	@RequestMapping(value="reserve/hostResList", method=RequestMethod.GET)
 	public ModelAndView hostReserveList(Integer sNo, Integer pageNum, String searchType, String searchContent, HttpSession session) {
 		
+		
 		if(pageNum == null || pageNum.toString().equals("")) {
 			pageNum = 1;
 		}
@@ -115,10 +128,12 @@ public class ReserveController {
 		ModelAndView mav = new ModelAndView();
 		
 		int limit = 100;		// 한 페이지에 나올 게시글의 숫자
-		int listcount = service.hostReserveCount(sNo, searchType, searchContent);	// 표시될 총 게시글의 수
+		String hostName = ((Member)session.getAttribute("loginMember")).getHostName();
+		
+		int listcount = service.hostReserveCount(hostName, sNo, searchType, searchContent);	// 표시될 총 게시글의 수
 		
 		
-		List<Reserve> reservelist = service.selectHostReserveList(sNo, searchType, searchContent, pageNum, limit);
+		List<Reserve> reservelist = service.selectHostReserveList(sNo, hostName, searchType, searchContent, pageNum, limit);
 		
 		int maxpage = (int)((double)listcount/limit + 0.95);
 		int startpage = ((int)((pageNum/10.0 + 0.9) - 1)) * 10 + 1; // 시작페이지

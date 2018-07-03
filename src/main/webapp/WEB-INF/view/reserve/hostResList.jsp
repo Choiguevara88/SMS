@@ -91,8 +91,8 @@ select {width: 200px; /* 원하는 너비설정 */
 					<th style="text-align:center;">예약인</th>
 					<th style="text-align:center;">예약일자</th>
 					<th style="text-align:center;">등록일자</th>
-					<th style="text-align:center;"></th>
-					<th style="text-align:center;"></th>
+					<th style="text-align:center;">이용금액</th>
+					<th style="text-align:center;">비고</th>
 				</tr>
 
 				<c:forEach var="res" items="${list}">
@@ -119,8 +119,23 @@ select {width: 200px; /* 원하는 너비설정 */
 
 						<td style="text-align:center;">${res.totPrice}</td>
 
-						<td style="text-align:center;"><font style="color:blue"><i class="fa fa-thumbs-o-up"></i></font>&nbsp;${res.reCnt}</td> 
-						<td style="text-align:center;"><font style="color:red"><i class="fa fa-thumbs-o-down"></i></font>&nbsp;${res.reStat}</td>
+						<td style="text-align:center;"></td> 
+						<td style="text-align:center;">
+							<c:if test="${res.reStat == 0}">예약요청 : <a href="">[결제확인하기]</a></c:if>
+							<c:if test="${res.reStat == 1}">
+								
+								<c:if test="${today1 > redate}">
+									[이용완료]
+								</c:if>
+								
+								<c:if test="${today1 <= redate}">
+									[결제완료:이용대기 중]
+								</c:if>
+								
+							</c:if>
+							<c:if test="${res.reStat == 2}">[예약취소신청]</c:if>
+							<c:if test="${res.reStat == 3}">[환불완료]</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 

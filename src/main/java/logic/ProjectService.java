@@ -32,17 +32,13 @@ public interface ProjectService {
 
 	int reserveCount(String id, String searchType, String searchContent);
 	
-	int hostReserveCount(Integer sNo, String searchType, String searchContent);
-
 	List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum, int limit);
 
 	void reserveInsert(Reserve reserve);
 
 	void reserveUpdate(Reserve reserve);
 
-	List<Reserve> selectHostReserveList(Integer sNo, String searchType, String searchContent, Integer pageNum, int limit);
-
-	List<Building> selectHostReserveInfo(String hostName);
+	Building selectHostReserveInfo(String hostName, Integer sNo);
 
 	void updateMember(Member member);
 
@@ -57,4 +53,10 @@ public interface ProjectService {
 	void insertRoom(Room room);
 
 	void reserveCancel(Integer reNo, Integer reStat);
+
+	int hostReserveCount(String hostName, Integer sNo, String searchType, String searchContent);
+
+	List<Reserve> selectHostReserveList(Integer sNo, String hostName, String searchType, String searchContent, Integer pageNum, int limit);
+
+	List<Integer> hostHaveBuildsNo(String hostId);
 }
