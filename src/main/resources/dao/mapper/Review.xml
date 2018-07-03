@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!-- main/resources/dao/mapper/Board.xml -->
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="dao.mapper.BoardMapper">
-	<select id="list" resultType="Board" parameterType="map">
+<mapper namespace="dao.mapper.ReviewMapper">
+<select id="list" resultType="Board" parameterType="map">
 		select * from board
-		
-		<if test="searchType != null and searchContent != null">
-			where ${searchType} like '%${searchContent}%'
+		<if test="kind != null and sNo != null">
+			where kind= #{kind} and sNo = #{sNo}
 		</if>
 		<if test="startrow != null and limit != null">
 			order by ref desc limit #{startrow}, #{limit}	
@@ -14,13 +12,12 @@
 		<if test="bNo != null">
 			where bNo = #{bNo}
 		</if>
-		
 	</select>
 	
 	<select id="count" resultType="Integer" parameterType="map">
 		select count(*) from board 
-		<if test="searchType != null and searchContent != null">
-			where ${searchType} like '%${searchContent}%'	
+		<if test="kind != null and sNo != null">
+			where kind = #{kind} and sNo = #{sNo}	
 		</if>
 	</select>
 	

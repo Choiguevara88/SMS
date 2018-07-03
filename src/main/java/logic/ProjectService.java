@@ -48,4 +48,8 @@ public interface ProjectService {
 
 	int hostBuildCount(String hostName);
 
+	int boardcount(Integer kind, int sNo);
+
+	List<Board> boardList(Integer kind, int sNo, Integer pageNum, int limit);
+
 }

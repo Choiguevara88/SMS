@@ -80,4 +80,27 @@ public class BoardDaoImpl implements BoardDao{
 		return null;
 	}
 
+	@Override
+	public int count(Integer kind, int sNo) {
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("kind", kind);
+		map.put("sNo",sNo);
+		return sqlSession.selectOne("dao.mapper.ReviewMapper.count", map);
+	}
+
+
+	@Override
+	public List<Board> list(Integer kind, int sNo, Integer pageNum, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		int startrow = (pageNum - 1) * limit;
+		
+		map.put("startrow", startrow);
+		map.put("limit", limit);
+		map.put("kind", kind);
+		map.put("sNo",sNo);
+		
+		return sqlSession.selectList("dao.mapper.ReviewMapper.list", map);
+	}
+
+
 }
