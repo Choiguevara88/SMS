@@ -27,12 +27,12 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping(value="joinForm") //È¸¿ø°¡ÀÔ ÆûÀ¸·Î 
+	@RequestMapping(value="joinForm") //íšŒì›ê°€ì… í¼ìœ¼ë¡œ 
 	public String joinForm() {
 		return "member/joinForm";
 	}
 	
-	@RequestMapping("member/join") //È¸¿ø°¡ÀÔ
+	@RequestMapping("member/join") //íšŒì›ê°€ì…
 	public ModelAndView join(@Valid Member member, BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
@@ -48,12 +48,12 @@ public class MemberController {
 		}
 		return mav;
 	}
-	@RequestMapping(value = "login", method = RequestMethod.GET) //URL·Î °Ë»öÇØ¼­ µé¾î¿ÔÀ»¶§
+	@RequestMapping(value = "login", method = RequestMethod.GET) //URLë¡œ ê²€ìƒ‰í•´ì„œ ë“¤ì–´ ì™”ì„ ë•Œ
 	public String loginForm() {
 		return "member/loginpage";
 	}
 	
-	@RequestMapping(value = "login", method = RequestMethod.POST) //id,pwÀÔ·ÂÇØ¼­ ·Î±×ÀÎ ´©¸¦¶§
+	@RequestMapping(value = "login", method = RequestMethod.POST) //id, pwì…ë ¥í•´ì„œ ë¡œê·¸ì¸ ëˆ„ë¥¼ ë•Œ
 	public ModelAndView loginForm(@Valid Member member, BindingResult bindingResult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
@@ -61,13 +61,16 @@ public class MemberController {
 			mav.setViewName("member/loginpage");
 			return mav;
 		}
+		
 		Member dbmember = service.getMember(member.getId());
+		
 		if(dbmember == null) {
 			bindingResult.reject("error.login.id");
 			mav.setViewName("member/loginpage");
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
 		}
+		
 		if(dbmember.getPw().equals(member.getPw())) {
 			mav.setViewName("main");
 			mav.addObject("dbmember",dbmember);
@@ -77,10 +80,12 @@ public class MemberController {
 			mav.getModel().putAll(bindingResult.getModel());
 			mav.setViewName("member/loginpage");
 		}
+		
+		
 		return mav;
 	}
 	
-	@RequestMapping(value="logout") //¼¼¼ÇÀ» ²÷°í ¸®´ÙÀÌ·ºÆ®¸¸ ÇØÁÖ¸é µÇ¼­ String, redirect»ç¿ë
+	@RequestMapping(value="logout") //ì„¸ì…˜ì„ ëŠê³  ë¦¬ë‹¤ì´ë ‰íŠ¸ë§Œ í•´ì£¼ë©´ ë˜ì–´ì„œ String, redirect ì‚¬ìš©
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect: main.sms";

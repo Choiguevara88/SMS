@@ -47,8 +47,8 @@
 			order by ReNo desc limit #{startrow}, #{limit}	
 		</if> -->
 		
-		<if test="sNo != null">
-			where sNo = #{sNo}
+		<if test="id != null">
+			where id = #{id}
 		</if>
 	</select>
 	
@@ -61,5 +61,16 @@
 			and bu.id = #{hostName} 
 		</if> 	
 	</select>
+	
+	<update id="cancel" parameterType="map">
+		update Reserve set reStat = 
+		
+		<if test="reStat == 0">	1 </if>
+		<if test="reStat == 1">	2 </if>
+		<if test="reStat == 2">	3 </if>
+		
+		where reNo = #{reNo}
+		
+	</update>
 	
 </mapper>
