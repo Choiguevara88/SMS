@@ -1,6 +1,7 @@
 package dao.mapper;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import logic.Member;
@@ -13,6 +14,7 @@ public interface MemberMapper {
 
 	@Update("update Member set pw=#{pw}, email=#{email}, mob=#{mob} where id=#{id}")
 	void update(Member member);
+
 
 	
 //	@Update("update userAccount set userName=#{userName}, phoneNo=#{phoneNo},"

@@ -12,6 +12,30 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 var pwdCheck = 0;
+var idCheck = 0;
+ function checkID(){
+	var inputed= $("#id").val();
+	$.ajax({
+		data : {
+			id : inputed
+		},
+		url : "checkID.sms",
+		success: function(data){
+			console.log(data);
+			if(inputed =="" && data=='0'){ //인풋이 없고 db에 없을때는 빨간색
+				$("#signup").prop("disabled",true);
+				$("#id").css("background-color","#FFCECE");
+				idCheck = 0;
+			} else if(data=='0'){
+				$("#id").css("background-color","MediumSeaGreen");
+				idCheck = 1;
+			} else if(data =="1"){
+				$("#signup").prop("disabled",true);
+				$("#id").css("background-color","#FFCECE")
+			}
+		}
+	});
+}
 function checkPwd(){
 	var inputed = $('#pw').val(); //비번
 	var reinputed = $('#repwd').val(); //비밀번호 재확인
@@ -20,9 +44,13 @@ function checkPwd(){
 		$("#repwd").css("background-color","#FFCECE");
 	}
 	else if(inputed == reinputed){
-		$(".signup").prop("disabled",false);
 		$('#repwd').css("background-color","MediumSeaGreen");
 		pwdCheck = 1;
+		if(idCheck==1 && pwdCheck==1){
+			console.log(idCheck);
+			console.log(pwdCheck);
+			$(".signup").prop("disabled",false);
+		}
 	} else if(inputed != reinputed){
 		pwdCheck = 0;
 		$(".signup").prop("disabled",true);
@@ -66,7 +94,7 @@ $(document).ready(function() { //이메일 자동 완성
 		</font>
 	</spring:hasBindErrors>
 <table align="center" cellpadding="1" cellspacing="1" border = "1">
-	<tr><td>아이디 </td><td><form:input path="id" placeholder="영문과 숫자조합으로 가즈아!"/>
+	<tr><td>아이디 </td><td><form:input path="id" placeholder="영문과 숫자조합으로 가즈아!" oninput="checkID()"/>
 		<font color="red"><form:errors path="id"/></font></td></tr>
 	<tr>
 		<td>비밀번호 </td><td><form:password path="pw" placeholder="쉬운건 하지 말즈아!" onkeyup="checkPwd()"/>

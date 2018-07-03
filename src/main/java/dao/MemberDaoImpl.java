@@ -36,4 +36,6 @@ public class MemberDaoImpl implements MemberDao{
 	public void updateMember(Member member) {
 		sqlSession.getMapper(MemberMapper.class).update(member);
 	}
+
+
 }

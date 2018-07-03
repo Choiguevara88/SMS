@@ -23,14 +23,14 @@ public class BuildingController {
 	public ModelAndView buildindForm(Integer num, HttpServletRequest request) {
 		Building building = new Building();
 		List<String> sTypeNames = new ArrayList<String>();
-		sTypeNames.add("ìŠ¤í„°ë””ë£¸");
-		sTypeNames.add("ì—°ìŠµì‹¤");
-		sTypeNames.add("ì‘ì—…ì‹¤");
-		sTypeNames.add("íšŒì˜ì‹¤");
-		sTypeNames.add("ì„¸ë¯¸ë‚˜ì‹¤");
-		sTypeNames.add("ì¹´í˜");
-		sTypeNames.add("íŒŒí‹°ë£¸");
-		sTypeNames.add("ê³µì—°ì¥");
+		sTypeNames.add("½ºÅÍµğ·ë");
+		sTypeNames.add("¿¬½À½Ç");
+		sTypeNames.add("ÀÛ¾÷½Ç");
+		sTypeNames.add("È¸ÀÇ½Ç");
+		sTypeNames.add("¼¼¹Ì³ª½Ç");
+		sTypeNames.add("Ä«Æä");
+		sTypeNames.add("ÆÄÆ¼·ë");
+		sTypeNames.add("°ø¿¬Àå");
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("sTypeNames",sTypeNames);

@@ -108,7 +108,7 @@ function infodel(di) {
 <body>
 <div>
 <form:form modelAttribute="building" method="post" action="buildingList.sms" enctype="multipart/form-data">
-
+	
   <table cellpadding="0" cellspacing="1" align="center">
   <tr><td colspan="2" align="center">공간정보</td></tr>
     <tr><td>공간 유형(최대 3개)</td>
@@ -139,7 +139,7 @@ function infodel(di) {
     <tr><td>대표이미지</td><td><input type="file" name="sImg1" /></td></tr>
     
     <!-- 다중업로드 추후 사용 -->
-    <tr><td>이미지(일단한개만)</td><td><input type="file" name="sImg2" /></td></tr>
+    <tr><td>이미지(일단한개만)</td><td><input type="file" name="sImg2" multiple/></td></tr>
     
     <!-- 주소API 추후 사용 -->
     <tr><td>주소</td><td><form:input path="sAddress" /> </td></tr>
