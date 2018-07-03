@@ -34,14 +34,14 @@ public class MemberController {
 	
 	@RequestMapping("member/join") //회원가입
 	public ModelAndView join(@Valid Member member, BindingResult bindingResult) {
-		ModelAndView mav = new ModelAndView("member/joinForm");
+		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
 		}
 		try {
 		service.joinsms(member);
-		mav.setViewName("member/loginpage");
+		mav.setViewName("redirect: ../login.sms");
 		mav.addObject("member",member);
 		} catch(DataIntegrityViolationException e) {
 			bindingResult.reject("error.duplicate.user");
