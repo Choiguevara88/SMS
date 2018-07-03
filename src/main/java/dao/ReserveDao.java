@@ -16,10 +16,12 @@ public interface ReserveDao {
 
 	void insert(Reserve reserve);
 
-	List<Reserve> hostlist(Integer sNo, String searchType, String searchContent, Integer pageNum, int limit);
-
-	int hostCount(Integer sNo, String searchType, String searchContent);
-
 	void cancel(Integer reNo, Integer reStat);
+
+	int hostCount(Integer sNo, String hostName, String searchType, String searchContent);
+
+	List<Reserve> hostlist(Integer sNo, String hostName, String searchType, String searchContent, Integer pageNum, int limit);
+
+	void hostPaymentConfirm(Integer reNo);
 
 }

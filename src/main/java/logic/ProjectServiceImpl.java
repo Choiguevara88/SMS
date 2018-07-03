@@ -148,11 +148,6 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
-	public int hostReserveCount(Integer sNo, String searchType, String searchContent) {
-		return reDao.hostCount(sNo, searchType, searchContent);
-	}
-	
-	@Override
 	public List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum, int limit) {
 		return reDao.list(id, searchType, searchContent, pageNum, limit);
 	}
@@ -168,15 +163,10 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
-	public List<Building> selectHostReserveInfo(String hostName) {
-		return buDao.resList(hostName);
+	public Building selectHostReserveInfo(String hostName, Integer sNo) {
+		return buDao.resInfo(hostName, sNo);
 	}
 	
-	@Override
-	public List<Reserve> selectHostReserveList(Integer sNo, String searchType, String searchContent, Integer pageNum, int limit) {
-		return reDao.hostlist(sNo, searchType, searchContent, pageNum, limit);
-	}
-
 	@Override
 	public void reserveInsert(Reserve reserve) {
 		reserve.setReNo(reserve.getSrNo() + (int)new Date().getTime());
@@ -226,6 +216,26 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void insertRoom(Room room) {
 		roomDao.insertRoom(room);
+	}
+
+	@Override
+	public int hostReserveCount(String hostName, Integer sNo, String searchType, String searchContent) {
+		return reDao.hostCount(sNo, hostName, searchType, searchContent);
+	}
+
+	@Override
+	public List<Reserve> selectHostReserveList(Integer sNo, String hostName, String searchType, String searchContent, Integer pageNum, int limit) {
+		return reDao.hostlist(sNo, hostName, searchType, searchContent, pageNum, limit);
+	}
+
+	@Override
+	public List<Integer> hostHaveBuildsNo(String hostId) {
+		return buDao.hostHaveBuildsNo(hostId);
+	}
+
+	@Override
+	public void hostPaymentConfirm(Integer reNo) {
+		reDao.hostPaymentConfirm(reNo);		
 	}
 
 

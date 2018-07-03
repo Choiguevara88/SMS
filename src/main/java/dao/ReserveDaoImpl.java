@@ -50,11 +50,12 @@ public class ReserveDaoImpl implements ReserveDao {
 	}
 	
 	@Override
-	public int hostCount(Integer sNo, String searchType, String searchContent) {
+	public int hostCount(Integer sNo, String hostName, String searchType, String searchContent) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("sNo", sNo);
+		map.put("hostName", hostName);
 		map.put("searchType", searchType);
 		map.put("searchContent", searchContent);
 		
@@ -77,12 +78,13 @@ public class ReserveDaoImpl implements ReserveDao {
 	}
 
 	@Override
-	public List<Reserve> hostlist(Integer sNo, String searchType, String searchContent, Integer pageNum, int limit) {
+	public List<Reserve> hostlist(Integer sNo, String hostName, String searchType, String searchContent, Integer pageNum, int limit) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		int startrow = (pageNum - 1) * limit;
 		
 		map.put("sNo", sNo);
+		map.put("hostName", hostName);
 		map.put("startrow", startrow);
 		map.put("limit", limit);
 		map.put("searchType", searchType);
@@ -100,5 +102,15 @@ public class ReserveDaoImpl implements ReserveDao {
 		map.put("reStat", reStat);
 		
 		sqlSession.update(NS + "cancel", map);
+	}
+
+	@Override
+	public void hostPaymentConfirm(Integer reNo) {
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		map.put("reNo", reNo);
+		
+		sqlSession.update(NS + "paymentConfirm", map);
 	}
 }
