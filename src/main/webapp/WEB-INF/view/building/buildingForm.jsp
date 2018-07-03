@@ -10,8 +10,9 @@
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
+/*건물유형 관련 스크립트*/
 function chkboxcheck() {
-	var sTypeList = document.getElementsByName("sTypeList")
+	var sTypeList = document.getElementsByName("sType")
 	var cnt = 0;
 	for(var i=0;i<sTypeList.length;i++) {
 		if (sTypeList[i].checked) cnt++;
@@ -34,7 +35,7 @@ $(document).ready(function() {
 		 t = document.getElementById("tag"); //입력하는 곳
 		 tagarr[idx++] = t.value;
 		 for (var i=0;i<idx;i++) {
-			 ti += "<span name='tags' id='tags" + i +"'>#"+tagarr[i] +
+			 ti += "<span name='sTag' id='tags" + i +"'>#"+tagarr[i] +
 			 "<input type='button' onclick=\"tagdel("+i +")\" value='X'></input>&nbsp;</span>";
 		 }
 		 console.log(ti)
@@ -53,7 +54,7 @@ function tagdel(di) {
      ti=""
      idx--
 	 for (var i=0;i<idx;i++) {
-		 ti += "<span id='tags" + i +"'>#"+tagarr[i] +
+		 ti += "<span id='sTag" + i +"'>#"+tagarr[i] +
 		 "<input type='button' onclick=\"tagdel("+i+")\" value='X'></input>&nbsp;</span>";
 	 }
      console.log(ti)
@@ -73,7 +74,7 @@ $(document).ready(function() {
 		 info = document.getElementById("info"); //입력하는 곳
 		 infoarr[infoidx++] = info.value;
 		 for (var i=0;i<infoidx;i++) {
-			 ii += "<span name='infos' id='infos" + i +"'>"+(i+1)+". "+infoarr[i] +
+			 ii += "<span name='sInfoSub' id='infos" + i +"'>"+(i+1)+". "+infoarr[i] +
 			 "<input type='button' onclick=\"infodel("+i +")\" value='X'></input>&nbsp;</span><br>";
 		 }
 		 console.log(ii)
@@ -92,7 +93,7 @@ function infodel(di) {
      ii=""
      infoidx--
 	 for (var i=0;i<infoidx;i++) {
-		 ii += "<span name='infos' id='infos" + i +"'>"+(i+1)+". "+infoarr[i] +
+		 ii += "<span name='sInfoSub' id='infos" + i +"'>"+(i+1)+". "+infoarr[i] +
 		 "<input type='button' onclick=\"infodel("+i+")\" value='X'></input>&nbsp;</span><br>";
 	 }
      console.log(ii)
@@ -106,18 +107,18 @@ function infodel(di) {
 </head>
 <body>
 <div>
-<form:form modelAttribute="building" method="post" action="buildingSuccess.sms">
+<form:form modelAttribute="building" method="post" action="buildingList.sms" enctype="multipart/form-data">
 
   <table cellpadding="0" cellspacing="1" align="center">
   <tr><td colspan="2" align="center">공간정보</td></tr>
     <tr><td>공간 유형(최대 3개)</td>
         <td>
-        <form:checkboxes path="sTypeList" items="${sTypeNames}" value="${sTypeNames}" onchange="chkboxcheck()"/>  
+        <form:checkboxes path="sType" items="${sTypeNames}" value="${sTypeNames}" onchange="chkboxcheck()"/>  
         </td></tr>
            
     <tr><td>공간 이름(최대 20자)</td><td><form:input path="sName" /></td></tr>
     <tr><td>공간 한줄 소개(최대 30자)</td><td><form:input path="sPreview" /></td></tr>
-    <tr><td>공간 소개(최대 500자)</td><td><form:textarea cols="50px" rows="10px" path="sPreview" /></td></tr>
+    <tr><td>공간 소개(최대 500자)</td><td><form:textarea cols="50px" rows="10px" path="sContent" /></td></tr>
     
     <tr><td>태그 설정(최대 5개)</td>
         <td><input id="tag" />
@@ -135,21 +136,20 @@ function infodel(di) {
               <!-- 시설안내 추가시 웹상에서 보여지는 부분 -->
             </div></td></tr>
     
-    <tr><td>대표이미지</td><td><input type="button" value="파일첨부"></td></tr>
-    <tr><td colspan="2"><%-- <form:input path="sImg1"></form:input> --%></td></tr>
+    <tr><td>대표이미지</td><td><input type="file" name="sImg1" /></td></tr>
     
-    <tr><td>이미지(최대10개)</td><td><button onclick="return false">파일첨부</button></td></tr>
-    <tr><td colspan="2"><%-- <form:input path="sImg2"></form:input> --%></td></tr>
+    <!-- 다중업로드 추후 사용 -->
+    <tr><td>이미지(일단한개만)</td><td><input type="file" name="sImg2" /></td></tr>
     
-    <tr><td>주소위치</td><td><button onclick="return false">주소찾기</button></td></tr>
-    <tr><td colspan="2"><%-- <form:input path="sAddress"></form:input> --%></td></tr>
+    <!-- 주소API 추후 사용 -->
+    <tr><td>주소</td><td><form:input path="sAddress" /> </td></tr>
                      
      <tr><td colspan="2" align="center">이용정보</td></tr>
      <tr><td>이용시간</td>
-         <td><select>
+         <td><select name="sBHour">
          <c:forEach var="i" begin="0" end="23" >
          <option>${i}시</option></c:forEach></select>부터
-         <select>
+         <select name="sBHour">
          <c:forEach var="i" begin="1" end="24" >
          <option>${i}시</option></c:forEach></select>까지</td></tr>
      
