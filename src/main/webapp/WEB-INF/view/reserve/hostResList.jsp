@@ -133,8 +133,9 @@ select {width: 200px; /* 원하는 너비설정 */
 								</c:if>
 								
 							</c:if>
-							<c:if test="${res.reStat == 2}">[예약취소신청]</c:if>
+							<c:if test="${res.reStat == 2}">[예약취소요청:환불확인중]</c:if>
 							<c:if test="${res.reStat == 3}">[환불완료]</c:if>
+							<c:if test="${res.reStat == 4}">[예약취소]</c:if>
 						</td>
 					</tr>
 				</c:forEach>
