@@ -20,10 +20,10 @@
 
 <table align="center" cellpadding="1" cellspacing="1" border = "1">
 	
-	<tr><td>SRName </td><td><form:input path="sNo" placeholder="primarykey"/>
+	<tr><td>SNo </td><td><form:input path="sNo" placeholder="primarykey"/>
 		<font color="red"><form:errors path="sNo"/></font></td></tr>
 	
-	<tr><td>SRName </td><td><form:input path="sRNo" placeholder="primarykey" />
+	<tr><td>SRNo </td><td><form:input path="sRNo" placeholder="primarykey" />
 		<font color="red"><form:errors path="sRNo"/></font></td></tr>
 	
 	<tr><td>SRName </td><td><form:input path="sRName" value="1" />
