@@ -26,6 +26,8 @@ public interface BoardDao {
 	int count(Integer kind, int sNo);
 
 	List<Board> list(Integer kind, int sNo, Integer pageNum, int limit);
+	
+	List<Board> list(Integer kind, int sNo);
 
 }
 

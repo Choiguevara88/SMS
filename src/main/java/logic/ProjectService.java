@@ -54,6 +54,7 @@ public interface ProjectService {
 
 	void reserveCancel(Integer reNo, Integer reStat);
 
+
 	int hostReserveCount(String hostName, Integer sNo, String searchType, String searchContent);
 
 	List<Reserve> selectHostReserveList(Integer sNo, String hostName, String searchType, String searchContent, Integer pageNum, int limit);
@@ -63,4 +64,6 @@ public interface ProjectService {
 	void hostPaymentConfirm(Integer reNo);
 
 	void buildingReg(Building building, HttpServletRequest request);
+	
+	List<Board> boardList(Integer kind, int sNo);
 }

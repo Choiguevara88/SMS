@@ -35,7 +35,10 @@ public class ReViewController {
 		int limit = 5;		// 한 페이지에 나올 게시글의 숫자
 		int listcount = service.boardcount(kind,sNo);	// 표시될 총 게시글의 수
 		List<Board> boardlist = service.boardList(kind,sNo,pageNum, limit);
-		double avg = boardlist.stream().mapToInt(Board :: getScore).average().getAsDouble();
+		List<Board> boardlist2 = service.boardList(kind,sNo);
+		
+		double avg = boardlist2.stream().mapToInt(Board :: getScore).average().getAsDouble();
+		
 		int maxpage = (int)((double)listcount/limit + 0.95);
 		int startpage = ((int)((pageNum/5.0 + 0.9) - 1)) * 5 + 1; // 시작페이지
 		int endpage = startpage + 4;	// 마지막 페이지
@@ -107,19 +110,22 @@ public class ReViewController {
 	public ModelAndView reply(@Valid Board board, BindingResult bindingResult) {
 		
 		ModelAndView mav = new ModelAndView();
-		
+		int sNo = board.getsNo();
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
+			board = service.getBoard(board.getbNo());
+			mav.addObject("board", board);
 			return mav;
 		}
 		
 		try {
 			service.boardReply(board);
-			mav.setViewName("redirect:/building/buildingDetail.sms");
+			mav.setViewName("redirect:/review/list.sms");
 		} catch (Exception e) {
 			throw new ProjectException("오류가 발생하였습니다." , "/review/list.shop");
 		}
 		mav.addObject("kind",kind);
+		mav.addObject("sNo",sNo);
 		return mav;
 	}
 	

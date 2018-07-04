@@ -45,6 +45,7 @@
 		<td colspan="4"><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd H:mm:ss"/></td>
 	<tr>
   		<td colspan="4" align="center" class="content">
+  		<a href="../review/reply.sms?bNo=${board.bNo}&pageNum=${pageNum}">[답변]</a>
 		<a href="../review/update.sms?bNo=${board.bNo}&pageNum=${pageNum}">[수정]</a>
 		<a href="../review/delete.sms?bNo=${board.bNo}&pageNum=${pageNum}">[삭제]</a><br>
  	 </td>

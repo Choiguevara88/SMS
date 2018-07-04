@@ -14,6 +14,13 @@
 		</if>
 	</select>
 	
+	<select id="list2" resultType="Board" parameterType="map">
+		select * from board
+		<if test="kind != null and sNo != null">
+			where kind= #{kind} and sNo = #{sNo} and refLevel=0
+		</if>
+	</select>
+	
 	<select id="count" resultType="Integer" parameterType="map">
 		select count(*) from board 
 		<if test="kind != null and sNo != null">

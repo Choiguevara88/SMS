@@ -36,13 +36,16 @@
   <c:if test="${!empty sessionScope.loginMember.id }">
   	<hr size="1">
   	<a href="${path }/reserve/resList.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>나의 예약정보 !</a></c:if>
-  <c:if test="${!empty sessionScope.loginMember.id }">
+  <c:if test="${sessionScope.loginMember.memType == 1}">
   	<hr size="1">
   	<a href="${path }/reserve/hostResInfo.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공간 예약관리 !</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id }">
   	<hr size="1">
   	<a href="wishlist.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>내가 찜한 공간 !</a></c:if>
-  <c:if test="${!empty sessionScope.loginMember.id }">
+  <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.memType != 2 }">
+  	<hr size="1">
+  	<a href="becomeaHost.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>호스트 등록 !</a></c:if>
+  <c:if test="${sessionScope.loginMember.memType == 1 }">
   	<hr size="1">
   	<a href="wishlist.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공간 등록하기 !</a></c:if>
   <hr size="1">
@@ -82,7 +85,7 @@ function carousel() {
     myIndex++;
     if (myIndex > x.length) {myIndex = 1}    
     x[myIndex-1].style.display = "block";  
-    setTimeout(carousel, 3000); // Change image every 2 seconds
+    setTimeout(carousel, 4000); // Change image every 2 seconds
 }
 </script>
 
@@ -104,6 +107,5 @@ function closeRightMenu() {
 </p></div>
 
 </body>
-
 </html>
 

@@ -37,21 +37,22 @@ public class ReserveController {
 			e.printStackTrace();
 			throw new ProjectException("오류가 발생하였습니다.", "reserve/list.sms");
 		}
+		
 		return mav;
 	}
 
 	// 예약을 수정할 때 호출되는 메서드
-	@RequestMapping(value = "", method = RequestMethod.POST)
+	@RequestMapping(value = "reserve/resUpdate", method = RequestMethod.POST)
 	public ModelAndView updateReserve(Reserve reserve, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
 
 		try {
 			service.reserveUpdate(reserve);
-			mav.setViewName("redirect:reserve/detail.sms");
+			mav.setViewName("redirect:resDetail.sms?reNo=" + reserve.getReNo());
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new ProjectException("오류가 발생하였습니다.", "reserve/detail.sms");
+			throw new ProjectException("오류가 발생하였습니다.", "resUpdate.sms?reNo=" + reserve.getReNo());
 		}
 
 		return mav;
@@ -101,11 +102,11 @@ public class ReserveController {
 
 		String hostId = ((Member) session.getAttribute("loginMember")).getId();
 
-		List<Integer> hostHaveBuild = service.hostHaveBuildsNo(hostId);
+		List<Integer> hostHaveBuild = service.hostHaveBuildsNo(hostId); // 해당 Host 앞으로 등록된 Building들의 건물관리번호를 List로 저장
 
 		List<Building> list = new ArrayList<Building>();
 
-		for (Integer sNo : hostHaveBuild) {
+		for (Integer sNo : hostHaveBuild) {	// 건물관리별로 Building 정보를 가져와서 list<Building>에 저장
 			list.add(service.selectHostReserveInfo(hostId, sNo));
 		}
 
@@ -153,7 +154,7 @@ public class ReserveController {
 		return mav;
 	}
 
-	// 예약 정보 확인 후 구매/취소여부 확인할 때 사용하는 메서드
+	// 예약 정보 확인 할 때 사용하는 메서드
 	@RequestMapping(value = "reserve/resDetail", method = RequestMethod.GET)
 	public ModelAndView detailReserve2(Integer reNo, HttpSession session) {
 
@@ -182,17 +183,11 @@ public class ReserveController {
 			List<Integer> hostSNoList = service.hostHaveBuildsNo(hostId);
 
 			for (Integer hostSNo : hostSNoList) {
-				
 				if (hostSNo.intValue() == dbSNo.intValue()) {
-					System.out.println("이건 작동하냐???");
 					service.hostPaymentConfirm(reNo);
 					mav.setViewName("redirect:/reserve/hostResInfo.sms");
-					
 				}
 			}
-			
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ProjectException("오류가 발생하였습니다.", "redirect:/reserve/hostResInfo.sms");
@@ -204,6 +199,22 @@ public class ReserveController {
 	// 예약 취소 작업시 호출되는 메서드
 	@RequestMapping(value = "reserve/resCancel", method = RequestMethod.GET)
 	public ModelAndView reserveCancel(Integer reNo, Integer reStat, HttpSession session) {
+
+		ModelAndView mav = new ModelAndView();
+
+		try {
+			service.reserveCancel(reNo, reStat);
+			mav.setViewName("redirect:/main.sms");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ProjectException("오류가 발생하였습니다.", "reserve/list.sms");
+		}
+		return mav;
+	}
+	
+	// 예약 취소 작업시 호출되는 메서드
+	@RequestMapping(value = "reserve/hostResCancel", method = RequestMethod.GET)
+	public ModelAndView hostResCancel(Integer reNo, Integer reStat, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
 

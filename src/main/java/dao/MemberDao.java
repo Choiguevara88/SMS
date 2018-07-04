@@ -8,4 +8,5 @@ public interface MemberDao {
 	void joinsms(Member member);
 
 	void updateMember(Member member);
+
 }

@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import logic.Member;
@@ -27,12 +28,12 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping(value="joinForm") //회원가입 폼으로 
+	@RequestMapping(value="joinForm") //����媛��� �쇱�쇰� 
 	public String joinForm() {
 		return "member/joinForm";
 	}
 	
-	@RequestMapping("member/join") //회원가입
+	@RequestMapping("member/join") //����媛���
 	public ModelAndView join(@Valid Member member, BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
@@ -48,12 +49,12 @@ public class MemberController {
 		}
 		return mav;
 	}
-	@RequestMapping(value = "login", method = RequestMethod.GET) //URL로 검색해서 들어 왔을 때
+	@RequestMapping(value = "login", method = RequestMethod.GET) //URL濡� 寃����댁�� �ㅼ�� ���� ��
 	public String loginForm() {
 		return "member/loginpage";
 	}
 	
-	@RequestMapping(value = "login", method = RequestMethod.POST) //id, pw입력해서 로그인 누를 때
+	@RequestMapping(value = "login", method = RequestMethod.POST) //id, pw���ν�댁�� 濡�洹몄�� ��瑜� ��
 	public ModelAndView loginForm(@Valid Member member, BindingResult bindingResult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
@@ -85,7 +86,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping(value="logout") //세션을 끊고 리다이렉트만 해주면 되어서 String, redirect 사용
+	@RequestMapping(value="logout") //�몄���� ��怨� 由щ�ㅼ�대���몃� �댁＜硫� ���댁�� String, redirect �ъ��
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect: main.sms";
@@ -114,6 +115,27 @@ public class MemberController {
 		}
 		service.updateMember(member);
 		mav.setViewName("redirect: personal_info.sms?id=" + member.getId());
+		return mav;
+	}
+	@RequestMapping(value="checkID") //ID중복확인. 여기서만 나오고 끝남
+	public @ResponseBody String checkID(String id) {
+		Member member = service.getMember(id);
+		if (member == null) {
+			return "0";
+		}
+		return "1";
+	}
+	@RequestMapping(value="becomeaHost")
+	public ModelAndView becomeaHost(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/becomeaHost");
+		return mav;
+	}
+	@RequestMapping(value="addhostdata")
+	public ModelAndView addhostdata(Member member, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println(member);
+		mav.setViewName("redirect: main.sms");
 		return mav;
 	}
 }

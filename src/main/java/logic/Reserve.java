@@ -20,8 +20,9 @@ public class Reserve {
 	/* 	reStat : 예약/구매 상태
 	 *  	0 : 예약&결제대기
 	 *   	1 : 결제완료
-	 *   	2 : 취소&환불대기
+	 *   	2 : 예약취소&환불대기
 	 *   	3 : 환불완료
+	 *   	4 : 예약취소
 	 */
 	
 	public Integer getReNo() {
