@@ -122,13 +122,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<Board> hostQuestionList() {
-		return boDao.hostQuestionList();
-	}
-
-	@Override
 	public void updateReadCnt(Integer num) {
-		// TODO Auto-generated method stub
 
 	}
 	
@@ -337,6 +331,21 @@ public class ProjectServiceImpl implements ProjectService {
 			li += list.get(i) + "|";
 		}
 		return li;
+	}
+
+	@Override
+	public List<Board> guestQuestionList() {
+		return boDao.guestQuestionList();
+	}
+	
+	@Override
+	public List<Board> hostQuestionList() {
+		return boDao.hostQuestionList();
+	}
+
+	@Override
+	public List<Member> hostRegList() {
+		return memDao.getHostRegList();
 	}
 
 } // ProjectServiceImpl end
