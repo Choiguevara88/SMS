@@ -65,14 +65,11 @@ public class AdminController {
 	@RequestMapping(value="admin/adminAnswerQuestion", method=RequestMethod.POST)
 	public ModelAndView adminAnswerQuestionWrite(Board answerBoard, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println(answerBoard.getbNo());
-		System.out.println(answerBoard.getId());
 		
-		service.boardReply(answerBoard);
+		service.boardReply(answerBoard);	// 문의글 답변
 		
-		mav.setViewName("admin/adminManagement");
+		mav.setViewName("redirect:adminManagement.sms");	// 문의글 답변
 		
 		return mav;
 	}
-
 }
