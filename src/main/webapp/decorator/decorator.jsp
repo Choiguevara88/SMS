@@ -35,7 +35,7 @@
   	<a href="${path }/personal_info.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>나의 소중한 정보 !</a></c:if>
   <c:if test="${sessionScope.loginMember.id == 'admin' }">
   	<hr size="1">
-  	<a href="${path }/personal_info.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>관리자 페이지 !</a></c:if>
+  	<a href="${path }/admin/adminManagement.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>관리자 페이지 !</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.id != 'admin' }">
   	<hr size="1">
   	<a href="${path }/reserve/resList.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>나의 예약정보 !</a></c:if>
