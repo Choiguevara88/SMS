@@ -59,11 +59,11 @@ public class LoginAspect {
 				loginMember = (Member)session.getAttribute("loginMember");
 				
 				if(loginMember == null) {
-					throw new ProjectException("관리자로 로그인 하세요.", "../main.test");
+					throw new ProjectException("관리자로 로그인 하세요.", "../main.sms");
 				}
 				
 				if(!loginMember.getId().equals("admin")) {
-					throw new ProjectException("관리자만 가능한 거래입니다.", "../main.test");
+					throw new ProjectException("관리자만 가능한 거래입니다.", "../main.sms");
 				}
 				
 				adminable = true;
@@ -72,7 +72,7 @@ public class LoginAspect {
 		}
 		
 		if(!adminable) {
-			throw new ProjectException("전산부로 전화하세요. 세션 객체가 요구됨.", "../main.test");
+			throw new ProjectException("전산부로 전화하세요. 세션 객체가 요구됨.", "../main.sms");
 		}
 		
 		Object ret = joinPoint.proceed();

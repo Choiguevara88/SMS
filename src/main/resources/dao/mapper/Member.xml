@@ -18,7 +18,7 @@
 	</select>
 	
 	<select id="hostRegList" resultType="Member">
-		select * from Member where memType = 0 and regStatus = 1
+		select * from Member where memType = 0 and regStatus = 0
 	</select>
 	
 	<update id="hostRegister" parameterType="map">
