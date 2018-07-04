@@ -78,7 +78,9 @@ public interface ProjectService {
 
 	List<Building> getMyBuildings(String id);
 
+	int boardcount(Integer kind, String id);
 
+	List<Board> boardList(Integer kind, String id, Integer pageNum, int limit);
 
 
 	
