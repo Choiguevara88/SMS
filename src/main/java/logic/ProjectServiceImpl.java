@@ -348,4 +348,9 @@ public class ProjectServiceImpl implements ProjectService {
 		return memDao.getHostRegList();
 	}
 
+	@Override
+	public void hostRegister(String id) {
+		memDao.hostRegister(id);
+	}
+
 } // ProjectServiceImpl end

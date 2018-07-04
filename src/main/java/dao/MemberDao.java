@@ -13,4 +13,6 @@ public interface MemberDao {
 
 	List<Member> getHostRegList();
 
+	void hostRegister(String id);
+
 }
