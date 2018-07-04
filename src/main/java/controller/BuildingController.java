@@ -60,4 +60,12 @@ public class BuildingController {
 		mav.addObject("id", id);
 		return mav;
 	}
+	
+	//빌딩정보 수정하기
+	@RequestMapping(value="building/buildingUpdate", method=RequestMethod.GET)
+	public ModelAndView buildingUpdate(HttpServletRequest request) {
+		String sNo = request.getParameter("sNo");
+		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
 }
