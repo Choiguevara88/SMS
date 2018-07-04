@@ -382,5 +382,20 @@ public Member find_member(String name, String email) {
 public Member find_password(String id, String email, String name) {
 	return memDao.find_password(id,email,name);
 }
+
+@Override
+public List<Building> getMyBuildings(String id) {
+	return buDao.getMyBuildings(id);
+}
+
+@Override
+public int boardcount(Integer kind, String id) {
+	return boDao.count(kind, id);
+}
+
+@Override
+public List<Board> boardList(Integer kind, String id, Integer pageNum, int limit) {
+	return boDao.list(kind,id,pageNum,limit);
+}
    
 } // ProjectServiceImpl end
