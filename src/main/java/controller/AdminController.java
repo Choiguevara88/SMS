@@ -22,7 +22,7 @@ public class AdminController {
 	private ProjectService service;
 	
 	// 관리자페이지 기본 요청 메서드 : 관리자 유효성 검증은 LoginAspect에서 처리할 예정
-	@RequestMapping(value="adminManagement", method=RequestMethod.GET)
+	@RequestMapping(value="admin/adminManagement", method=RequestMethod.GET)
 	public ModelAndView adminManagementPage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		

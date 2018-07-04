@@ -164,6 +164,8 @@ Admin = 2',
 	-- 은행명 + \t + 계좌번호 + \t + 예금주
 	AccountNo varchar(200) COMMENT '은행명 + \t + 계좌번호 + \t + 예금주',
 	regStatus int(1),
+	-- 호스트 계정 전환용 사업자 등록증 파일이름
+	PictureUrl varchar(130) COMMENT '호스트 계정 전환용 사업자 등록증 파일이름',
 	PRIMARY KEY (ID)
 );
 
