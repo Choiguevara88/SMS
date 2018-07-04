@@ -13,13 +13,26 @@
 		return false;
 	}
 </script>
+<script type="text/javascript">			
+	function roundXL(n, digits) {
+		  if (digits >= 0) return parseFloat(n.toFixed(digits)); // 소수부 반올림
+
+		  digits = Math.pow(10, digits); // 정수부 반올림
+		  var t = Math.round(n * digits) / digits;
+
+		  return parseFloat(t.toFixed(0));
+		}
+</script>
 </head>
 <body>
 
 <div>
 	<div style="float:left; display:inliine;">
 	<h4>이용 후기 <strong><em>${listcount}</em>개</strong><span></span>
-						평균 평점 <strong><em>${avgScore}</em></strong>
+						평균 평점 <strong><em>
+						<script>
+						document.write(roundXL(${avgScore},1))
+						</script></em></strong>
 	</h4></div>
 	<span style="float:right">
 	</span>

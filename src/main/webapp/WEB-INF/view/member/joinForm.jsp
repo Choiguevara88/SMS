@@ -20,7 +20,7 @@ function checkReg(){
 	if(reg_id.test(inputed) || reg_id2.test(inputed)){
 		checkID();
 	} else{
-		$("#signup").prop("disabled",true);
+		$(".signup").prop("disabled",true);
 		$("#id").css("background-color","#FFCECE");
 		alert("숫자-영문조합 또는 영문을 사용해 주세요~");
 		document.getElementById('id').focus();
@@ -37,14 +37,14 @@ function checkID(){
 		success: function(data){
 			console.log(data);
 			if(inputed =="" && data=='0'){ //인풋이 없고 db에 없을때는 빨간색
-				$("#signup").prop("disabled",true);
+				$(".signup").prop("disabled",true);
 				$("#id").css("background-color","#FFCECE");
 				idCheck = 0;
 			} else if(data=='0'){
 				$("#id").css("background-color","MediumSeaGreen");
 				idCheck = 1;
 			} else if(data =="1"){
-				$("#signup").prop("disabled",true);
+				$(".signup").prop("disabled",true);
 				$("#id").css("background-color","#FFCECE")
 				alert("중복된 아이디입니다~");
 				document.getElementById('id').focus();
@@ -94,6 +94,17 @@ function autohypen(){
 		tmp += x.value.substr(7);
 		x.value = tmp;
 		return x.value;
+	}
+}
+function emailcheck(){
+	var email = $('#email').val();
+	console.log(email);
+	var reg_email = /@+/;
+	if(!reg_email.test(email)){
+		alert('이메일 주소에 @이가 없습니다. 대충 쓰지 마셔요~ ><');
+		document.getElementById('email').focus();
+		$(".signup").prop("disabled",false);
+		return false;
 	}
 }
 </script>
@@ -146,7 +157,7 @@ $(document).ready(function() { //이메일 자동 완성
 		<td>이메일 </td><td><form:input path="email" placeholder="자주 쓰는걸로 가즈아!"/>
 		<font color="red"><form:errors path="email"/></font></td></tr>
 	<tr>
-		<td>휴대폰번호 </td><td><form:input path="mob" placeholder="예약시 필요!!" onkeyup="autohypen()" maxlength="13"/>
+		<td>휴대폰번호 </td><td><form:input path="mob" placeholder="예약시 필요!!" onfocus="emailcheck()" onkeyup="autohypen()" maxlength="13"/>
 		<font color="red"><form:errors path="mob"/></font></td></tr>
 	<tr>
 		<td colspan="2" align="center">

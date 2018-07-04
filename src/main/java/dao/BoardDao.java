@@ -33,5 +33,7 @@ public interface BoardDao {
 
 	List<Board> hostQuestionList();
 
+	void qTypeAdd(Board board);
+
 }
 
