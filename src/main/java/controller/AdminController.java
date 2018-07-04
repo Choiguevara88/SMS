@@ -38,7 +38,7 @@ public class AdminController {
 	}
 	
 	// Host계정 전환 요청 작업을 처리할 때 호출 되는 메서드
-	@RequestMapping(value="adminHostRegister", method=RequestMethod.POST)
+	@RequestMapping(value="admin/adminHostRegister", method=RequestMethod.GET)
 	public ModelAndView adminHostRegister(HttpSession session, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		
@@ -46,7 +46,7 @@ public class AdminController {
 		
 		service.hostRegister(id);	// host 계정으로 전환
 		
-		mav.setViewName("adminManagement.sms");
+		mav.setViewName("adminManagement");
 		
 		return mav;
 	}
