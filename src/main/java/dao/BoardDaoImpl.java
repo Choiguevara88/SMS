@@ -127,5 +127,26 @@ public class BoardDaoImpl implements BoardDao{
 		sqlSession.getMapper(BoardMapper.class).qTypeAdd(board);
 	}
 
+	@Override
+	public int count(Integer kind, String id) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("kind", kind);
+		map.put("sNo",id);
+		return sqlSession.selectOne("dao.mapper.AdminMapper.count", map);
+	}
+
+	@Override
+	public List<Board> list(Integer kind, String id, Integer pageNum, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		int startrow = (pageNum - 1) * limit;
+		
+		map.put("startrow", startrow);
+		map.put("limit", limit);
+		map.put("kind", kind);
+		map.put("sNo",id);
+		
+		return sqlSession.selectList("dao.mapper.AdminMapper.list", map);
+	}
+
 
 }
