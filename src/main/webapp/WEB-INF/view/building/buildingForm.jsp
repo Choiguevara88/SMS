@@ -198,7 +198,7 @@ $(document).ready(function() {
     
     <tr><td>이미지</td>
         <td>
-        <input type="file" id="sImg2" name="sImg2Files" accept="image/*" onchange="imgprc()" multiple="multiple"/></td></tr>
+        <input multiple="multiple" type="file" id="sImg2" name="sImg2Files" accept="image/*" onchange="imgprc()"/></td></tr>
     
     <!-- 주소API 추후 사용 -->
     <tr><td>주소</td><td><form:input path="sAddress" /> </td></tr>

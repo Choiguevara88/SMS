@@ -12,4 +12,8 @@ public interface BuildingDao {
 
 	Building resInfo(String hostName, Integer sNo);
 
+	int maxNum();
+
+	void buRegist(Building building);
+
 }

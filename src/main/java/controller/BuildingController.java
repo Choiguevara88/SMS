@@ -40,11 +40,10 @@ public class BuildingController {
 	}
 	
 	@RequestMapping(value="building/buildingReg", method=RequestMethod.POST)
-	public ModelAndView buildingReg(Building building, HttpServletRequest request) {
-		
-		System.out.println(building);		
+	public ModelAndView buildingReg(Building building, HttpServletRequest request) {		
 		ModelAndView mav = new ModelAndView();
-
+		System.out.println("controller"+building);
+		service.buildingReg(building, request);
 		return mav;
 	}
 }
