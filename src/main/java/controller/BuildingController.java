@@ -20,6 +20,7 @@ public class BuildingController {
 	@Autowired
 	private ProjectService service;
 	
+	//빌딩폼 만들기
 	@RequestMapping(value="building/buildingForm")
 	public ModelAndView buildingForm() {
 		Building building = new Building();
@@ -39,18 +40,26 @@ public class BuildingController {
 		return mav;
 	}
 	
+	//빌딩폼 등록
 	@RequestMapping(value="building/buildingReg", method=RequestMethod.POST)
 	public ModelAndView buildingReg(Building building, HttpServletRequest request) {		
 		ModelAndView mav = new ModelAndView();
 		service.buildingReg(building, request);
-		mav.setViewName("buildingList");
+		mav.setViewName("myBuildingList");
 		return mav;
 	}
 	
-	@RequestMapping(value="building/buildingList", method=RequestMethod.POST)
-	public ModelAndView buildingList(HttpServletRequest request) {		
+	//등록된 내 빌딩폼 리스트 불러오기
+	@RequestMapping(value="building/myBuildingList", method=RequestMethod.GET)
+	public ModelAndView myBuildingList(HttpServletRequest request) {		
 		ModelAndView mav = new ModelAndView();
-		String id = "id04";
+		/* 추후에 리퀘스트로 로그인된 아이디 가져와야함.*/
+		String id = "id6";
+		List<Building> MyBuildingList = service.getMyBuildings(id);
+		for(Building b : MyBuildingList) {
+			System.out.println(b.getsName());
+		}
+		mav.addObject("myBuildingList",MyBuildingList);
 		return mav;
 	}
 }

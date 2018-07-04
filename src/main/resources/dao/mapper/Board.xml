@@ -16,6 +16,7 @@
 			where bNo = #{bNo}
 		</if>
 		
+		
 	</select>
 	
 	<select id="count" resultType="Integer" parameterType="map">
@@ -26,11 +27,11 @@
 	</select>
 	
 	<select id="guestQuestion" resultType="Board">
-		select * from board where kind=4
+		select * from board where kind=4 and qType=0
 	</select>
 	
 	<select id="hostQuestion" resultType="Board">
-		select * from board where kind=5
+		select * from board where kind=5 and qType=0
 	</select>
 	
 </mapper>

@@ -18,7 +18,7 @@ public class Board {
 	@NotEmpty(message = "내용을 입력하세요.")
 	private String content;					// 게시글 내용
 	
-	private String qType;					// 문의유형
+	private Integer qType;					// 문의유형
 	private Date regDate;					// 등록일자
 	private Integer ref;					// 게시글 원번호
 	private Integer refLevel;				// 게시글 단계번호
@@ -69,10 +69,10 @@ public class Board {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getqType() {
+	public Integer getqType() {
 		return qType;
 	}
-	public void setqType(String qType) {
+	public void setqType(Integer qType) {
 		this.qType = qType;
 	}
 	public Date getRegDate() {

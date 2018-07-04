@@ -38,16 +38,23 @@ public class AdminController {
 	}
 	
 	// Host계정 전환 요청 작업을 처리할 때 호출 되는 메서드
-	@RequestMapping(value="adminHostRegister", method=RequestMethod.POST)
-	public ModelAndView adminHostRegister(HttpSession session, HttpServletRequest request) {
+	@RequestMapping(value="admin/adminHostRegister", method=RequestMethod.GET)
+	public ModelAndView adminHostRegister(HttpSession session, String id) {
 		ModelAndView mav = new ModelAndView();
-		
-		String id = request.getParameter("id");
 		
 		service.hostRegister(id);	// host 계정으로 전환
 		
-		mav.setViewName("adminManagement.sms");
+		mav.setViewName("adminManagement");
 		
+		return mav;
+	}
+	
+	// admin문의에 대한 답변 작업을 처리할 때 호출 되는 메서드
+	@RequestMapping(value="admin/adminAnswerQuestion", method=RequestMethod.GET)
+	public ModelAndView adminAnswerQuestion(HttpSession session, Integer bNo) {
+		ModelAndView mav = new ModelAndView();
+		Board board = service.getBoard(bNo);
+		mav.addObject("board", board);
 		return mav;
 	}
 

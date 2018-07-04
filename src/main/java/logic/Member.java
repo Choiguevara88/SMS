@@ -1,29 +1,27 @@
 package logic;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
 public class Member {
    private String id;      // ID
    private String pw;      // Password
-   private String name;   // ÀÌ¸§
-   private String email;   // ÀÌ¸ÞÀÏ
-   private String mob;      // ÈÞ´ëÆù
-   private Date regDate;   // °¡ÀÔÀÏÀÚ (È¸¿ø°¡ÀÔ½Ã ÀÚµ¿À¸·Î ÀÔ·ÂµÇ°Ô²û) now()
-   private Integer memType;// È¸¿ø »óÅÂ 0:°Ô½ºÆ®, 1:È£½ºÆ® 2:admin
+   private String name;   // ï¿½Ì¸ï¿½
+   private String email;   // ï¿½Ì¸ï¿½ï¿½ï¿½
+   private String mob;      // ï¿½Þ´ï¿½ï¿½ï¿½
+   private Date regDate;   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ÂµÇ°Ô²ï¿½) now()
+   private Integer memType;// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 0:ï¿½Ô½ï¿½Æ®, 1:È£ï¿½ï¿½Æ® 2:admin
    
-   /* È£½ºÆ®°èÁ¤À¸·Î ÀüÈ¯ ½Ã »ç¿ë µÉ Ç×¸ñµé */
+   /* È£ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ */
    private String pictureUrl;
    private MultipartFile picture; 
-   private String hostName;   // È£½ºÆ®°èÁ¤¸í( ex:»óÈ£¸í )
-   private Integer hostRegNo;   // »ç¾÷ÀÚµî·Ï¹øÈ£
-   private String address;      // »ç¾÷ÀÚÁÖ¼ÒÁö
-   private String accountNo;   // °èÁÂÁ¤º¸ (ÀºÇà + °èÁÂ¹øÈ£ + ¿¹±ÝÁÖ)
-   private String tel;         // »ç¾÷ÀÚ ¿¬¶ôÃ³
-   private Integer regStatus;   //È£½ºÆ® µî·Ï ½ÂÀÎ »óÅÂ. 0 :´ë±â, 1 : ½ÂÀÎ 2: °ÅºÎ 
+   private String hostName;   // È£ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½( ex:ï¿½ï¿½È£ï¿½ï¿½ )
+   private Integer hostRegNo;   // ï¿½ï¿½ï¿½ï¿½Úµï¿½Ï¹ï¿½È£
+   private String address;      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½
+   private String accountNo;   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ + ï¿½ï¿½ï¿½Â¹ï¿½È£ + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+   private String tel;         // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã³
+   private Integer regStatus;   //È£ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. 0 :ï¿½ï¿½ï¿½, 1 : ï¿½ï¿½ï¿½ï¿½ 2: ï¿½Åºï¿½ 
 public String getId() {
 	return id;
 }

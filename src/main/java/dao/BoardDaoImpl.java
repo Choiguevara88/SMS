@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import dao.mapper.BoardMapper;
 import logic.Board;
-import logic.Building;
 
 
 @Repository
@@ -121,6 +120,11 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public List<Board> hostQuestionList() {
 		return sqlSession.selectList(NS + "hostQuestion");
+	}
+
+	@Override
+	public void qTypeAdd(Board board) {
+		sqlSession.getMapper(BoardMapper.class).qTypeAdd(board);
 	}
 
 
