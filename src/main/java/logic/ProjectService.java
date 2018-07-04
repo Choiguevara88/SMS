@@ -76,6 +76,10 @@ public interface ProjectService {
 
 	void hostRegister(String id);
 
+	Member find_member(String name, String email);
+
+	Member find_password(String id, String email, String name);
+
 	List<Building> getMyBuildings(String id);
 
 	int boardcount(Integer kind, String id);

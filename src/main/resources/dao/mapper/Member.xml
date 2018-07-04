@@ -24,4 +24,27 @@
 	<update id="hostRegister" parameterType="map">
 		update Member set memType=1 , regStatus = 2 where id=#{id}
 	</update>
+	
+	<select id="findmyID" resultType="Member" parameterType="map">
+		select * from member
+		<if test = "name != null">
+			where name = #{name}
+		</if>
+		<if test = "email != null">
+			and email = #{email}
+		</if>
+	</select>
+	
+	<select id="findmypassword" resultType="Member" parameterType="map">
+		select * from member
+		<if test = "name != null">
+			where name = #{name}
+		</if>
+		<if test = "email != null">
+			and email = #{email}
+		</if>
+		<if test = "id != null">
+			and id = #{id}
+		</if>
+	</select>
 </mapper>
