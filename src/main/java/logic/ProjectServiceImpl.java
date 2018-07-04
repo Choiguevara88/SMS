@@ -34,6 +34,11 @@ public class ProjectServiceImpl implements ProjectService {
 	public Member getMember(String id) {
 		return memDao.select(id);
 	}
+	
+	@Override
+	public List<Member> hostRegList() {
+		return memDao.getHostRegList();
+	}
 
 	@Override
 	public int boardcount(String searchType, String searchContent) {
@@ -120,6 +125,16 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void boardDelete(Integer num) {
 		boDao.delete(num);
+	}
+	
+	@Override
+	public List<Board> guestQuestionList() {	
+		return boDao.guestQuestionList();
+	}
+
+	@Override
+	public List<Board> hostQuestionList() {
+		return boDao.hostQuestionList();
 	}
 
 	@Override
@@ -244,7 +259,4 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Board> boardList(Integer kind, int sNo) {
 		return boDao.list(kind, sNo);
 	}
-
-
-
 } // ProjectServiceImpl end

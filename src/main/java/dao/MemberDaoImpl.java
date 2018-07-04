@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -35,6 +36,12 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public void updateMember(Member member) {
 		sqlSession.getMapper(MemberMapper.class).update(member);
+	}
+
+
+	@Override
+	public List<Member> getHostRegList() {
+		return sqlSession.selectList(NS+"hostRegList");
 	}
 
 

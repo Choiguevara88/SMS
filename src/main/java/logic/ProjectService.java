@@ -64,4 +64,10 @@ public interface ProjectService {
 	void hostPaymentConfirm(Integer reNo);
 	
 	List<Board> boardList(Integer kind, int sNo);
+
+	List<Board> guestQuestionList();
+
+	List<Board> hostQuestionList();
+
+	List<Member> hostRegList();
 }
