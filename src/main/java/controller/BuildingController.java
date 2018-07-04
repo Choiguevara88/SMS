@@ -24,14 +24,14 @@ public class BuildingController {
 	public ModelAndView buildingForm() {
 		Building building = new Building();
 		List<String> sTypeNames = new ArrayList<String>();
-		sTypeNames.add("½ºÅÍµğ·ë");
-		sTypeNames.add("¿¬½À½Ç");
-		sTypeNames.add("ÀÛ¾÷½Ç");
-		sTypeNames.add("È¸ÀÇ½Ç");
-		sTypeNames.add("¼¼¹Ì³ª½Ç");
-		sTypeNames.add("Ä«Æä");
-		sTypeNames.add("ÆÄÆ¼·ë");
-		sTypeNames.add("°ø¿¬Àå");
+		sTypeNames.add("ìŠ¤í„°ë””ë£¸");
+		sTypeNames.add("ì—°ìŠµì‹¤");
+		sTypeNames.add("ì‘ì—…ì‹¤");
+		sTypeNames.add("íšŒì˜ì‹¤");
+		sTypeNames.add("ì„¸ë¯¸ë‚˜ì‹¤");
+		sTypeNames.add("ì¹´í˜");
+		sTypeNames.add("íŒŒí‹°ë£¸");
+		sTypeNames.add("ê³µì—°ì¥");
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("sTypeNames",sTypeNames);
@@ -42,8 +42,15 @@ public class BuildingController {
 	@RequestMapping(value="building/buildingReg", method=RequestMethod.POST)
 	public ModelAndView buildingReg(Building building, HttpServletRequest request) {		
 		ModelAndView mav = new ModelAndView();
-		System.out.println("controller"+building);
 		service.buildingReg(building, request);
+		mav.setViewName("buildingList");
+		return mav;
+	}
+	
+	@RequestMapping(value="building/buildingList", method=RequestMethod.POST)
+	public ModelAndView buildingList(HttpServletRequest request) {		
+		ModelAndView mav = new ModelAndView();
+		String id = "id04";
 		return mav;
 	}
 }
