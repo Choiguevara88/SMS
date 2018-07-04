@@ -20,4 +20,8 @@
 	<select id="hostRegList" resultType="Member">
 		select * from Member where memType = 0 and regStatus = 1
 	</select>
+	
+	<update id="hostRegister" parameterType="map">
+		update Member set memType=1 , regStatus = 2 where id=#{id}
+	</update>
 </mapper>

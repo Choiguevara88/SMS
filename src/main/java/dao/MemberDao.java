@@ -1,5 +1,6 @@
 package dao;
 
+
 import java.util.List;
 
 import logic.Member;
@@ -11,6 +12,10 @@ public interface MemberDao {
 
 	void updateMember(Member member);
 
+	void becomeaHost(Member member);
+
 	List<Member> getHostRegList();
+
+	void hostRegister(String id);
 
 }

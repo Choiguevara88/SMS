@@ -40,8 +40,24 @@ public class MemberDaoImpl implements MemberDao{
 
 
 	@Override
+	public void becomeaHost(Member member) {
+		sqlSession.getMapper(MemberMapper.class).becomeaHost(member);
+	}
+
+
+
+	@Override
 	public List<Member> getHostRegList() {
-		return sqlSession.selectList(NS+"hostRegList");
+		return sqlSession.selectList(NS + "hostRegList");
+	}
+
+
+	@Override
+	public void hostRegister(String id) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id",id);
+		sqlSession.update(NS + "hostRegister", map);
+		
 	}
 
 
