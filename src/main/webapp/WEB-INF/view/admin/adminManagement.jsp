@@ -57,7 +57,7 @@
 			<td><a href="adminQuestionDetail?bNo=${gueQue.bNo}">${gueQue.subject}</a></td>
 			<td>${fn:substring(gueQue.content,0,15)}...</td>
 			<td><fmt:formatDate value="${gueQue.regDate}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
-			<td><a href="adminAnswerQuestion.sms?id=${gueQue.id}">[답변하기]</a></td>
+			<td><a href="adminAnswerQuestion.sms?bNo=${gueQue.bNo}">[답변하기]</a></td>
 		</tr>
 		</c:forEach>
 	</c:if>
@@ -82,7 +82,7 @@
 			<td><a href="adminQuestionDetail?bNo=${hosQue.bNo}">${hosQue.subject}</a></td>
 			<td>${fn:substring(hosQue.content,0,15)}...</td>
 			<td><fmt:formatDate value="${hosQue.regDate}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
-			<td><a href="adminAnswerQuestion.sms?id=${hosQue.id}">[답변하기]</a></td>
+			<td><a href="adminAnswerQuestion.sms?bNo=${hosQue.bNo}">[답변하기]</a></td>
 		</tr>
 		</c:forEach>
 	</c:if>

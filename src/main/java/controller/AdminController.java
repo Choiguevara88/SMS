@@ -2,7 +2,6 @@ package controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +38,8 @@ public class AdminController {
 	
 	// Host계정 전환 요청 작업을 처리할 때 호출 되는 메서드
 	@RequestMapping(value="admin/adminHostRegister", method=RequestMethod.GET)
-	public ModelAndView adminHostRegister(HttpSession session, HttpServletRequest request) {
+	public ModelAndView adminHostRegister(HttpSession session, String id) {
 		ModelAndView mav = new ModelAndView();
-		
-		String id = request.getParameter("id");
 		
 		service.hostRegister(id);	// host 계정으로 전환
 		
@@ -50,5 +47,29 @@ public class AdminController {
 		
 		return mav;
 	}
-
+	
+	// admin문의에 대한 답변 작업을 처리할 때 호출 되는 메서드(작성 전)
+	@RequestMapping(value="admin/adminAnswerQuestion", method=RequestMethod.GET)
+	public ModelAndView adminAnswerQuestion(HttpSession session, Integer bNo) {
+		ModelAndView mav = new ModelAndView();
+		
+		Board board = service.getBoard(bNo); // 문의글 객체
+		Board answerBoard = new Board();	// 작성할 답변글 객체
+		
+		mav.addObject("board", board);
+		mav.addObject("answerBoard", answerBoard);
+		return mav;
+	}
+	
+	// admin문의에 대한 답변 작업을 처리할 때 호출 되는 메서드(작성완료)
+	@RequestMapping(value="admin/adminAnswerQuestion", method=RequestMethod.POST)
+	public ModelAndView adminAnswerQuestionWrite(Board answerBoard, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		
+		service.boardReply(answerBoard);	// 문의글 답변
+		
+		mav.setViewName("redirect:adminManagement.sms");	// 문의글 답변
+		
+		return mav;
+	}
 }
