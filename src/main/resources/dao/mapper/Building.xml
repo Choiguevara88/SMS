@@ -22,5 +22,4 @@
 	<select id="hostCount" resultType="Integer" parameterType="map">
 		select count(*) from Building where id = #{id}
 	</select>
-	
 </mapper>
