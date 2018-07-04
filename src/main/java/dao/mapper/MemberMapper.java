@@ -15,6 +15,9 @@ public interface MemberMapper {
 	@Update("update Member set pw=#{pw}, email=#{email}, mob=#{mob} where id=#{id}")
 	void update(Member member);
 
+	@Insert("update Member set hostName=#{hostName}, pictureUrl=#{pictureUrl}, hostRegNo=#{hostRegNo}, address=#{address}, accountNo=#{accountNo}, tel=#{tel}, regStatus=#{regStatus} where id=#{id}")
+	void becomeaHost(Member member);
+
 
 	
 //	@Update("update userAccount set userName=#{userName}, phoneNo=#{phoneNo},"

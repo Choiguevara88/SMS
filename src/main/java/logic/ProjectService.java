@@ -67,6 +67,8 @@ public interface ProjectService {
 	
 	List<Board> boardList(Integer kind, int sNo);
 
+	void becomeaHost(Member member, HttpServletRequest request);
+
 	List<Board> guestQuestionList();
 
 	List<Board> hostQuestionList();

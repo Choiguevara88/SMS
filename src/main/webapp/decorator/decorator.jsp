@@ -29,23 +29,26 @@
   	<i class="fa fa-arrow-circle-right"></i>로그인/회원가입!</a></c:if>
    <c:if test="${!empty sessionScope.loginMember.id }">
   	<hr size="1">
-  	<a href="${path }/personal_info.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>${sessionScope.loginMember.name }님 환영해여~&gt;&lt;</a></c:if>
-  <c:if test="${!empty sessionScope.loginMember.id }">
+  	<a href="#" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>${sessionScope.loginMember.name }님 환영해여~&gt;&lt;</a></c:if>
+  <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.id != 'admin' }">
   	<hr size="1">
   	<a href="${path }/personal_info.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>나의 소중한 정보 !</a></c:if>
-  <c:if test="${!empty sessionScope.loginMember.id }">
+  <c:if test="${sessionScope.loginMember.id == 'admin' }">
+  	<hr size="1">
+  	<a href="${path }/personal_info.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>관리자 페이지 !</a></c:if>
+  <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.id != 'admin' }">
   	<hr size="1">
   	<a href="${path }/reserve/resList.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>나의 예약정보 !</a></c:if>
-  <c:if test="${sessionScope.loginMember.memType == 1}">
+  <c:if test="${sessionScope.loginMember.memType == 1 && sessionScope.loginMember.id != 'admin'}">
   	<hr size="1">
   	<a href="${path }/reserve/hostResInfo.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공간 예약관리 !</a></c:if>
-  <c:if test="${!empty sessionScope.loginMember.id }">
+  <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.id != 'admin' }">
   	<hr size="1">
   	<a href="wishlist.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>내가 찜한 공간 !</a></c:if>
-  <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.memType != 2 }">
+  <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.memType == '0'}">
   	<hr size="1">
   	<a href="becomeaHost.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>호스트 등록 !</a></c:if>
-  <c:if test="${sessionScope.loginMember.memType == 1 }">
+  <c:if test="${sessionScope.loginMember.memType == '1' && sessionScope.loginMember.regStatus == '1' }">
   	<hr size="1">
   	<a href="wishlist.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공간 등록하기 !</a></c:if>
   <hr size="1">
