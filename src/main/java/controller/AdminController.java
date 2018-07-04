@@ -70,8 +70,7 @@ public class AdminController {
 	@RequestMapping(value="admin/adminAnswerQuestion", method=RequestMethod.POST)
 	public ModelAndView adminAnswerQuestionWrite(Board answerBoard, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println(answerBoard.getbNo());
-		System.out.println(answerBoard.getId());
+
 		
 		service.boardReply(answerBoard);
 		

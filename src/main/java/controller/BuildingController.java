@@ -56,10 +56,16 @@ public class BuildingController {
 		/* 추후에 리퀘스트로 로그인된 아이디 가져와야함.*/
 		String id = "id6";
 		List<Building> MyBuildingList = service.getMyBuildings(id);
-		for(Building b : MyBuildingList) {
-			System.out.println(b.getsName());
-		}
 		mav.addObject("myBuildingList",MyBuildingList);
+		mav.addObject("id", id);
+		return mav;
+	}
+	
+	//빌딩정보 수정하기
+	@RequestMapping(value="building/buildingUpdate", method=RequestMethod.GET)
+	public ModelAndView buildingUpdate(HttpServletRequest request) {
+		String sNo = request.getParameter("sNo");
+		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
 }
