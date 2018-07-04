@@ -104,7 +104,7 @@ function closeRightMenu() {
     document.getElementById("rightMenu").style.display = "none";
 }
 </script>
-<div class="w3-container">
+<div class="w3-content" style="max-width:1400px">
 <decorator:body/>
 </div>
 <div class="w3-container w3-light-gray" align="right"><p>	

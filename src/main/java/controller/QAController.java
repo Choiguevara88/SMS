@@ -18,12 +18,13 @@ import logic.Member;
 import logic.ProjectService;
 
 @Controller
-public class BoardController {
+public class QAController {
 	@Autowired
 	private ProjectService service;
+	int kind = 3;
 	
-	@RequestMapping("board/listex")
-	public ModelAndView list (Integer pageNum, String searchType, String searchContent,Integer kind) {
+	@RequestMapping("qa/list")
+	public ModelAndView list (Integer pageNum, Integer kind, Integer sNo) {
 		
 		if(pageNum == null || pageNum.toString().equals("")) {
 			pageNum = 1;
@@ -31,13 +32,13 @@ public class BoardController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		int limit = 10;		// 한 페이지에 나올 게시글의 숫자
-		int listcount = service.boardcount(searchType, searchContent);	// 표시될 총 게시글의 수
-		List<Board> boardlist = service.boardList(searchType, searchContent, pageNum, limit);
+		int limit = 5;		// 한 페이지에 나올 게시글의 숫자
+		int listcount = service.boardcount(kind,sNo);	// 표시될 총 게시글의 수
+		List<Board> boardlist = service.boardList(kind,sNo,pageNum, limit);
 		
 		int maxpage = (int)((double)listcount/limit + 0.95);
-		int startpage = ((int)((pageNum/10.0 + 0.9) - 1)) * 10 + 1; // 시작페이지
-		int endpage = startpage + 9;	// 마지막 페이지
+		int startpage = ((int)((pageNum/5.0 + 0.9) - 1)) * 5 + 1; // 시작페이지
+		int endpage = startpage + 4;	// 마지막 페이지
 		if(endpage > maxpage) endpage = maxpage;
 		int boardcnt = listcount - (pageNum - 1) * limit;
 		mav.addObject("pageNum", pageNum);
@@ -48,15 +49,17 @@ public class BoardController {
 		mav.addObject("boardlist",boardlist);
 		mav.addObject("boardcnt",boardcnt);
 		mav.addObject("kind",kind);
+		mav.addObject("sNo",sNo);
 				
 		return mav;
 	}
 	
 	// 게시글 등록하기
-	@RequestMapping(value="board/write", method=RequestMethod.POST) // 게시글 작성 시 호출되는 메서드
+	@RequestMapping(value="qa/write", method=RequestMethod.POST) // 게시글 작성 시 호출되는 메서드
 	public ModelAndView write(@Valid Board board, BindingResult bindingResult, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
+		int sNo = Integer.parseInt(request.getParameter("sNo"));
 		
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
@@ -65,19 +68,23 @@ public class BoardController {
 		
 		try {
 			service.boardWrite(board, request);
-			mav.setViewName("redirect:/board/listex.sms");
+			mav.setViewName("redirect:/qa/list.sms");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new ProjectException("오류가 발생하였습니다." , "/board/write.sms");
+			throw new ProjectException("오류가 발생하였습니다." , "/qa/write.sms");
 		}
+		mav.addObject("sNo",sNo);
+		mav.addObject("kind",kind);
 		return mav;
 	}
 	
 	// 게시글 수정하기
-	@RequestMapping(value="board/update", method=RequestMethod.POST) // 게시글 작성 시 호출되는 메서드
+	@RequestMapping(value="qa/update", method=RequestMethod.POST) // 게시글 작성 시 호출되는 메서드
 	public ModelAndView update(@Valid Board board, BindingResult bindingResult, HttpServletRequest request) {
 			
 			ModelAndView mav = new ModelAndView();
+			int sNo = board.getsNo();
 			
 			if(bindingResult.hasErrors()) {
 				mav.getModel().putAll(bindingResult.getModel());
@@ -85,19 +92,21 @@ public class BoardController {
 			}
 			try {
 				service.boardUpdate(board, request);
-				mav.setViewName("redirect:/board/listex.sms");
+				mav.setViewName("redirect:/qa/list.sms");
 			} catch (Exception e) {
-				throw new ProjectException("오류가 발생하였습니다." , "/board/listex.sms");
+				e.printStackTrace();
+				throw new ProjectException("오류가 발생하였습니다." , "/qa/list.sms");
 			}
+			mav.addObject("kind",kind);
+			mav.addObject("sNo",sNo);
 			return mav;
 		}
-
 	
-	@RequestMapping(value="board/reply", method=RequestMethod.POST) // 댓글 작성 시 호출되는 메서드
+	@RequestMapping(value="qa/reply", method=RequestMethod.POST) // 댓글 작성 시 호출되는 메서드
 	public ModelAndView reply(@Valid Board board, BindingResult bindingResult) {
 		
 		ModelAndView mav = new ModelAndView();
-		
+		int sNo = board.getsNo();
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
 			board = service.getBoard(board.getbNo());
@@ -107,32 +116,26 @@ public class BoardController {
 		
 		try {
 			service.boardReply(board);
-			mav.setViewName("redirect:/board/list.shop");
+			mav.setViewName("redirect:/qa/list.sms");
 		} catch (Exception e) {
-			throw new ProjectException("오류가 발생하였습니다." , "/board/list.shop");
+			throw new ProjectException("오류가 발생하였습니다." , "/review/list.shop");
 		}
-		
+		mav.addObject("kind",kind);
+		mav.addObject("sNo",sNo);
 		return mav;
 	}
 	
-	@RequestMapping(value="board/delete", method=RequestMethod.POST)
-	public ModelAndView delete(Integer bNo, Member mem, Integer pageNum) {
+	@RequestMapping(value="qa/delete", method=RequestMethod.POST)
+	public ModelAndView delete(Integer bNo, Integer pageNum,Integer sNo,Integer kind) {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		Board dbBoard = service.getBoard(bNo);
-		
-//		 if(dbBoard.getId().equals(mem.getId())) {	
 			service.boardDelete(bNo);
-			mav.setViewName("redirect:/board/listex.sms?pageNum=" + pageNum);
+			mav.setViewName("redirect:/qa/list.sms?sNo="+sNo+"&kind="+kind);
 			return mav;
-//		} else {
-//			throw new ProjectException("비밀번호 오류","delete.sms?bNo=" + bNo + "&pageNum=" + pageNum);
-//		}
 	}
 	
-	
-	@RequestMapping(value="board/*", method=RequestMethod.GET) // 게시글 작성 View로 접속할 때 호출되는 메서드
+	@RequestMapping(value="qa/*", method=RequestMethod.GET) // 게시글 작성 View로 접속할 때 호출되는 메서드
 	public ModelAndView detail(Integer bNo, HttpServletRequest request) {
 				
 		ModelAndView mav = new ModelAndView();
@@ -143,11 +146,11 @@ public class BoardController {
 			board = service.getBoard(bNo);
 			String url = request.getServletPath();
 			
-			if(url.contains("/board/detail.sms")) {
+			if(url.contains("/qa/detail.sms")) {
 				service.updateReadCnt(bNo);
 			}
 		}
-		
+		mav.addObject("kind",kind);
 		mav.addObject("board", board);
 		return mav;
 	}

@@ -4,17 +4,18 @@
 <mapper namespace="dao.mapper.BoardMapper">
 	
 	<select id="list" resultType="Board" parameterType="map">
-		select * from board
+		select * from board where kind=1
 		
 		<if test="searchType != null and searchContent != null">
-			where ${searchType} like '%${searchContent}%'
+			and ${searchType} like '%${searchContent}%'
 		</if>
 		<if test="startrow != null and limit != null">
 			order by ref desc limit #{startrow}, #{limit}	
 		</if>
 		<if test="bNo != null">
-			where bNo = #{bNo}
+			and bNo = #{bNo}
 		</if>
+		
 		
 	</select>
 	

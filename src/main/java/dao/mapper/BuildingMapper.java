@@ -34,5 +34,8 @@ public interface BuildingMapper {
 
 	@Select("select name 'key', count(*) 'value' from board group by name having count(*) >= 1")
 	List<Map<String, Object>> graph();
+	
+	@Select("select * from building where id=#{value}")
+	List<Building> selectMyBuildings(String id);
 
 }

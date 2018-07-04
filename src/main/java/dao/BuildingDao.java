@@ -16,4 +16,6 @@ public interface BuildingDao {
 
 	void buRegist(Building building);
 
+	List<Building> getMyBuildings(String id);
+
 }
