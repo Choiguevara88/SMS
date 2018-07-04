@@ -8,7 +8,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import dao.mapper.BoardMapper;
 import dao.mapper.BuildingMapper;
 import logic.Building;
 
@@ -52,6 +51,11 @@ public class BuildingDaoImpl implements BuildingDao {
 	@Override
 	public void buRegist(Building building) {
 		sqlSession.getMapper(BuildingMapper.class).insert(building);
+	}
+
+	@Override
+	public List<Building> getMyBuildings(String id) {
+		return sqlSession.getMapper(BuildingMapper.class).selectMyBuildings(id);
 	}
 
 }

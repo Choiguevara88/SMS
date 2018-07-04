@@ -148,7 +148,7 @@ $(document).ready(function() {
 	$("#direct").click(function(){
 		var chk = $("input:checkbox[id='direct']").is(":checked")
 		var dir = document.getElementById("directsHDay")
-		var dirTag = "<tr><td></td><td><input id='sHDaydir' name='sHDayList'/></td></tr>";
+		var dirTag = "<tr><td></td><td><input id='sHDaydir' name='sHDay'/></td></tr>";
 		if(chk) {
 			$("#sHDayList" ).attr('disabled', true );
 			dir.innerHTML = dirTag
