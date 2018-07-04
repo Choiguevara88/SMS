@@ -2,7 +2,6 @@ package controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,12 +48,30 @@ public class AdminController {
 		return mav;
 	}
 	
-	// admin문의에 대한 답변 작업을 처리할 때 호출 되는 메서드
+	// admin문의에 대한 답변 작업을 처리할 때 호출 되는 메서드(작성 전)
 	@RequestMapping(value="admin/adminAnswerQuestion", method=RequestMethod.GET)
 	public ModelAndView adminAnswerQuestion(HttpSession session, Integer bNo) {
 		ModelAndView mav = new ModelAndView();
-		Board board = service.getBoard(bNo);
+		
+		Board board = service.getBoard(bNo); // 문의글 객체
+		Board answerBoard = new Board();	// 작성할 답변글 객체
+		
 		mav.addObject("board", board);
+		mav.addObject("answerBoard", answerBoard);
+		return mav;
+	}
+	
+	// admin문의에 대한 답변 작업을 처리할 때 호출 되는 메서드(작성완료)
+	@RequestMapping(value="admin/adminAnswerQuestion", method=RequestMethod.POST)
+	public ModelAndView adminAnswerQuestionWrite(Board answerBoard, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println(answerBoard.getbNo());
+		System.out.println(answerBoard.getId());
+		
+		service.boardReply(answerBoard);
+		
+		mav.setViewName("admin/adminManagement");
+		
 		return mav;
 	}
 
