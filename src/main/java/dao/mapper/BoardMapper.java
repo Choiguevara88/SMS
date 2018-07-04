@@ -24,4 +24,7 @@ public interface BoardMapper {
 
 	@Delete("delete from board where bNo=#{bNo}")
 	void delete(Integer bNo);
+
+	@Update("update board set qType = ifnull(qType,0) + 1 where ref=#{ref}")
+	void qTypeAdd(Board board);
 }

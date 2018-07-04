@@ -123,5 +123,10 @@ public class BoardDaoImpl implements BoardDao{
 		return sqlSession.selectList(NS + "hostQuestion");
 	}
 
+	@Override
+	public void qTypeAdd(Board board) {
+		sqlSession.getMapper(BoardMapper.class).qTypeAdd(board);
+	}
+
 
 }
