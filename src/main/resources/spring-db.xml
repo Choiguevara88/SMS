@@ -21,10 +21,10 @@
 		<value>org.mariadb.jdbc.Driver</value>
 	</property>
 	<property name="jdbcUrl">
-		<value>jdbc:mariadb://localhost:3306/bigdb</value>
+		<value>jdbc:mariadb://localhost:3306/test</value>
 	</property>
-	<property name="user"><value>scott</value></property>
-	<property name="password"><value>tiger</value></property>
+	<property name="user"><value>root</value></property>
+	<property name="password"><value>1234</value></property>
 </bean>
 
 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

@@ -31,4 +31,6 @@ public class RoomDaoImpl implements RoomDao{
 		sqlSession.getMapper(RoomMapper.class).insert(room);
 		
 	}
+
+	
 }
