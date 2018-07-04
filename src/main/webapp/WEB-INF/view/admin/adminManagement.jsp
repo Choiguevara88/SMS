@@ -55,7 +55,7 @@
 		<c:forEach var="gueQue" items="${gList}">
 		<tr align="center" valign="middle">
 			<td>${gueQue.id}</td>
-			<td><a href="adminQuestionDetail?bNo=${gueQue.bNo}">${gueQue.subject}</a></td>
+			<td><a href="adminQuestionDetail.sms?bNo=${gueQue.bNo}">${gueQue.subject}</a></td>
 			<td>${fn:substring(gueQue.content,0,15)}...</td>
 			<td><fmt:formatDate value="${gueQue.regDate}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
 			<td><a href="adminAnswerQuestion.sms?bNo=${gueQue.bNo}">[답변하기]</a></td>
@@ -80,7 +80,7 @@
 		<c:forEach var="hosQue" items="${hList}">
 		<tr align="center" valign="middle">
 			<td>${hosQue.id}</td>
-			<td><a href="adminQuestionDetail?bNo=${hosQue.bNo}">${hosQue.subject}</a></td>
+			<td><a href="adminQuestionDetail.sms?bNo=${hosQue.bNo}">${hosQue.subject}</a></td>
 			<td>${fn:substring(hosQue.content,0,15)}...</td>
 			<td><fmt:formatDate value="${hosQue.regDate}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
 			<td><a href="adminAnswerQuestion.sms?bNo=${hosQue.bNo}">[답변하기]</a></td>

@@ -9,7 +9,7 @@ public interface BoardDao {
 
 	int count(String searchType, String searchContent);
 
-	List<Board> list(String searchType, String searchContent, Integer pageNum, int limit);
+	List<Board> list(String searchType, String searchContent, Integer pageNum, int limit, int kind);
 
 	Board getBoard(Integer num);
 
@@ -34,10 +34,6 @@ public interface BoardDao {
 	List<Board> hostQuestionList();
 
 	void qTypeAdd(Board board);
-
-	int count(Integer kind, String id);
-
-	List<Board> list(Integer kind, String id, Integer pageNum, int limit);
-
+	
 }
 

@@ -14,13 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import exception.ProjectException;
 import logic.Board;
-import logic.Member;
 import logic.ProjectService;
 
 @Controller
 public class QAController {
 	@Autowired
 	private ProjectService service;
+	
 	int kind = 3;
 	
 	@RequestMapping("qa/list")
@@ -33,8 +33,8 @@ public class QAController {
 		ModelAndView mav = new ModelAndView();
 		
 		int limit = 5;		// 한 페이지에 나올 게시글의 숫자
-		int listcount = service.boardcount(kind,sNo);	// 표시될 총 게시글의 수
-		List<Board> boardlist = service.boardList(kind,sNo,pageNum, limit);
+		int listcount = service.boardcount(kind, sNo);	// 표시될 총 게시글의 수
+		List<Board> boardlist = service.boardList(kind, sNo, pageNum, limit);
 		
 		int maxpage = (int)((double)listcount/limit + 0.95);
 		int startpage = ((int)((pageNum/5.0 + 0.9) - 1)) * 5 + 1; // 시작페이지
