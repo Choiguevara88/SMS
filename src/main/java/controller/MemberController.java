@@ -1,5 +1,6 @@
 package controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -132,10 +133,17 @@ public class MemberController {
 		return mav;
 	}
 	@RequestMapping(value="addhostdata")
-	public ModelAndView addhostdata(Member member, HttpSession session) {
+	public ModelAndView addhostdata(Member member, HttpSession session, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(member);
-		mav.setViewName("redirect: main.sms");
+		service.becomeaHost(member,request);
+		mav.setViewName("redirect: becomeahost_complete.sms");
+		return mav;
+	}
+	@RequestMapping(value="becomeahost_complete")
+	public ModelAndView becomeahost_complete(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/becomeahost_complete");
 		return mav;
 	}
 }

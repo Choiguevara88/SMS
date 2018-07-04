@@ -34,27 +34,31 @@ function autohypen(){
 </head>
 <body>
 <form:form modelAttribute="member" action="addhostdata.sms" method="POST" enctype="multipart/form-data">
-	<input type="hidden" id="memType" name="memType" value="1"/>
-	<table cellpadding="1" cellspacing="1" border="1">
+	<input type="hidden" id="regStatus" name="regStatus" value="0"/>
+	<input type="hidden" id="id" name="id" value="${sessionScope.loginMember.id }">
+	<table align="center" cellpadding="1" cellspacing="1" border="0">
 		<tr>
-			<td align="center">상호명/호스트이름</td><td><input type="text" name="hostName" id="hostName"></td>
+			<td align="left">상호명/호스트이름</td><td style="width:auto;"><input type="text" name="hostName" id="hostName"></td>
 		</tr>
 		<tr>
-			<td align="center">사업자 등록번호</td><td><input type="text" name="hostRegNo" id="hostRegNo"></td>
+			<td align="left">사업자 등록번호</td><td><input type="text" name="hostRegNo" id="hostRegNo"></td>
 		</tr>
 		<tr>
-			<td align="center">사업자주소지</td><td><input type="text" name="address" id="address"></td>
+			<td align="left"> 사업자 등록증</td><td><input type="file" name="picture">
+		</tr>
+		<tr>
+			<td align="left">사업자주소지</td><td><input type="text" name="address" id="address"></td>
 		</tr>
 		
-		<tr><td rowspan="3" align="center">계좌정보</td>
+		<tr><td rowspan="3" align="left">계좌정보</td>
 			<td><input type="text" name="accountNo" id="accountNo" placeholder="은행명: 뒤에 '은행'은 빼고"/></td></tr>
 		<tr><td><input type="text" name="accountNo" id="accountNo" placeholder="계좌번호: - 제외"/></td></tr>
 		<tr><td><input type="text" name="accountNo" id="accountNo" placeholder="예금주 : 이름"/></td></tr>  
 		<tr>
-			<td align="center">사업자 연락처</td>
+			<td align="left">사업자 연락처</td>
 					<td><input type="text" name="tel" id="tel" placeholder="123-456-7890" onkeyup="autohypen()" maxlength="13"></td>
 		</tr>
-		<tr><td colspan="2" align="center">
+		<tr><td></td><td align="left">
 				<input type="submit" value="호스트 승인 요청">
 				<input type="button" onclick="javascript:history.go(-1)" value="뒤로가기"></td></tr>
 	</table>

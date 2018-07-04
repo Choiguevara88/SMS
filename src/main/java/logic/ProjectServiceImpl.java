@@ -245,6 +245,24 @@ public class ProjectServiceImpl implements ProjectService {
 		return boDao.list(kind, sNo);
 	}
 
+	@Override
+	public void becomeaHost(Member member, HttpServletRequest request) {
+		if(member.getPicture() != null && !member.getPicture().isEmpty()) {
+			uploadFileCreate(member.getPicture(), request);
+			member.setPictureUrl(member.getPicture().getOriginalFilename());
+		}
+		memDao.becomeaHost(member);
+	}
+	private void uploadFileCreate(MultipartFile picture, HttpServletRequest request) {
+		String uploadPath = request.getServletContext().getRealPath("/") + "/picture/";
+		String orgFile = picture.getOriginalFilename();
+		try {
+			picture.transferTo(new File(uploadPath + orgFile));
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 
 
 } // ProjectServiceImpl end

@@ -38,4 +38,11 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 
+	@Override
+	public void becomeaHost(Member member) {
+		sqlSession.getMapper(MemberMapper.class).becomeaHost(member);
+	}
+
+
+
 }

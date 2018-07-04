@@ -1,5 +1,6 @@
 package dao;
 
+
 import logic.Member;
 
 public interface MemberDao {
@@ -8,5 +9,7 @@ public interface MemberDao {
 	void joinsms(Member member);
 
 	void updateMember(Member member);
+
+	void becomeaHost(Member member);
 
 }
