@@ -113,5 +113,15 @@ public class BoardDaoImpl implements BoardDao{
 		return sqlSession.selectList("dao.mapper.ReviewMapper.list2", map);
 	}
 
+	@Override
+	public List<Board> guestQuestionList() {
+		return sqlSession.selectList(NS + "guestQuestion");
+	}
+
+	@Override
+	public List<Board> hostQuestionList() {
+		return sqlSession.selectList(NS + "hostQuestion");
+	}
+
 
 }

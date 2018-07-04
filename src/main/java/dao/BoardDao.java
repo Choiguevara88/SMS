@@ -29,5 +29,9 @@ public interface BoardDao {
 	
 	List<Board> list(Integer kind, int sNo);
 
+	List<Board> guestQuestionList();
+
+	List<Board> hostQuestionList();
+
 }
 

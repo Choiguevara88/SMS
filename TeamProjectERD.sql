@@ -99,7 +99,7 @@ CREATE TABLE Building
 	SRule varchar(1200) COMMENT '공간 이용 시 주의사항 기입',
 	-- 공간 업무 운영 시간
 	-- ex) 0024 : 00시 부터 24시까지
-	SBHour int(4) COMMENT '공간 업무 운영 시간
+	SBHour varchar(130) COMMENT '공간 업무 운영 시간
 ex) 0024 : 00시 부터 24시까지',
 	-- 사업주 휴무요일
 	-- ex) 토일월
@@ -119,7 +119,8 @@ ex ) img.png\timg2.jpg\t',
 	SStat int NOT NULL COMMENT '미승인 : 0
 승인 : 1
 반려 : 2',
-	PRIMARY KEY (SNo)
+	PRIMARY KEY (SNo),
+	UNIQUE (ID)
 );
 
 
@@ -153,17 +154,17 @@ CREATE TABLE Member
 Host = 1
 Admin = 2',
 	-- Host계정 전환 시 사용 될 사업주명
-	HostName varchar(20) COMMENT 'Host계정 전환 시 사용 될 사업주명',
+	HostName varchar(200) COMMENT 'Host계정 전환 시 사용 될 사업주명',
 	-- 사업자등록번호
-	HostRegNo varchar(30) COMMENT '사업자등록번호',
+	HostRegNo varchar(200) COMMENT '사업자등록번호',
 	-- 사업자등록 소재지
-	Address varchar(40) COMMENT '사업자등록 소재지',
+	Address varchar(1200) COMMENT '사업자등록 소재지',
 	-- Host계정 전환 시 대표번호로 사용
-	Tel varchar(30) COMMENT 'Host계정 전환 시 대표번호로 사용',
+	Tel varchar(200) COMMENT 'Host계정 전환 시 대표번호로 사용',
 	-- 은행명 + \t + 계좌번호 + \t + 예금주
-	AccountNo varchar(40) COMMENT '은행명 + \t + 계좌번호 + \t + 예금주',
-	PRIMARY KEY (ID),
-	UNIQUE (ID)
+	AccountNo varchar(200) COMMENT '은행명 + \t + 계좌번호 + \t + 예금주',
+	regStatus int(1),
+	PRIMARY KEY (ID)
 );
 
 

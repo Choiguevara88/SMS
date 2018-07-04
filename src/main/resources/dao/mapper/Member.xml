@@ -16,4 +16,8 @@
 		</foreach>
 		and not id = 'admin'
 	</select>
+	
+	<select id="hostRegList" resultType="Member">
+		select * from Member where memType = 0 and regStatus = 1
+	</select>
 </mapper>
