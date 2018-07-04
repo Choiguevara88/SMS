@@ -74,4 +74,6 @@ public interface ProjectService {
 	List<Board> hostQuestionList();
 
 	List<Member> hostRegList();
+
+	void hostRegister(String id);
 }

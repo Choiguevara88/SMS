@@ -1,3 +1,4 @@
+
 package logic;
 
 import java.io.File;
@@ -347,6 +348,12 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Member> hostRegList() {
 		return memDao.getHostRegList();
 	}
+
+	@Override
+	public void hostRegister(String id) {
+		memDao.hostRegister(id);
+	}
+	
 	@Override
 	public void becomeaHost(Member member, HttpServletRequest request) {
 		if(member.getPicture() != null && !member.getPicture().isEmpty()) {
@@ -355,6 +362,7 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 		memDao.becomeaHost(member);
 	}
+	
 	private void uploadFileCreate(MultipartFile picture, HttpServletRequest request) {
 		String uploadPath = request.getServletContext().getRealPath("/") + "/picture/";
 		String orgFile = picture.getOriginalFilename();
@@ -364,5 +372,5 @@ public class ProjectServiceImpl implements ProjectService {
 			e.printStackTrace();
 		}
 	}
-
+	
 } // ProjectServiceImpl end
