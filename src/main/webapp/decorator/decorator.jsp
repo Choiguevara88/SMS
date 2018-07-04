@@ -53,13 +53,13 @@
   	<a href="addBuilding.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공간 등록하기 !</a></c:if>
   <c:if test="${sessionScope.loginMember.id != 'admin'}">
   	<hr size="1">
-  	<a href="askAdmin.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>1 : 1 문의 !</a></c:if>
+  	<a href="${path}/qa/questionAdmin.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>1 : 1 문의 !</a></c:if>
   <hr size="1">
   <a href="${path }/notice/list.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공지사항 !</a>
   <hr size="1">
   <a href="${path }/terms_and_condition.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>이용약관 !</a>
   <hr size="1">
-  <c:if test="${!empty sessionScope.loginMember.id }"><a href="logout.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>로그아웃..ㅜ</a></c:if>
+  <c:if test="${!empty sessionScope.loginMember.id }"><a href="${path }/logout.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>로그아웃..ㅜ</a></c:if>
 </div>
 
 

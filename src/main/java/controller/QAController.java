@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import exception.ProjectException;
 import logic.Board;
+import logic.Member;
 import logic.ProjectService;
 
 @Controller
@@ -22,6 +23,28 @@ public class QAController {
 	private ProjectService service;
 	
 	int kind = 3;
+	
+	// 1:1 문의 작성 시 호출 되는 메서드
+	@RequestMapping(value="qa/questionAdmin", method=RequestMethod.GET)
+	public ModelAndView writeQuestion (String id) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		Member writer = service.getMember(id);
+		
+		Board board = new Board();
+		
+		if(writer.getHostName() != null) {	// 해당 아이디가 Host계정이라면?
+			board.setKind(5);				// Board 객체 Kind = 5 부여
+		} else {							// 해당 아이디가 Host 계정이 아니라면?
+			board.setKind(4);				// Board 객체 Kind = 4 부여
+		}
+		
+		mav.addObject("board", board);
+		mav.setViewName("qa/write");
+		
+		return mav;
+	}
 	
 	@RequestMapping("qa/list")
 	public ModelAndView list (Integer pageNum, Integer kind, Integer sNo) {
