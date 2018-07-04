@@ -36,6 +36,17 @@ public class AdminController {
 		return mav;
 	}
 	
+	// Host계정 전환 요청 전처리 전 확인 위해 보여질 페이지
+	@RequestMapping(value="admin/adminHostRegDetail", method=RequestMethod.GET)
+	public ModelAndView adminHostRegDetailView(HttpSession session, String id) {
+		
+		ModelAndView mav = new ModelAndView();
+		Member hostMember = service.getMember(id);
+		mav.addObject("hostMem", hostMember);
+		
+		return mav;
+	}
+	
 	// Host계정 전환 요청 작업을 처리할 때 호출 되는 메서드
 	@RequestMapping(value="admin/adminHostRegister", method=RequestMethod.GET)
 	public ModelAndView adminHostRegister(HttpSession session, String id) {
