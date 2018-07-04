@@ -76,4 +76,12 @@ public interface ProjectService {
 	List<Member> hostRegList();
 
 	void hostRegister(String id);
+
+
+
+
+	
+
+
+
 }
