@@ -29,7 +29,7 @@
 		select * from board where kind=4
 	</select>
 	
-	<select id="guestQuestion" resultType="Board">
+	<select id="hostQuestion" resultType="Board">
 		select * from board where kind=5
 	</select>
 	
