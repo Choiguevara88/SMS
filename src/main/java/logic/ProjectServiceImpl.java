@@ -72,7 +72,6 @@ public class ProjectServiceImpl implements ProjectService {
 		board.setbNo(++num);
 		board.setRef(num);
 		board.setRefLevel(0);
-
 		boDao.insert(board);
 
 	}
