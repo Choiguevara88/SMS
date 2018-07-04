@@ -372,5 +372,15 @@ public class ProjectServiceImpl implements ProjectService {
          e.printStackTrace();
       }
    }
+
+@Override
+public Member find_member(String name, String email) {
+	return memDao.find_member(name,email);
+}
+
+@Override
+public Member find_password(String id, String email, String name) {
+	return memDao.find_password(id,email,name);
+}
    
 } // ProjectServiceImpl end

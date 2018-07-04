@@ -18,4 +18,8 @@ public interface MemberDao {
 
 	void hostRegister(String id);
 
+	Member find_member(String name, String email);
+
+	Member find_password(String id, String email, String name);
+
 }
