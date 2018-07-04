@@ -67,13 +67,13 @@ public class ProjectServiceImpl implements ProjectService {
          String img = uploadImgCreate(board.getImg1File(),request);
          if(img != null) board.setImg4(img);
       }
+      
       int num = boDao.maxNum();
       
       board.setbNo(++num);
       board.setRef(num);
       board.setRefLevel(0);
       boDao.insert(board);
-
    }
 
    @Override
