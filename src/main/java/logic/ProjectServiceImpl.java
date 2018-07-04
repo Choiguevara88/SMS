@@ -364,4 +364,10 @@ public class ProjectServiceImpl implements ProjectService {
 		return buDao.getMyBuildings(id);
 	}
 
+	@Override
+	public List<Room> getMyRoom(Integer sNo) {
+		// TODO Auto-generated method stub
+		return roomDao.getMyroom(sNo);
+	}
+
 } // ProjectServiceImpl end

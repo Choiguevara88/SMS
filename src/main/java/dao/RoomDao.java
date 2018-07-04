@@ -10,6 +10,8 @@ public interface RoomDao {
 
 	void insertRoom(Room room);
 
+	List<Room> getMyroom(Integer sNo);
+
 
 
 

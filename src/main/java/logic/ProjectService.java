@@ -78,6 +78,8 @@ public interface ProjectService {
 
 	List<Building> getMyBuildings(String id);
 
+	List<Room> getMyRoom(Integer sNo);
+
 
 
 
