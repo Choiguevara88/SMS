@@ -62,6 +62,8 @@ public interface ProjectService {
 	List<Integer> hostHaveBuildsNo(String hostId);
 
 	void hostPaymentConfirm(Integer reNo);
+
+	void buildingReg(Building building, HttpServletRequest request);
 	
 	List<Board> boardList(Integer kind, int sNo);
 

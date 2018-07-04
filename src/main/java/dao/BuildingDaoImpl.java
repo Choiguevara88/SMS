@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import dao.mapper.BoardMapper;
+import dao.mapper.BuildingMapper;
 import logic.Building;
 
 @Repository
@@ -40,6 +42,16 @@ public class BuildingDaoImpl implements BuildingDao {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("id", hostId);
 		return sqlSession.selectList(NS+"hostHaveBuildsNo", map);
+	}
+
+	@Override
+	public int maxNum() {
+		return sqlSession.getMapper(BuildingMapper.class).maxNum();
+	}
+
+	@Override
+	public void buRegist(Building building) {
+		sqlSession.getMapper(BuildingMapper.class).insert(building);
 	}
 
 }

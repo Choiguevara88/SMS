@@ -34,11 +34,6 @@ public class ProjectServiceImpl implements ProjectService {
 	public Member getMember(String id) {
 		return memDao.select(id);
 	}
-	
-	@Override
-	public List<Member> hostRegList() {
-		return memDao.getHostRegList();
-	}
 
 	@Override
 	public int boardcount(String searchType, String searchContent) {
@@ -126,11 +121,6 @@ public class ProjectServiceImpl implements ProjectService {
 	public void boardDelete(Integer num) {
 		boDao.delete(num);
 	}
-	
-	@Override
-	public List<Board> guestQuestionList() {	
-		return boDao.guestQuestionList();
-	}
 
 	@Override
 	public List<Board> hostQuestionList() {
@@ -208,6 +198,27 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 		return null;
 	} // uploadImgCreate() end
+	
+	private String uploadImgCreate2(List<MultipartFile> pictures, HttpServletRequest request) { // imgUploadMethod()
+		
+		String uploadPath = request.getServletContext().getRealPath("/") + "/picture/"; // upload path setting
+		Date date = new Date();
+		String orgFile = "";
+		
+		for(MultipartFile picture : pictures) {		
+			
+			String fileName = date.getTime() + picture.getOriginalFilename(); // imgFileName setting
+			
+			try {
+				picture.transferTo(new File(uploadPath + fileName)); // new File(uploadPath + orgFile) : img upload complite
+				orgFile = orgFile + "|" + fileName;	
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return orgFile;
+	}
 
 	@Override
 	public void joinsms(Member member) {
@@ -259,4 +270,74 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Board> boardList(Integer kind, int sNo) {
 		return boDao.list(kind, sNo);
 	}
+
+
+	@Override
+	public void buildingReg(Building building, HttpServletRequest request) {
+		/*if (board.getImg1File() != null) { 
+			String img = uploadImgCreate(board.getImg1File(),request);	
+			if(img != null) board.setImg1(img); 
+		}
+		
+		if (board.getImg2File() != null) { 
+			String img = uploadImgCreate(board.getImg2File(),request);
+			if(img != null) board.setImg2(img);
+		}
+		
+		if (board.getImg3File() != null) { 
+			String img = uploadImgCreate(board.getImg3File(),request);
+			if(img != null) board.setImg3(img);
+		}
+		
+		if (board.getImg4File() != null) { 
+			String img = uploadImgCreate(board.getImg1File(),request);
+			if(img != null) board.setImg4(img);
+		}
+		int num = boDao.maxNum();
+		
+		board.setbNo(++num);
+		board.setRef(num);
+		board.setRefLevel(0);
+
+		boDao.insert(board);*/
+		
+		if(building.getsImg1File() != null) {
+			String img1 = uploadImgCreate(building.getsImg1File(),request);
+			if(img1 != null) building.setsImg1(img1);
+		}
+		
+		if(!(building.getsImg2Files().isEmpty())) {
+			String img2 = uploadImgCreate2(building.getsImg2Files(), request);
+			if(img2 != null) building.setsImg2(img2);
+		}
+		
+		int sNo = buDao.maxNum();
+		building.setsNo(++sNo);
+		/*로그인 정보를 받아줄 수 있을때 id 다시해야함*/
+		String id = "id" + sNo;
+		building.setId(id);
+		String sType = listToString(building.getsTypeList());
+		String sTag = listToString(building.getsTagList());
+		String sInfoSub = listToString(building.getsInfoSubList());
+		String sRule = listToString(building.getsRuleList());
+		String sBHour = listToString(building.getsBHourList());
+		int sStat = 0;
+		building.setsType(sType);
+		building.setsTag(sTag);
+		building.setsInfoSub(sInfoSub);
+		building.setsRule(sRule);
+		building.setsBHour(sBHour);
+		building.setsStat(sStat);
+		System.out.println("service" + building);
+		buDao.buRegist(building);
+	}
+
+	private String listToString(List<String> list) {
+		String li = "";
+		for (int i = 0 ; i < list.size() ; i++) {
+			li += list.get(i) + "|";
+		}
+		return li;
+	}
+
 } // ProjectServiceImpl end

@@ -9,15 +9,16 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import logic.Board;
+import logic.Building;
 
 public interface BuildingMapper {
 
-	@Select("select ifnull(max(num),0) from board")
+	@Select("select ifnull(max(sNo),0) from building")
 	int maxNum();
 	
-	@Insert("insert into board(num, name, pass, subject, content, file1, regdate, readcnt, ref, reflevel, refstep) "
-			+ "values(#{num}, #{name}, #{pass}, #{subject}, #{content}, #{fileurl}, now(), #{readcnt}, #{ref}, #{reflevel}, #{refstep})")
-	void insert(Board board);
+	@Insert("insert into building(sNo, id, sName, sPreview, sContent, sType, sTag, sInfoSub, sRule, sBHour, sHDay, sImg1, sImg2, sAddress, sStat) "
+			+ "values(#{sNo}, #{id}, #{sName}, #{sPreview}, #{sContent}, #{sType}, #{sTag}, #{sInfoSub}, #{sRule}, #{sBHour}, #{sHDay}, #{sImg1}, #{sImg2}, #{sAddress}, #{sStat})")
+	void insert(Building building);
 
 	@Update("update board set readcnt=readcnt+1 where num=#{value}")
 	void addReadCnt(Integer num);
