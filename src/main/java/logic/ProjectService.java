@@ -76,6 +76,8 @@ public interface ProjectService {
 
 	void hostRegister(String id);
 
+	List<Building> getMyBuildings(String id);
+
 
 
 
