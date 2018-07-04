@@ -48,4 +48,19 @@ public class RoomController {
 		ModelAndView mav = new ModelAndView();
 		return mav;
 }
+	
+	/*@RequestMapping("room/roomList")
+	public ModelAndView roomList(Room room) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			service.selectRoom(room);
+			mav.setViewName("redirect:roomList.sms");
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new ProjectException("throw new ProjectException(string,string주소)","roomForm.sms");
+		}
+		
+		return mav;
+		
+	}*/
 }
