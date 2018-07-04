@@ -142,9 +142,8 @@ function ruledel(di) {
 	 rl.innerHTML=ri;
 	 $("#addrule" ).attr( 'disabled', false );
 }
-function imgprc() {
-	ip = document.getElementById("sImg2")
-}
+
+/*휴무일 직접입력 관련 스크립트*/
 $(document).ready(function() {
 	$("#direct").click(function(){
 		var chk = $("input:checkbox[id='direct']").is(":checked")
@@ -198,7 +197,7 @@ $(document).ready(function() {
     
     <tr><td>이미지</td>
         <td>
-        <input multiple="multiple" type="file" id="sImg2" name="sImg2Files" accept="image/*" onchange="imgprc()"/></td></tr>
+        <input multiple="multiple" type="file" id="sImg2" name="sImg2Files" accept="image/*" /></td></tr>
     
     <!-- 주소API 추후 사용 -->
     <tr><td>주소</td><td><form:input path="sAddress" /> </td></tr>
