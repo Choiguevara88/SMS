@@ -15,7 +15,7 @@
 </script>
 </head>
 <body>
-<form:form modelAttribute="board" action="update.sms" method="post" name="f" enctype="multipart/form-data">
+<form:form modelAttribute="board" action="Rupdate.sms" method="post" name="f" enctype="multipart/form-data">
   <spring:hasBindErrors name="board">
   	<font color="red">
   	  <c:forEach items="${errors.globalErrors}" var="error">
@@ -47,7 +47,7 @@
             	<option value="1"> 1점</option>
             </form:select>
   		<a href="javascript:document.f.submit()">[수정]</a>
-  		<a href="list.sms?sNo=${board.sNo}&kind=${board.kind}">[목록]</a>
+  		<a href="review/Rlist.sms?sNo=${board.sNo}">[목록]</a>
   	</td></tr></table>
   	<div><div align="center">사진(최대 4개)</div>
 		 <div align="center">

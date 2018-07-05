@@ -36,11 +36,6 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public int boardcount(String searchType, String searchContent) {
-		return boDao.count(searchType, searchContent);
-	}
-
-	@Override
 	public List<Board> boardList(String searchType, String searchContent, Integer pageNum, int limit, int kind) {
 		
 		return boDao.list(searchType, searchContent, pageNum, limit, kind);
@@ -381,7 +376,21 @@ public class ProjectServiceImpl implements ProjectService {
 		return roomDao.getMyroom(sNo);
 	}
 
-	
+	@Override
+	public int boardcount(String searchType, String searchContent, int kind) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-	
+	@Override
+	public void boardWrite(Board board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void boardUpdate(Board board) {
+		// TODO Auto-generated method stub
+		
+	}
 } // ProjectServiceImpl end

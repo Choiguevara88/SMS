@@ -38,7 +38,7 @@
 <fmt:formatDate var="regdate" value="${reserve.reDate }" type="date" />
 
 <c:if test="${reserve.reStat==1 && today1 > regdate}">
-	<a href="../review/write.sms?sNo=${room.sNo}">[리뷰작성]</a>
+	<a href='"../review/Rwrite.sms?sNo="+${param.sNo}'>[리뷰작성]</a>
 </c:if>
 
 <c:if test="${reserve.reStat==0 && today1 < regdate}">

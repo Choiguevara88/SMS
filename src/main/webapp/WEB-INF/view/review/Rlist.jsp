@@ -58,9 +58,11 @@
 		<td colspan="4"><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd H:mm:ss"/></td>
 	<tr>
   		<td colspan="4" align="center" class="content">
-  		<a href="../review/reply.sms?bNo=${board.bNo}&pageNum=${pageNum}">[답변]</a>
-		<a href="../review/update.sms?bNo=${board.bNo}&pageNum=${pageNum}">[수정]</a>
-		<a href="../review/delete.sms?bNo=${board.bNo}&pageNum=${pageNum}">[삭제]</a><br>
+  		<c:if test="${sessionScope.loginMember.id == building.id && board.sNo == building.sNo }">
+  		<a href="../review/reply.sms?bNo=${board.bNo}&pageNum=${pageNum}">[답변]</a></c:if>
+  		<c:if test="${sessionScope.loginMember.id == board.id }">
+		<a href="../review/Rupdate.sms?bNo=${board.bNo}&pageNum=${pageNum}">[수정]</a>
+		<a href="../review/delete.sms?bNo=${board.bNo}&pageNum=${pageNum}">[삭제]</a></c:if><br>
  	 </td>
 </tr>
 <!--  글 밑 부분 -->

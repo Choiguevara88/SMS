@@ -20,15 +20,16 @@ public class BoardDaoImpl implements BoardDao{
 	private final String NS = "dao.mapper.BoardMapper.";
 			
 	@Override
-	public int count(String searchType, String searchContent) {
+	public int count(String searchType, String searchContent, int kind) {
 	
-		Map<String,String> map = new HashMap<String,String>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		
 		if(searchType==null || searchType.equals("")) searchType=null;
 		if(searchContent==null||searchContent.equals("")) searchContent=null;
 		
 		map.put("searchType", searchType);
 		map.put("searchContent",searchContent);
+		map.put("kind", kind);
 		
 		return sqlSession.selectOne(NS + "count", map);
 	}
