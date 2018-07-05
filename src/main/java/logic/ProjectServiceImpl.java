@@ -41,8 +41,8 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<Board> boardList(String searchType, String searchContent, Integer pageNum, int limit, int kind) {
-		return boDao.list(searchType, searchContent, pageNum, limit, kind);
+	public List<Board> boardList(String searchType, String searchContent, Integer pageNum, int limit) {
+		return boDao.list(searchType, searchContent, pageNum, limit);
 	}
 
 	@Override // board Write Method()
@@ -71,13 +71,13 @@ public class ProjectServiceImpl implements ProjectService {
 			if (img != null)
 				board.setImg4(img);
 		}
+
 		int num = boDao.maxNum();
 
 		board.setbNo(++num);
 		board.setRef(num);
 		board.setRefLevel(0);
 		boDao.insert(board);
-
 	}
 
 	@Override
@@ -88,9 +88,12 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void boardReply(Board board) {
 		boDao.qTypeAdd(board);
+		
 		int num = boDao.maxNum();
+		
 		board.setbNo(++num);
 		board.setRefLevel(board.getRefLevel() + 1);
+		
 		boDao.insert(board);
 	}
 
@@ -276,28 +279,6 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void buildingReg(Building building, HttpServletRequest request) {
-		/*
-		 * if (board.getImg1File() != null) { String img =
-		 * uploadImgCreate(board.getImg1File(),request); if(img != null)
-		 * board.setImg1(img); }
-		 * 
-		 * if (board.getImg2File() != null) { String img =
-		 * uploadImgCreate(board.getImg2File(),request); if(img != null)
-		 * board.setImg2(img); }
-		 * 
-		 * if (board.getImg3File() != null) { String img =
-		 * uploadImgCreate(board.getImg3File(),request); if(img != null)
-		 * board.setImg3(img); }
-		 * 
-		 * if (board.getImg4File() != null) { String img =
-		 * uploadImgCreate(board.getImg1File(),request); if(img != null)
-		 * board.setImg4(img); } int num = boDao.maxNum();
-		 * 
-		 * board.setbNo(++num); board.setRef(num); board.setRefLevel(0);
-		 * 
-		 * boDao.insert(board);
-		 */
-
 		if (building.getsImg1File() != null) {
 			String img1 = uploadImgCreate(building.getsImg1File(), request);
 			if (img1 != null)
@@ -382,12 +363,12 @@ public class ProjectServiceImpl implements ProjectService {
 	public Member find_member(String name, String email) {
 		return memDao.find_member(name, email);
 	}
-
+	
 	@Override
 	public Member find_password(String id, String email, String name) {
 		return memDao.find_password(id, email, name);
 	}
-
+	
 	@Override
 	public List<Building> getMyBuildings(String id) {
 		return buDao.getMyBuildings(id);
@@ -398,5 +379,4 @@ public class ProjectServiceImpl implements ProjectService {
 		// TODO Auto-generated method stub
 		return roomDao.getMyroom(sNo);
 	}
-
 } // ProjectServiceImpl end
