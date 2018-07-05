@@ -12,7 +12,7 @@
 <title>리뷰 답글 달기</title>
 </head>
 <body>
-<form:form action="reply.sms?pageNum=${param.pageNum}" method="post" name="f" modelAttribute="board">
+<form:form action="reply.sms" method="post" name="f" modelAttribute="board">
 	<input type="hidden" name="bNo" value="${board.bNo}">
 	<input type="hidden" name="sNo" value="${board.sNo}">
 	<input type="hidden" name="kind" value="${board.kind}">

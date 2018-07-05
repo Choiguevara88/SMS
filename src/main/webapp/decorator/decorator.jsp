@@ -51,7 +51,7 @@
   <c:if test="${sessionScope.loginMember.memType == '1' && sessionScope.loginMember.regStatus == '1' }">
   	<hr size="1">
   	<a href="addBuilding.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공간 등록하기 !</a></c:if>
-  <c:if test="${sessionScope.loginMember.id != 'admin'}">
+  <c:if test="${!empty sessionScope.loginMember}">
   	<hr size="1">
   	<a href="${path}/qa/questionAdmin.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>1 : 1 문의 !</a></c:if>
   <hr size="1">

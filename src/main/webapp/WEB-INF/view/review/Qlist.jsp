@@ -15,7 +15,7 @@
 </script>
 </head>
 <body>
-<div align="center"><a href="../qa/write.sms">질문 작성하기</a></div>
+<div align="center"><a href='"../review/Qwrite.sms?sNo="+${param.sNo}'>질문 작성하기</a></div>
 <!--  리뷰 목록부분 -->
 <table border="1" style="margin-top:30px" width="80%" align="center">
 

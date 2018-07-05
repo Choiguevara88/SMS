@@ -39,8 +39,8 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public int boardcount(String searchType, String searchContent) {
-		return boDao.count(searchType, searchContent);
+	public int boardcount(String searchType, String searchContent, int kind) {
+		return boDao.count(searchType, searchContent, kind);
 	}
 
 	@Override
@@ -82,7 +82,17 @@ public class ProjectServiceImpl implements ProjectService {
 		boDao.insert(board);
 
 	}
+	
+	@Override
+	public void boardWrite(Board board) {
+		int num = boDao.maxNum();
 
+		board.setbNo(++num);
+		board.setRef(num);
+		board.setRefLevel(0);
+		boDao.insert(board);
+	}
+	
 	@Override
 	public Board getBoard(int num) {
 		return boDao.getBoard(num);
@@ -127,7 +137,11 @@ public class ProjectServiceImpl implements ProjectService {
 		boDao.update(board);
 
 	}
-
+	@Override
+	public void boardUpdate(Board board) {
+		boDao.update(board);
+	}
+	
 	@Override
 	public void boardDelete(Integer num) {
 		boDao.delete(num);
