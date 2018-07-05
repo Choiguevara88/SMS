@@ -389,12 +389,18 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<TransactionHistory> hostTransHistoryList() {
-		return tranDao.transHistory();
+	public List<TransactionHistory> hostTransHistoryList(String first) {
+		return tranDao.transHistory(first);
 	}
+	
 	@Override
 	public List<Room> getMyRoom(Integer sNo) {
-		// TODO Auto-generated method stub
 		return roomDao.getMyroom(sNo);
 	}
+
+	@Override
+	public List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate) {
+		return tranDao.searchTransHistory(searchType, searchContent, startDate, endDate);
+	}
+	
 } // ProjectServiceImpl end

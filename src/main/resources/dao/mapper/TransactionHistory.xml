@@ -5,11 +5,29 @@
 	
 <!-- [&lt; : <] [&gt; : >] -->
 <!-- 이번 달 초부터 금일까지 한달 동안의 거래량을 조회하기 위한 쿼리문 -->
-<select id="transHistoryList" resultType="TransactionHistory">
-	select t.host, m.hostName, m.address, m.regDate, m.tel, m.accountNo, sum(t.totPrice)'totPrice', count(t.reNo)'cnt', t.sRName, t.sRNo, t.reNo, t.guest
-	from member m, (select * from transactionHistory where reDate &gt; date_format(now(), '%Y-%m-01') and reDate &lt; now()) t
-	where t.host = m.id
-	group by t.sNo
-</select>
+	<select id="transHistoryList" resultType="TransactionHistory">
+		select host, guest, hostName, email, address, regDate, tel, accountNo, sNo, sName, srNo, srName, reNo, reDate, totPrice, count(*) 'cnt'	
+		from transactionHistory where reDate &gt; date_format(now(), '%Y-%m-01') and reDate &lt; now()
+	
+		<if test="sum == first">
+			group by sNo
+		</if>
+	</select>
 
+	<select id="searchTransList" resultType="TransactionHistory" parameterType="map">
+		select * from transactionHistory
+	
+		<if test="searchType != null and searchContent !=null and startDate == null and endDate == null">
+			where ${searchType} like '%${searchContent}%' order by ${searchType}
+		</if>
+	
+		<if test="startDate != null and endDate != null and searchType == null and searchContent ==null">
+			where reDate &gt; ${startDate} and reDate &lt; ${endDate} order by reDate
+		</if>
+		
+		<if test="searchType != null and searchContent !=null and startDate != null and endDate != null">
+			where ${searchType} like '%${searchContent}%' and reDate &gt; ${startDate} and reDate &lt; ${endDate} order by ${searchType}
+		</if>
+		
+	</select>
 </mapper>
