@@ -76,6 +76,8 @@ public interface ProjectService {
 	Member find_password(String id, String email, String name);
 
 	List<Building> getMyBuildings(String id);
+	
+	List<Board> boardList(Integer kind,String id);
 
 
 }

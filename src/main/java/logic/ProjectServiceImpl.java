@@ -407,6 +407,11 @@ public class ProjectServiceImpl implements ProjectService {
 		return buDao.getMyBuildings(id);
 	}
 
+	@Override
+	public List<Board> boardList(Integer kind,String id) {
+		return boDao.list(kind,id);
+	}
+
 
 
 	
