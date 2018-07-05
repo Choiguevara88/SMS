@@ -392,4 +392,9 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Building> getMyBuildings(String id) {
 		return buDao.getMyBuildings(id);
 	}
+
+	@Override
+	public Member find_member_by_email(String email) {
+		return memDao.find_member_by_email(email);
+	}
 } // ProjectServiceImpl end
