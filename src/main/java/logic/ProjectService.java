@@ -6,22 +6,19 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface ProjectService {
 
-	Member getMember(String id);
-
 	int boardcount(String searchType, String searchContent);
 
-	List<Board> boardList(String searchType, String searchContent, Integer pageNum, int limit);
 
-	void boardWrite(Board board, HttpServletRequest request);
+	List<Board> boardList(String searchType, String searchContent, Integer pageNum, int limit, int kind);
 
+	List<Board> boardList(Integer kind, int sNo);
+	
 	Board getBoard(int num);
 
-	void boardReply(Board board);
-
+	void boardWrite(Board board, HttpServletRequest request);
 	void boardUpdate(Board board, HttpServletRequest request);
-
 	void boardDelete(Integer num);
-
+	void boardReply(Board board);
 	void updateReadCnt(Integer num);
 
 	void joinsms(Member member);
@@ -63,8 +60,6 @@ public interface ProjectService {
 	void hostPaymentConfirm(Integer reNo);
 
 	void buildingReg(Building building, HttpServletRequest request);
-	
-	List<Board> boardList(Integer kind, int sNo);
 
 	void becomeaHost(Member member, HttpServletRequest request);
 
@@ -76,16 +71,17 @@ public interface ProjectService {
 
 	void hostRegister(String id);
 
-	List<Building> getMyBuildings(String id);
+	Member find_member(String name, String email);
+	
+	Member getMember(String id);
+
+	Member find_password(String id, String email, String name);
 
 	List<Room> getMyRoom(Integer sNo);
 
-	int boardcount(Integer kind, String id);
-
-
+	List<Building> getMyBuildings(String id);
 
 	
-
 
 
 }

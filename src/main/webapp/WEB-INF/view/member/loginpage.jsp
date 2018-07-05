@@ -18,17 +18,20 @@
  			</c:forEach>
  		</font>
  	</spring:hasBindErrors>
- 	<table align="center" cellpadding="1" cellspacing="1" border="1" height="200" width="300">
+ 	<table align="center" cellpadding="1" cellspacing="1" border="1" height="150" width="400">
  		<tr>
- 			<td align="center">아이디</td><td><form:input path="id"/>
+ 			<td align="center" width="20%">아이디</td><td colspan="2"><form:input path="id" size="35"/>
  			<font color="red"><form:errors path="id"/></font></td></tr>
  		<tr>
- 			<td align="center">비밀번호</td><td><form:password align="middle" path="pw"/>
+ 			<td align="center">비밀번호</td><td colspan="2"><form:password align="middle" path="pw" size="35"/>
  			<font color="red"><form:errors path="pw"/></font></td></tr>
+ 		<tr><td colspan="3" align="center"><a href="findmyID.sms"><font size="1">ID 찾기 !</font></a>&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;<a href="findmypassword.sms"><font size="1">비밀번호 찾기 !</font></a></td></tr>
  		<tr>
-  			<td colspan="2" align="center"><input type="submit" value="로그인">
-  		<input type="button" onclick="location.href='joinForm.sms'" value="가입하기"></td>
-  		</tr>
+  			<td colspan="3" align="center">
+  				<input type="submit" value="로그인">
+  				<input type="button" onclick="location.href='joinForm.sms'" value="가입하기"></td></tr>
+  		<tr>
+  			<td colspan="3" style="text-align:center;"><a href="#">네이버 로그인</a>&nbsp;&nbsp;<a href="#">구글 로그인</a>&nbsp;&nbsp;<a href="#">페이스북로그인</a></td></tr>
  	</table>
  </form:form>
 </body>

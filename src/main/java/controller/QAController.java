@@ -21,7 +21,30 @@ import logic.ProjectService;
 public class QAController {
 	@Autowired
 	private ProjectService service;
+	
 	int kind = 3;
+	
+	// 1:1 문의 작성 시 호출 되는 메서드
+	@RequestMapping(value="qa/questionAdmin", method=RequestMethod.GET)
+	public ModelAndView writeQuestion (String id) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		Member writer = service.getMember(id);
+		
+		Board board = new Board();
+		
+		if(writer.getHostName() != null) {	// 해당 아이디가 Host계정이라면?
+			board.setKind(5);				// Board 객체 Kind = 5 부여
+		} else {							// 해당 아이디가 Host 계정이 아니라면?
+			board.setKind(4);				// Board 객체 Kind = 4 부여
+		}
+		
+		mav.addObject("board", board);
+		mav.setViewName("qa/write");
+		
+		return mav;
+	}
 	
 	@RequestMapping("qa/list")
 	public ModelAndView list (Integer pageNum, Integer kind, Integer sNo) {
@@ -33,8 +56,8 @@ public class QAController {
 		ModelAndView mav = new ModelAndView();
 		
 		int limit = 5;		// 한 페이지에 나올 게시글의 숫자
-		int listcount = service.boardcount(kind,sNo);	// 표시될 총 게시글의 수
-		List<Board> boardlist = service.boardList(kind,sNo,pageNum, limit);
+		int listcount = service.boardcount(kind, sNo);	// 표시될 총 게시글의 수
+		List<Board> boardlist = service.boardList(kind, sNo, pageNum, limit);
 		
 		int maxpage = (int)((double)listcount/limit + 0.95);
 		int startpage = ((int)((pageNum/5.0 + 0.9) - 1)) * 5 + 1; // 시작페이지

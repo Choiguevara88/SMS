@@ -3,12 +3,15 @@
 <mapper namespace="dao.mapper.ReviewMapper">
 <select id="list" resultType="Board" parameterType="map">
 		select * from board
+		
 		<if test="kind != null and sNo != null">
 			where kind= #{kind} and sNo = #{sNo}
 		</if>
+		
 		<if test="startrow != null and limit != null">
 			order by ref desc limit #{startrow}, #{limit}	
 		</if>
+		
 		<if test="bNo != null">
 			where bNo = #{bNo}
 		</if>

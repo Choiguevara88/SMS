@@ -61,4 +61,23 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 
+	@Override
+	public Member find_member(String name, String email) {
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("name", name);
+		map.put("email", email);
+		return sqlSession.selectOne(NS+"findmyID", map);
+	}
+
+
+	@Override
+	public Member find_password(String id, String email, String name) {
+		Map<String, String> map = new HashMap<String,String>();
+		map.put("id", id);
+		map.put(email, email);
+		map.put("name", name);
+		return sqlSession.selectOne(NS+"findmypassword",map);
+	}
+
+
 }

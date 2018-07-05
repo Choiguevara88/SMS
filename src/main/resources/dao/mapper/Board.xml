@@ -4,34 +4,58 @@
 <mapper namespace="dao.mapper.BoardMapper">
 	
 	<select id="list" resultType="Board" parameterType="map">
-		select * from board where kind=1
+		select * from board
+		
+		<if test="kind != null and sNo != null">
+			where kind= #{kind} and sNo = #{sNo}
+		</if>
+
+		<if test="bNo != null">
+			where bNo = #{bNo}
+		</if> 
+		
+		<if test ="kind != null and sNo == null">
+			where kind = #{kind}
+		</if>
 		
 		<if test="searchType != null and searchContent != null">
 			and ${searchType} like '%${searchContent}%'
 		</if>
+		
 		<if test="startrow != null and limit != null">
 			order by ref desc limit #{startrow}, #{limit}	
 		</if>
-		<if test="bNo != null">
-			and bNo = #{bNo}
-		</if>
+	</select>
+	
+	
+	<select id="list2" resultType="Board" parameterType="map">
+		select * from board
 		
+		<if test="kind != null and sNo != null">
+			where kind= #{kind} and sNo = #{sNo} and refLevel=0
+		</if>
 		
 	</select>
 	
+	
 	<select id="count" resultType="Integer" parameterType="map">
 		select count(*) from board 
+		
 		<if test="searchType != null and searchContent != null">
 			where ${searchType} like '%${searchContent}%'	
+		</if>
+		
+		<if test="kind != null and sNo != null">
+			where kind = #{kind} and sNo = #{sNo}	
 		</if>
 	</select>
 	
 	<select id="guestQuestion" resultType="Board">
-		select * from board where kind=4 and qType=0
+		select * from board where kind = 4 and qType=0
 	</select>
 	
 	<select id="hostQuestion" resultType="Board">
-		select * from board where kind=5 and qType=0
+		select * from board where kind = 5 and qType=0
 	</select>
 	
 </mapper>

@@ -17,21 +17,22 @@
 
 <body>
 <div class="row">
-<div class="col-md-4">
+<div class="col-lg-4">
 	<table>
 	<c:if test="${!empty hRegList}">
 		<tr align="center" valign="middle">
 			<td colspan="4"></td><td></td>
 		</tr>
 		<tr align="center" valign="middle">
-			<th>아이디</th><th>상호명</th><th>이메일</th><th>연락처</th><th>승인상태</th>
+			<th>아이디</th><th>상호명</th><th>이메일</th><th>연락처</th><th colspan="2">비고</th>
 		</tr>
 		<c:forEach var="hostMem" items="${hRegList}">
 		<tr align="center" valign="middle">
-			<td><a href="hostRegDetail.sms?id=${hostMem.id}">${hostMem.id}</a></td>
+			<td>${hostMem.id}</td>
 			<td>${hostMem.hostName}</td>
 			<td>${hostMem.email}</td>
 			<td>${hostMem.tel}</td>
+			<td><a href="adminHostRegDetail.sms?id=${hostMem.id}">[확인하기]</a></td>
 			<td><a href="adminHostRegister.sms?id=${hostMem.id}">[승인하기]</a></td>
 		</tr>
 		</c:forEach>
@@ -42,7 +43,7 @@
 	</table>
 </div>
 
-<div class="col-md-4">
+<div class="col-lg-4">
 	<table>
 	<c:if test="${!empty gList}">
 		<tr align="center" valign="middle">
@@ -54,7 +55,7 @@
 		<c:forEach var="gueQue" items="${gList}">
 		<tr align="center" valign="middle">
 			<td>${gueQue.id}</td>
-			<td><a href="adminQuestionDetail?bNo=${gueQue.bNo}">${gueQue.subject}</a></td>
+			<td><a href="adminQuestionDetail.sms?bNo=${gueQue.bNo}">${gueQue.subject}</a></td>
 			<td>${fn:substring(gueQue.content,0,15)}...</td>
 			<td><fmt:formatDate value="${gueQue.regDate}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
 			<td><a href="adminAnswerQuestion.sms?bNo=${gueQue.bNo}">[답변하기]</a></td>
@@ -67,7 +68,7 @@
 	</table>
 </div>
 
-<div class="col-md-4">
+<div class="col-lg-4">
 	<table>
 	<c:if test="${!empty hList}">
 		<tr align="center" valign="middle">
@@ -79,7 +80,7 @@
 		<c:forEach var="hosQue" items="${hList}">
 		<tr align="center" valign="middle">
 			<td>${hosQue.id}</td>
-			<td><a href="adminQuestionDetail?bNo=${hosQue.bNo}">${hosQue.subject}</a></td>
+			<td><a href="adminQuestionDetail.sms?bNo=${hosQue.bNo}">${hosQue.subject}</a></td>
 			<td>${fn:substring(hosQue.content,0,15)}...</td>
 			<td><fmt:formatDate value="${hosQue.regDate}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
 			<td><a href="adminAnswerQuestion.sms?bNo=${hosQue.bNo}">[답변하기]</a></td>

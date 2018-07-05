@@ -23,6 +23,7 @@ public class BoardDaoImpl implements BoardDao{
 	public int count(String searchType, String searchContent) {
 	
 		Map<String,String> map = new HashMap<String,String>();
+		
 		if(searchType==null || searchType.equals("")) searchType=null;
 		if(searchContent==null||searchContent.equals("")) searchContent=null;
 		
@@ -33,19 +34,20 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-	public List<Board> list(String searchType, String searchContent, Integer pageNum, int limit) {
+	public List<Board> list(String searchType, String searchContent, Integer pageNum, int limit, int kind) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		if(searchType==null || searchType.equals("")) searchType=null;
 		if(searchContent==null||searchContent.equals("")) searchContent=null;
 		
 		int startrow = (pageNum - 1) * limit;
 		
+		map.put("kind", kind);
 		map.put("startrow", startrow);
 		map.put("limit", limit);
 		map.put("searchType", searchType);
 		map.put("searchContent",searchContent);
-
 			
 		return sqlSession.selectList(NS + "list", map);
 	}
@@ -84,9 +86,11 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public int count(Integer kind, int sNo) {
 		Map<String,Integer> map = new HashMap<String,Integer>();
+		
 		map.put("kind", kind);
 		map.put("sNo",sNo);
-		return sqlSession.selectOne("dao.mapper.ReviewMapper.count", map);
+		
+		return sqlSession.selectOne(NS + "count", map);
 	}
 
 
@@ -100,8 +104,9 @@ public class BoardDaoImpl implements BoardDao{
 		map.put("kind", kind);
 		map.put("sNo",sNo);
 		
-		return sqlSession.selectList("dao.mapper.ReviewMapper.list", map);
+		return sqlSession.selectList(NS + "list", map);
 	}
+	
 	@Override
 	public List<Board> list(Integer kind, int sNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -109,7 +114,7 @@ public class BoardDaoImpl implements BoardDao{
 		map.put("kind", kind);
 		map.put("sNo",sNo);
 		
-		return sqlSession.selectList("dao.mapper.ReviewMapper.list2", map);
+		return sqlSession.selectList(NS + "list2", map);
 	}
 
 	@Override
@@ -125,27 +130,6 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public void qTypeAdd(Board board) {
 		sqlSession.getMapper(BoardMapper.class).qTypeAdd(board);
-	}
-
-	@Override
-	public int count(Integer kind, String id) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("kind", kind);
-		map.put("sNo",id);
-		return sqlSession.selectOne("dao.mapper.AdminMapper.count", map);
-	}
-
-	@Override
-	public List<Board> list(Integer kind, String id, Integer pageNum, int limit) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		int startrow = (pageNum - 1) * limit;
-		
-		map.put("startrow", startrow);
-		map.put("limit", limit);
-		map.put("kind", kind);
-		map.put("sNo",id);
-		
-		return sqlSession.selectList("dao.mapper.AdminMapper.list", map);
 	}
 
 

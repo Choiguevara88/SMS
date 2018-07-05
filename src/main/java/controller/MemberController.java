@@ -149,4 +149,45 @@ public class MemberController {
 		mav.setViewName("member/becomeahost_complete");
 		return mav;
 	}
+	@RequestMapping(value="findmyID")
+	public ModelAndView findmyID() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/findmyID");
+		return mav;
+	}
+	@RequestMapping(value="letsfindID")
+	public ModelAndView letsfindID(String name, String email) {
+		Member member = service.find_member(name, email);
+		System.out.println(member);
+		ModelAndView mav = new ModelAndView();
+		if(member == null) {
+			mav.setViewName("member/findID_result");
+			return mav;
+		}
+		else {
+			String id = member.getId();
+			mav.addObject("id",id);
+			mav.setViewName("member/findID_result");
+			return mav;
+		}
+	}
+	@RequestMapping(value="findmypassword")
+	public ModelAndView findmypassword() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/findmypassword");
+		return mav;
+	}
+	@RequestMapping(value="letsfindmypassword")
+	public ModelAndView letsfindmypassword(String name, String id, String email) {
+		ModelAndView mav = new ModelAndView();
+		Member member = service.find_password(id,email,name);
+		if(member == null) {
+			mav.setViewName("member/findpassword_result");
+			return mav;
+		}else {
+			mav.addObject("member",member);
+			mav.setViewName("member/findpassword_result");
+			return mav;
+		}
+	}
 }

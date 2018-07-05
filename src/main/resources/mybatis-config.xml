@@ -9,8 +9,6 @@
 		<typeAlias type="logic.Member" alias="Member"/>
 		<typeAlias type="logic.Reserve" alias="Reserve"/>		
 		<typeAlias type="logic.Room" alias="Room"/>
-		<typeAlias type="logic.Board" alias="Review"/>
-		<typeAlias type="logic.Board" alias="Admin"/>
 	</typeAliases>
 	
 	<mappers>
@@ -19,8 +17,6 @@
 		<mapper resource="dao/mapper/Member.xml"/>
 		<mapper resource="dao/mapper/Reserve.xml"/>
 		<mapper resource="dao/mapper/Room.xml"/>
-		<mapper resource="dao/mapper/Review.xml"/>
-		<mapper resource="dao/mapper/Admin.xml"/>
 	</mappers>
 	
 </configuration>
