@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- main/resources/dao/mapper/TransactionHistory.xml -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.mapper.TransactionHistoryMapper">	
+	
+<!-- [&lt; : <] [&gt; : >] -->
+<!-- 이번 달 초부터 금일까지 한달 동안의 거래량을 조회하기 위한 쿼리문 -->
+<select id="transHistoryList" resultType="TransactionHistory">
+	select t.host, m.hostName, m.address, m.regDate, m.tel, m.accountNo, sum(t.totPrice)'totPrice', count(t.reNo)'cnt', t.sRName, t.sRNo, t.reNo, t.guest
+	from member m, (select * from transactionHistory where reDate &gt; date_format(now(), '%Y-%m-01') and reDate &lt; now()) t
+	where t.host = m.id
+	group by t.sNo
+</select>
+
+</mapper>

@@ -15,6 +15,7 @@ import dao.BuildingDao;
 import dao.MemberDao;
 import dao.ReserveDao;
 import dao.RoomDao;
+import dao.TransactionHistoryDao;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -29,6 +30,8 @@ public class ProjectServiceImpl implements ProjectService {
 	private BuildingDao buDao;
 	@Autowired
 	private RoomDao roomDao;
+	@Autowired
+	private TransactionHistoryDao tranDao;
 
 	@Override
 	public Member getMember(String id) {
@@ -36,8 +39,12 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
+	public int boardcount(String searchType, String searchContent, int kind) {
+		return boDao.count(searchType, searchContent, kind);
+	}
+
+	@Override
 	public List<Board> boardList(String searchType, String searchContent, Integer pageNum, int limit, int kind) {
-		
 		return boDao.list(searchType, searchContent, pageNum, limit, kind);
 	}
 
@@ -67,7 +74,6 @@ public class ProjectServiceImpl implements ProjectService {
 			if (img != null)
 				board.setImg4(img);
 		}
-
 		int num = boDao.maxNum();
 
 		board.setbNo(++num);
@@ -75,7 +81,17 @@ public class ProjectServiceImpl implements ProjectService {
 		board.setRefLevel(0);
 		boDao.insert(board);
 	}
+	
+	@Override
+	public void boardWrite(Board board) {
+		int num = boDao.maxNum();
 
+		board.setbNo(++num);
+		board.setRef(num);
+		board.setRefLevel(0);
+		boDao.insert(board);
+	}
+	
 	@Override
 	public Board getBoard(int num) {
 		return boDao.getBoard(num);
@@ -84,12 +100,9 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void boardReply(Board board) {
 		boDao.qTypeAdd(board);
-		
 		int num = boDao.maxNum();
-		
 		board.setbNo(++num);
 		board.setRefLevel(board.getRefLevel() + 1);
-		
 		boDao.insert(board);
 	}
 
@@ -124,6 +137,11 @@ public class ProjectServiceImpl implements ProjectService {
 
 	}
 
+	@Override
+	public void boardUpdate(Board board) {
+		boDao.update(board);
+	}
+	
 	@Override
 	public void boardDelete(Integer num) {
 		boDao.delete(num);
@@ -371,26 +389,13 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
+	public List<TransactionHistory> hostTransHistoryList() {
+		return tranDao.transHistory();
+	}
+	
+	@Override
 	public List<Room> getMyRoom(Integer sNo) {
 		// TODO Auto-generated method stub
 		return roomDao.getMyroom(sNo);
-	}
-
-	@Override
-	public int boardcount(String searchType, String searchContent, int kind) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void boardWrite(Board board) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void boardUpdate(Board board) {
-		// TODO Auto-generated method stub
-		
 	}
 } // ProjectServiceImpl end

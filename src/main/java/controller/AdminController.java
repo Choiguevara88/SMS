@@ -17,6 +17,7 @@ import exception.ProjectException;
 import logic.Board;
 import logic.Member;
 import logic.ProjectService;
+import logic.TransactionHistory;
 
 @Controller
 public class AdminController {
@@ -32,10 +33,12 @@ public class AdminController {
 		List<Member> hostRegList = service.hostRegList();			// host 등록 요청 목록
 		List<Board> guestQuestionList = service.guestQuestionList();// guest 문의 목록
 		List<Board> hostQuestionList = service.hostQuestionList();	// host 문의 목록
+		List<TransactionHistory> transHostList = service.hostTransHistoryList();	// host별 수입 목록
 		
 		mav.addObject("hRegList",hostRegList);
 		mav.addObject("gList",guestQuestionList);
 		mav.addObject("hList",hostQuestionList);
+		mav.addObject("thList", transHostList);
 		
 		return mav;
 	}
@@ -58,7 +61,7 @@ public class AdminController {
 		
 		service.hostRegister(id);	// host 계정으로 전환
 		
-		mav.setViewName("adminManagement");
+		mav.setViewName("admin/adminManagement");
 		
 		return mav;
 	}
