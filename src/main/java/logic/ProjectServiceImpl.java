@@ -392,7 +392,6 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<TransactionHistory> hostTransHistoryList() {
 		return tranDao.transHistory();
 	}
-	
 	@Override
 	public List<Room> getMyRoom(Integer sNo) {
 		// TODO Auto-generated method stub

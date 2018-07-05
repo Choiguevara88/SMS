@@ -17,7 +17,6 @@ public interface RoomMapper {
 	
 	
 	
-	
 //	@Update("update userAccount set userName=#{userName}, phoneNo=#{phoneNo},"
 //		+ " postcode=#{postcode}, address=#{address}, email=#{email}, birthDay=#{birthDay} where userId=#{userId}")
 //	void update(User user);

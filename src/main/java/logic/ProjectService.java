@@ -81,4 +81,3 @@ public interface ProjectService {
 
 	List<Room> getMyRoom(Integer sNo);
 }
-

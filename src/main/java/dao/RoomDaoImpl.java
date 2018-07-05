@@ -33,9 +33,6 @@ public class RoomDaoImpl implements RoomDao{
 		sqlSession.getMapper(RoomMapper.class).insert(room);
 		
 	}
-
-
-
 	@Override
 	public List<Room> getMyroom(Integer sNo) {
 		return sqlSession.getMapper(RoomMapper.class).selectMyRoom(sNo);
