@@ -35,5 +35,9 @@ public interface BoardDao {
 
 	void qTypeAdd(Board board);
 
+	int count(Integer kind, String id);
+
+	List<Board> list(Integer kind, String id, Integer pageNum, int limit);
+
 }
 

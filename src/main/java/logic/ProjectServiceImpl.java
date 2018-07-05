@@ -370,4 +370,15 @@ public class ProjectServiceImpl implements ProjectService {
 		return roomDao.getMyroom(sNo);
 	}
 
+	@Override
+	public int boardcount(Integer kind, String id) {
+		return boDao.count(kind, id);
+		
+	}
+
+	@Override
+	public List<Board> boardList(Integer kind, String id, Integer pageNum, int limit) {
+		return boDao.list(kind, id, pageNum, limit);
+	}
+
 } // ProjectServiceImpl end

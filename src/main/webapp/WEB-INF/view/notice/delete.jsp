@@ -10,6 +10,7 @@
 <body>
 <form name="f" method="post" action="delete.sms?pageNum=${param.pageNum}&bNO=${board.bNo}">
 	<input type="hidden" name="bNo"	value="${param.bNo}">
+	<input type="hidden" name="kind" value="${board.kind}">
 	<input type="hidden" name="pageNum"	value="${param.pageNum}">
 	<table border="1" cellspacing="0" cellpadding="0" align="center">
 	 <tr>

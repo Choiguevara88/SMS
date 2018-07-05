@@ -80,6 +80,7 @@ public interface ProjectService {
 
 	List<Room> getMyRoom(Integer sNo);
 
+	int boardcount(Integer kind, String id);
 
 
 
