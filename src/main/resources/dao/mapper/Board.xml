@@ -48,6 +48,10 @@
 		<if test="kind != null and sNo != null">
 			where kind = #{kind} and sNo = #{sNo}	
 		</if>
+		
+		<if test="kind != null and sNo == null">
+			where kind = #{kind}	
+		</if>
 	</select>
 	
 	<select id="guestQuestion" resultType="Board">
