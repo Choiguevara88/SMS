@@ -80,6 +80,7 @@ public class ProjectServiceImpl implements ProjectService {
 		board.setRef(num);
 		board.setRefLevel(0);
 		boDao.insert(board);
+
 	}
 	
 	@Override
@@ -136,7 +137,6 @@ public class ProjectServiceImpl implements ProjectService {
 		boDao.update(board);
 
 	}
-
 	@Override
 	public void boardUpdate(Board board) {
 		boDao.update(board);
@@ -408,6 +408,11 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<Building> getMyBuildings(String id) {
 		return buDao.getMyBuildings(id);
+	}
+
+	@Override
+	public List<Board> boardList(Integer kind,String id) {
+		return boDao.list(kind,id);
 	}
 
 	@Override

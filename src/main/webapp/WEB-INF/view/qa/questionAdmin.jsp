@@ -5,9 +5,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>1:1 문의</title>
 </head>
 <body>
-Hello
+
+<form method="post" name="f" action="questionAdmin.sms">
+	<input type="hidden" name="kind" value="${kind}">
+	<input type="hidden" name="id" value="${sessionScope.loginMember.id }"/>
+	<table border="1" align="center">
+		<tr><td><textarea rows="2" cols="80" name="content" placeholder="입력해 주세요."></textarea>
+	</td><td>
+		<input type="submit" value="전송">
+	</tr>
+</table>
+
+</form>
 </body>
 </html>

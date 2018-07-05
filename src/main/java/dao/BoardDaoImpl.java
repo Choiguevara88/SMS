@@ -133,5 +133,13 @@ public class BoardDaoImpl implements BoardDao{
 		sqlSession.getMapper(BoardMapper.class).qTypeAdd(board);
 	}
 
+	@Override
+	public List<Board> list(Integer kind,String id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("kind",kind);
+		map.put("id",id);
+		return sqlSession.selectList(NS + "list", map);
+	}
+
 
 }
