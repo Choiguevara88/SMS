@@ -181,11 +181,13 @@ public class MemberController {
 	public ModelAndView letsfindmypassword(String name, String id, String email) {
 		ModelAndView mav = new ModelAndView();
 		Member member = service.find_password(id,email,name);
+		
 		if(member == null) {
+			System.out.println(member);
 			mav.setViewName("member/findpassword_result");
 			return mav;
 		}else {
-			mav.addObject("member",member);
+			mav.addObject("pw",member.getPw());
 			mav.setViewName("member/findpassword_result");
 			return mav;
 		}

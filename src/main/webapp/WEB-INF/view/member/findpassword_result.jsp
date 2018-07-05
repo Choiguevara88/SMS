@@ -23,7 +23,7 @@ window.onclick = function(event) {
 <body>
 <br/>
 <br/>
-<c:if test="${!empty member }">
+<c:if test="${!empty pw}">
 	<div class="w3-container w3-center w3-text-tawny">
 		<h1>비밀번호가 나왔습니다 !</h1><br>
 		<h1>결과를 확인하세욥 ! </h1>
@@ -37,14 +37,14 @@ window.onclick = function(event) {
  		 <span onclick="document.getElementById('id01').style.display='none'" 
     		    class="w3-button w3-display-topright">&times;</span>     
       <div class="w3-container">
-        <h1 align="center">결과 : ${member.pw }</h1><br>
+        <h1 align="center">결과 : ${pw}</h1><br>
         <a href="main.sms">메인페이지로 가기! &gt;&lt;</a>
       </div>
     </div>
   </div>
 </div>
 </c:if>
-<c:if test="${empty member}">
+<c:if test="${empty pw}">
 	<div class="w3-container w3-center">
 		<h1>조건을 만족하는 비밀번호가 없네여...ㅜ</h1><br>
 		<h1>다시 한번 검색 해보시겠어엽?</h1>

@@ -1,5 +1,11 @@
 SET SESSION FOREIGN_KEY_CHECKS=0;
 
+/* Drop Views */
+
+DROP VIEW IF EXISTS transactionHistory;
+
+
+
 /* Drop Tables */
 
 DROP TABLE IF EXISTS Alert;
@@ -119,8 +125,7 @@ ex ) img.png\timg2.jpg\t',
 	SStat int NOT NULL COMMENT '미승인 : 0
 승인 : 1
 반려 : 2',
-	PRIMARY KEY (SNo),
-	UNIQUE (ID)
+	PRIMARY KEY (SNo)
 );
 
 
@@ -166,7 +171,8 @@ Admin = 2',
 	regStatus int(1),
 	-- 호스트 계정 전환용 사업자 등록증 파일이름
 	PictureUrl varchar(130) COMMENT '호스트 계정 전환용 사업자 등록증 파일이름',
-	PRIMARY KEY (ID)
+	PRIMARY KEY (ID),
+	UNIQUE (Email)
 );
 
 
@@ -232,6 +238,12 @@ ex)세미나실, 회의실, 연습실 등등',
 	SRImg varchar(1200) COMMENT '세부공간을 표현하는 이미지 설정',
 	PRIMARY KEY (SNo, SRNo)
 );
+
+
+
+/* Create Views */
+
+CREATE VIEW transactionHistory AS select `bu`.`ID` AS `id`,`bu`.`SNo` AS `sNo`,`bu`.`SName` AS `sName`,`re`.`ReDate` AS `reDate`,`re`.`RegDate` AS `regDate`,`re`.`TotPrice` AS `totPrice`,`re`.`ReNo` AS `reNo`,`ro`.`SRName` AS `srName`,`ro`.`SRNo` AS `srNo` from `bigdb`.`building` `bu` join `bigdb`.`reserve` `re` join `bigdb`.`room` `ro` where `bu`.`ID` = `re`.`ID` and `re`.`SRNo` = `ro`.`SRNo` and `re`.`ReStat` = 1 and `re`.`ReDate` < current_timestamp();
 
 
 

@@ -15,6 +15,7 @@ import dao.BuildingDao;
 import dao.MemberDao;
 import dao.ReserveDao;
 import dao.RoomDao;
+import dao.TransactionHistoryDao;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -29,6 +30,8 @@ public class ProjectServiceImpl implements ProjectService {
 	private BuildingDao buDao;
 	@Autowired
 	private RoomDao roomDao;
+	@Autowired
+	private TransactionHistoryDao tranDao;
 
 	@Override
 	public Member getMember(String id) {
@@ -392,4 +395,10 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Building> getMyBuildings(String id) {
 		return buDao.getMyBuildings(id);
 	}
+
+	@Override
+	public List<TransactionHistory> hostTransHistoryList() {
+		return tranDao.transHistory();
+	}
+	
 } // ProjectServiceImpl end
