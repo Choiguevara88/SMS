@@ -29,6 +29,8 @@ public class ProjectServiceImpl implements ProjectService {
 	private BuildingDao buDao;
 	@Autowired
 	private RoomDao roomDao;
+	@Autowired
+	private TransactionHistoryDao tranDao;
 
 	@Override
 	public Member getMember(String id) {
@@ -36,8 +38,8 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public int boardcount(String searchType, String searchContent) {
-		return boDao.count(searchType, searchContent);
+	public int boardcount(String searchType, String searchContent, int kind) {
+		return boDao.count(searchType, searchContent, kind);
 	}
 
 	@Override
@@ -77,9 +79,18 @@ public class ProjectServiceImpl implements ProjectService {
 		board.setRef(num);
 		board.setRefLevel(0);
 		boDao.insert(board);
-
 	}
+	
+	@Override
+	public void boardWrite(Board board) {
+		int num = boDao.maxNum();
 
+		board.setbNo(++num);
+		board.setRef(num);
+		board.setRefLevel(0);
+		boDao.insert(board);
+	}
+	
 	@Override
 	public Board getBoard(int num) {
 		return boDao.getBoard(num);
@@ -125,6 +136,11 @@ public class ProjectServiceImpl implements ProjectService {
 
 	}
 
+	@Override
+	public void boardUpdate(Board board) {
+		boDao.update(board);
+	}
+	
 	@Override
 	public void boardDelete(Integer num) {
 		boDao.delete(num);
@@ -397,4 +413,20 @@ public class ProjectServiceImpl implements ProjectService {
 	public Member find_member_by_email(String email) {
 		return memDao.find_member_by_email(email);
 	}
+
+	@Override
+	public List<TransactionHistory> hostTransHistoryList(String first) {
+		return tranDao.transHistory(first);
+	}
+	
+	@Override
+	public List<Room> getMyRoom(Integer sNo) {
+		return roomDao.getMyroom(sNo);
+	}
+
+	@Override
+	public List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate) {
+		return tranDao.searchTransHistory(searchType, searchContent, startDate, endDate);
+	}
+	
 } // ProjectServiceImpl end

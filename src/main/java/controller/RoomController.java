@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.ProjectException;
@@ -39,7 +40,7 @@ public class RoomController {
 		ModelAndView mav = new ModelAndView();
 		try{
 			service.insertRoom(room);
-			mav.setViewName("redirect:roomList.sms"); // 이게 자꾸 404가 나오는데 왜그러죠?
+			mav.setViewName("redirect:NewFile.sms"); // 이게 자꾸 404가 나오는데 왜그러죠?
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new ProjectException("throw new ProjectException(string,string주소)","roomForm.sms");
@@ -52,18 +53,21 @@ public class RoomController {
 		return mav;
 }
 	
-	/*@RequestMapping("room/roomList")
-	public ModelAndView roomList(Member member) {
+	@RequestMapping(value="building/roomList", method=RequestMethod.GET)
+	public ModelAndView myBuildingList(HttpServletRequest request) {		
 		ModelAndView mav = new ModelAndView();
+		/* 추후에 리퀘스트로 로그인된 아이디 가져와야함.*/
+		Integer sNo = 1;
 		try {
-			List<Building> roomlist = service.selectBuilding(member);
-			mav.setViewName("redirect:NewFile.sms");
+			List<Room> myRoomList = service.getMyRoom(sNo);
+			mav.addObject("myRoomList",myRoomList);
+			mav.addObject("sNo", sNo);
+			mav.setViewName("room/roomList");
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new ProjectException("throw new ProjectException(string,string주소)","roomForm.sms");
 		}
 		
 		return mav;
-		
-	}*/
+	}
 }

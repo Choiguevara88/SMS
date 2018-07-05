@@ -76,145 +76,6 @@ public class MemberController {
 	public String loginForm() {
 		return "member/loginpage";
 	}
-	@RequestMapping(value = "loginbyNaver")
-	public ModelAndView loginbysns(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException, ParseException {
-		String clientId = "Gq6yEGwFqkB9pHnvlf6E";//애플리케이션 클라이언트 아이디값";
-	    String clientSecret = "GPb0l9WxBS";//애플리케이션 클라이언트 시크릿값";
-	    String code = request.getParameter("code");
-	    System.out.println(code);
-	    String state = request.getParameter("state");
-	    System.out.println(state);
-	    String redirectURI = URLEncoder.encode("http://localhost:8080/TestProject/loginbysns.sms", "UTF-8");
-	    String apiURL;
-	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
-	    apiURL += "client_id=" + clientId;
-	    apiURL += "&client_secret=" + clientSecret;
-	    apiURL += "&redirect_uri=" + redirectURI;
-	    apiURL += "&code=" + code;
-	    apiURL += "&state=" + state;
-	    System.out.println("code="+code+",state="+state);
-	    String access_token = "";
-	    String refresh_token = "";
-	    StringBuffer res = new StringBuffer();
-	    System.out.println("apiURL="+apiURL);
-	    try {
-	      URL url = new URL(apiURL);
-	      HttpURLConnection con = (HttpURLConnection)url.openConnection();
-	      con.setRequestMethod("GET");
-	      int responseCode = con.getResponseCode();
-	      BufferedReader br;
-	      System.out.print("responseCode="+responseCode);
-	      if(responseCode==200) { // 정상 호출
-	        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-	      } else {  // 에러 발생
-	        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-	      }
-	      String inputLine;
-	      while ((inputLine = br.readLine()) != null) {
-	        res.append(inputLine);
-	      }
-	      br.close();
-	      if(responseCode==200) {
-	        System.out.println("\n===========res 1:");
-	        System.out.println("res:" + res.toString());
-	      }
-	    } catch (Exception e) {
-	      System.out.println(e);
-	    }
-	    JSONParser parser = new JSONParser(); 
-	    JSONObject json = (JSONObject)parser.parse(res.toString()); //json parsing
-	    String token = (String)json.get("access_token");
-	    System.out.println("\n=====token:"+token);
-	    String header = "Bearer " + token; // Bearer 다음에 공백 추가
-	    try {
-	        apiURL = "https://openapi.naver.com/v1/nid/me";
-//	        apiURL = "https://openapi.naver.com/v1/nid/getUserProfile";
-	        URL url = new URL(apiURL);
-	        HttpURLConnection con = (HttpURLConnection)url.openConnection();
-	        con.setRequestMethod("GET");
-	        con.setRequestProperty("Authorization", header);
-	        int responseCode = con.getResponseCode();
-	        BufferedReader br;
-	        res = new StringBuffer();
-	        if(responseCode==200) { // 정상 호출
-	        	System.out.println("로그인 정보 정상 수신");
-	            br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-	        } else {  // 에러 발생
-	        	System.out.println("로그인 정보 오류 수신");
-	            br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-	        }
-	        String inputLine;
-	        while ((inputLine = br.readLine()) != null) {
-	            res.append(inputLine);
-	        }
-	        br.close();
-	        System.out.println(res.toString());
-	    } catch (Exception e) {
-	        System.out.println(e);
-	    }
-	    json = (JSONObject)parser.parse(res.toString());
-		System.out.println(json);  //json값으로 나옴	
-		JSONObject jsondetail = (JSONObject)json.get("response");
-		String email = (String)jsondetail.get("email");
-		Member loginMember = service.find_member_by_email(email);
-		System.out.println(loginMember);
-		ModelAndView mav = new ModelAndView();
-		if(loginMember == null) {
-			mav.addObject("email", email);
-			mav.addObject("name",(String)jsondetail.get("name"));
-			mav.setViewName("member/joinForm");
-		}
-		else {
-			session.setAttribute("loginMember", loginMember);
-			mav.setViewName("main");
-		}
-		return mav;
-	}
-	
-	@RequestMapping(value = "facebooklogin")
-	public String loginbyFB(HttpSession session) {
-		String facebookurl = "https://www.facebook.com/v3.0/dialog/oauth?" + 
-				"client_id=223500144933393" + 
-				"&redirect_uri=http://localhost:8080/TestProject/facebookAccessToken.sms" + 
-				"&scope=public_profile,email";
-		return "redirect:" +facebookurl;
-	}
-	@RequestMapping(value="facebookAccessToken")
-	public ModelAndView loginWithFB1(String code, HttpSession session, String state) throws ClientProtocolException, IOException, ParseException {
-		System.out.println(session);
-		System.out.println(code);
-		System.out.println(state);
-		String accessToken = requesFacebooktAccessToken(session,code); //이미 여기서 session으로 accessToken이 등록이 되고 여기로 넘어옴
-		System.out.println("====");
-		System.out.println(accessToken);
-		//facebookUserDataLoadAndSave(accessToken, session);
-		String facebookUrl = "https://graph.facebook.com/me?"+
-	            "access_token="+ accessToken +
-	            "&fields=id,name,email";
-	    HttpClient client = HttpClientBuilder.create().build();
-	    HttpGet getRequest = new HttpGet(facebookUrl);
-	    String rawJsonString = client.execute(getRequest, new BasicResponseHandler());
-
-	    JSONParser jsonParser = new JSONParser();
-	    JSONObject jsonObject = (JSONObject) jsonParser.parse(rawJsonString);
-	    System.out.println(jsonObject.get("id"));
-	    System.out.println(jsonObject.get("name"));
-	    System.out.println(jsonObject.get("email"));
-	    String email = (String)jsonObject.get("email");
-	    String name = (String)jsonObject.get("name");
-	    Member member = service.find_member_by_email(email);
-	    	ModelAndView mav = new ModelAndView();
-	    if(member == null) {
-	    		mav.addObject("name",name);
-	    		mav.addObject("email",email);
-	    		mav.setViewName("member/joinForm");
-	    		return mav;
-	    } else {
-	    		session.setAttribute("loginMember", member);
-	    		mav.setViewName("main");
-	    		return mav;
-	    }
-	}
 	
 	
 //	private void facebookUserDataLoadAndSave(String accessToken, HttpSession session) throws ClientProtocolException, IOException, ParseException {
@@ -370,11 +231,12 @@ public class MemberController {
 	public ModelAndView letsfindmypassword(String name, String id, String email) {
 		ModelAndView mav = new ModelAndView();
 		Member member = service.find_password(id,email,name);
+		
 		if(member == null) {
 			mav.setViewName("member/findpassword_result");
 			return mav;
 		}else {
-			mav.addObject("member",member);
+			mav.addObject("pw",member.getPw());
 			mav.setViewName("member/findpassword_result");
 			return mav;
 		}

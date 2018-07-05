@@ -1,5 +1,11 @@
 SET SESSION FOREIGN_KEY_CHECKS=0;
 
+/* Drop Views */
+
+DROP VIEW IF EXISTS transactionhistory;
+
+
+
 /* Drop Tables */
 
 DROP TABLE IF EXISTS Alert;
@@ -113,14 +119,7 @@ ex) 토일월',
 ex ) img.png\timg2.jpg\t',
 	-- 공간(건물) 주소
 	SAddress varchar(50) COMMENT '공간(건물) 주소',
-	-- 미승인 : 0
-	-- 승인 : 1
-	-- 반려 : 2
-	SStat int NOT NULL COMMENT '미승인 : 0
-승인 : 1
-반려 : 2',
-	PRIMARY KEY (SNo),
-	UNIQUE (ID)
+	PRIMARY KEY (SNo)
 );
 
 
@@ -166,7 +165,8 @@ Admin = 2',
 	regStatus int(1),
 	-- 호스트 계정 전환용 사업자 등록증 파일이름
 	PictureUrl varchar(130) COMMENT '호스트 계정 전환용 사업자 등록증 파일이름',
-	PRIMARY KEY (ID)
+	PRIMARY KEY (ID),
+	UNIQUE (Email)
 );
 
 
@@ -232,6 +232,12 @@ ex)세미나실, 회의실, 연습실 등등',
 	SRImg varchar(1200) COMMENT '세부공간을 표현하는 이미지 설정',
 	PRIMARY KEY (SNo, SRNo)
 );
+
+
+
+/* Create Views */
+
+CREATE VIEW transactionhistory AS select `t`.`host` AS `host`,`t`.`guest` AS `guest`,`m`.`HostName` AS `hostName`,`m`.`Email` AS `Email`,`m`.`Address` AS `address`,`m`.`RegDate` AS `regDate`,`m`.`Tel` AS `tel`,`m`.`AccountNo` AS `accountNo`,`t`.`SNo` AS `sNo`,`t`.`SName` AS `sName`,`t`.`srNo` AS `sRNo`,`t`.`srName` AS `sRName`,`t`.`reNo` AS `reNo`,`t`.`reDate` AS `reDate`,`t`.`totPrice` AS `totPrice` from `bigdb`.`member` `m` join (select `bu`.`ID` AS `host`,`bu`.`SNo` AS `SNo`,`bu`.`SName` AS `SName`,`rr`.`reDate` AS `reDate`,`rr`.`regDate` AS `regDate`,`rr`.`totPrice` AS `totPrice`,`rr`.`reNo` AS `reNo`,`rr`.`srName` AS `srName`,`rr`.`srNo` AS `srNo`,`rr`.`guest` AS `guest` from (select `re`.`sNo` AS `sNo`,`ro`.`SRNo` AS `srNo`,`ro`.`SRName` AS `srName`,`re`.`reDate` AS `reDate`,`re`.`totPrice` AS `totPrice`,`re`.`reNo` AS `reNo`,`re`.`regDate` AS `regDate`,`re`.`id` AS `guest` from (select `bigdb`.`reserve`.`SNo` AS `sNo`,`bigdb`.`reserve`.`SRNo` AS `srNo`,`bigdb`.`reserve`.`ReDate` AS `reDate`,`bigdb`.`reserve`.`RegDate` AS `regDate`,`bigdb`.`reserve`.`TotPrice` AS `totPrice`,`bigdb`.`reserve`.`ReStat` AS `reStat`,`bigdb`.`reserve`.`ReNo` AS `reNo`,`bigdb`.`reserve`.`ID` AS `id` from `bigdb`.`reserve` where `bigdb`.`reserve`.`ReStat` = 1 and `bigdb`.`reserve`.`ReDate` < curdate()) `re` join `bigdb`.`room` `ro` where `re`.`srNo` = `ro`.`SRNo` and `re`.`sNo` = `ro`.`SNo` group by `re`.`reNo`) `rr` join `bigdb`.`building` `bu` where `rr`.`sNo` = `bu`.`SNo` group by `rr`.`reNo`) `t` where `t`.`host` = `m`.`ID` group by `t`.`reNo`;
 
 
 

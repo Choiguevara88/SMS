@@ -13,15 +13,20 @@ public class Member {
    private Date regDate;   // �������� (ȸ�����Խ� �ڵ����� �ԷµǰԲ�) now()
    private Integer memType;// ȸ�� ���� 0:�Խ�Ʈ, 1:ȣ��Ʈ 2:admin
    
-   /* ȣ��Ʈ�������� ��ȯ �� ��� �� �׸�� */
-   private String pictureUrl;
-   private MultipartFile picture; 
+   /* ȣ��Ʈ�������� ��ȯ �� ��� �� �׸�� */ 
    private String hostName;   // ȣ��Ʈ������( ex:��ȣ�� )
    private Integer hostRegNo;   // ����ڵ�Ϲ�ȣ
    private String address;      // ������ּ���
    private String accountNo;   // �������� (���� + ���¹�ȣ + ������)
    private String tel;         // ����� ����ó
-   private Integer regStatus;   //ȣ��Ʈ ��� ���� ����. 0 :���, 1 : ���� 2: �ź� 
+   private Integer regStatus;   //ȣ��Ʈ ��� ���� ����. 0 :���, 1 : ���� 2: �ź�
+   private String pictureUrl;
+   private MultipartFile picture;
+   
+   /* TransactionHistory View Column : 거래장부용 멤버 변수 */
+   private Integer totPrice;
+   private Integer cnt;
+   
 public String getId() {
 	return id;
 }
