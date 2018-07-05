@@ -41,8 +41,9 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<Board> boardList(String searchType, String searchContent, Integer pageNum, int limit) {
-		return boDao.list(searchType, searchContent, pageNum, limit);
+	public List<Board> boardList(String searchType, String searchContent, Integer pageNum, int limit, int kind) {
+		
+		return boDao.list(searchType, searchContent, pageNum, limit, kind);
 	}
 
 	@Override // board Write Method()
@@ -379,4 +380,8 @@ public class ProjectServiceImpl implements ProjectService {
 		// TODO Auto-generated method stub
 		return roomDao.getMyroom(sNo);
 	}
+
+	
+
+	
 } // ProjectServiceImpl end
