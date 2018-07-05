@@ -20,6 +20,7 @@
 </head>
 
 <body>
+<div class="w3-container w3-margin">
 <div class="row">
 <div class="col-lg-4">
 	<table class="w3-table w3-striped">
@@ -71,7 +72,7 @@
 	</c:if>
 	</table>
 </div>
-
+</div>
 <div class="col-lg-4">
 	<table class="w3-table w3-striped">
 	<c:if test="${!empty hList}">
@@ -97,7 +98,7 @@
 	</table>
 </div>
 </div>
-<div>
+<div class="w3-container w3-margin">
 	<table class="w3-table w3-striped w3-border">
 		<tr><th>호스트ID</th><th>상호명</th><th>Room이름</th><th>가입일자</th><th>금월 수입금</th><th>거래량</th></tr>
 	<c:forEach var="th" items="${thList}">

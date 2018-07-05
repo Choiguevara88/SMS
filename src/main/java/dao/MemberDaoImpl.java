@@ -71,8 +71,7 @@ public class MemberDaoImpl implements MemberDao{
 		return sqlSession.selectOne(NS+"findmypassword",map);
 	}
 	
-	
-	@Override // ?¸ì?¤í?? ?¹ì?? ??ì²? ëª©ë??? ë¶??¬ì?¤ë?? ë©?????
+	@Override 
 	public List<Member> getHostRegList() {
 		return sqlSession.selectList(NS + "hostRegList");
 	}
@@ -83,13 +82,5 @@ public class MemberDaoImpl implements MemberDao{
 		Map<String,String> map = new HashMap<String, String>();
 		map.put("email", email);
 		return sqlSession.selectOne(NS+"findmemberbyemail",map);
-	}
-
-
-	@Override // ?¸ì?¤í?? ?¹ì?? ??ì²? ?±ë??? ?? ?¬ì?©ë???? ë©?????
-	public void hostRegister(String id) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("id",id);
-		sqlSession.update(NS + "hostRegister", map);
 	}
 }
