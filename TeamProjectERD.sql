@@ -119,12 +119,6 @@ ex) 토일월',
 ex ) img.png\timg2.jpg\t',
 	-- 공간(건물) 주소
 	SAddress varchar(50) COMMENT '공간(건물) 주소',
-	-- 미승인 : 0
-	-- 승인 : 1
-	-- 반려 : 2
-	SStat int NOT NULL COMMENT '미승인 : 0
-승인 : 1
-반려 : 2',
 	PRIMARY KEY (SNo)
 );
 
@@ -243,7 +237,7 @@ ex)세미나실, 회의실, 연습실 등등',
 
 /* Create Views */
 
-CREATE VIEW transactionHistory AS select `bu`.`ID` AS `id`,`bu`.`SNo` AS `sNo`,`bu`.`SName` AS `sName`,`re`.`ReDate` AS `reDate`,`re`.`RegDate` AS `regDate`,`re`.`TotPrice` AS `totPrice`,`re`.`ReNo` AS `reNo`,`ro`.`SRName` AS `srName`,`ro`.`SRNo` AS `srNo` from `bigdb`.`building` `bu` join `bigdb`.`reserve` `re` join `bigdb`.`room` `ro` where `bu`.`ID` = `re`.`ID` and `re`.`SRNo` = `ro`.`SRNo` and `re`.`ReStat` = 1 and `re`.`ReDate` < current_timestamp();
+CREATE VIEW transactionHistory AS select `bu`.`ID` AS `host`,`bu`.`SNo` AS `SNo`,`bu`.`SName` AS `SName`,`rr`.`reDate` AS `reDate`,`rr`.`regDate` AS `regDate`,`rr`.`totPrice` AS `totPrice`,`rr`.`reNo` AS `reNo`,`rr`.`srName` AS `srName`,`rr`.`srNo` AS `srNo`,`rr`.`guest` AS `guest` from (select `re`.`sNo` AS `sNo`,`re`.`srNo` AS `srNo`,`ro`.`SRName` AS `srName`,`re`.`reDate` AS `reDate`,`re`.`totPrice` AS `totPrice`,`re`.`reNo` AS `reNo`,`re`.`regDate` AS `regDate`,`re`.`id` AS `guest` from (select `bigdb`.`reserve`.`SNo` AS `sNo`,`bigdb`.`reserve`.`SRNo` AS `srNo`,`bigdb`.`reserve`.`ReDate` AS `reDate`,`bigdb`.`reserve`.`RegDate` AS `regDate`,`bigdb`.`reserve`.`TotPrice` AS `totPrice`,`bigdb`.`reserve`.`ReStat` AS `reStat`,`bigdb`.`reserve`.`ReNo` AS `reNo`,`bigdb`.`reserve`.`ID` AS `id` from `bigdb`.`reserve` where `bigdb`.`reserve`.`ReStat` = 1 and `bigdb`.`reserve`.`ReDate` < curdate()) `re` join `bigdb`.`room` `ro` group by `re`.`reNo`) `rr` join `bigdb`.`building` `bu` where `rr`.`sNo` = `bu`.`SNo` group by `rr`.`reNo`;
 
 
 
