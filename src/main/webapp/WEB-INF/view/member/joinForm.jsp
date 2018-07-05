@@ -151,11 +151,20 @@ $(document).ready(function() { //이메일 자동 완성
 		 <font color="red"><form:errors path="pw"/></font></td></tr>
 	<tr>
 		<td>비번확인 </td><td><input type="password" placeholder="비번 입력 한번 더 가즈아!" name="pw-repeat" class="pass" id="repwd" onkeyup="checkPwd()"></td></tr>
-	<tr><td>이름 </td><td><form:input path="name" placeholder="틀릴리 없겠쥬?"/>
-		<font color="red"><form:errors path="name"/></font></td></tr>
 	<tr>
-		<td>이메일 </td><td><form:input path="email" placeholder="자주 쓰는걸로 가즈아!"/>
-		<font color="red"><form:errors path="email"/></font></td></tr>
+		<c:if test="${!empty name }">
+			<td>이름 </td><td><form:input path="name" value="${name }" placeholder="틀릴리 없겠쥬?" readonly="true"/>
+			<font color="red"><form:errors path="name"/></font></td></c:if>
+		<c:if test="${empty name }">
+			<td>이름 </td><td><form:input path="name" placeholder="틀릴리 없겠쥬?"/>
+			<font color="red"><form:errors path="name"/></font></td></tr></c:if>
+	<tr>
+		<c:if test="${!empty email }">
+			<td>이메일 </td><td><form:input path="email" value= "${email }" placeholder="틀릴리 없겠쥬?" readonly="true"/>
+			<font color="red"><form:errors path="email"/></font></td></c:if>
+		<c:if test="${empty email }">
+			<td>이메일 </td><td><form:input path="email" placeholder="자주 쓰는걸로 가즈아!"/>
+			<font color="red"><form:errors path="email"/></font></td></tr></c:if>
 	<tr>
 		<td>휴대폰번호 </td><td><form:input path="mob" placeholder="예약시 필요!!" onfocus="emailcheck()" onkeyup="autohypen()" maxlength="13"/>
 		<font color="red"><form:errors path="mob"/></font></td></tr>

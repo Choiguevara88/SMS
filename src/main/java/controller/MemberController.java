@@ -1,5 +1,23 @@
 package controller;
 
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.json.simple.JSONObject;
+import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+import java.util.Properties;
+import java.net.URLEncoder;
+import java.net.URL;
+import java.net.HttpURLConnection;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +34,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+
+import logic.Board;
 import logic.Member;
 import logic.ProjectService;
 
@@ -57,6 +77,37 @@ public class MemberController {
 		return "member/loginpage";
 	}
 	
+	
+//	private void facebookUserDataLoadAndSave(String accessToken, HttpSession session) throws ClientProtocolException, IOException, ParseException {
+//		String facebookUrl = "https://graph.facebook.com/me?"+
+//	            "access_token="+ accessToken +
+//	            "&fields=id,name,email";
+//	    HttpClient client = HttpClientBuilder.create().build();
+//	    HttpGet getRequest = new HttpGet(facebookUrl);
+//	    String rawJsonString = client.execute(getRequest, new BasicResponseHandler());
+//
+//	    JSONParser jsonParser = new JSONParser();
+//	    JSONObject jsonObject = (JSONObject) jsonParser.parse(rawJsonString);
+//	    System.out.println(jsonObject.get("id"));
+//	    System.out.println(jsonObject.get("name"));
+//	    System.out.println(jsonObject.get("email"));
+//	}
+
+
+	private String requesFacebooktAccessToken(HttpSession session, String code) throws ClientProtocolException, IOException, ParseException {
+		String facebookurl = "https://graph.facebook.com/v2.8/oauth/access_token?client_id=223500144933393&redirect_uri=http://localhost:8080/TestProject/facebookAccessToken.sms&&client_secret=60704d2d09d27d6fdbe2f034cf0ecdda&code="+code;
+		System.out.println("a");
+		HttpClient client = HttpClientBuilder.create().build();
+		HttpGet getRequest = new HttpGet(facebookurl);
+		String rawJsonString = client.execute(getRequest, new BasicResponseHandler());
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObject = (JSONObject) jsonParser.parse(rawJsonString);
+		String faceBookAccessToken = (String) jsonObject.get("access_token");
+		session.setAttribute("faceBookAccessToken", faceBookAccessToken);
+		return faceBookAccessToken;
+	}
+
+
 	@RequestMapping(value = "login", method = RequestMethod.POST) //id, pw���ν�댁�� 濡�洹몄�� ��瑜� ��
 	public ModelAndView loginForm(@Valid Member member, BindingResult bindingResult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -180,11 +231,12 @@ public class MemberController {
 	public ModelAndView letsfindmypassword(String name, String id, String email) {
 		ModelAndView mav = new ModelAndView();
 		Member member = service.find_password(id,email,name);
+		
 		if(member == null) {
 			mav.setViewName("member/findpassword_result");
 			return mav;
 		}else {
-			mav.addObject("member",member);
+			mav.addObject("pw",member.getPw());
 			mav.setViewName("member/findpassword_result");
 			return mav;
 		}

@@ -29,6 +29,8 @@ public class ProjectServiceImpl implements ProjectService {
 	private BuildingDao buDao;
 	@Autowired
 	private RoomDao roomDao;
+	@Autowired
+	private TransactionHistoryDao tranDao;
 
 	@Override
 	public Member getMember(String id) {
@@ -412,7 +414,24 @@ public class ProjectServiceImpl implements ProjectService {
 		return boDao.list(kind,id);
 	}
 
+	@Override
+	public Member find_member_by_email(String email) {
+		return memDao.find_member_by_email(email);
+	}
 
+	@Override
+	public List<TransactionHistory> hostTransHistoryList(String first) {
+		return tranDao.transHistory(first);
+	}
+	
+	@Override
+	public List<Room> getMyRoom(Integer sNo) {
+		return roomDao.getMyroom(sNo);
+	}
 
+	@Override
+	public List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate) {
+		return tranDao.searchTransHistory(searchType, searchContent, startDate, endDate);
+	}
 	
 } // ProjectServiceImpl end

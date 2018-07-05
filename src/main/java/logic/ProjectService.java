@@ -78,6 +78,12 @@ public interface ProjectService {
 	List<Building> getMyBuildings(String id);
 	
 	List<Board> boardList(Integer kind,String id);
+	
+	Member find_member_by_email(String email);
+	
+	List<TransactionHistory> hostTransHistoryList(String first);
 
-
+	List<Room> getMyRoom(Integer sNo);
+	
+	List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate);
 }
