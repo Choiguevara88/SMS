@@ -151,15 +151,12 @@ public class ReserveController {
 		mav.addObject("listcount", listcount);
 		mav.addObject("list", reservelist);
 		mav.addObject("reservecnt", reservecnt);
-<<<<<<< HEAD
 		mav.addObject("sNo", sNo);
 		
 		if(searchType != null && !searchType.equals("")) {
 			mav.addObject("searchType", searchType);
 		}
 
-=======
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
 		return mav;
 	}
 
