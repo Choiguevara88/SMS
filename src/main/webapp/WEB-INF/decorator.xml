@@ -9,6 +9,7 @@
 	
 	<!-- layout 설정을 제외 함. -->
 	<excludes>
+		<pattern>/trans/graph*</pattern>
 		<pattern>/qa/questionAdmin.sms*</pattern>
 	</excludes>
 

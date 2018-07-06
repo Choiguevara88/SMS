@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- main/resources/dao/mapper/Building.xml -->
+<!-- main/resources/dao/mapper/Reserve.xml -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.mapper.ReserveMapper">
 
@@ -53,12 +53,12 @@
 	</select>
 	
 	<select id="selectHostList" resultType="Reserve" parameterType="map">
-		select re.ReNo, re.srNo, re.id, re.ReDate, re.RegDate, re.TotPrice, re.ReCnt, re.ReStat, bu.id 'HostName' 
+		select re.reNo, re.srNo, re.id, re.reDate, re.regDate, re.totPrice, re.reCnt, re.reStat
 		from Reserve re, building bu 
 		where re.sNo = bu.sNo
 		
-		<if test="hostName != null">
-			and bu.id = #{hostName} 
+		<if test="id != null and sNo != null">
+			and bu.id = #{id} and re.sNo = #{sNo}
 		</if> 	
 	</select>
 	

@@ -22,9 +22,10 @@
 <body>
 	<table class="w3-table w3-striped w3-hoverable">
 		<c:if test="${buildCnt == 0}">
-			<td>등록된 건물이 없습니다.<a href="main.sms">[등록하러 가기]</a></td>
+			<td>등록된 건물이 없습니다.<a href="../building/buildingForm.sms?id=${sessionScope.loginMember.id}">[등록하러 가기]</a></td>
 		</c:if>
-			
+			<tr><td><a href="../building/buildingForm.sms?id=${sessionScope.loginMember.id}">[공간등록하기]</a></td></tr>
+			<tr><td><a href="../building/myBuildingList.sms?id=${sessionScope.loginMember.id}">[공간관리하기]</a></td></tr>
 		<c:if test="${reservecnt != 0 }">
 			<tr>
 				<th style="text-align:center;">건물관리번호</th>
@@ -36,11 +37,11 @@
 
 			<c:forEach var="build" items="${list}">
 				<tr>
-					<td>${build.sNo}</td>
-					<td>${build.sName}</td>
-					<td>[${build.reCnt}]</td>
-					<td>[${build.boCnt}]</td>
-					<td><a href="hostResList.sms?sNo=${build.sNo}">[확인하러가기]</a></td>			
+					<td style="text-align:center;">${build.sNo}</td>
+					<td style="text-align:center;">${build.sName}</td>
+					<td style="text-align:center;">[${build.reCnt}]</td>
+					<td style="text-align:center;">[${build.boCnt}]</td>
+					<td style="text-align:center;"><a href="hostResList.sms?sNo=${build.sNo}">[전체 예약정보]</a></td>			
 				</tr>
 			</c:forEach>
 		</c:if>

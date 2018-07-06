@@ -236,9 +236,15 @@ $(document).ready(function() {
 	
 	img2idx = 0;
 	img2arr = new Array();
+	<c:forEach items="${building.sImg2Name}" var="item">
+	img2arr[img2idx++] = ("${item}");
+    </c:forEach>
+    console.log(img2arr)
+    $("#sImg2Name").val(img2arr);
 	$("#img2_btn").click(function() {
+		img2idx = 0;
 		<c:forEach items="${building.sImg2Name}">
-			img2arr[img2idx++] == "";
+			img2arr[img2idx++] = "";
 		</c:forEach>
 		console.log(img2arr)
 		   $("#file2_desc").empty();
@@ -254,7 +260,7 @@ $(document).ready(function() {
 <div>
 <form:form name="f" modelAttribute="building" method="post" action="buildingUpdateReg.sms" enctype="multipart/form-data">
 <input type="hidden" name="sNo" value="${building.sNo}">
-<input type="hidden" name="Id" value="${building.id}">
+<input type="hidden" name="id" value="${building.id}">
 <input type="hidden" id="sImg1" name="sImg1" value="${building.sImg1}">
 <input type="hidden" id="sImg2Name" name="sImg2Name" value="${building.sImg2Name}">
 <input type="hidden" id="sStat" name="sStat" value="${building.sStat}">
@@ -309,15 +315,17 @@ $(document).ready(function() {
     
     <tr><td>이미지</td>
         <td>
+        <div id="file2_desc">
         <c:forEach items="${building.sImg2Name}" var="item">
-        <c:if test="${!empty item}">
-            <div id="file2_desc">
+        <c:if test="${item != null}">
               <a href="../picture/${item}">${item}</a><br>
-            </div> 
-          </c:if>
+        </c:if>
         </c:forEach>
+        </div>
         <div id="file2_desc2">
-        <input type="button" id="img2_btn" value="기존이미지삭제" /> 
+        
+        <input type="button" id="img2_btn" value="기존이미지삭제" />
+        
         </div>
         <input multiple="multiple" type="file" id="sImg2File" name="sImg2Files" accept="image/*" />
         
@@ -363,7 +371,7 @@ $(document).ready(function() {
               <!-- 이용시 주의사항 추가시 웹상에서 보여지는 부분 -->
             </div></td></tr>
      
-    <tr><td colspan="2" align="center"><input type="submit" value="공간등록"></td></tr>
+    <tr><td colspan="2" align="center"><input type="submit" value="공간수정"></td></tr>
   </table>
 </form:form>
 </div>
