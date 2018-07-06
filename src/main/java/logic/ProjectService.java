@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -94,6 +95,10 @@ public interface ProjectService {
 	void updateRoom(Room room);
 	
 	void deleteRoom(Integer sRNo);
+	
+	Map<String, Object> graphTransHistoryCnt(String searchType, String id);
+	
+	Map<String, Object> graphTransHistorySum(String searchType, String id);
 	
 	
 }
