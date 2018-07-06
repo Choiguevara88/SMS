@@ -2,7 +2,9 @@ package logic;
 
 import java.io.File;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -433,6 +435,31 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate) {
 		return tranDao.searchTransHistory(searchType, searchContent, startDate, endDate);
+	}
+
+	@Override
+	public Map<String, Object> graphTransHistoryCnt(String searchType, String id) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		for(Map<String, Object> m : tranDao.graphTransCnt(searchType, id)) {
+			map.put((String)m.get("key"), m.get("value"));
+		}
+		
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> graphTransHistorySum(String searchType, String id) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		for(Map<String, Object> m : tranDao.graphTransSum(searchType, id)) {
+			map.put((String)m.get("key"), m.get("value"));
+		}
+		
+		return map;
+
 	}
 	
 } // ProjectServiceImpl end

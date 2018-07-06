@@ -9,8 +9,7 @@
 	
 	<!-- layout 설정을 제외 함. -->
 	<excludes>
-		<pattern>/admin/graph*</pattern>
-		<pattern>/user/mygraph*</pattern>
+		<pattern>graph*</pattern>
 	</excludes>
 
 </decorators>
