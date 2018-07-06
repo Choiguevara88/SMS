@@ -13,7 +13,7 @@ public interface BoardMapper {
 	int maxNum();
 	
 	@Insert("insert into board(bNo, sNo, id, email, subject, content, qType, regDate, ref, refLevel, score, img1, img2, img3, img4, kind) "
-			+ "values(#{bNo}, #{sNo}, #{id}, #{email},#{subject}, #{content}, #{qType}, now(), #{ref}, #{refLevel}, #{score}, "
+			+ "values(#{bNo}, #{sNo}, #{id}, #{email},#{subject}, #{content}, 0, now(), #{ref}, 0, #{score}, "
 			+ "#{img1}, #{img2}, #{img3}, #{img4}, #{kind})")
 	void insert(Board board);
 

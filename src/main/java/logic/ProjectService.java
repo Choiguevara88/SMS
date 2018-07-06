@@ -44,8 +44,6 @@ public interface ProjectService {
 
 	int hostBuildCount(String hostName);
 
-	Room getRoom(Integer srNo);
-
 	void insertRoom(Room room);
 
 	void reserveCancel(Integer reNo, Integer reStat);
@@ -88,11 +86,19 @@ public interface ProjectService {
 	
 	void buildingUpdateReg(Building building, HttpServletRequest request);
 
-	List<Room> getMyRoom(Integer sNo);
+	Room getMyRoom(Integer sRNo);
 	
 	List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate);
+	
+	List<Room> getmyRoomList(Integer sNo);
+	
+	void updateRoom(Room room);
+	
+	void deleteRoom(Integer sRNo);
 	
 	Map<String, Object> graphTransHistoryCnt(String searchType, String id);
 	
 	Map<String, Object> graphTransHistorySum(String searchType, String id);
+	
+	
 }

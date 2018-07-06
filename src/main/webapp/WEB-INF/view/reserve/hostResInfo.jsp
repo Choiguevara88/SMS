@@ -20,13 +20,13 @@
 </head>
 
 <body>
-<div class="w3-container w3-margin">
 	<table class="w3-table w3-striped w3-hoverable">
 		<c:if test="${buildCnt == 0}">
-			<td>등록된 건물이 없습니다.<a href="main.sms">[등록하러 가기]</a></td>
+			<td>등록된 건물이 없습니다.<a href="../building/buildingForm.sms?id=${sessionScope.loginMember.id}">[등록하러 가기]</a></td>
 		</c:if>
-			
-		<c:if test="${reservecnt != 0}">
+			<tr><td><a href="../building/buildingForm.sms?id=${sessionScope.loginMember.id}">[공간등록하기]</a></td></tr>
+			<tr><td><a href="../building/myBuildingList.sms?id=${sessionScope.loginMember.id}">[공간관리하기]</a></td></tr>
+		<c:if test="${reservecnt != 0 }">
 			<tr>
 				<th style="text-align:center;">건물관리번호</th>
 				<th style="text-align:center;">건물명</th>
@@ -46,6 +46,5 @@
 			</c:forEach>
 		</c:if>
 	</table>
-</div>
 </body>
 </html>

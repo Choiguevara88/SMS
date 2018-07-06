@@ -39,29 +39,29 @@ public class BuildingController {
 		sTypeNames.add("카페");
 		sTypeNames.add("파티룸");
 		sTypeNames.add("공연장");
-		//String id = request.getParameter("id");
+		String id = request.getParameter("id");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("sTypeNames",sTypeNames);
 		mav.addObject("building", building);
-		//mav.addObject("id", id);
+		mav.addObject("id", id);
 		return mav;
 	}
 	
 	//빌딩폼 등록
 	@RequestMapping(value="building/buildingReg", method=RequestMethod.POST)
-	public ModelAndView buildingReg(Building building, HttpServletRequest request) {		
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView buildingReg(Building building, HttpServletRequest request) {
+		System.out.println(building);
 		service.buildingReg(building, request);
-		mav.setViewName("myBuildingList");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("building/myBuildingList.sms?id="+building.getId());
 		return mav;
 	}
 	
 	//등록된 내 빌딩폼 리스트 불러오기
 	@RequestMapping(value="building/myBuildingList", method=RequestMethod.GET)
-	public ModelAndView myBuildingList(HttpServletRequest request) {		
+	public ModelAndView myBuildingList(HttpServletRequest request) {
+		String id = request.getParameter("id");
 		ModelAndView mav = new ModelAndView();
-		/* 추후에 리퀘스트로 로그인된 아이디 가져와야함.*/
-		String id = "id6";
 		List<Building> MyBuildingList = service.getMyBuildings(id);
 		mav.addObject("myBuildingList",MyBuildingList);
 		mav.addObject("id", id);
@@ -89,14 +89,25 @@ public class BuildingController {
 		return mav;
 	}
 	
+	//빌딩정보 수정사항 등록하기
 	@RequestMapping(value="building/buildingUpdateReg", method=RequestMethod.POST)
 	public ModelAndView buildingUpdateReg(Building building, HttpServletRequest request) {
-		//String sNo = request.getParameter("sNo");
-		String id = "id6";
 		System.out.println(building);
 		service.buildingUpdateReg(building, request);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("myBuildingList?id="+id);
+		String id = building.getId();
+		System.out.println(id);
+		mav.setViewName("redirect:/building/myBuildingList.sms?id=" + id);
+		return mav;
+	}
+	
+	//빌딩 상세정보 보기
+	@RequestMapping(value="building/buildingDetail", method=RequestMethod.GET)
+	public ModelAndView buildingDetail(Building building, HttpServletRequest request) {
+		String sNo = request.getParameter("sNo");
+		building = service.getMyBuildingOne(sNo);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("building", building);
 		return mav;
 	}
 }

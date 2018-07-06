@@ -164,7 +164,7 @@ $(document).ready(function() {
 <body>
 <div>
 <form:form id="sss" modelAttribute="building" method="post" action="buildingReg.sms" enctype="multipart/form-data">
-
+<input type="hidden" name="id" value="${param.id}" />
   <table cellpadding="0" cellspacing="1" align="center">
   <tr><td colspan="2" align="center">공간정보</td></tr>
     <tr><td>공간 유형(최대 3개)</td>

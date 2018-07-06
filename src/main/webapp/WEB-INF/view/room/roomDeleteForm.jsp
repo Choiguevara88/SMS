@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>세부 공간 리스트</title>
+<title>지울거야</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -13,22 +13,22 @@
 </script>
 </head>
 <body>
-<h1>${id}님의 공간 정보 관리</h1>
-
-<c:forEach var="room" items="${myRoomList}">
-<form:form modelAttribute="room" action="roomDetail.sms" method="post">
+<p>roomDeleteForm 지울거야?</p>
+<form method="post" action="roomDeleteSuccess.sms" name="f">
 <div class="w3-container">
   <div class="w3-card-4" style="width:30%">
     <div class="w3-container w3-center">
-      <p>sRName : ${room.sRName}</p><br>	
-      <p>sRNo : ${room.sRNo}</p><br>
-   		<form:hidden path="sRNo" value="${room.sRNo}" />
+  		<input type="hidden" name="sRNo" value="${myRoom.sRNo}"/>
+		
+		<label for="pass">
+		<input type="text" name="pass"/>
+		</label>
+      <p>sRName : ${myRoom.sRName}</p><br>	
+      <p>sRNo : ${myRoom.sRNo}</p><br>
     </div>
   </div>
 </div>
-  <input type="submit" value="sRNo=${room.sRNo } 세부정보 보기"/>
-</form:form>
-</c:forEach>
-
+<a href="javascript:document.f.submit()" class="w3-button w3-black">삭제 확정</a>
+</form>
 </body>
 </html>

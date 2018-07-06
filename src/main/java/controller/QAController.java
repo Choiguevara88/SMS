@@ -45,7 +45,6 @@ public class QAController {
 	public void insert(@ModelAttribute Board board,String id,String content,Integer kind) {
 		board.setId(id);
 		board.setContent(content);
-		board.setqType(0);
 		board.setKind(kind);
 		service.boardWrite(board);
 	}
@@ -57,7 +56,6 @@ public class QAController {
 		mav.addObject("list",list);
 		return mav;
 	}
-
 
 	/*@RequestMapping(value = "qa/questionAdmin", method = RequestMethod.POST)
 	public ModelAndView write(String id, HttpSession session, Integer kind, String content) {

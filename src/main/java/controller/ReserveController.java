@@ -151,12 +151,15 @@ public class ReserveController {
 		mav.addObject("listcount", listcount);
 		mav.addObject("list", reservelist);
 		mav.addObject("reservecnt", reservecnt);
+<<<<<<< HEAD
 		mav.addObject("sNo", sNo);
 		
 		if(searchType != null && !searchType.equals("")) {
 			mav.addObject("searchType", searchType);
 		}
 
+=======
+>>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
 		return mav;
 	}
 
@@ -167,7 +170,7 @@ public class ReserveController {
 		ModelAndView mav = new ModelAndView();
 
 		Reserve reserve = service.getReserve(reNo);
-		Room room = service.getRoom(reserve.getSrNo());
+		Room room = service.getMyRoom(reserve.getSrNo());
 
 		mav.addObject("reserve", reserve);
 		mav.addObject("room", room); // 세부공간에 대한 세부정보

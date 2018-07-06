@@ -24,7 +24,6 @@ public class LoginAspect {
 		String id = null;
 		HttpSession session = null;
 		Member paramMember = null;
-		
 		if (joinPoint.getArgs()[0] instanceof Member) {
 			paramMember = (Member) joinPoint.getArgs()[0];
 			session = (HttpSession) joinPoint.getArgs()[2];
@@ -133,7 +132,6 @@ public class LoginAspect {
 				if(loginMember == null) {
 					throw new ProjectException("로그인이 필요합니다.", "../main.sms");
 				}
-				
 				reservable = true;
 				break;
 			}
