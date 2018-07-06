@@ -110,7 +110,9 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void boardReply(Board board) {
 		boDao.qTypeAdd(board);
+		
 		int num = boDao.maxNum();
+		
 		board.setbNo(++num);
 		board.setRefLevel(board.getRefLevel() + 1);
 		boDao.insert(board);
@@ -271,13 +273,13 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public int hostReserveCount(String hostName, Integer sNo, String searchType, String searchContent) {
-		return reDao.hostCount(sNo, hostName, searchType, searchContent);
+	public int hostReserveCount(Integer sNo, String searchType, String searchContent) {
+		return reDao.hostCount(sNo, searchType, searchContent);
 	}
 
 	@Override
-	public List<Reserve> selectHostReserveList(Integer sNo, String id, String searchType, String searchContent, Integer pageNum, int limit) {
-		return reDao.hostlist(sNo, id, searchType, searchContent, pageNum, limit);
+	public List<Reserve> selectHostReserveList(Integer sNo, String searchType, String searchContent, Integer pageNum, int limit, String startDate, String endDate) {
+		return reDao.hostlist(sNo, searchType, searchContent, pageNum, limit, startDate, endDate);
 	}
 
 	@Override
