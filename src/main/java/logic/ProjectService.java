@@ -74,6 +74,8 @@ public interface ProjectService {
 	Member find_password(String id, String email, String name);
 
 	List<Building> getMyBuildings(String id);
-
-
+	
+	Building getMyBuildingOne(String sNo);
+	
+	void buildingUpdateReg(Building building, HttpServletRequest request);
 }

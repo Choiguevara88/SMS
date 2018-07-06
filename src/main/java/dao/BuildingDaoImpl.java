@@ -58,4 +58,14 @@ public class BuildingDaoImpl implements BuildingDao {
 		return sqlSession.getMapper(BuildingMapper.class).selectMyBuildings(id);
 	}
 
+	@Override
+	public Building getMyBuildingOne(String sNo) {
+		return sqlSession.getMapper(BuildingMapper.class).selectMyBuildingOne(sNo);
+	}
+
+	@Override
+	public void buUpdateReg(Building building) {
+		sqlSession.getMapper(BuildingMapper.class).update(building);
+	}
+
 }
