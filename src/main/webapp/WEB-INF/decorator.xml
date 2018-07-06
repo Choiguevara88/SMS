@@ -9,7 +9,7 @@
 	
 	<!-- layout 설정을 제외 함. -->
 	<excludes>
-		<pattern>graph*</pattern>
+		<pattern>/trans/graph*</pattern>
 	</excludes>
 
 </decorators>

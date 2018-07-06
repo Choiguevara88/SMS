@@ -276,9 +276,8 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<Reserve> selectHostReserveList(Integer sNo, String hostName, String searchType, String searchContent,
-			Integer pageNum, int limit) {
-		return reDao.hostlist(sNo, hostName, searchType, searchContent, pageNum, limit);
+	public List<Reserve> selectHostReserveList(Integer sNo, String id, String searchType, String searchContent, Integer pageNum, int limit) {
+		return reDao.hostlist(sNo, id, searchType, searchContent, pageNum, limit);
 	}
 
 	@Override

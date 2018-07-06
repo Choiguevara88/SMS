@@ -11,7 +11,7 @@
 		from Building
 
 		<if test="id != null">
-			where id = #{id} and. sNo = #{sNo}
+			where id = #{id} and sNo = #{sNo}
 		</if>
 	</select>
 	

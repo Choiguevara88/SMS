@@ -20,12 +20,13 @@
 </head>
 
 <body>
+<div class="w3-container w3-margin">
 	<table class="w3-table w3-striped w3-hoverable">
 		<c:if test="${buildCnt == 0}">
 			<td>등록된 건물이 없습니다.<a href="main.sms">[등록하러 가기]</a></td>
 		</c:if>
 			
-		<c:if test="${reservecnt != 0 }">
+		<c:if test="${reservecnt != 0}">
 			<tr>
 				<th style="text-align:center;">건물관리번호</th>
 				<th style="text-align:center;">건물명</th>
@@ -36,14 +37,15 @@
 
 			<c:forEach var="build" items="${list}">
 				<tr>
-					<td>${build.sNo}</td>
-					<td>${build.sName}</td>
-					<td>[${build.reCnt}]</td>
-					<td>[${build.boCnt}]</td>
-					<td><a href="hostResList.sms?sNo=${build.sNo}">[확인하러가기]</a></td>			
+					<td style="text-align:center;">${build.sNo}</td>
+					<td style="text-align:center;">${build.sName}</td>
+					<td style="text-align:center;">[${build.reCnt}]</td>
+					<td style="text-align:center;">[${build.boCnt}]</td>
+					<td style="text-align:center;"><a href="hostResList.sms?sNo=${build.sNo}">[전체 예약정보]</a></td>			
 				</tr>
 			</c:forEach>
 		</c:if>
 	</table>
+</div>
 </body>
 </html>
