@@ -5,12 +5,53 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>공간 정보 보기</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+</script>
 </head>
 <body>
+<!-- 공간(Building)헤더정보 -->
+<img src="../picture/${building.sImg1}" style="width:100% ; height:300px">
+<div><h1>${building.sName}</h1></div>
+<div><h4>${building.sPreview}</h4></div>
+<div><h5>${building.sTagList}</h5></div>
+<hr>
 
+<div class="w3-row">
+<div class="w3-col s7">
+<!-- 공간(Building)정보 -->
+<div>
 
+<h3>공간소개</h3>
+<div>${building.sContent}</div>
+<hr>
+
+<%-- <div>${building.sTypeList}</div> --%>
+<h3>이용정보</h3>
+<div>${building.sInfoSubList}</div>
+<hr>
+
+<h3>이용규칙</h3>
+<div>${building.sRuleList}</div>
+<hr>
+
+<h3>이용시간</h3>
+<div>${building.sBHourList}</div>
+<hr>
+
+<h3>휴무일</h3>
+<div>${building.sHDay}</div>
+<hr>
+
+<h3>주소</h3>
+<div>${building.sAddress}</div>
+</div>
 <hr size="1">
+
+<!-- 이용후기, Q&A -->
 <div>
 	<div style="float:left; display:inliine;">
 	<h4 class="h_intro">이용 후기 <strong><em>${listcount}</em>개</strong><span></span>
@@ -18,8 +59,7 @@
 	</h4></div>
 	<span style="float:right">
 	</span>
-</div>
-<!--  리뷰 목록부분 -->
+	<!--  리뷰 목록부분 -->
 <table border="1" style="margin-top:30px" width="80%" align="center">
 
 <c:if test="${listcount > 0}">
@@ -67,5 +107,13 @@
 	 <tr><td colspan="5">등록된 게시물이 없습니다.</td></tr>
 	 </c:if>
 </table>
+</div>
+</div>
+
+<!-- 세부공간(Room)정보 -->
+<div class="w3-col s5">
+<h1>룸정보가 들어올 공간</h1>
+</div>
+</div>
 </body>
 </html>

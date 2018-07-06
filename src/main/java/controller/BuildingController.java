@@ -100,4 +100,14 @@ public class BuildingController {
 		mav.setViewName("redirect:/building/myBuildingList.sms?id=" + id);
 		return mav;
 	}
+	
+	//빌딩 상세정보 보기
+	@RequestMapping(value="building/buildingDetail", method=RequestMethod.GET)
+	public ModelAndView buildingDetail(Building building, HttpServletRequest request) {
+		String sNo = request.getParameter("sNo");
+		building = service.getMyBuildingOne(sNo);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("building", building);
+		return mav;
+	}
 }
