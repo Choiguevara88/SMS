@@ -41,8 +41,13 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public int boardcount(String searchType, String searchContent) {
-		return boDao.count(searchType, searchContent);
+	public int boardcount(String searchType, String searchContent, int kind) {
+		return boDao.count(searchType, searchContent, kind);
+	}
+	
+	@Override
+	public int boardcount(Integer kind, int sNo) {
+		return boDao.count(kind, sNo);
 	}
 
 	@Override
@@ -252,10 +257,7 @@ public class ProjectServiceImpl implements ProjectService {
 		memDao.updateMember(member);
 	}
 
-	@Override
-	public int boardcount(Integer kind, int sNo) {
-		return boDao.count(kind, sNo);
-	}
+
 
 	@Override
 	public List<Board> boardList(Integer kind, int sNo, Integer pageNum, int limit) {
