@@ -9,7 +9,7 @@ public class TransactionHistory {
 	private String guest;			// 구매자 ID
 	private String email; 			// 사업자 Email
 	private String mob; 			// 사업자 연락처
-	private Date regDate; 			// 사업자 가입일자	
+	private Date regDate; 			// 사업자 가입일자
 	private String hostName;		// 사업자명
 	private Integer hostRegNo;		// 사업자번호
 	private String address;			// 사업자 주소
@@ -20,6 +20,7 @@ public class TransactionHistory {
 	private Integer sRNo;			// Room 번호
 	private String sRName;			// Room 이름
 	private Integer reNo;			// 예약별관리번호
+	private Date reDate;			// 예약일자
 	private Integer totPrice;		// 거래금액
 	private Integer cnt;			// 거래수량
 	
@@ -114,6 +115,12 @@ public class TransactionHistory {
 	public void setReNo(Integer reNo) {
 		this.reNo = reNo;
 	}
+	public Date getReDate() {
+		return reDate;
+	}
+	public void setReDate(Date reDate) {
+		this.reDate = reDate;
+	}
 	public Integer getTotPrice() {
 		return totPrice;
 	}
@@ -132,7 +139,7 @@ public class TransactionHistory {
 		return "TransactionHistory [host=" + host + ", guest=" + guest + ", email=" + email + ", mob=" + mob
 				+ ", regDate=" + regDate + ", hostName=" + hostName + ", hostRegNo=" + hostRegNo + ", address="
 				+ address + ", accountNo=" + accountNo + ", tel=" + tel + ", sNo=" + sNo + ", sName=" + sName
-				+ ", sRNo=" + sRNo + ", sRName=" + sRName + ", reNo=" + reNo + ", totPrice=" + totPrice + ", cnt=" + cnt
-				+ "]";
+				+ ", sRNo=" + sRNo + ", sRName=" + sRName + ", reNo=" + reNo + ", reDate=" + reDate + ", totPrice="
+				+ totPrice + ", cnt=" + cnt + "]";
 	}
 }

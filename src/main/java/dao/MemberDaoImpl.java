@@ -45,6 +45,15 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
+	public void hostRegister(String id) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id",id);
+		sqlSession.update(NS + "hostRegister", map);
+		
+	}
+
+
+	@Override
 	public Member find_member(String name, String email) {
 		Map<String,String> map = new HashMap<String, String>();
 		map.put("name", name);
@@ -57,22 +66,21 @@ public class MemberDaoImpl implements MemberDao{
 	public Member find_password(String id, String email, String name) {
 		Map<String, String> map = new HashMap<String,String>();
 		map.put("id", id);
-		map.put(email, email);
+		map.put("email", email);
 		map.put("name", name);
 		return sqlSession.selectOne(NS+"findmypassword",map);
 	}
 	
-	
-	@Override // 호스트 승인 요청 목록을 불러오는 메서드
+	@Override 
 	public List<Member> getHostRegList() {
 		return sqlSession.selectList(NS + "hostRegList");
 	}
 
 
-	@Override // 호스트 승인 요청 등록할 때 사용되는 메서드
-	public void hostRegister(String id) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("id",id);
-		sqlSession.update(NS + "hostRegister", map);
+	@Override
+	public Member find_member_by_email(String email) {
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("email", email);
+		return sqlSession.selectOne(NS+"findmemberbyemail",map);
 	}
 }

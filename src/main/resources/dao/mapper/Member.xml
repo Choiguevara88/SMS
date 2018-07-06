@@ -47,4 +47,11 @@
 			and id = #{id}
 		</if>
 	</select>
+	
+	<select id="findmemberbyemail" resultType="Member" parameterType="map">
+		select * from member
+		<if test = "email != null">
+			where email = #{email}
+		</if>
+	</select>
 </mapper>

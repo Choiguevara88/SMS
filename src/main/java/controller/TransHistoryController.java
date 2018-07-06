@@ -18,7 +18,7 @@ public class TransHistoryController {
 	private ProjectService service;
 	
 	@RequestMapping(value="", method=RequestMethod.GET)
-	public ModelAndView transactionList (HttpSession session, String id) {
+	public ModelAndView admintransactionList (HttpSession session, String id) {
 		
 		ModelAndView mav = new ModelAndView();
 		

@@ -18,4 +18,7 @@ public interface BuildingDao {
 
 	List<Building> getMyBuildings(String id);
 
+	Building getMyBuildingOne(String sNo);
+
+	void buUpdateReg(Building building);
 }

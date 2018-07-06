@@ -22,4 +22,6 @@ public interface MemberDao {
 
 	Member find_password(String id, String email, String name);
 
+	Member find_member_by_email(String email);
+
 }

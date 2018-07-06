@@ -30,10 +30,10 @@ public class AdminController {
 	public ModelAndView adminManagementPage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
-		List<Member> hostRegList = service.hostRegList();			// host 등록 요청 목록
-		List<Board> guestQuestionList = service.guestQuestionList();// guest 문의 목록
-		List<Board> hostQuestionList = service.hostQuestionList();	// host 문의 목록
-		List<TransactionHistory> transHostList = service.hostTransHistoryList();	// host별 수입 목록
+		List<Member> hostRegList = service.hostRegList();						// host 등록 요청 목록
+		List<Board> guestQuestionList = service.guestQuestionList();			// guest 문의 목록
+		List<Board> hostQuestionList = service.hostQuestionList();				// host 문의 목록
+		List<TransactionHistory> transHostList = service.hostTransHistoryList("first");// host 공간 별 월별 수입 목록
 		
 		mav.addObject("hRegList",hostRegList);
 		mav.addObject("gList",guestQuestionList);
@@ -87,6 +87,38 @@ public class AdminController {
 		service.boardReply(answerBoard);
 		
 		mav.setViewName("admin/adminManagement");
+		
+		return mav;
+	}
+	
+	// 거래관리대장 페이지를 처리할 때 호출 되는 메서드 (GET)
+	@RequestMapping(value="admin/adminTransHostList", method=RequestMethod.GET)
+	public ModelAndView adminTransHostList(HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		List<TransactionHistory> transHostList = service.hostTransHistoryList("second");// host 공간 별 월별 수입 목록
+		
+		mav.addObject("thList", transHostList);
+		
+		return mav;
+	}
+	
+	// 거래관리대장 페이지를 처리할 때 호출 되는 메서드 (POST)
+	@RequestMapping(value="admin/adminTransHostList", method=RequestMethod.POST)
+	public ModelAndView adminSearchTransList(HttpSession session, HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		String searchType = request.getParameter("searchType");
+		String searchContent = request.getParameter("searchContent");
+		String startDate = request.getParameter("startDate");
+		String endDate = request.getParameter("endDate");
+
+		List<TransactionHistory> transHostList = 
+				service.searchTransHistoryList(searchType, searchContent, startDate, endDate); // 거래관리대장 검색용
+		
+		mav.addObject("thList", transHostList);
 		
 		return mav;
 	}

@@ -1,6 +1,8 @@
 package logic;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +44,11 @@ public class ProjectServiceImpl implements ProjectService {
 	public int boardcount(String searchType, String searchContent, int kind) {
 		return boDao.count(searchType, searchContent, kind);
 	}
+	
+	@Override
+	public int boardcount(Integer kind, int sNo) {
+		return boDao.count(kind, sNo);
+	}
 
 	@Override
 	public List<Board> boardList(String searchType, String searchContent, Integer pageNum, int limit, int kind) {
@@ -80,6 +87,7 @@ public class ProjectServiceImpl implements ProjectService {
 		board.setRef(num);
 		board.setRefLevel(0);
 		boDao.insert(board);
+
 	}
 	
 	@Override
@@ -136,7 +144,6 @@ public class ProjectServiceImpl implements ProjectService {
 		boDao.update(board);
 
 	}
-
 	@Override
 	public void boardUpdate(Board board) {
 		boDao.update(board);
@@ -231,7 +238,7 @@ public class ProjectServiceImpl implements ProjectService {
 			try {
 				picture.transferTo(new File(uploadPath + fileName)); // new File(uploadPath + orgFile) : img upload
 																		// complite
-				orgFile = orgFile + "|" + fileName;
+				orgFile = orgFile + fileName +"|";
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -250,10 +257,7 @@ public class ProjectServiceImpl implements ProjectService {
 		memDao.updateMember(member);
 	}
 
-	@Override
-	public int boardcount(Integer kind, int sNo) {
-		return boDao.count(kind, sNo);
-	}
+
 
 	@Override
 	public List<Board> boardList(Integer kind, int sNo, Integer pageNum, int limit) {
@@ -322,7 +326,6 @@ public class ProjectServiceImpl implements ProjectService {
 		building.setsRule(sRule);
 		building.setsBHour(sBHour);
 		building.setsStat(sStat);
-		System.out.println("service" + building);
 		buDao.buRegist(building);
 	}
 	private String listToString(List<String> list) {
@@ -376,24 +379,90 @@ public class ProjectServiceImpl implements ProjectService {
 	public Member find_member(String name, String email) {
 		return memDao.find_member(name, email);
 	}
-	
+
 	@Override
 	public Member find_password(String id, String email, String name) {
 		return memDao.find_password(id, email, name);
 	}
-	
+
 	@Override
 	public List<Building> getMyBuildings(String id) {
 		return buDao.getMyBuildings(id);
 	}
 
 	@Override
-	public List<TransactionHistory> hostTransHistoryList() {
-		return tranDao.transHistory();
+	public Building getMyBuildingOne(String sNo) {
+		Building myBuildingOne = buDao.getMyBuildingOne(sNo);
+		String sTypes = myBuildingOne.getsType();
+		String sTags = myBuildingOne.getsTag();
+		String sInfoSubs = myBuildingOne.getsInfoSub();
+		String sRules = myBuildingOne.getsRule();
+		String sBHours = myBuildingOne.getsBHour();
+		String sImg2s = myBuildingOne.getsImg2();
+		List<String> sTypeList = new ArrayList<String>(Arrays.asList(sTypes.split("[|]")));
+		List<String> sTagList = new ArrayList<String>(Arrays.asList(sTags.split("[|]")));
+		List<String> sInfoSubList = new ArrayList<String>(Arrays.asList(sInfoSubs.split("[|]")));
+		List<String> sRuleList = new ArrayList<String>(Arrays.asList(sRules.split("[|]")));
+		List<String> sBHourList = new ArrayList<String>(Arrays.asList(sBHours.split("[|]")));
+		List<String> sImg2Name = new ArrayList<String>(Arrays.asList(sImg2s.split("[|]")));
+		myBuildingOne.setsTypeList(sTypeList);
+		myBuildingOne.setsTagList(sTagList);
+		myBuildingOne.setsInfoSubList(sInfoSubList);
+		myBuildingOne.setsRuleList(sRuleList);
+		myBuildingOne.setsBHourList(sBHourList);
+		myBuildingOne.setsImg2Name(sImg2Name);
+		return myBuildingOne;
 	}
+
+	@Override
+	public void buildingUpdateReg(Building building, HttpServletRequest request) {
+		if (building.getsImg1File() != null) {
+			String img1 = uploadImgCreate(building.getsImg1File(), request);
+			if (img1 != null)
+				building.setsImg1(img1);
+		}
+
+		if (!(building.getsImg2Files().isEmpty())) {
+			String img2 = uploadImgCreate2(building.getsImg2Files(), request);
+			if (img2 != null)
+				building.setsImg2(img2);
+		}
+		String sType = listToString(building.getsTypeList());
+		String sTag = listToString(building.getsTagList());
+		String sInfoSub = listToString(building.getsInfoSubList());
+		String sRule = listToString(building.getsRuleList());
+		String sBHour = listToString(building.getsBHourList());
+		building.setsType(sType);
+		building.setsTag(sTag);
+		building.setsInfoSub(sInfoSub);
+		building.setsRule(sRule);
+		building.setsBHour(sBHour);
+		buDao.buUpdateReg(building);
+	}
+	
+	@Override
+	public List<Board> boardList(Integer kind,String id) {
+		return boDao.list(kind,id);
+	}
+
+	@Override
+	public Member find_member_by_email(String email) {
+		return memDao.find_member_by_email(email);
+	}
+
+	@Override
+	public List<TransactionHistory> hostTransHistoryList(String first) {
+		return tranDao.transHistory(first);
+	}
+	
 	@Override
 	public List<Room> getMyRoom(Integer sNo) {
-		// TODO Auto-generated method stub
 		return roomDao.getMyroom(sNo);
 	}
+
+	@Override
+	public List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate) {
+		return tranDao.searchTransHistory(searchType, searchContent, startDate, endDate);
+	}
+
 } // ProjectServiceImpl end

@@ -1,6 +1,8 @@
 package controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -25,31 +27,46 @@ public class QAController {
 		return new Board();
 	}
 	
-	
 	// 1:1 문의 작성 시 호출 되는 메서드
 	@RequestMapping(value="qa/questionAdmin", method=RequestMethod.GET)
 	public ModelAndView writeQuestion(String id, HttpSession session) {
-		System.out.println(id);
 		Member writer = service.getMember(id);
-		System.out.println(writer);
 		ModelAndView mav = new ModelAndView();
-		
-		
-		Board board = new Board();
-		
-		if(writer.getMemType() != 1) {	// 해당 아이디가 Host계정이라면?
-			board.setKind(5);				// Board 객체 Kind = 5 부여
+		int kind = 0;
+		if(writer.getHostName() != null) {	// 해당 아이디가 Host계정이라면?
+			kind = 5;				// Board 객체 Kind = 5 부여
 		} else {							// 해당 아이디가 Host 계정이 아니라면?
-			board.setKind(4);				// Board 객체 Kind = 4 부여
+			kind = 4;				// Board 객체 Kind = 4 부여
 		}
-		
-		mav.addObject("board", board);
-		
+		mav.addObject("kind",kind);
 		return mav;
 	}
 	
-	
+	@RequestMapping(value="qa/questionAdmin", method=RequestMethod.POST)
+	public ModelAndView write(String id, HttpSession session, Integer kind,String content) {
+		ModelAndView mav = new ModelAndView();
+		Board board = new Board();
+		board.setContent(content);
+		board.setId(id);
+		board.setKind(kind);
+		board.setqType(0);
+		try {
+		service.boardWrite(board);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		mav.setViewName("redirect:/qa/quetstionList.sms");
+		mav.addObject("id",id);
+		return mav;
+	}
 	// 게시글 수정하기
+	@RequestMapping(value="qa/questionList", method=RequestMethod.GET)
+	public ModelAndView list(String id, HttpSession session, Integer kind) {
+		ModelAndView mav = new ModelAndView();
+		List<Board> boardlist = service.boardList(kind,id);
+		mav.addObject("board", boardlist);
+		return mav;
+	}
 	
 	
 	@RequestMapping(value="qa/*", method=RequestMethod.GET) // 게시글 작성 View로 접속할 때 호출되는 메서드
