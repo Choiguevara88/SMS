@@ -49,7 +49,6 @@ public class MemberDaoImpl implements MemberDao{
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("id",id);
 		sqlSession.update(NS + "hostRegister", map);
-		
 	}
 
 
