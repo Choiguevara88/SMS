@@ -15,11 +15,11 @@
 		</if> 
 		
 		<if test ="kind != null and sNo == null">
-			where kind = #{kind} and refLevel=0
+			where kind = #{kind}
 		</if>
 		
 		<if test="id != null">
-			and id = #{id}
+			and id #{id} 
 		</if> 
 		
 		<if test="searchType != null and searchContent != null">
