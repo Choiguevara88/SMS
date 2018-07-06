@@ -83,6 +83,10 @@ public interface ProjectService {
 	Member find_member_by_email(String email);
 	
 	List<TransactionHistory> hostTransHistoryList(String first);
+	
+	Building getMyBuildingOne(String sNo);
+	
+	void buildingUpdateReg(Building building, HttpServletRequest request);
 
 	List<Room> getMyRoom(Integer sNo);
 	

@@ -1,6 +1,8 @@
 package logic;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +45,11 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public int boardcount(String searchType, String searchContent, int kind) {
 		return boDao.count(searchType, searchContent, kind);
+	}
+	
+	@Override
+	public int boardcount(Integer kind, int sNo) {
+		return boDao.count(kind, sNo);
 	}
 
 	@Override
@@ -233,7 +240,7 @@ public class ProjectServiceImpl implements ProjectService {
 			try {
 				picture.transferTo(new File(uploadPath + fileName)); // new File(uploadPath + orgFile) : img upload
 																		// complite
-				orgFile = orgFile + "|" + fileName;
+				orgFile = orgFile + fileName +"|";
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -252,10 +259,6 @@ public class ProjectServiceImpl implements ProjectService {
 		memDao.updateMember(member);
 	}
 
-	@Override
-	public int boardcount(Integer kind, int sNo) {
-		return boDao.count(kind, sNo);
-	}
 
 	@Override
 	public List<Board> boardList(Integer kind, int sNo, Integer pageNum, int limit) {
@@ -295,28 +298,6 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void buildingReg(Building building, HttpServletRequest request) {
-		/*
-		 * if (board.getImg1File() != null) { String img =
-		 * uploadImgCreate(board.getImg1File(),request); if(img != null)
-		 * board.setImg1(img); }
-		 * 
-		 * if (board.getImg2File() != null) { String img =
-		 * uploadImgCreate(board.getImg2File(),request); if(img != null)
-		 * board.setImg2(img); }
-		 * 
-		 * if (board.getImg3File() != null) { String img =
-		 * uploadImgCreate(board.getImg3File(),request); if(img != null)
-		 * board.setImg3(img); }
-		 * 
-		 * if (board.getImg4File() != null) { String img =
-		 * uploadImgCreate(board.getImg1File(),request); if(img != null)
-		 * board.setImg4(img); } int num = boDao.maxNum();
-		 * 
-		 * board.setbNo(++num); board.setRef(num); board.setRefLevel(0);
-		 * 
-		 * boDao.insert(board);
-		 */
-
 		if (building.getsImg1File() != null) {
 			String img1 = uploadImgCreate(building.getsImg1File(), request);
 			if (img1 != null)
@@ -346,7 +327,6 @@ public class ProjectServiceImpl implements ProjectService {
 		building.setsRule(sRule);
 		building.setsBHour(sBHour);
 		building.setsStat(sStat);
-		System.out.println("service" + building);
 		buDao.buRegist(building);
 	}
 
@@ -412,6 +392,56 @@ public class ProjectServiceImpl implements ProjectService {
 		return buDao.getMyBuildings(id);
 	}
 
+	@Override
+	public Building getMyBuildingOne(String sNo) {
+		Building myBuildingOne = buDao.getMyBuildingOne(sNo);
+		String sTypes = myBuildingOne.getsType();
+		String sTags = myBuildingOne.getsTag();
+		String sInfoSubs = myBuildingOne.getsInfoSub();
+		String sRules = myBuildingOne.getsRule();
+		String sBHours = myBuildingOne.getsBHour();
+		String sImg2s = myBuildingOne.getsImg2();
+		List<String> sTypeList = new ArrayList<String>(Arrays.asList(sTypes.split("[|]")));
+		List<String> sTagList = new ArrayList<String>(Arrays.asList(sTags.split("[|]")));
+		List<String> sInfoSubList = new ArrayList<String>(Arrays.asList(sInfoSubs.split("[|]")));
+		List<String> sRuleList = new ArrayList<String>(Arrays.asList(sRules.split("[|]")));
+		List<String> sBHourList = new ArrayList<String>(Arrays.asList(sBHours.split("[|]")));
+		List<String> sImg2Name = new ArrayList<String>(Arrays.asList(sImg2s.split("[|]")));
+		myBuildingOne.setsTypeList(sTypeList);
+		myBuildingOne.setsTagList(sTagList);
+		myBuildingOne.setsInfoSubList(sInfoSubList);
+		myBuildingOne.setsRuleList(sRuleList);
+		myBuildingOne.setsBHourList(sBHourList);
+		myBuildingOne.setsImg2Name(sImg2Name);
+		return myBuildingOne;
+	}
+
+	@Override
+	public void buildingUpdateReg(Building building, HttpServletRequest request) {
+		if (building.getsImg1File() != null) {
+			String img1 = uploadImgCreate(building.getsImg1File(), request);
+			if (img1 != null)
+				building.setsImg1(img1);
+		}
+
+		if (!(building.getsImg2Files().isEmpty())) {
+			String img2 = uploadImgCreate2(building.getsImg2Files(), request);
+			if (img2 != null)
+				building.setsImg2(img2);
+		}
+		String sType = listToString(building.getsTypeList());
+		String sTag = listToString(building.getsTagList());
+		String sInfoSub = listToString(building.getsInfoSubList());
+		String sRule = listToString(building.getsRuleList());
+		String sBHour = listToString(building.getsBHourList());
+		building.setsType(sType);
+		building.setsTag(sTag);
+		building.setsInfoSub(sInfoSub);
+		building.setsRule(sRule);
+		building.setsBHour(sBHour);
+		buDao.buUpdateReg(building);
+	}
+	
 	@Override
 	public List<Board> boardList(Integer kind,String id) {
 		return boDao.list(kind,id);
