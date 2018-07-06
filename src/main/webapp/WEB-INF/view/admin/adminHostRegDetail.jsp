@@ -19,6 +19,5 @@
 		<tr><td>계좌정보</td><td>${hostMem.accountNo}</td></tr>
 		<tr><td><a href="adminHostRegister.sms?id=${hostMem.id}">[등록하기]</a></td><td colspan="2"><a href="javascript:history.go(-1)">[뒤로가기]</a></td></tr>
 	</table>
-
 </body>
 </html>

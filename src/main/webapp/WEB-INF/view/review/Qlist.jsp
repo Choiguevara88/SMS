@@ -15,30 +15,27 @@
 </script>
 </head>
 <body>
-<div align="center"><a href="../qa/write.sms">질문 작성하기</a></div>
+<div align="center"><a href="${path}/review/Qwrite.sms?sNo=${param.sNo}">질문 작성하기</a></div>
 <!--  리뷰 목록부분 -->
 <table border="1" style="margin-top:30px" width="80%" align="center">
 
 <c:if test="${listcount > 0}">
 <c:forEach var="board" items="${boardlist}">
 	<tr>
-		<td width="50%">${board.subject}</td></tr>
-	<tr><td>${board.content}</td> 
+		<td width="50%" colspan="2">${board.subject}</td></tr>
+	<tr><td colspan="2">${board.content}</td> 
 	</tr>
 	<tr>
-		<td colspan="4"><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd H:mm:ss"/></td>
-	<tr>
-  		<td colspan="4" align="center" class="content">
+		<td><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd H:mm:ss"/></td>
+  		<td align="right">
   		<c:if test="${sessionScope.loginMember.id == building.id && board.sNo == building.sNo }">
   		<a href="../review/reply.sms?bNo=${board.bNo}&pageNum=${pageNum}">[답변]</a></c:if>
   		<c:if test="${sessionScope.loginMember.id == board.id }">
 		<a href="../review/Qupdate.sms?bNo=${board.bNo}&pageNum=${pageNum}">[수정]</a>
-		<a href="../review/delete.sms?bNo=${board.bNo}&pageNum=${pageNum}">[삭제]</a></c:if><br>
- 	 </td>
-</tr>
+		<a href="../review/delete.sms?bNo=${board.bNo}&pageNum=${pageNum}">[삭제]</a></c:if><br></td>
 <!--  글 밑 부분 -->
 </c:forEach>
-<tr align="center" height="26"><td colspan="5">
+<tr align="center" height="26"><td colspan="2">
 		<c:if test="${pageNum >1 }">
 			<a href="javascript:list(${pageNum -1 })"> [이전]</a>
 		</c:if>&nbsp;

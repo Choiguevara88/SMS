@@ -8,10 +8,11 @@
 <title>리뷰 글 등록</title>
 </head>
 <body>
-<form:form modelAttribute="board" action="write.sms" method="post" name="f" enctype="multipart/form-data">
+<form:form modelAttribute="board" action="Rwrite.sms" method="post" name="f" enctype="multipart/form-data">
 <form:hidden path="kind" value="2"/>
 <input type="hidden" name="pageNum" value="1"/>
-<form:hidden path="sNo" value="1"/>
+<form:hidden path="sNo" value="${param.sNo}"/>
+<form:hidden path="id" value="${sessionScope.loginMember.id}"/>
 	<table border="1" cellpadding="0" cellspacing="0" align="center">
 		<caption><h3>리 뷰</h3></caption>
 		<tr><td colspan="2">제목</td>
@@ -35,12 +36,12 @@
 	</table>
 	<div><div align="center">사진(최대 4개)</div>
 		 <div align="center">
-		 	<input type="file" name="img1File">
-		 	<input type="file" name="img2File">
+		 	<input type="file" name="img1File" accept="image/*">
+		 	<input type="file" name="img2File" accept="image/*">
 		 </div><br>
 		 <div align="center">
-			 <input type="file" name="img3File">
-		 	<input type="file" name="img4File">
+			 <input type="file" name="img3File" accept="image/*">
+		 	<input type="file" name="img4File" accept="image/*">
 		 </div>
 	</div>
 </form:form>

@@ -1,8 +1,6 @@
 package logic;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +15,7 @@ import dao.BuildingDao;
 import dao.MemberDao;
 import dao.ReserveDao;
 import dao.RoomDao;
+import dao.TransactionHistoryDao;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -31,6 +30,8 @@ public class ProjectServiceImpl implements ProjectService {
 	private BuildingDao buDao;
 	@Autowired
 	private RoomDao roomDao;
+	@Autowired
+	private TransactionHistoryDao tranDao;
 
 	@Override
 	public Member getMember(String id) {

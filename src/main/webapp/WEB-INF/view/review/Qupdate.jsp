@@ -9,7 +9,7 @@
 <title>질문글 수정</title>
 </head>
 <body>
-<form:form modelAttribute="board" action="update.sms" method="post" name="f">
+<form:form modelAttribute="board" action="Qupdate.sms" method="post" name="f">
   <spring:hasBindErrors name="board">
   	<font color="red">
   	  <c:forEach items="${errors.globalErrors}" var="error">
@@ -30,7 +30,7 @@
   		<font color="red"><form:errors path="content"/></font></td></tr>
   	<tr><td align="center" colspan="2">
   		<a href="javascript:document.f.submit()">[수정]</a>
-  		<a href="list.sms?sNo=${board.sNo}">[목록]</a>
+  		<a href="review/Qlist.sms?sNo=${board.sNo}">[목록]</a>
   	</td></tr></table>
 	</form:form>
 </body>

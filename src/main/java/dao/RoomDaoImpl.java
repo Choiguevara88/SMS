@@ -1,12 +1,14 @@
 package dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import dao.mapper.BuildingMapper;
 import dao.mapper.RoomMapper;
 import logic.Room;
 
@@ -30,6 +32,10 @@ public class RoomDaoImpl implements RoomDao{
 	public void insertRoom(Room room) {
 		sqlSession.getMapper(RoomMapper.class).insert(room);
 		
+	}
+	@Override
+	public List<Room> getMyroom(Integer sNo) {
+		return sqlSession.getMapper(RoomMapper.class).selectMyRoom(sNo);
 	}
 
 	

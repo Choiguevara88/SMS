@@ -15,8 +15,12 @@
 		</if> 
 		
 		<if test ="kind != null and sNo == null">
-			where kind = #{kind}
+			where kind = #{kind} and refLevel=0
 		</if>
+		
+		<if test="id != null">
+			and id = #{id}
+		</if> 
 		
 		<if test="searchType != null and searchContent != null">
 			and ${searchType} like '%${searchContent}%'
@@ -25,6 +29,7 @@
 		<if test="startrow != null and limit != null">
 			order by ref desc limit #{startrow}, #{limit}	
 		</if>
+		
 	</select>
 	
 	
@@ -47,6 +52,10 @@
 		
 		<if test="kind != null and sNo != null">
 			where kind = #{kind} and sNo = #{sNo}	
+		</if>
+		
+		<if test="kind != null and sNo == null">
+			where kind = #{kind}	
 		</if>
 	</select>
 	

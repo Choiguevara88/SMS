@@ -44,14 +44,6 @@ public class MemberDaoImpl implements MemberDao{
 		sqlSession.getMapper(MemberMapper.class).becomeaHost(member);
 	}
 
-
-
-	@Override
-	public List<Member> getHostRegList() {
-		return sqlSession.selectList(NS + "hostRegList");
-	}
-
-
 	@Override
 	public void hostRegister(String id) {
 		Map<String, String> map = new HashMap<String, String>();
@@ -74,10 +66,21 @@ public class MemberDaoImpl implements MemberDao{
 	public Member find_password(String id, String email, String name) {
 		Map<String, String> map = new HashMap<String,String>();
 		map.put("id", id);
-		map.put(email, email);
+		map.put("email", email);
 		map.put("name", name);
 		return sqlSession.selectOne(NS+"findmypassword",map);
 	}
+	
+	@Override 
+	public List<Member> getHostRegList() {
+		return sqlSession.selectList(NS + "hostRegList");
+	}
 
 
+	@Override
+	public Member find_member_by_email(String email) {
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("email", email);
+		return sqlSession.selectOne(NS+"findmemberbyemail",map);
+	}
 }

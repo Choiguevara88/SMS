@@ -7,7 +7,7 @@ import logic.Board;
 
 public interface BoardDao {
 
-	int count(String searchType, String searchContent);
+	int count(String searchType, String searchContent, int kind);
 
 	List<Board> list(String searchType, String searchContent, Integer pageNum, int limit, int kind);
 
@@ -34,6 +34,8 @@ public interface BoardDao {
 	List<Board> hostQuestionList();
 
 	void qTypeAdd(Board board);
+
+	List<Board> list(Integer kind, String id);
 	
 }
 

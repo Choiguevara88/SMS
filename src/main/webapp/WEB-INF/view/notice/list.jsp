@@ -11,7 +11,7 @@
 		if(searchType == null || searchType.length == 0) {
 			document.searchform.searchContent.value = "";
 			document.searchform.pageNum.value = "1";
-			location.href="list.sms?pageNum=" + pageNum;
+			location.href="list.sms?pageNum=" + pageNum+"&kind="+ 1;
 		}else{
 			document.searchform.pageNum.value = pageNum;
 			document.searchform.submit();
@@ -22,7 +22,8 @@
 </script>
 </head>
 <body>
-<div align="center"><a href="../notice/write.sms">[작성]</a></div>
+<c:if test="${sessionScope.loginMember.id == 'admin' }">
+<div align="center"><a href="../notice/write.sms">[작성]</a></div></c:if>
 <table width="80%" align="center" border="1" style="margin-top:10px">
 	<tr><td colspan="5" align="center">
 		<form action="list.sms" method="post" name="searchform" onsubmit="return list(1)" >
@@ -53,8 +54,9 @@
 	</tr>
 	<tr class="content" id="${i.count}-view">
   		<td colspan="3" align="center" class="content">
+  		<c:if test="${sessionScope.loginMember.id == 'admin' }">
 		<a href="../notice/update.sms?bNo=${board.bNo}&pageNum=${pageNum}">[수정]</a>
-		<a href="../notice/delete.sms?bNo=${board.bNo}&pageNum=${pageNum}">[삭제]</a><br>
+		<a href="../notice/delete.sms?bNo=${board.bNo}&pageNum=${pageNum}">[삭제]</a><br></c:if>
    		 ${board.content}
  	 </td>
 </tr>

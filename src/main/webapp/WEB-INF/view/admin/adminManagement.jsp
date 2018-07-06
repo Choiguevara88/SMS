@@ -12,13 +12,18 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <!-- 부트스트랩 사용 선언-->
 
+<!-- w3 css 사용 선언 -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- w3 css 사용 선언-->
+
 <title>관리자 페이지</title>
 </head>
 
 <body>
+<div class="w3-container w3-margin">
 <div class="row">
 <div class="col-lg-4">
-	<table>
+	<table class="w3-table w3-striped">
 	<c:if test="${!empty hRegList}">
 		<tr align="center" valign="middle">
 			<td colspan="4"></td><td></td>
@@ -38,13 +43,13 @@
 		</c:forEach>
 	</c:if>
 	<c:if test="${empty hRegList}">
-		<tr><td colspan="5">등록된 요청이 없습니다.</td></tr>
+		<tr><td colspan="5">등록된 Host 승인 요청이 없습니다.</td></tr>
 	</c:if>
 	</table>
 </div>
 
 <div class="col-lg-4">
-	<table>
+	<table class="w3-table w3-striped">
 	<c:if test="${!empty gList}">
 		<tr align="center" valign="middle">
 			<td colspan="4"></td><td></td>
@@ -63,13 +68,13 @@
 		</c:forEach>
 	</c:if>
 	<c:if test="${empty gList}">
-		<tr><td colspan="5">등록된 Guest 문의가 없습니다.</td></tr>
+		<tr><td colspan="5">등록된 Guest 고객 문의가 없습니다.</td></tr>
 	</c:if>
 	</table>
 </div>
-
+</div>
 <div class="col-lg-4">
-	<table>
+	<table class="w3-table w3-striped">
 	<c:if test="${!empty hList}">
 		<tr align="center" valign="middle">
 			<td colspan="4"></td><td></td>
@@ -88,10 +93,20 @@
 		</c:forEach>
 	</c:if>
 	<c:if test="${empty hList}">
-		<tr><td colspan="5">등록된 host 문의가 없습니다.</td></tr>
+		<tr><td colspan="5">등록된 Host 고객 문의가 없습니다.</td></tr>
 	</c:if>
 	</table>
 </div>
+</div>
+<div class="w3-container w3-margin">
+	<table class="w3-table w3-striped w3-border">
+		<tr><th>호스트ID</th><th>상호명</th><th>Room이름</th><th>가입일자</th><th>금월 수입금</th><th>거래량</th></tr>
+	<c:forEach var="th" items="${thList}">
+		<tr><td>${th.host}</td><td>${th.hostName}</td><td>${th.sRName}</td><td><fmt:formatDate value="${th.regDate}" pattern="yyyy-MM-dd"/></td>
+			<td>${th.totPrice}</td><td>${th.cnt}</td></tr>
+	</c:forEach>
+	<tr><td colspan="6"><a href="adminTransHostList.sms" class="w3-button">[세부 거래 대장 보러가기]</a></td></tr>
+	</table>
 </div>
 </body>
 </html>

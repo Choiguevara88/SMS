@@ -8,7 +8,11 @@
 <title>질문 글 등록</title>
 </head>
 <body>
-<form:form modelAttribute="board" action="questionAdmin.sms" method="post" name="f">
+<form:form modelAttribute="board" action="Qwrite.sms" method="post" name="f">
+<form:hidden path="kind" value="3"/>
+<input type="hidden" name="pageNum" value="1"/>
+<form:hidden path="sNo" value="${param.sNo }"/>
+<form:hidden path="id" value="${sessionScope.loginMember.id}"/>
 	<table border="1" cellpadding="0" cellspacing="0" align="center">
 		<caption><h3>질문 글 등록하기</h3></caption>
 		<tr><td>제목</td>

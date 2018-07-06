@@ -43,25 +43,25 @@
 <c:if test="${listcount > 0}">
 <c:forEach var="board" items="${boardlist}" varStatus="i">
 	<tr>
-		<td colspan="2" width="50%">${board.subject}</td>
+		<td colspan="2" width="50%">제목 : ${board.subject}</td>
 		<td>${board.id}</td>
 		<td align="right">${board.score}</td>
 	</tr>
 	<tr>
-		<td colspan="4">${board.content}</td></tr>
+		<td colspan="4">내용 : ${board.content}</td></tr>
 	<tr><td><img src="${path }/picture/${board.img1}" style="width:25%; height:300px"></td>
 		<td><img src="${path }/picture/${board.img2}" style="width:25%; height:300px"></td>
 		<td><img src="${path }/picture/${board.img3}" style="width:25%; height:300px"></td>
 		<td><img src="${path }/picture/${board.img4}" style="width:25%; height:300px"></td>
 	</tr>
 	<tr>
-		<td colspan="4"><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd H:mm:ss"/></td>
-	<tr>
-  		<td colspan="4" align="center" class="content">
-  		<a href="../review/reply.sms?bNo=${board.bNo}&pageNum=${pageNum}">[답변]</a>
-		<a href="../review/update.sms?bNo=${board.bNo}&pageNum=${pageNum}">[수정]</a>
-		<a href="../review/delete.sms?bNo=${board.bNo}&pageNum=${pageNum}">[삭제]</a><br>
- 	 </td>
+		<td colspan="3"><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd H:mm:ss"/></td>
+  		<td align="center" class="content">
+  		<c:if test="${sessionScope.loginMember.id == building.id && board.sNo == building.sNo }">
+  		<a href="../review/reply.sms?bNo=${board.bNo}&pageNum=${pageNum}">[답변]</a></c:if>
+  		<c:if test="${sessionScope.loginMember.id == board.id }">
+		<a href="../review/Rupdate.sms?bNo=${board.bNo}&pageNum=${pageNum}">[수정]</a>
+		<a href="../review/delete.sms?bNo=${board.bNo}&pageNum=${pageNum}">[삭제]</a></c:if><br></td>
 </tr>
 <!--  글 밑 부분 -->
 </c:forEach>
