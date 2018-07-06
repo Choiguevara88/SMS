@@ -13,22 +13,18 @@
 </script>
 </head>
 <body>
-<h1>${id}님의 공간 정보 관리</h1>
+<h1>${id}님의 세부공간 정보</h1>
 
-<c:forEach var="room" items="${myRoomList}">
-<form:form modelAttribute="room" action="roomDetail.sms" method="post">
 <div class="w3-container">
   <div class="w3-card-4" style="width:30%">
     <div class="w3-container w3-center">
-      <p>sRName : ${room.sRName}</p><br>	
-      <p>sRNo : ${room.sRNo}</p><br>
-   		<form:hidden path="sRNo" value="${room.sRNo}" />
+      <p>sRName : ${myRoom.sRName}</p><br>	
+      <p>sRNo : ${myRoom.sRNo}</p><br>	
     </div>
   </div>
 </div>
-  <input type="submit" value="sRNo=${room.sRNo } 세부정보 보기"/>
-</form:form>
-</c:forEach>
-
+<p>roomDetail</p>
+<a href="roomUpdateForm.sms?sRNo=${myRoom.sRNo }" class="w3-button w3-black">세부 공간 정보 수정</a>
+<a href="roomDeleteForm.sms?sRNo=${myRoom.sRNo }" class="w3-button w3-black">세부 공간 삭제</a>
 </body>
 </html>

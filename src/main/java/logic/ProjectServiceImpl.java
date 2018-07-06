@@ -165,11 +165,6 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public Room getRoom(Integer srNo) {
-		return roomDao.getRoom(srNo);
-	}
-
-	@Override
 	public List<Reserve> getReserveList(String id) {
 		return reDao.getReserveList(id);
 	}
@@ -456,8 +451,8 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
-	public List<Room> getMyRoom(Integer sNo) {
-		return roomDao.getMyroom(sNo);
+	public Room getMyRoom(Integer sRNo) {
+		return roomDao.getMyRoom(sRNo);
 	}
 
 	@Override
@@ -465,4 +460,23 @@ public class ProjectServiceImpl implements ProjectService {
 		return tranDao.searchTransHistory(searchType, searchContent, startDate, endDate);
 	}
 
-} // ProjectServiceImpl end
+	@Override
+	public List<Room> getmyRoomList(Integer sNo) {
+		return roomDao.getmyRoomList(sNo);
+	}
+
+	@Override
+	public void updateRoom(Room room) {
+		roomDao.updateRoom(room);
+		}
+
+	@Override
+	public void deleteRoom(Integer sRNo) {
+		roomDao.deleteRoom(sRNo);
+		
+	}
+
+
+
+	
+	}// ProjectServiceImpl end

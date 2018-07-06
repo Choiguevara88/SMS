@@ -2,10 +2,10 @@
 <!-- main/resources/dao/mapper/Room.xml -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.mapper.RoomMapper">
-	<select id="selectOne" resultType="Room" parameterType="map">
+	<select id="list" resultType="room" parameterType="map">
 		select * from room
-		<if test="srNo != null">
-			where srNo = #{srNo}
+		<if test="sNo != null">
+			where sNo = #{sNo}
 		</if>
 	</select>
 	
