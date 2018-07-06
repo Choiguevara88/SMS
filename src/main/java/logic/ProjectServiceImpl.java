@@ -1,6 +1,8 @@
 package logic;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -82,7 +84,17 @@ public class ProjectServiceImpl implements ProjectService {
 		boDao.insert(board);
 
 	}
+	
+	@Override
+	public void boardWrite(Board board) {
+		int num = boDao.maxNum();
 
+		board.setbNo(++num);
+		board.setRef(num);
+		board.setRefLevel(0);
+		boDao.insert(board);
+	}
+	
 	@Override
 	public Board getBoard(int num) {
 		return boDao.getBoard(num);
@@ -127,7 +139,11 @@ public class ProjectServiceImpl implements ProjectService {
 		boDao.update(board);
 
 	}
-
+	@Override
+	public void boardUpdate(Board board) {
+		boDao.update(board);
+	}
+	
 	@Override
 	public void boardDelete(Integer num) {
 		boDao.delete(num);
@@ -422,4 +438,30 @@ public class ProjectServiceImpl implements ProjectService {
 		building.setsBHour(sBHour);
 		buDao.buUpdateReg(building);
 	}
+	
+	@Override
+	public List<Board> boardList(Integer kind,String id) {
+		return boDao.list(kind,id);
+	}
+
+	@Override
+	public Member find_member_by_email(String email) {
+		return memDao.find_member_by_email(email);
+	}
+
+	@Override
+	public List<TransactionHistory> hostTransHistoryList(String first) {
+		return tranDao.transHistory(first);
+	}
+	
+	@Override
+	public List<Room> getMyRoom(Integer sNo) {
+		return roomDao.getMyroom(sNo);
+	}
+
+	@Override
+	public List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate) {
+		return tranDao.searchTransHistory(searchType, searchContent, startDate, endDate);
+	}
+
 } // ProjectServiceImpl end
