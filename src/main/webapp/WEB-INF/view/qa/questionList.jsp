@@ -18,11 +18,6 @@
 		<tr>
 			<td border="1">${board.id} 
 			(<fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd a hh:mm:ss"/>)<br>
-	<c:if test="${sessionScope.loginMember.id == board.id }">
-		<input type="button" value="수정"/></c:if>
-	<c:if test="${sessionScope.loginMember.id == board.id }">
-		<input type="button" value="삭제"/>
-		</c:if></td>
 		<td>
 		${str}
 		</td>
