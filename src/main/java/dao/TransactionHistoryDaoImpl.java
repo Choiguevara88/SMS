@@ -42,4 +42,37 @@ public class TransactionHistoryDaoImpl implements TransactionHistoryDao {
 		
 		return sqlSession.selectList(NS + "searchTransList", map);
 	}
+	
+	/* 거래량에 대한 그래프를 그릴 때 호출되는 메서드
+	 * searchType = 그래프로 나타내고자 하는 키워드
+	 * id = 해당 내용을 검색하고자 하는 주체 (로그인한 유저)
+	 */
+	
+	@Override
+	public List<Map<String, Object>> graphTransCnt(String searchType, String id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(id.equals("admin")) {
+			id = null;
+		}
+		
+		map.put("searchType", searchType);
+		map.put("id", id);
+		
+		return sqlSession.selectList(NS + "graphTransCnt", map);
+	}
+
+	@Override
+	public List<Map<String, Object>> graphTransSum(String searchType, String id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(id.equals("admin")) {
+			id = null;
+		}
+		
+		map.put("searchType", searchType);
+		map.put("id", id);
+		
+		return sqlSession.selectList(NS + "graphTransSum", map);
+	}
 }

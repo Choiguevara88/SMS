@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -51,7 +52,7 @@ public interface ProjectService {
 
 	int hostReserveCount(String hostName, Integer sNo, String searchType, String searchContent);
 
-	List<Reserve> selectHostReserveList(Integer sNo, String hostName, String searchType, String searchContent, Integer pageNum, int limit);
+	List<Reserve> selectHostReserveList(Integer sNo, String id, String searchType, String searchContent, Integer pageNum, int limit);
 
 	List<Integer> hostHaveBuildsNo(String hostId);
 
@@ -90,4 +91,8 @@ public interface ProjectService {
 	List<Room> getMyRoom(Integer sNo);
 	
 	List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate);
+	
+	Map<String, Object> graphTransHistoryCnt(String searchType, String id);
+	
+	Map<String, Object> graphTransHistorySum(String searchType, String id);
 }

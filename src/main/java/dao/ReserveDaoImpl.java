@@ -83,13 +83,13 @@ public class ReserveDaoImpl implements ReserveDao {
 	}
 
 	@Override	// Host계정에서 예약리스트 확인 할 때 호출되는 메서드
-	public List<Reserve> hostlist(Integer sNo, String hostName, String searchType, String searchContent, Integer pageNum, int limit) {
+	public List<Reserve> hostlist(Integer sNo, String id, String searchType, String searchContent, Integer pageNum, int limit) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		int startrow = (pageNum - 1) * limit;
 		
 		map.put("sNo", sNo);
-		map.put("hostName", hostName);
+		map.put("id", id);
 		map.put("startrow", startrow);
 		map.put("limit", limit);
 		map.put("searchType", searchType);

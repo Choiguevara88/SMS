@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -266,7 +268,6 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 
-
 	@Override
 	public List<Board> boardList(Integer kind, int sNo, Integer pageNum, int limit) {
 		return boDao.list(kind, sNo, pageNum, limit);
@@ -283,9 +284,8 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<Reserve> selectHostReserveList(Integer sNo, String hostName, String searchType, String searchContent,
-			Integer pageNum, int limit) {
-		return reDao.hostlist(sNo, hostName, searchType, searchContent, pageNum, limit);
+	public List<Reserve> selectHostReserveList(Integer sNo, String id, String searchType, String searchContent, Integer pageNum, int limit) {
+		return reDao.hostlist(sNo, id, searchType, searchContent, pageNum, limit);
 	}
 
 	@Override
@@ -482,4 +482,29 @@ public class ProjectServiceImpl implements ProjectService {
 		return tranDao.searchTransHistory(searchType, searchContent, startDate, endDate);
 	}
 
+	@Override
+	public Map<String, Object> graphTransHistoryCnt(String searchType, String id) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		for(Map<String, Object> m : tranDao.graphTransCnt(searchType, id)) {
+			map.put((String)m.get("key"), m.get("value"));
+		}
+		
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> graphTransHistorySum(String searchType, String id) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		for(Map<String, Object> m : tranDao.graphTransSum(searchType, id)) {
+			map.put((String)m.get("key"), m.get("value"));
+		}
+		
+		return map;
+
+	}
+	
 } // ProjectServiceImpl end

@@ -30,4 +30,20 @@
 		</if>
 		
 	</select>
+	
+	<select id="graphTransCnt" resultType="map" parameterType="map">
+		select ${searchType} 'key', count(*) 'value' from TransactionHistory
+   			<if test="id != null">
+   				where id = #{id}
+   			</if>
+  		group by ${searchType} having count(*) &gt;= 1
+	</select>
+	
+	<select id="graphTransSum" resultType="map" parameterType="map">
+		select ${searchType} 'key', sum(totPrice) 'value' from TransactionHistory
+   			<if test="id != null">
+   				where id = #{id}
+   			</if>
+  		group by ${searchType} having sum(totPrice) &gt;= 1
+	</select>
 </mapper>
