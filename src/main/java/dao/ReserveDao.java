@@ -20,7 +20,7 @@ public interface ReserveDao {
 
 	int hostCount(Integer sNo, String hostName, String searchType, String searchContent);
 
-	List<Reserve> hostlist(Integer sNo, String hostName, String searchType, String searchContent, Integer pageNum, int limit);
+	List<Reserve> hostlist(Integer sNo, String id, String searchType, String searchContent, Integer pageNum, int limit);
 
 	void hostPaymentConfirm(Integer reNo);
 

@@ -49,7 +49,7 @@ public interface ProjectService {
 
 	int hostReserveCount(String hostName, Integer sNo, String searchType, String searchContent);
 
-	List<Reserve> selectHostReserveList(Integer sNo, String hostName, String searchType, String searchContent, Integer pageNum, int limit);
+	List<Reserve> selectHostReserveList(Integer sNo, String id, String searchType, String searchContent, Integer pageNum, int limit);
 
 	List<Integer> hostHaveBuildsNo(String hostId);
 
