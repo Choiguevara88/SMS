@@ -124,6 +124,7 @@ public class RoomController {
 		mav.addObject("myRoom", myRoom);
 	return mav;	
 	}
+	
 	@RequestMapping("room/roomDeleteSuccess")
 	public ModelAndView roomDelete(HttpSession session,HttpServletRequest request,Integer sRNo, String pass) {
 		ModelAndView mav = new ModelAndView();
