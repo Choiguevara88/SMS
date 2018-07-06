@@ -10,7 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Room {
 	private Integer sNo;				// 빌딩번호
-	
 	private Integer sRNo;				// Room 번호
 	@NotNull
 	private String sRName;				// Room 이름
