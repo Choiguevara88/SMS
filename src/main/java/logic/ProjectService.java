@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -82,8 +83,16 @@ public interface ProjectService {
 	Member find_member_by_email(String email);
 	
 	List<TransactionHistory> hostTransHistoryList(String first);
+	
+	Building getMyBuildingOne(String sNo);
+	
+	void buildingUpdateReg(Building building, HttpServletRequest request);
 
 	List<Room> getMyRoom(Integer sNo);
 	
 	List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate);
+	
+	Map<String, Object> graphTransHistoryCnt(String searchType, String id);
+	
+	Map<String, Object> graphTransHistorySum(String searchType, String id);
 }

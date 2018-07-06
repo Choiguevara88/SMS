@@ -10,7 +10,6 @@
 	<!-- layout 설정을 제외 함. -->
 	<excludes>
 		<pattern>/qa/questionAdmin.sms*</pattern>
-		<pattern>/user/mygraph*</pattern>
 	</excludes>
 
 </decorators>

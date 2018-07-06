@@ -20,7 +20,7 @@ public interface BuildingMapper {
 			+ "values(#{sNo}, #{id}, #{sName}, #{sPreview}, #{sContent}, #{sType}, #{sTag}, #{sInfoSub}, #{sRule}, #{sBHour}, #{sHDay}, #{sImg1}, #{sImg2}, #{sAddress}, #{sStat})")
 	void insert(Building building);
 
-	@Update("update board set readcnt=readcnt+1 where num=#{value}")
+	/*@Update("update board set readcnt=readcnt+1 where num=#{value}")
 	void addReadCnt(Integer num);
 
 	@Update("update board set refstep = refstep+1 where ref = #{ref} and refstep > #{refstep}")
@@ -33,9 +33,15 @@ public interface BuildingMapper {
 	void delete(Integer num);
 
 	@Select("select name 'key', count(*) 'value' from board group by name having count(*) >= 1")
-	List<Map<String, Object>> graph();
+	List<Map<String, Object>> graph();*/
 	
 	@Select("select * from building where id=#{value}")
 	List<Building> selectMyBuildings(String id);
+
+	@Select("select * from building where sNo=#{value}")
+	Building selectMyBuildingOne(String sNo);
+
+	@Update("update building set sName=#{sName}, sPreview=#{sPreview}, sContent=#{sContent}, sType=#{sType}, sTag=#{sTag}, sInfoSub=#{sInfoSub}, sRule=#{sRule}, sBHour=#{sBHour}, sHDay=#{sHDay}, sImg1=#{sImg1}, sImg2=#{sImg2}, sAddress=#{sAddress}, sStat=#{sStat} where sNo=#{sNo}")
+	void update(Building building);
 
 }

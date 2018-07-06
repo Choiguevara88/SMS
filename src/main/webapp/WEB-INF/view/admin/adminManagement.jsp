@@ -22,7 +22,8 @@
 <body>
 <div class="w3-container w3-margin">
 <div class="row">
-<div class="col-lg-4">
+
+<div class="col-4">
 	<table class="w3-table w3-striped">
 	<c:if test="${!empty hRegList}">
 		<tr align="center" valign="middle">
@@ -48,7 +49,7 @@
 	</table>
 </div>
 
-<div class="col-lg-4">
+<div class="col-4">
 	<table class="w3-table w3-striped">
 	<c:if test="${!empty gList}">
 		<tr align="center" valign="middle">
@@ -72,8 +73,8 @@
 	</c:if>
 	</table>
 </div>
-</div>
-<div class="col-lg-4">
+
+<div class="col-4">
 	<table class="w3-table w3-striped">
 	<c:if test="${!empty hList}">
 		<tr align="center" valign="middle">
@@ -97,6 +98,8 @@
 	</c:if>
 	</table>
 </div>
+
+</div>
 </div>
 <div class="w3-container w3-margin">
 	<table class="w3-table w3-striped w3-border">
@@ -108,5 +111,6 @@
 	<tr><td colspan="6"><a href="adminTransHostList.sms" class="w3-button">[세부 거래 대장 보러가기]</a></td></tr>
 	</table>
 </div>
+
 </body>
 </html>
