@@ -325,7 +325,6 @@ public class ProjectServiceImpl implements ProjectService {
 		System.out.println("service" + building);
 		buDao.buRegist(building);
 	}
-
 	private String listToString(List<String> list) {
 		String li = "";
 		for (int i = 0; i < list.size(); i++) {

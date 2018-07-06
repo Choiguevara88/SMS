@@ -36,8 +36,13 @@ public class RoomController {
 	}
 	
 	@RequestMapping("room/roomSuccess")
-	public ModelAndView roomSuccess(Room room) {
+	public ModelAndView roomSuccess(@Valid Room room, BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView();
+		if(bindingResult.hasErrors()) {
+			mav.getModel().putAll(bindingResult.getModel());
+			mav.setViewName("room/roomForm");
+			return mav;
+		}
 		try{
 			service.insertRoom(room);
 			mav.setViewName("redirect:NewFile.sms"); // 이게 자꾸 404가 나오는데 왜그러죠?
@@ -45,6 +50,7 @@ public class RoomController {
 			e.printStackTrace();
 			throw new ProjectException("throw new ProjectException(string,string주소)","roomForm.sms");
 		}
+	
 	return mav;
 }
 	@RequestMapping("room/NewFile")

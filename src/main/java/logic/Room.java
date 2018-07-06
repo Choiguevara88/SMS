@@ -2,11 +2,17 @@ package logic;
 
 import java.util.List;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class Room {
 	private Integer sNo;				// 빌딩번호
+	
 	private Integer sRNo;				// Room 번호
+	@NotNull
 	private String sRName;				// Room 이름
 	private String sRType;				// Room 유형
 	private List<String> sRTypeList;	// Room 유형 View 전달용 리스트 객체
@@ -15,6 +21,7 @@ public class Room {
 	private List<String> sRInfoList;	// Room시설안내 View 전달용 리스트 객체
 	private Integer sResType;			// 0 = 시간 단위 예약 / 1 = 일자 단위 예약
 	private String sRPersonLimit;		// 예약제한인원 설명 작성
+	@Min(2)
 	private Integer sPrice;				// Room 가격
 	private String sRImg;				// Room 이미지파일명 DB 저장용
 	private List<MultipartFile> sRImgList;	// Room 이미지파일 View 전달용 리스트 객체

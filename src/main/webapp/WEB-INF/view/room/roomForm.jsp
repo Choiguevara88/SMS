@@ -8,7 +8,7 @@
 <title>room/roomForm.jsp</title>
 </head>
 <body>
-<form:form modelAttribute="room" action="roomSuccess.sms" method="post" >
+<form:form modelAttribute="room" action="roomSuccess.sms" method="post" commandName="room">
 <spring:hasBindErrors name="room"> <!-- ? -->
 		<font color="tomato">
 			<c:forEach items="${errors.globalErrors }" var="error">
