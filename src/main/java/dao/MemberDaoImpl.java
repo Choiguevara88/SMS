@@ -70,8 +70,7 @@ public class MemberDaoImpl implements MemberDao{
 		return sqlSession.selectOne(NS+"findmypassword",map);
 	}
 	
-	
-	@Override // ?��?��?? ?��?? ??�? 목�??? �??��?��?? �?????
+	@Override 
 	public List<Member> getHostRegList() {
 		return sqlSession.selectList(NS + "hostRegList");
 	}

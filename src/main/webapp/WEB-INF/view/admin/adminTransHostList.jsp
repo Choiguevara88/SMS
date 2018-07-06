@@ -14,18 +14,19 @@
 <title>세부 선언</title>
 </head>
 <body>
+<div class="w3-container w3-margin">
 <form action="adminTransHostList.sms" method="post">
 <input type="date" name="startDate">부터 <input type="date" name="endDate">까지
-
-<select name="searchType">
-	<option value="">선택하세요.</option>
-	<option value="host">판매자ID</option>
-	<option value="guest">구매자ID</option>
-	<option value="sName">상호명</option>
-	<option value="srName">건물명</option>
-</select>
+	<select name="searchType">
+		<option value="">선택하세요.</option>
+		<option value="host">판매자ID</option>
+		<option value="guest">구매자ID</option>
+		<option value="sName">상호명</option>
+		<option value="srName">건물명</option>
+	</select>
 검색내용 <input type="text" name="searchContent"/> <input type="submit" value="검색">
-</form>
+	</form>
+</div>
 
 <table class="w3-table w3-striped">
 		<tr><th>호스트ID</th><th>상호명</th><th>Room이름</th><th>예약일자</th><th>발생수익</th><th>구매자</th></tr>
