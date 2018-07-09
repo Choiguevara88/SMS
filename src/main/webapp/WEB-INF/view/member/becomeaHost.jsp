@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script>
 function autohypen(){
 	var x = document.getElementById("tel"); //tel을 선택해서
@@ -30,38 +31,54 @@ function autohypen(){
 		return x.value;
 	}
 }
+function find_address(){
+	var op = "width=500, height=200, scrollbars=yes, left=70, top=150";
+	window.open("find_address.sms","",op); //하나밖에 안뜸. picture는 생략가능
+}
 </script>
+<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 </head>
 <body>
 <form:form modelAttribute="member" action="addhostdata.sms" method="POST" enctype="multipart/form-data">
 	<input type="hidden" id="regStatus" name="regStatus" value="0"/>
 	<input type="hidden" id="id" name="id" value="${sessionScope.loginMember.id }">
-	<table align="center" cellpadding="1" cellspacing="1" border="0">
+	
+		<table align="center">
 		<tr>
-			<td align="left">상호명/호스트이름</td><td style="width:auto;"><input type="text" name="hostName" id="hostName"></td>
-		</tr>
+			<td align="left">상호명/호스트이름</td><td style="width:auto;"><input type="text" name="hostName" id="hostName"></td></tr>
 		<tr>
-			<td align="left">사업자 등록번호</td><td><input type="text" name="hostRegNo" id="hostRegNo"></td>
-		</tr>
+			<td align="left">사업자 등록번호</td><td><input type="text" name="hostRegNo" id="hostRegNo"></td></tr>
 		<tr>
-			<td align="left"> 사업자 등록증</td><td><input type="file" name="picture">
-		</tr>
+			<td align="left"> 사업자 등록증</td><td><input type="file" name="picture"></tr></table>
+			
+	<hr size="1" style="margin-top:1px; margin-bottom:1px">
+		<table align="center">
 		<tr>
-			<td align="left">사업자주소지</td><td><input type="text" name="address" id="address"></td>
-		</tr>
-		
+			<td><strong>사업자 주소지</strong></td></tr>
+		<tr>
+			<td>우편번호</td><td><input type="text" name="" class="postcodify_postcode5" value="" />
+				<input type="button" id="postcodify_search_button" value="검색"></td></tr>
+		<tr>
+			<td>도로명 주소</td><td><input type="text" name="" class="postcodify_address" value="" /></td></tr>
+		<tr>
+			<td>상세 주소</td><td><input type="text" name="" class="postcodify_address" value="" /></td></tr></table>
+			
+	<hr size="1" style="margin-top:1px; margin-bottom:1px">
+		<table align="center">			
 		<tr><td rowspan="3" align="left">계좌정보</td>
 			<td><input type="text" name="accountNo" id="accountNo" placeholder="은행명: 뒤에 '은행'은 빼고"/></td></tr>
-		<tr><td><input type="text" name="accountNo" id="accountNo" placeholder="계좌번호: - 제외"/></td></tr>
-		<tr><td><input type="text" name="accountNo" id="accountNo" placeholder="예금주 : 이름"/></td></tr>  
+		<tr>
+			<td><input type="text" name="accountNo" id="accountNo" placeholder="계좌번호: - 제외"/></td></tr>
+		<tr>
+			<td><input type="text" name="accountNo" id="accountNo" placeholder="예금주 : 이름"/></td></tr>
 		<tr>
 			<td align="left">사업자 연락처</td>
-					<td><input type="text" name="tel" id="tel" placeholder="123-456-7890" onkeyup="autohypen()" maxlength="13"></td>
-		</tr>
+				<td><input type="text" name="tel" id="tel" placeholder="123-456-7890" onkeyup="autohypen()" maxlength="13"></td></tr></table>
+	<hr size="1" style="margin-top:1px; margin-bottom:1px">
+		<table align="center">
 		<tr><td></td><td align="left">
 				<input type="submit" value="호스트 승인 요청">
-				<input type="button" onclick="javascript:history.go(-1)" value="뒤로가기"></td></tr>
-	</table>
+				<input type="button" onclick="javascript:history.go(-1)" value="뒤로가기"></td></tr></table>
 </form:form>
 </body>
 </html>

@@ -15,6 +15,7 @@ import dao.BuildingDao;
 import dao.MemberDao;
 import dao.ReserveDao;
 import dao.RoomDao;
+import dao.TransactionHistoryDao;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
