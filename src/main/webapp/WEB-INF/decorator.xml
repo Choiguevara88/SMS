@@ -11,6 +11,8 @@
 	<excludes>
 		<pattern>/trans/graph*</pattern>
 		<pattern>/qa/questionAdmin.sms*</pattern>
+		<pattern>/review/Qlist.sms*</pattern>
+		<pattern>/review/Rlist.sms*</pattern>
 		<pattern>*find_address*</pattern>
 	</excludes>
 </decorators>

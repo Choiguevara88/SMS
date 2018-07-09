@@ -2,14 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp" %>    
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>목록보기</title>
 <script type="text/javascript">
 	function list(pageNum) {
-		location.href="list.sms?pageNum=" + pageNum +"&sNo="+${param.sNo}+"&kind="+${param.kind};
+		location.href="Rlist.sms?pageNum=" + pageNum +"&sNo="+${param.sNo};
 		return false;
 	}
 </script>
@@ -23,16 +18,14 @@
 		  return parseFloat(t.toFixed(0));
 		}
 </script>
-</head>
-<body>
-
 <div>
 	<div style="float:left; display:inliine;">
 	<h4>이용 후기 <strong><em>${listcount}</em>개</strong><span></span>
 						평균 평점 <strong><em>
-						<script>
-						document.write(roundXL(${avgScore},1))
-						</script></em></strong>
+	<div id="roundavg" style="display:inline"></div>					
+	<script>
+	roundavg.innerHTML =roundXL(${avgScore},1)
+	</script></em></strong>
 	</h4></div>
 	<span style="float:right">
 	</span>
@@ -56,12 +49,9 @@
 	</tr>
 	<tr>
 		<td colspan="3"><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd H:mm:ss"/></td>
-  		<td align="center" class="content">
+  		<td align="center" >
   		<c:if test="${sessionScope.loginMember.id == building.id && board.sNo == building.sNo }">
   		<a href="../review/reply.sms?bNo=${board.bNo}&pageNum=${pageNum}">[답변]</a></c:if>
-  		<c:if test="${sessionScope.loginMember.id == board.id }">
-		<a href="../review/Rupdate.sms?bNo=${board.bNo}&pageNum=${pageNum}">[수정]</a>
-		<a href="../review/delete.sms?bNo=${board.bNo}&pageNum=${pageNum}">[삭제]</a></c:if><br></td>
 </tr>
 <!--  글 밑 부분 -->
 </c:forEach>
@@ -85,6 +75,3 @@
 	 <tr><td colspan="5">등록된 게시물이 없습니다.</td></tr>
 	 </c:if>
 </table>
-
-</body>
-</html>

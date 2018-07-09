@@ -79,7 +79,7 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 
 		if (board.getImg4File() != null) {
-			String img = uploadImgCreate(board.getImg1File(), request);
+			String img = uploadImgCreate(board.getImg4File(), request);
 			if (img != null)
 				board.setImg4(img);
 		}
