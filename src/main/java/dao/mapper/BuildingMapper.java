@@ -16,7 +16,7 @@ public interface BuildingMapper {
 	@Select("select ifnull(max(sNo),0) from building")
 	int maxNum();
 	
-	@Insert("insert into building(sNo, id, sName, sPreview, sContent, sType, sTag, sInfoSub, sRule, sBHour, sHDay, sImg1, sImg2, sAddress, sStat) "
+	@Insert("insert into building(sNo, id, sName, sPreview, sContent, sType, sTag, sInfoSub, sRule, sBHour, sHDay, sImg1, sImg2, sAddress) "
 			+ "values(#{sNo}, #{id}, #{sName}, #{sPreview}, #{sContent}, #{sType}, #{sTag}, #{sInfoSub}, #{sRule}, #{sBHour}, #{sHDay}, #{sImg1}, #{sImg2}, #{sAddress})")
 	void insert(Building building);
 

@@ -322,13 +322,11 @@ public class ProjectServiceImpl implements ProjectService {
 		String sInfoSub = listToString(building.getsInfoSubList());
 		String sRule = listToString(building.getsRuleList());
 		String sBHour = listToString(building.getsBHourList());
-		int sStat = 0;
 		building.setsType(sType);
 		building.setsTag(sTag);
 		building.setsInfoSub(sInfoSub);
 		building.setsRule(sRule);
 		building.setsBHour(sBHour);
-		building.setsStat(sStat);
 		buDao.buRegist(building);
 	}
 	private String listToString(List<String> list) {
@@ -470,8 +468,8 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
-	public Room getMyRoom(Integer sRNo) {
-		return roomDao.getMyRoom(sRNo);
+	public Room getMyRoom(Room room) {
+		return roomDao.getMyRoom(room);
 	}
 
 	@Override
@@ -514,12 +512,8 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 
 	@Override
-	public void deleteRoom(Integer sRNo) {
-		roomDao.deleteRoom(sRNo);
+	public void deleteRoom(Room room) {
+		roomDao.deleteRoom(room);
 		
 	}
-
-
-
-	
 	}// ProjectServiceImpl end

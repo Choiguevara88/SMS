@@ -118,7 +118,7 @@ public class ReserveController {
 		return mav;
 	}
 
-	// 예약 리스트를 확인할 때 호출되는 메서드 (Host계정용)
+	// 건물 별로 예약 리스트를 확인할 때 호출되는 메서드 (Host계정용)
 	@RequestMapping(value = "reserve/hostResList", method = RequestMethod.GET)
 	public ModelAndView hostReserveList(Integer sNo, Integer pageNum, String searchType, String searchContent, HttpSession session,
 			String startDate, String endDate) {
@@ -130,8 +130,6 @@ public class ReserveController {
 		ModelAndView mav = new ModelAndView();
 
 		int limit = 100; // 한 페이지에 나올 게시글의 숫자
-		
-//		String hostName = ((Member) session.getAttribute("loginMember")).getHostName();
 		
 		int listcount = service.hostReserveCount(sNo, searchType, searchContent); // 표시될 총 게시글의 수
 
@@ -167,7 +165,11 @@ public class ReserveController {
 		ModelAndView mav = new ModelAndView();
 
 		Reserve reserve = service.getReserve(reNo);
-		Room room = service.getMyRoom(reserve.getSrNo());
+		
+		Room room = new Room();
+		room.setsRNo(reserve.getSrNo());
+		room =service.getMyRoom(room);
+		//Room room = service.getMyRoom(reserve.getSrNo());
 
 		mav.addObject("reserve", reserve);
 		mav.addObject("room", room); // 세부공간에 대한 세부정보

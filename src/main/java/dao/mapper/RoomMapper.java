@@ -11,15 +11,16 @@ public interface RoomMapper {
 
 	@Insert("insert into room (sno,srno,srname,srtype,srcontent,srinfo,srestype,srpersonlimit,sprice,srimg) values(#{sNo},#{sRNo},#{sRName},#{sRType},#{sRContent},#{sRInfo},#{sResType},#{sRPersonLimit},#{sPrice},#{sRImg})")
 	void insert(Room room);
+	@Update("update room set srname=#{sRName},srtype=#{sRType},srcontent=#{sRContent},srinfo=#{sRInfo},srestype=#{sResType},srpersonlimit=#{sRPersonLimit},sprice=#{sPrice} where srno=#{sRNo} and sNo=#{sNo}")
+	void update(Room room);
 
-	@Select("select * from room where sRNo=#{value}")
-	Room selectMyRoom(Integer sRNo);
+	//@Select("select * from room where sRNo=#{value}")
+	//Room selectMyRoom(Integer sRNo);
 
-	@Update("update room set srname=#{sRName},srtype=#{sRType},srcontent=#{sRContent},srinfo=#{sRInfo},srestype=#{sResType},srpersonlimit=#{sRPersonLimit},sprice=#{sPrice} where srno=#{sRNo}")
-	void updateRoom(Room room);
+	//@Update("update room set srname=#{sRName},srtype=#{sRType},srcontent=#{sRContent},srinfo=#{sRInfo},srestype=#{sResType},srpersonlimit=#{sRPersonLimit},sprice=#{sPrice} where srno=#{sRNo}")
 	
-	@Delete("delete from room where srNo=#{sRNo}")
-	void deleteRoom(Integer sRNo);
+	//@Delete("delete from room where srNo=#{sRNo}")
+	//void deleteRoom(Integer sRNo);
 	
 	
 	

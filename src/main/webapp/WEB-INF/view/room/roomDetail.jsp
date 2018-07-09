@@ -24,7 +24,7 @@
   </div>
 </div>
 <p>roomDetail</p>
-<a href="roomUpdateForm.sms?sRNo=${myRoom.sRNo }" class="w3-button w3-black">세부 공간 정보 수정</a>
-<a href="roomDeleteForm.sms?sRNo=${myRoom.sRNo }" class="w3-button w3-black">세부 공간 삭제</a>
+<a href="roomUpdateForm.sms?sRNo=${myRoom.sRNo }&sNo=${myRoom.sNo}" class="w3-button w3-black">세부 공간 정보 수정</a>
+<a href="roomDeleteForm.sms?sRNo=${myRoom.sRNo }&sNo=${myRoom.sNo}" class="w3-button w3-black">세부 공간 삭제</a>
 </body>
 </html>

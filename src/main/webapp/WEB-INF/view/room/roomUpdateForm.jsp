@@ -19,8 +19,12 @@
 
 <table align="center" cellpadding="1" cellspacing="1" border = "1">
 		
+		
+	<tr><td>sNo = ${myRoom.sNo }</td><td>네가 수정 할 수 있을까?</td></tr>
+	<form:hidden path="sNo" value="${myRoom.sNo }" />	
 	<tr><td>sRNo = ${myRoom.sRNo }</td><td>수정해라 수정!</td></tr>
 	<form:hidden path="sRNo" value="${myRoom.sRNo }" />
+	
 	
 	<tr><td>SRName</td><td><form:input path="sRName" value="${myRoom.sRName}"  />
 		<font color="red"><form:errors path="sRName"/></font></td></tr>
