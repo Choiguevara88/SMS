@@ -27,7 +27,6 @@ public class Building {
 	private List<MultipartFile> sImg2Files;	// 다중이미지파일을 업로드 하기 위한 객체
 	private List<String> sImg2Name;			// View단으로 이미지파일명들을 보내기 위한 List 객체
 	private String sAddress;			// 빌딩 주소
-	private Integer sStat;				// 승인 여부
 	private List<Room> room;				// 화면에 표시할 Room 객체들
 	private Integer boCnt;					// 아직 읽지 않은 문의 갯수
 	private Integer reCnt;					// 아직 확인 안 된 예약 갯수
@@ -163,12 +162,6 @@ public class Building {
 	public void setsAddress(String sAddress) {
 		this.sAddress = sAddress;
 	}
-	public Integer getsStat() {
-		return sStat;
-	}
-	public void setsStat(Integer sStat) {
-		this.sStat = sStat;
-	}
 	public List<Room> getRoom() {
 		return room;
 	}
@@ -194,7 +187,7 @@ public class Building {
 				+ sTag + ", sInfoSubList=" + sInfoSubList + ", sInfoSub=" + sInfoSub + ", sRuleList=" + sRuleList
 				+ ", sRule=" + sRule + ", sBHourList=" + sBHourList + ", sBHour=" + sBHour + ", sHDay=" + sHDay
 				+ ", sImg1=" + sImg1 + ", sImg1File=" + sImg1File + ", sImg2=" + sImg2 + ", sImg2Files=" + sImg2Files
-				+ ", sImg2Name=" + sImg2Name + ", sAddress=" + sAddress + ", sStat=" + sStat + ", room=" + room
+				+ ", sImg2Name=" + sImg2Name + ", sAddress=" + sAddress + ", room=" + room
 				+ ", boCnt=" + boCnt + ", reCnt=" + reCnt + "]";
 	}
 	
