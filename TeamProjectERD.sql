@@ -117,7 +117,7 @@ ex) 토일월',
    -- ex ) img.png\timg2.jpg\t
    SImg2 varchar(1200) COMMENT '\t로 구분자 사용
 ex ) img.png\timg2.jpg\t',
-<<<<<<< HEAD
+
    -- 공간(건물) 주소
    SAddress varchar(50) COMMENT '공간(건물) 주소',
    -- 미승인 : 0
@@ -128,11 +128,11 @@ ex ) img.png\timg2.jpg\t',
 반려 : 2',
    PRIMARY KEY (SNo),
    UNIQUE (ID)
-=======
+
 	-- 공간(건물) 주소
 	SAddress varchar(50) COMMENT '공간(건물) 주소',
 	PRIMARY KEY (SNo)
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
+
 );
 
 
@@ -165,7 +165,7 @@ CREATE TABLE Member
    MemType int COMMENT 'Guest = 0
 Host = 1
 Admin = 2',
-<<<<<<< HEAD
+
    -- Host계정 전환 시 사용 될 사업주명
    HostName varchar(200) COMMENT 'Host계정 전환 시 사용 될 사업주명',
    -- 사업자등록번호
@@ -181,7 +181,7 @@ Admin = 2',
    PictureUrl varchar(130) COMMENT '호스트 계정 전환용 사업자 등록증 파일이름',
    PRIMARY KEY (ID),
    UNIQUE (Email)
-=======
+
 	-- Host계정 전환 시 사용 될 사업주명
 	HostName varchar(200) COMMENT 'Host계정 전환 시 사용 될 사업주명',
 	-- 사업자등록번호
@@ -197,7 +197,7 @@ Admin = 2',
 	PictureUrl varchar(130) COMMENT '호스트 계정 전환용 사업자 등록증 파일이름',
 	PRIMARY KEY (ID),
 	UNIQUE (Email)
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
+
 );
 
 
@@ -268,11 +268,11 @@ ex)세미나실, 회의실, 연습실 등등',
 
 /* Create Views */
 
-<<<<<<< HEAD
+
 CREATE VIEW transactionhistory AS select `bu`.`ID` AS `id`,`bu`.`SNo` AS `sNo`,`re`.`reDate` AS `reDate`,`re`.`regDate` AS `regDate`,`re`.`totPrice` AS `totPrice`,`re`.`cnt` AS `cnt` from `bigdb`.`building` `bu` join (select `bigdb`.`reserve`.`SNo` AS `sNo`,`bigdb`.`reserve`.`ReDate` AS `reDate`,`bigdb`.`reserve`.`RegDate` AS `regDate`,sum(`bigdb`.`reserve`.`TotPrice`) AS `totPrice`,count(0) AS `cnt`,`bigdb`.`reserve`.`ReStat` AS `reStat` from `bigdb`.`reserve` group by `bigdb`.`reserve`.`SNo` having `bigdb`.`reserve`.`ReStat` = 1 and `bigdb`.`reserve`.`ReDate` < current_timestamp()) `re` where `bu`.`SNo` = `re`.`sNo`;
-=======
+
 CREATE VIEW transactionhistory AS select `t`.`host` AS `host`,`t`.`guest` AS `guest`,`m`.`HostName` AS `hostName`,`m`.`Email` AS `Email`,`m`.`Address` AS `address`,`m`.`RegDate` AS `regDate`,`m`.`Tel` AS `tel`,`m`.`AccountNo` AS `accountNo`,`t`.`SNo` AS `sNo`,`t`.`SName` AS `sName`,`t`.`srNo` AS `sRNo`,`t`.`srName` AS `sRName`,`t`.`reNo` AS `reNo`,`t`.`reDate` AS `reDate`,`t`.`totPrice` AS `totPrice` from `bigdb`.`member` `m` join (select `bu`.`ID` AS `host`,`bu`.`SNo` AS `SNo`,`bu`.`SName` AS `SName`,`rr`.`reDate` AS `reDate`,`rr`.`regDate` AS `regDate`,`rr`.`totPrice` AS `totPrice`,`rr`.`reNo` AS `reNo`,`rr`.`srName` AS `srName`,`rr`.`srNo` AS `srNo`,`rr`.`guest` AS `guest` from (select `re`.`sNo` AS `sNo`,`ro`.`SRNo` AS `srNo`,`ro`.`SRName` AS `srName`,`re`.`reDate` AS `reDate`,`re`.`totPrice` AS `totPrice`,`re`.`reNo` AS `reNo`,`re`.`regDate` AS `regDate`,`re`.`id` AS `guest` from (select `bigdb`.`reserve`.`SNo` AS `sNo`,`bigdb`.`reserve`.`SRNo` AS `srNo`,`bigdb`.`reserve`.`ReDate` AS `reDate`,`bigdb`.`reserve`.`RegDate` AS `regDate`,`bigdb`.`reserve`.`TotPrice` AS `totPrice`,`bigdb`.`reserve`.`ReStat` AS `reStat`,`bigdb`.`reserve`.`ReNo` AS `reNo`,`bigdb`.`reserve`.`ID` AS `id` from `bigdb`.`reserve` where `bigdb`.`reserve`.`ReStat` = 1 and `bigdb`.`reserve`.`ReDate` < curdate()) `re` join `bigdb`.`room` `ro` where `re`.`srNo` = `ro`.`SRNo` and `re`.`sNo` = `ro`.`SNo` group by `re`.`reNo`) `rr` join `bigdb`.`building` `bu` where `rr`.`sNo` = `bu`.`SNo` group by `rr`.`reNo`) `t` where `t`.`host` = `m`.`ID` group by `t`.`reNo`;
 
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
+
 
 
