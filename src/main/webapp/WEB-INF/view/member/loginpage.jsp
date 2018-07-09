@@ -45,12 +45,12 @@
  		<tr><td colspan="3" align="center"><a href="findmyID.sms"><font size="1">ID 찾기 !</font></a>&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;<a href="findmypassword.sms"><font size="1">비밀번호 찾기 !</font></a></td></tr>
  		<tr>
   			<td colspan="3" align="center">
-  				<input type="submit" value="로그인">
+  				<input type="submit" value="로그인">&nbsp;&nbsp;
   				<input type="button" onclick="location.href='joinForm.sms'" value="가입하기"></td></tr>
   		<tr>
-  			<td><a href="<%=apiURL%>"><img style="width:55px; height:55px;" src="${path }/picture/naver.png"></a></td>
-  			<td><a href="loginwithGoogle.sms"><img style="width:55px; height:55px;" src="${path }/picture/google.png"></a></td>
-  			<td><a href="facebooklogin.sms"><img style="width:55px; height:55px;" src="${path }/picture/facebook.png"></a></td>
+  			<td colspan="3" align="center"><a href="<%=apiURL%>"><img style="width:55px; height:55px;" src="${path }/picture/naver.png"></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  			<a href="loginwithGoogle.sms"><img style="width:55px; height:55px;" src="${path }/picture/google.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  			<a href="facebooklogin.sms"><img style="width:55px; height:55px;" src="${path }/picture/facebook.png"></a></td>
 		</tr>
  	</table>
  </form:form>
