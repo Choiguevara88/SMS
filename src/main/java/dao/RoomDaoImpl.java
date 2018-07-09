@@ -22,13 +22,18 @@ public class RoomDaoImpl implements RoomDao{
 
 	@Override
 	public void insertRoom(Room room) {
-		sqlSession.getMapper(RoomMapper.class).insert(room);
-		
+		sqlSession.getMapper(RoomMapper.class).insert(room);	
 	}
-	
 	@Override
-	public Room getMyRoom(Integer sRNo) {
-		return sqlSession.getMapper(RoomMapper.class).selectMyRoom(sRNo);
+	public Room getMyRoom(Room room) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		Integer sRNo = room.getsRNo();
+		Integer sNo = room.getsNo();
+		
+		map.put("sRNo",sRNo);
+		map.put("sNo", sNo);
+		return sqlSession.selectOne(NS + "one",map);
 	}
 	
 	@Override
@@ -40,15 +45,18 @@ public class RoomDaoImpl implements RoomDao{
 
 	@Override
 	public void updateRoom(Room room) {
-		sqlSession.getMapper(RoomMapper.class).updateRoom(room);
-		
+		sqlSession.getMapper(RoomMapper.class).update(room);	
 	}
 
 	@Override
-	public void deleteRoom(Integer sRNo) {
-		sqlSession.getMapper(RoomMapper.class).deleteRoom(sRNo);
+	public void deleteRoom(Room room) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		Integer sRNo = room.getsRNo();
+		Integer sNo = room.getsNo();
+		
+		map.put("sRNo",sRNo);
+		map.put("sNo", sNo);
+		sqlSession.selectOne(NS + "oneD",map);
 		
 	}
-
-	
 }

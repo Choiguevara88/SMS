@@ -468,8 +468,8 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
-	public Room getMyRoom(Integer sRNo) {
-		return roomDao.getMyRoom(sRNo);
+	public Room getMyRoom(Room room) {
+		return roomDao.getMyRoom(room);
 	}
 
 	@Override
@@ -512,10 +512,11 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 
 	@Override
-	public void deleteRoom(Integer sRNo) {
-		roomDao.deleteRoom(sRNo);
+	public void deleteRoom(Room room) {
+		roomDao.deleteRoom(room);
 		
 	}
+
 
 	@Override
 	public void deleteAccount(Member member) {

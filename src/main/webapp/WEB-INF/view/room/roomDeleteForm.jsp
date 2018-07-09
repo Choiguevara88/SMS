@@ -19,7 +19,7 @@
   <div class="w3-card-4" style="width:30%">
     <div class="w3-container w3-center">
   		<input type="hidden" name="sRNo" value="${myRoom.sRNo}"/>
-		
+		<input type="hidden" name="sNo" value="${myRoom.sNo}"/>
 		<label for="pass">
 		<input type="text" name="pass"/>
 		</label>
