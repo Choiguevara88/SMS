@@ -125,10 +125,10 @@ ex ) img.png\timg2.jpg\t',
 
 CREATE TABLE Favorite
 (
-	-- 회원 ID
-	ID varchar(30) NOT NULL COMMENT '회원 ID',
-	-- 건물관리고유번호
-	SNo int NOT NULL COMMENT '건물관리고유번호'
+   -- 회원 ID
+   ID varchar(30) NOT NULL COMMENT '회원 ID',
+   -- 건물관리고유번호
+   SNo int NOT NULL COMMENT '건물관리고유번호'
 );
 
 
