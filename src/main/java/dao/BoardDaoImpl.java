@@ -69,6 +69,12 @@ public class BoardDaoImpl implements BoardDao{
 	public void insert(Board board) {
 		sqlSession.getMapper(BoardMapper.class).insert(board);
 	}
+	
+	@Override
+	public void replyInsert(Board board) {
+		sqlSession.getMapper(BoardMapper.class).rInsert(board);
+	}
+	
 	@Override
 	public void update(Board board) {
 		sqlSession.getMapper(BoardMapper.class).update(board);

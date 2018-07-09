@@ -32,7 +32,7 @@ public interface ProjectService {
 
 	int reserveCount(String id, String searchType, String searchContent);
 	
-	List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum, int limit);
+	List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum, int limit, String startDate, String endDate);
 
 	void reserveInsert(Reserve reserve);
 
@@ -86,7 +86,7 @@ public interface ProjectService {
 	
 	void buildingUpdateReg(Building building, HttpServletRequest request);
 
-	Room getMyRoom(Integer sRNo);
+	Room getMyRoom(Room room);
 	
 	List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate);
 	
@@ -94,11 +94,21 @@ public interface ProjectService {
 	
 	void updateRoom(Room room);
 	
-	void deleteRoom(Integer sRNo);
+	void deleteRoom(Room room);
 	
 	Map<String, Object> graphTransHistoryCnt(String searchType, String id);
 	
 	Map<String, Object> graphTransHistorySum(String searchType, String id);
+	
+	void deleteAccount(Member member);
+	
+	List<Member> getMemberList(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum);
+	
+	int getMemberCnt(String searchType, String searchContent, String startDate, String endDate, Integer pageNum, Integer limit);
+	int getHostCnt(String searchType, String searchContent, String startDate, String endDate, Integer pageNum,
+			Integer limit);
+	List<Member> getHostList(String searchType, String searchContent, String startDate, String endDate, Integer pageNum,
+			Integer limit);
 	
 	
 }

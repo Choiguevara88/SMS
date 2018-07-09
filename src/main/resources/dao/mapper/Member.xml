@@ -2,6 +2,7 @@
 <!-- main/resources/dao/mapper/Member.xml -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.mapper.MemberMapper">
+
 	<select id="list" resultType="Member" parameterType="map">
 		select * from member
 		<if test="id != null">
@@ -17,13 +18,67 @@
 		and not id = 'admin'
 	</select>
 	
+	<!-- adminPage 관련 start -->
+	<!-- [&lt; = <] [&gt; = >] -->
+	<select id="adminMemberCnt" resultType="int" parameterType="map">
+		select count(*) from member
+		
+		<if test="searchType != null and searchContent != null and startDate == null and endDate == null">
+			where ${searchType} like '%${searchContent}%'
+		</if>
+		
+		<if test="searchType == 'regDate' and searchContent == null and startDate != null and endDate != null">
+			where regDate &gt;= #{startDate} and regDate &lt;= #{endDate}
+		</if>
+		order by #{searchType} desc limit #{pageNum}, #{limit}
+	</select>
+	
+	<select id="adminMemberList" resultType="Member" parameterType="map">
+		select * from member 
+		
+		<if test="searchType != null and searchContent != null and startDate == null and endDate == null">
+			where ${searchType} like '%${searchContent}%'
+		</if>
+		
+		<if test="searchType == 'regDate' and searchContent == null and startDate != null and endDate != null">
+			where regDate &gt;= #{startDate} and regDate &lt;= #{endDate}
+		</if>
+	</select>
+	
+	<select id="adminHostCnt" resultType="int" parameterType="map">
+		select count(*) from member where memType = 1
+		
+		<if test="searchType != null and searchContent != null and startDate == null and endDate == null">
+			and ${searchType} like '%${searchContent}%'
+		</if>
+		
+		<if test="searchType == 'regDate' and searchContent == null and startDate != null and endDate != null">
+			and regDate &gt;= #{startDate} and regDate &lt;= #{endDate}
+		</if>
+		order by #{searchType} desc limit #{pageNum}, #{limit}
+	</select>
+	
+	<select id="adminHostList" resultType="Member" parameterType="map">
+		select * from member where memType = 1
+		
+		<if test="searchType != null and searchContent != null and startDate == null and endDate == null">
+			and ${searchType} like '%${searchContent}%'
+		</if>
+		
+		<if test="searchType == 'regDate' and searchContent == null and startDate != null and endDate != null">
+			and regDate &gt;= #{startDate} and regDate &lt;= #{endDate}
+		</if>
+	</select>
+	
 	<select id="hostRegList" resultType="Member">
 		select * from Member where memType = 0 and regStatus = 0
 	</select>
 	
 	<update id="hostRegister" parameterType="map">
-		update Member set memType=1 , regStatus = 2 where id=#{id}
+		update Member set memType=1 , regStatus = 1 where id=#{id}
 	</update>
+	
+	<!-- adminPage 관련 end -->
 	
 	<select id="findmyID" resultType="Member" parameterType="map">
 		select * from member

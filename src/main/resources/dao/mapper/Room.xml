@@ -9,4 +9,17 @@
 		</if>
 	</select>
 	
+	<select id="one" resultType="room" parameterType="map">
+		select * from room 
+		<if test="sNo != null and sRNo !=null" >
+			where sNo = #{sNo} and sRNo = #{sRNo}
+		</if>
+	</select>
+	<select id="oneD" parameterType="map">
+		delete from room 
+		<if test="sNo != null and sRNo !=null" >
+			where sNo = #{sNo} and sRNo = #{sRNo}
+		</if>
+	</select>
+	
 </mapper>

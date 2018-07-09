@@ -115,7 +115,7 @@ public class ProjectServiceImpl implements ProjectService {
 		
 		board.setbNo(++num);
 		board.setRefLevel(board.getRefLevel() + 1);
-		boDao.insert(board);
+		boDao.replyInsert(board);
 	}
 
 	@Override // board Update Method()
@@ -180,8 +180,8 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum,
-			int limit) {
-		return reDao.list(id, searchType, searchContent, pageNum, limit);
+			int limit, String startDate, String endDate) {
+		return reDao.list(id, searchType, searchContent, pageNum, limit, startDate, endDate);
 	}
 
 	@Override
@@ -322,13 +322,11 @@ public class ProjectServiceImpl implements ProjectService {
 		String sInfoSub = listToString(building.getsInfoSubList());
 		String sRule = listToString(building.getsRuleList());
 		String sBHour = listToString(building.getsBHourList());
-		int sStat = 0;
 		building.setsType(sType);
 		building.setsTag(sTag);
 		building.setsInfoSub(sInfoSub);
 		building.setsRule(sRule);
 		building.setsBHour(sBHour);
-		building.setsStat(sStat);
 		buDao.buRegist(building);
 	}
 	private String listToString(List<String> list) {
@@ -470,8 +468,8 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
-	public Room getMyRoom(Integer sRNo) {
-		return roomDao.getMyRoom(sRNo);
+	public Room getMyRoom(Room room) {
+		return roomDao.getMyRoom(room);
 	}
 
 	@Override
@@ -514,12 +512,36 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 
 	@Override
-	public void deleteRoom(Integer sRNo) {
-		roomDao.deleteRoom(sRNo);
+	public void deleteRoom(Room room) {
+		roomDao.deleteRoom(room);
 		
 	}
 
 
+	@Override
+	public void deleteAccount(Member member) {
+		memDao.deleteAccount(member);
+	}
 
+	@Override
+	public List<Member> getMemberList(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum) {
+		return memDao.getMemberList(searchType, searchContent, startDate, endDate, limit, pageNum);
+	}
+
+	@Override
+	public int getMemberCnt(String searchType, String searchContent, String startDate, String endDate, Integer pageNum, Integer limit) {
+		return memDao.getMemberCnt(searchType, searchContent, startDate, endDate, limit, pageNum);
+	}
+
+	@Override
+	public int getHostCnt(String searchType, String searchContent, String startDate, String endDate, Integer pageNum, Integer limit) {
+		return memDao.getHostCnt(searchType, searchContent, startDate, endDate, limit, pageNum);
+	}
+
+	@Override
+	public List<Member> getHostList(String searchType, String searchContent, String startDate, String endDate, Integer pageNum, Integer limit) {
+		return memDao.getHostList(searchType, searchContent, startDate, endDate, limit, pageNum);
+	}
+	
 	
 	}// ProjectServiceImpl end

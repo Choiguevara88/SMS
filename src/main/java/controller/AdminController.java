@@ -43,6 +43,82 @@ public class AdminController {
 		return mav;
 	}
 	
+	// 관리자가 총 회원 정보를 확인할 때 사용되는 메서드 (=회원리스트 확인)
+	@RequestMapping(value="admin/adminMemberList", method=RequestMethod.GET)
+	public ModelAndView adminMemberList(HttpSession session, String searchType, 
+			String searchContent, String startDate, String endDate,
+			Integer limit, Integer pageNum) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(pageNum == null || ("" + pageNum).equals("")) {
+			pageNum = 1;
+			limit = 30;
+		}
+		
+		int listCnt = service.getMemberCnt(searchType, searchContent, startDate, endDate, pageNum, limit);
+		List<Member> memList = service.getMemberList(searchType, searchContent, startDate, endDate, pageNum, limit);
+		
+		int maxpage = (int) ((double) listCnt / limit + 0.95);
+		int startpage = (((int) (pageNum / 10.0 + 0.9)) - 1) * 10 + 1;
+		int endpage = startpage + 9;
+		
+		if (endpage > maxpage) {
+			endpage = maxpage;
+		}
+		
+		mav.addObject("pageNum", pageNum);
+		mav.addObject("maxpage", maxpage);
+		mav.addObject("startpage ", startpage);
+		mav.addObject("endpage", endpage);
+		mav.addObject("listCnt", listCnt);
+		mav.addObject("list", memList);
+		
+		if(searchType != null && searchType.equals("")) {
+			mav.addObject("searchType", searchType);
+		}
+		
+		return mav;
+	}
+	
+	// 관리자가 총 Host 회원 정보를 확인할 때 사용되는 메서드 (=host 리스트 확인)
+	@RequestMapping(value="admin/adminHostList", method=RequestMethod.GET)
+	public ModelAndView adminHostList(HttpSession session, String searchType, 
+			String searchContent, String startDate, String endDate,
+			Integer limit, Integer pageNum) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(pageNum == null || ("" + pageNum).equals("")) {
+			pageNum = 1;
+			limit = 30;
+		}
+		
+		int listCnt = service.getHostCnt(searchType, searchContent, startDate, endDate, pageNum, limit);
+		List<Member> memList = service.getHostList(searchType, searchContent, startDate, endDate, pageNum, limit);
+		
+		int maxpage = (int) ((double) listCnt / limit + 0.95);
+		int startpage = (((int) (pageNum / 10.0 + 0.9)) - 1) * 10 + 1;
+		int endpage = startpage + 9;
+		
+		if (endpage > maxpage) {
+			endpage = maxpage;
+		}
+		
+		mav.addObject("pageNum", pageNum);
+		mav.addObject("maxpage", maxpage);
+		mav.addObject("startpage ", startpage);
+		mav.addObject("endpage", endpage);
+		mav.addObject("listCnt", listCnt);
+		mav.addObject("list", memList);
+		
+		if(searchType != null && searchType.equals("")) {
+			mav.addObject("searchType", searchType);
+		}
+		
+		return mav;
+	}
+	
 	// Host계정 전환 요청 전처리 전 확인 위해 보여질 페이지
 	@RequestMapping(value="admin/adminHostRegDetail", method=RequestMethod.GET)
 	public ModelAndView adminHostRegDetailView(HttpSession session, String id) {
@@ -86,10 +162,11 @@ public class AdminController {
 
 		Board board = service.getBoard(answerBoard.getbNo());
 		answerBoard.setId(board.getId());
+		answerBoard.setKind(board.getKind());
 		
 		service.boardReply(answerBoard);
 		
-		mav.setViewName("admin/adminManagement");
+		mav.setViewName("redirect:/admin/adminManagement.sms?id=admin");
 		
 		return mav;
 	}

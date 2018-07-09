@@ -22,7 +22,6 @@
 <body>
 <div class="w3-container w3-margin">
 <div class="row">
-
 <div class="col-4">
 	<table class="w3-table w3-striped w3-small">
 	<c:if test="${!empty hRegList}">
@@ -30,7 +29,10 @@
 			<td colspan="4"></td><td></td>
 		</tr>
 		<tr align="center" valign="middle">
-			<th>아이디</th><th>상호명</th><th>이메일</th><th colspan="2">비고</th>
+			<th style="text-align:center;">id</th>
+			<th style="text-align:center;">상호명</th>
+			<th style="text-align:center;">이메일</th>
+			<th colspan="2" style="text-align:center;">비고</th>
 		</tr>
 		<c:forEach var="hostMem" items="${hRegList}">
 		<tr align="center" valign="middle">
@@ -55,7 +57,10 @@
 			<td colspan="4"></td><td></td>
 		</tr>
 		<tr align="center" valign="middle">
-			<th>아이디</th><th>내 용</th><th>등록일자</th><th>비고</th>
+			<th style="text-align:center;">아이디</th>
+			<th style="text-align:center;">내 용</th>
+			<th style="text-align:center;">등록일자</th>
+			<th style="text-align:center;">비고</th>
 		</tr>
 		<c:forEach var="gueQue" items="${gList}">
 		<tr align="center" valign="middle">
@@ -79,7 +84,7 @@
 			<td colspan="4"></td><td></td>
 		</tr>
 		<tr align="center" valign="middle">
-			<th>아이디</th><th>내 용</th><th>등록일자</th><th>비고</th>
+			<th>id</th><th>내 용</th><th>date</th><th>비고</th>
 		</tr>
 		<c:forEach var="hosQue" items="${hList}">
 		<tr align="center" valign="middle">
@@ -95,17 +100,21 @@
 	</c:if>
 	</table>
 </div>
-
 </div>
+
 </div>
 <div class="w3-container w3-margin">
 	<table class="w3-table w3-striped w3-border">
+		<tr>
+			<td colspan="2" style="text-align:center;"><a href="adminTransHostList.sms" class="w3-button">[총 거래대장]</a></td>
+			<td colspan="2" style="text-align:center;"><a href="adminMemberList.sms" class="w3-button">[총 회원정보]</a></td>
+			<td colspan="2" style="text-align:center;"><a href="adminHostList.sms" class="w3-button">[총 Host 회원정보]</a></td>
+		</tr>
 		<tr><th>호스트ID</th><th>상호명</th><th>Room이름</th><th>가입일자</th><th>금월 수입금</th><th>거래량</th></tr>
 	<c:forEach var="th" items="${thList}">
 		<tr><td>${th.host}</td><td>${th.hostName}</td><td>${th.sRName}</td><td><fmt:formatDate value="${th.regDate}" pattern="yyyy-MM-dd"/></td>
-			<td>${th.totPrice}</td><td>${th.cnt}</td></tr>
+			<td><fmt:formatNumber value="${th.totPrice}" pattern="###,###"/></td><td>${th.cnt}</td></tr>
 	</c:forEach>
-	<tr><td colspan="6"><a href="adminTransHostList.sms" class="w3-button">[세부 거래 대장 보러가기]</a></td></tr>
 	</table>
 </div>
 
