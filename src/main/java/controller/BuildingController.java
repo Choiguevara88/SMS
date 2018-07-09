@@ -84,10 +84,16 @@ public class BuildingController {
 		sTypeNames.add("카페");
 		sTypeNames.add("파티룸");
 		sTypeNames.add("공연장");
+		String address1 = myBuildingOne.getsAddress().split(",")[0];
+		String address2 = myBuildingOne.getsAddress().split(",")[1];
+		String address3 = myBuildingOne.getsAddress().split(",")[2];
 		System.out.println(myBuildingOne);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("building", myBuildingOne);
 		mav.addObject("sTypeNames", sTypeNames);
+		mav.addObject("address1", address1);
+		mav.addObject("address2", address2);
+		mav.addObject("address3", address3);
 		return mav;
 	}
 	

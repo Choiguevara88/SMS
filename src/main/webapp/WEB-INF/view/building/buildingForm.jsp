@@ -159,6 +159,7 @@ $(document).ready(function() {
 	});
 });
 
+/*전화번호 관련 스크립트*/
  function chk_tel(str, field){ 
 	  var str; 
 	  str = checkDigit(str); 
@@ -213,12 +214,6 @@ $(document).ready(function() {
 	  return num.replace(/(^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3"); 
 	  } 
 	 } 
-/* 	 function error_numbr(str, field){ 
-	  alert("정상적인 번호가 아닙니다."); 
-	  field.value = ""; 
-	  field.focus(); 
-	  return; 
-	 }  */
 </script>
 
 <!-- 지도관련 스크립트 -->
@@ -264,8 +259,6 @@ $(document).ready(function() {
         <td>
         <input multiple="multiple" type="file" id="sImg2" name="sImg2Files" accept="image/*" /></td></tr>
     
-    <!-- 주소API 추후 사용 -->
-    <%-- <tr><td>주소</td><td><form:input path="sAddress" /> </td></tr> --%>
     <tr>
 			<td><strong>사업자 주소지</strong></td></tr>
 		<tr>
