@@ -8,13 +8,13 @@ public interface RoomDao {
 
 	void insertRoom(Room room);
 
-	Room getMyRoom(Integer sRNo);
+	Room getMyRoom(Room room);
 
 	List<Room> getmyRoomList(Integer sNo);
 
 	void updateRoom(Room room);
 
-	void deleteRoom(Integer sRNo);
+	void deleteRoom(Room room);
 
 
 

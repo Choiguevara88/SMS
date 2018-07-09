@@ -45,7 +45,7 @@ public class RoomController {
 		}
 		try{
 			service.insertRoom(room);
-			mav.setViewName("redirect:/NewFile.sms"); // 이게 자꾸 404가 나오는데 왜그러죠?
+			mav.setViewName("redirect:NewFile.sms"); // 이게 자꾸 404가 나오는데 왜그러죠?
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new ProjectException("throw new ProjectException(string,string주소)","roomForm.sms");
@@ -53,13 +53,16 @@ public class RoomController {
 	
 	return mav;
 }
-	@RequestMapping("NewFile")
+	@RequestMapping("room/NewFile")
 	public ModelAndView NewFile() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("room/NewFile");
 		return mav;
 	}
-	@RequestMapping(value="building/roomList", method=RequestMethod.GET)
+	@RequestMapping(value="room/roomList", method=RequestMethod.GET)
+	public String loginForm() {		
+	return "member/loginpage";
+	}
+	@RequestMapping(value="room/roomList", method=RequestMethod.POST)
 	public ModelAndView myBuildingList(HttpServletRequest request,Building building) {		
 		ModelAndView mav = new ModelAndView();
 			Integer sNo = building.getsNo();
@@ -74,35 +77,28 @@ public class RoomController {
 		}
 		return mav;
 	}
-	@RequestMapping("building/roomDetail")
+	@RequestMapping("room/roomDetail")
 	public ModelAndView roomDetail(HttpServletRequest request,Room room) {
 		ModelAndView mav = new ModelAndView();
 		try {
-	
-		Room myRoom = service.getMyRoom(room);
+		
+		Room myRoom = service.getMyRoom(room.getsRNo());
 		mav.addObject("myRoom", myRoom);
 		mav.setViewName("room/roomDetail");
 		}catch(Exception e){
-			Integer sNo = room.getsNo();
-			throw new ProjectException("throw new ProjectEx", "roomList.sms?sNo="+sNo);
+			throw new ProjectException("throw new ProjectEx", "roomList.sms");
 		}
 	return mav;
 	}
 	
-	@RequestMapping("building/roomUpdateForm")
+	@RequestMapping("room/roomUpdateForm")
 	public ModelAndView roomUpdateForm(HttpServletRequest request,Room room) {
-		ModelAndView mav = new ModelAndView();
-		try {
-		Room myRoom = service.getMyRoom(room);
+		ModelAndView mav = new ModelAndView("room/roomUpdateForm");
+		Room myRoom = service.getMyRoom(room.getsRNo());
 		mav.addObject("myRoom", myRoom);
-		mav.setViewName("room/roomUpdateForm");
-		}catch (Exception e){
-			e.printStackTrace();
-			throw new ProjectException("안돼", "redirect:roomUpdateForm");
-		}
 	return mav;	
 	}
-	@RequestMapping("building/roomUpdateSuccess.sms")
+	@RequestMapping("room/roomUpdateSuccess.sms")
 	public ModelAndView roomroomUpdate(HttpServletRequest request,@Valid Room room, BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
@@ -111,10 +107,8 @@ public class RoomController {
 			return mav;
 		}
 		try{
-			Integer sNo= room.getsNo();
-			Integer sRNo = room.getsRNo();
 			service.updateRoom(room);
-			mav.setViewName("redirect:roomDetail.sms?sRNo="+sRNo+"&sNo="+sNo); 
+			mav.setViewName("redirect:NewFile.sms"); 
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new ProjectException("throw new ProjectException(string,string주소)","roomForm.sms");
@@ -122,35 +116,35 @@ public class RoomController {
 	
 	return mav;
 }
-	@RequestMapping("building/roomDeleteForm")
+	@RequestMapping("room/roomDeleteForm")
 	public ModelAndView roomDeleteForm(HttpServletRequest request,Room room) {
 		ModelAndView mav = new ModelAndView("room/roomDeleteForm");
-		Room myRoom = service.getMyRoom(room);
+		Room myRoom = service.getMyRoom(room.getsRNo());
 		mav.addObject("myRoom", myRoom);
 	return mav;	
 	}
 	
-	@RequestMapping("building/roomDeleteSuccess")
-	public ModelAndView roomDelete(HttpSession session,Integer sRNo,Integer sNo, String pass)throws ProjectException {
+	@RequestMapping("room/roomDeleteSuccess")
+	public ModelAndView roomDelete(HttpSession session,Integer sRNo, String pass)throws ProjectException {
 		ModelAndView mav = new ModelAndView();
 		try{
-			
 			Member loginMember = (Member) session.getAttribute("loginMember");
 			String loginMemberPass = loginMember.getPw();
-				if(pass.equals(loginMemberPass)) {
-				Room room = new Room(); 
-				room.setsRNo(sRNo);
-				room.setsNo(sNo);
-				room =service.getMyRoom(room);
-				Room myRoom = service.getMyRoom(room);
-				service.deleteRoom(myRoom);
-				mav.setViewName("redirect:roomList.sms?sNo="+sNo);
+			
+				if(pass != (loginMemberPass)) {
+				
+					throw new ProjectException("하이요","roomDeleteForm.sms");
 				}
+				Room myRoom = service.getMyRoom(sRNo);
+				System.out.println(myRoom.getsRName());
+				service.deleteRoom(myRoom.getsRNo());
+				mav.setViewName("redirect:NewFile");
+				
 			}catch(Exception e) {
 			e.printStackTrace();
 			throw new ProjectException("로그인하세요. try catch구문은 한번 밖에 못쓰나? 두 번 쓰면 안됨?","redirect:roomDeleteForm");
 		}
 	return mav;
-	}
+}
 }
 

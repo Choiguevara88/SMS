@@ -132,10 +132,14 @@ $(document).ready(function() { //이메일 자동 완성
         });
     });
 });
+function signup(){
+	confirm("회원가입 완료!!! ><");
+	document.f.submit();
+}
 </script>
 </head>
 <body>
-<form:form modelAttribute="member" action="member/join.sms" method="post">
+<form:form name="f" modelAttribute="member" action="member/join.sms" method="post">
 	<spring:hasBindErrors name="member">
 		<font color="tomato">
 			<c:forEach items="${errors.globalErrors }" var="error">
@@ -170,7 +174,7 @@ $(document).ready(function() { //이메일 자동 완성
 		<font color="red"><form:errors path="mob"/></font></td></tr>
 	<tr>
 		<td colspan="2" align="center">
-			<input type="submit" class="signup" disabled="disabled" value="가입하기">
+			<input type="button" class="signup" onclick="signup()" disabled="disabled" value="가입하기">
 			<input type="button" onclick="javascript:history.go(-1)" value="뒤로가기"></td>
 	</tr>
 </table>

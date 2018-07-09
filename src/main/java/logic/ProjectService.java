@@ -86,7 +86,7 @@ public interface ProjectService {
 	
 	void buildingUpdateReg(Building building, HttpServletRequest request);
 
-	Room getMyRoom(Integer sRNo);
+	Room getMyRoom(Room room);
 	
 	List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate);
 	
@@ -94,7 +94,7 @@ public interface ProjectService {
 	
 	void updateRoom(Room room);
 	
-	void deleteRoom(Integer sRNo);
+	void deleteRoom(Room room);
 	
 	Map<String, Object> graphTransHistoryCnt(String searchType, String id);
 	
