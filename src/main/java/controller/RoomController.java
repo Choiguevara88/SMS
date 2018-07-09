@@ -35,9 +35,6 @@ public class RoomController {
 		mav.addObject(new Room());
 	return mav;
 	}
-	
-	
-	
 	@RequestMapping("room/roomSuccess")
 	public ModelAndView roomSuccess(@Valid Room room, BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView();
@@ -60,13 +57,15 @@ public class RoomController {
 	public ModelAndView NewFile() {
 		ModelAndView mav = new ModelAndView();
 		return mav;
-}
-	
+	}
 	@RequestMapping(value="room/roomList", method=RequestMethod.GET)
-	public ModelAndView myBuildingList(HttpServletRequest request) {		
+	public String loginForm() {		
+	return "member/loginpage";
+	}
+	@RequestMapping(value="room/roomList", method=RequestMethod.POST)
+	public ModelAndView myBuildingList(HttpServletRequest request,Building building) {		
 		ModelAndView mav = new ModelAndView();
-		/* 추후에 리퀘스트로 로그인된 아이디 가져와야함.*/
-		Integer sNo = 1;
+			Integer sNo = building.getsNo();
 		try {
 			List<Room> myRoomList = service.getmyRoomList(sNo);
 			mav.addObject("myRoomList",myRoomList);
@@ -126,25 +125,24 @@ public class RoomController {
 	}
 	
 	@RequestMapping("room/roomDeleteSuccess")
-	public ModelAndView roomDelete(HttpSession session,HttpServletRequest request,Integer sRNo, String pass) {
+	public ModelAndView roomDelete(HttpSession session,Integer sRNo, String pass)throws ProjectException {
 		ModelAndView mav = new ModelAndView();
 		try{
 			Member loginMember = (Member) session.getAttribute("loginMember");
 			String loginMemberPass = loginMember.getPw();
-			System.out.println(loginMemberPass);
-			System.out.println(pass);
-			if(pass.equals(loginMemberPass)) {
+			
+				if(pass != (loginMemberPass)) {
+				
+					throw new ProjectException("하이요","roomDeleteForm.sms");
+				}
 				Room myRoom = service.getMyRoom(sRNo);
 				System.out.println(myRoom.getsRName());
 				service.deleteRoom(myRoom.getsRNo());
-				mav.setViewName("redirect:NewFile.sms");
-			}else {
-				System.out.println("비밀번호 틀림");
+				mav.setViewName("redirect:NewFile");
 				
-			}
 			}catch(Exception e) {
 			e.printStackTrace();
-			throw new ProjectException("로그인하세요. try catch구문은 한번 밖에 못쓰나? 두 번 쓰면 안됨?","roomDeleteForm.sms");
+			throw new ProjectException("로그인하세요. try catch구문은 한번 밖에 못쓰나? 두 번 쓰면 안됨?","redirect:roomDeleteForm");
 		}
 	return mav;
 }

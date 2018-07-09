@@ -65,7 +65,7 @@ public class LoginAspect {
 					throw new ProjectException("관리자만 가능한 거래입니다.", "../main.sms");
 				}
 				
-				adminable = true;
+				adminable = true; 
 				break;
 			}
 		}
