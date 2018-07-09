@@ -322,13 +322,11 @@ public class ProjectServiceImpl implements ProjectService {
 		String sInfoSub = listToString(building.getsInfoSubList());
 		String sRule = listToString(building.getsRuleList());
 		String sBHour = listToString(building.getsBHourList());
-		int sStat = 0;
 		building.setsType(sType);
 		building.setsTag(sTag);
 		building.setsInfoSub(sInfoSub);
 		building.setsRule(sRule);
 		building.setsBHour(sBHour);
-		building.setsStat(sStat);
 		buDao.buRegist(building);
 	}
 	private String listToString(List<String> list) {
@@ -519,7 +517,8 @@ public class ProjectServiceImpl implements ProjectService {
 		
 	}
 
-
-
-	
+	@Override
+	public void deleteAccount(Member member) {
+		memDao.deleteAccount(member);
+	}
 	}// ProjectServiceImpl end

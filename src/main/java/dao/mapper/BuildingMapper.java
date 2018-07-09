@@ -16,8 +16,8 @@ public interface BuildingMapper {
 	@Select("select ifnull(max(sNo),0) from building")
 	int maxNum();
 	
-	@Insert("insert into building(sNo, id, sName, sPreview, sContent, sType, sTag, sInfoSub, sRule, sBHour, sHDay, sImg1, sImg2, sAddress, sStat) "
-			+ "values(#{sNo}, #{id}, #{sName}, #{sPreview}, #{sContent}, #{sType}, #{sTag}, #{sInfoSub}, #{sRule}, #{sBHour}, #{sHDay}, #{sImg1}, #{sImg2}, #{sAddress}, #{sStat})")
+	@Insert("insert into building(sNo, id, sName, sPreview, sContent, sType, sTag, sInfoSub, sRule, sBHour, sHDay, sImg1, sImg2, sAddress) "
+			+ "values(#{sNo}, #{id}, #{sName}, #{sPreview}, #{sContent}, #{sType}, #{sTag}, #{sInfoSub}, #{sRule}, #{sBHour}, #{sHDay}, #{sImg1}, #{sImg2}, #{sAddress})")
 	void insert(Building building);
 
 	/*@Update("update board set readcnt=readcnt+1 where num=#{value}")
@@ -41,7 +41,7 @@ public interface BuildingMapper {
 	@Select("select * from building where sNo=#{value}")
 	Building selectMyBuildingOne(String sNo);
 
-	@Update("update building set sName=#{sName}, sPreview=#{sPreview}, sContent=#{sContent}, sType=#{sType}, sTag=#{sTag}, sInfoSub=#{sInfoSub}, sRule=#{sRule}, sBHour=#{sBHour}, sHDay=#{sHDay}, sImg1=#{sImg1}, sImg2=#{sImg2}, sAddress=#{sAddress}, sStat=#{sStat} where sNo=#{sNo}")
+	@Update("update building set sName=#{sName}, sPreview=#{sPreview}, sContent=#{sContent}, sType=#{sType}, sTag=#{sTag}, sInfoSub=#{sInfoSub}, sRule=#{sRule}, sBHour=#{sBHour}, sHDay=#{sHDay}, sImg1=#{sImg1}, sImg2=#{sImg2}, sAddress=#{sAddress} where sNo=#{sNo}")
 	void update(Building building);
 
 }

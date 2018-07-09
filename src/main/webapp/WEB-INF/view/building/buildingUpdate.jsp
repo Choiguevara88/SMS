@@ -263,7 +263,6 @@ $(document).ready(function() {
 <input type="hidden" name="id" value="${building.id}">
 <input type="hidden" id="sImg1" name="sImg1" value="${building.sImg1}">
 <input type="hidden" id="sImg2Name" name="sImg2Name" value="${building.sImg2Name}">
-<input type="hidden" id="sStat" name="sStat" value="${building.sStat}">
   <table cellpadding="0" cellspacing="1" align="center">
   <tr><td colspan="2" align="center">공간정보 수정</td></tr>
     <tr><td>공간 유형(최대 3개)</td>
