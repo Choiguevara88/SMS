@@ -136,7 +136,6 @@ public class RoomController {
 		try{
 			Member loginMember = (Member) session.getAttribute("loginMember");
 			String loginMemberPass = loginMember.getPw();
-			
 				if(pass.equals(loginMemberPass)) {
 				Room room = new Room(); 
 				room.setsRNo(sRNo);
