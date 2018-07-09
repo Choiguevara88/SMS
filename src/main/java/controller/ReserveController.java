@@ -73,8 +73,6 @@ public class ReserveController {
 		int limit = 100; // 한 페이지에 나올 게시글의 숫자
 		int listcount = service.reserveCount(id, searchType, searchContent); // 표시될 총 게시글의 수
 
-		if (id != null) {
-			List<Reserve> reservelist = service.selectReserveList(id, searchType, searchContent, pageNum, limit);
 
 			int maxpage = (int) ((double) listcount / limit + 0.95);
 			int startpage = ((int) ((pageNum / 10.0 + 0.9) - 1)) * 10 + 1; // 시작페이지

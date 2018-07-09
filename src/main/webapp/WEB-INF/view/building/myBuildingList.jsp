@@ -14,10 +14,13 @@
 </head>
 <body>
 <h1>${id}님의 공간 정보 관리</h1>
+<c:if test="${buildCnt == 0}">
+등록된 건물이 없습니다.
+</c:if>
+<a href="../building/buildingForm.sms?id=${sessionScope.loginMember.id}">[공간등록하기]</a>
 <c:forEach var="build" items="${myBuildingList}">
 <div class="w3-container">
   <div class="w3-card-4" style="width:30%">
-  
     <img src="../picture/${build.sImg1}" style="width:100%">
     <div class="w3-container w3-center">
       <a href="buildingDetail.sms?sNo=${build.sNo}">
@@ -31,5 +34,6 @@
   </div>
 </div>
 </c:forEach>
+
 </body>
 </html>

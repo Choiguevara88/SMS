@@ -180,8 +180,8 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum,
-			int limit) {
-		return reDao.list(id, searchType, searchContent, pageNum, limit);
+			int limit, String startDate, String endDate) {
+		return reDao.list(id, searchType, searchContent, pageNum, limit, startDate, endDate);
 	}
 
 	@Override
@@ -515,5 +515,11 @@ public class ProjectServiceImpl implements ProjectService {
 	public void deleteRoom(Room room) {
 		roomDao.deleteRoom(room);
 		
+	}
+
+
+	@Override
+	public void deleteAccount(Member member) {
+		memDao.deleteAccount(member);
 	}
 	}// ProjectServiceImpl end

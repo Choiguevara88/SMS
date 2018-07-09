@@ -63,8 +63,10 @@ public class BuildingController {
 		String id = request.getParameter("id");
 		ModelAndView mav = new ModelAndView();
 		List<Building> MyBuildingList = service.getMyBuildings(id);
+		int buildCnt = service.hostBuildCount(id);
 		mav.addObject("myBuildingList",MyBuildingList);
 		mav.addObject("id", id);
+		mav.addObject("buildCnt", buildCnt);
 		return mav;
 	}
 	

@@ -30,7 +30,10 @@
 			<td colspan="4"></td><td></td>
 		</tr>
 		<tr align="center" valign="middle">
-			<th>아이디</th><th>상호명</th><th>이메일</th><th colspan="2">비고</th>
+			<th style="text-align:center;">id</th>
+			<th style="text-align:center;">상호명</th>
+			<th style="text-align:center;">이메일</th>
+			<th colspan="2" style="text-align:center;">비고</th>
 		</tr>
 		<c:forEach var="hostMem" items="${hRegList}">
 		<tr align="center" valign="middle">
@@ -55,7 +58,10 @@
 			<td colspan="4"></td><td></td>
 		</tr>
 		<tr align="center" valign="middle">
-			<th>아이디</th><th>내 용</th><th>등록일자</th><th>비고</th>
+			<th style="text-align:center;">아이디</th>
+			<th style="text-align:center;">내 용</th>
+			<th style="text-align:center;">등록일자</th>
+			<th style="text-align:center;">비고</th>
 		</tr>
 		<c:forEach var="gueQue" items="${gList}">
 		<tr align="center" valign="middle">
@@ -79,7 +85,7 @@
 			<td colspan="4"></td><td></td>
 		</tr>
 		<tr align="center" valign="middle">
-			<th>아이디</th><th>내 용</th><th>등록일자</th><th>비고</th>
+			<th>id</th><th>내 용</th><th>date</th><th>비고</th>
 		</tr>
 		<c:forEach var="hosQue" items="${hList}">
 		<tr align="center" valign="middle">

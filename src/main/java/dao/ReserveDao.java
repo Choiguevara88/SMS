@@ -12,7 +12,7 @@ public interface ReserveDao {
 
 	int count(String id, String searchType, String searchContent);
 
-	List<Reserve> list(String id, String searchType, String searchContent, Integer pageNum, int limit);
+	List<Reserve> list(String id, String searchType, String searchContent, Integer pageNum, int limit, String startDate, String endDate);
 
 	void insert(Reserve reserve);
 
