@@ -117,22 +117,10 @@ ex) 토일월',
    -- ex ) img.png\timg2.jpg\t
    SImg2 varchar(1200) COMMENT '\t로 구분자 사용
 ex ) img.png\timg2.jpg\t',
-<<<<<<< HEAD
-   -- 공간(건물) 주소
-   SAddress varchar(50) COMMENT '공간(건물) 주소',
-   -- 미승인 : 0
-   -- 승인 : 1
-   -- 반려 : 2
-   SStat int NOT NULL COMMENT '미승인 : 0
-승인 : 1
-반려 : 2',
-   PRIMARY KEY (SNo),
-   UNIQUE (ID)
-=======
 	-- 공간(건물) 주소
 	SAddress varchar(50) COMMENT '공간(건물) 주소',
 	PRIMARY KEY (SNo)
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
+
 );
 
 
