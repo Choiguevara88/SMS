@@ -83,4 +83,9 @@ public class MemberDaoImpl implements MemberDao{
 		return sqlSession.selectOne(NS+"findmemberbyemail",map);
 	}
 
+
+	@Override
+	public void deleteAccount(Member member) {
+		sqlSession.getMapper(MemberMapper.class).delete(member);
+	}
 }
