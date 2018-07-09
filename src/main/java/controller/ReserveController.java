@@ -62,7 +62,7 @@ public class ReserveController {
 	// 예약 리스트를 확인할 때 호출되는 메서드 (Guest계정용)
 	@RequestMapping(value = "reserve/resList", method = RequestMethod.GET)
 	public ModelAndView reserveList(String id, Integer pageNum, String searchType, String searchContent,
-			HttpSession session) {
+			HttpSession session, String startDate, String endDate) {
 
 		if (pageNum == null || pageNum.toString().equals("")) {
 			pageNum = 1;

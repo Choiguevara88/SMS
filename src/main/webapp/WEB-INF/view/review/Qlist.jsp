@@ -136,9 +136,9 @@ window.onclick = function(event) {
 	</tr>
 	<tr>
 		<td><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd H:mm:ss"/></td>
-  		<td align="right">
+  	<td align="right">
   		<c:if test="${sessionScope.loginMember.id == building.id && board.sNo == building.sNo }">
-  		<a href="../review/reply.sms?bNo=${board.bNo}&pageNum=${pageNum}">[답변]</a></c:if>
+  	<a href="../review/reply.sms?bNo=${board.bNo}&pageNum=${pageNum}">[답변]</a></c:if>
   		<c:if test="${sessionScope.loginMember.id == board.id }">
   	<form name="d" method="post" action="delete.sms">
   		<input type="hidden" name="bNo"	value="${board.bNo}">

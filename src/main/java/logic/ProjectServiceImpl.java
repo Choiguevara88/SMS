@@ -519,4 +519,11 @@ public class ProjectServiceImpl implements ProjectService {
 	public void deleteAccount(Member member) {
 		memDao.deleteAccount(member);
 	}
+
+	@Override
+	public List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum,
+			int limit) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	}// ProjectServiceImpl end
