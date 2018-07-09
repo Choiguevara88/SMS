@@ -19,23 +19,35 @@ public class RoomDaoImpl implements RoomDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	private final String NS = "dao.mapper.RoomMapper.";
-	
-	
-	@Override
-	public Room getRoom(Integer srNo) {
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("srNo", srNo);
-		return sqlSession.selectOne(NS + "selectOne", map);
-	}
 
 	@Override
 	public void insertRoom(Room room) {
 		sqlSession.getMapper(RoomMapper.class).insert(room);
 		
 	}
+	
 	@Override
-	public List<Room> getMyroom(Integer sNo) {
-		return sqlSession.getMapper(RoomMapper.class).selectMyRoom(sNo);
+	public Room getMyRoom(Integer sRNo) {
+		return sqlSession.getMapper(RoomMapper.class).selectMyRoom(sRNo);
+	}
+	
+	@Override
+	public List<Room> getmyRoomList(Integer sNo) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("sNo", sNo);
+		return sqlSession.selectList(NS + "list", map);
+	}
+
+	@Override
+	public void updateRoom(Room room) {
+		sqlSession.getMapper(RoomMapper.class).updateRoom(room);
+		
+	}
+
+	@Override
+	public void deleteRoom(Integer sRNo) {
+		sqlSession.getMapper(RoomMapper.class).deleteRoom(sRNo);
+		
 	}
 
 	

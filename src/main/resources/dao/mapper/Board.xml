@@ -18,6 +18,10 @@
 			where kind = #{kind}
 		</if>
 		
+		<if test="id != null">
+			and id #{id} 
+		</if> 
+		
 		<if test="searchType != null and searchContent != null">
 			and ${searchType} like '%${searchContent}%'
 		</if>
@@ -25,6 +29,7 @@
 		<if test="startrow != null and limit != null">
 			order by ref desc limit #{startrow}, #{limit}	
 		</if>
+		
 	</select>
 	
 	

@@ -10,9 +10,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-function update() {
-	
-}
 </script>
 </head>
 <body>
@@ -20,9 +17,13 @@ function update() {
 <c:forEach var="build" items="${myBuildingList}">
 <div class="w3-container">
   <div class="w3-card-4" style="width:30%">
+  
     <img src="../picture/${build.sImg1}" style="width:100%">
     <div class="w3-container w3-center">
-      <p>${build.sName}</p><br>
+      <a href="buildingDetail.sms?sNo=${build.sNo}">
+      <p>${build.sName}</p>
+      </a>
+      <br>
       <a href="buildingUpdate.sms?sNo=${build.sNo}" class="w3-btn w3-black">공간수정</a>
       <a href="roomList.sms?sNo=${build.sNo}" class="w3-btn w3-black">세부공간추가/수정</a>
       <a href="buildingDelete.sms?sNo=${build.sNo}" class="w3-btn w3-black">삭제</a>

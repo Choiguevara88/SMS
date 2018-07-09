@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -43,15 +44,13 @@ public interface ProjectService {
 
 	int hostBuildCount(String hostName);
 
-	Room getRoom(Integer srNo);
-
 	void insertRoom(Room room);
 
 	void reserveCancel(Integer reNo, Integer reStat);
 
-	int hostReserveCount(String hostName, Integer sNo, String searchType, String searchContent);
+	int hostReserveCount(Integer sNo, String searchType, String searchContent);
 
-	List<Reserve> selectHostReserveList(Integer sNo, String hostName, String searchType, String searchContent, Integer pageNum, int limit);
+	List<Reserve> selectHostReserveList(Integer sNo, String searchType, String searchContent, Integer pageNum, int limit, String startDate, String endDate);
 
 	List<Integer> hostHaveBuildsNo(String hostId);
 
@@ -76,11 +75,30 @@ public interface ProjectService {
 	Member find_password(String id, String email, String name);
 
 	List<Building> getMyBuildings(String id);
+	
+	List<Board> boardList(Integer kind,String id);
+	
 	Member find_member_by_email(String email);
 	
 	List<TransactionHistory> hostTransHistoryList(String first);
+	
+	Building getMyBuildingOne(String sNo);
+	
+	void buildingUpdateReg(Building building, HttpServletRequest request);
 
-	List<Room> getMyRoom(Integer sNo);
+	Room getMyRoom(Integer sRNo);
 	
 	List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate);
+	
+	List<Room> getmyRoomList(Integer sNo);
+	
+	void updateRoom(Room room);
+	
+	void deleteRoom(Integer sRNo);
+	
+	Map<String, Object> graphTransHistoryCnt(String searchType, String id);
+	
+	Map<String, Object> graphTransHistorySum(String searchType, String id);
+	
+	
 }

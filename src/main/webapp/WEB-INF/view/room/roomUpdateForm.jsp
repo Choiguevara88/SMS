@@ -8,7 +8,7 @@
 <title>room/roomForm.jsp</title>
 </head>
 <body>
-<form:form modelAttribute="room" action="roomSuccess.sms" method="post" commandName="room">
+<form:form modelAttribute="room" action="roomUpdateSuccess.sms" method="post" commandName="room">
 <spring:hasBindErrors name="room"> <!-- ? -->
 		<font color="tomato">
 			<c:forEach items="${errors.globalErrors }" var="error">
@@ -17,45 +17,37 @@
 		</font>
 	</spring:hasBindErrors>
 
-
 <table align="center" cellpadding="1" cellspacing="1" border = "1">
+		
+	<tr><td>sRNo = ${myRoom.sRNo }</td><td>수정해라 수정!</td></tr>
+	<form:hidden path="sRNo" value="${myRoom.sRNo }" />
 	
-	<tr><td>SNo </td><td><form:input path="sNo" placeholder="primarykey"/>
-		<font color="red"><form:errors path="sNo"/></font></td></tr>
-	
-	<tr><td>SRNo </td><td><form:input path="sRNo" placeholder="primarykey" />
-		<font color="red"><form:errors path="sRNo"/></font></td></tr>
-	
-	<tr><td>SRName </td><td><form:input path="sRName" />
+	<tr><td>SRName</td><td><form:input path="sRName" value="${myRoom.sRName}"  />
 		<font color="red"><form:errors path="sRName"/></font></td></tr>
 	<tr>
-		<td>SRType </td><td><form:input path="sRType"  />
+		<td>SRType</td><td><form:input path="sRType" value="${myRoom.sRType }" />
 		 <font color="red"><form:errors path="sRType"/></font></td></tr>
 	<tr>
-		<td>SRContent</td><td><form:input path="sRContent" />
+		<td>SRContent</td><td><form:input path="sRContent" value="${myRoom.sRContent }" />
 		<font color="red"><form:errors path="sRContent"/></font></td>
 		</tr>
 	<tr>
-		<td>SRInfo</td><td><form:input path="sRInfo"  />
+		<td>SRInfo</td><td><form:input path="sRInfo" value="${myRoom.sRInfo }" />
 		<font color="red"><form:errors path="sRInfo"/></font></td>
 	</tr>
 	<tr>
-		<td>SResType</td><td><form:input path="sResType"/>
+		<td>SResType</td><td><form:input path="sResType" value="${myRoom.sResType }"/>
 		<font color="red"><form:errors path="sResType"/></font></td></tr>
 	<tr>
-		<td>SRPersonLimit</td><td><form:input path="sRPersonLimit" />
+		<td>SRPersonLimit</td><td><form:input path="sRPersonLimit" value="${myRoom.sRPersonLimit }" />
 		<font color="red"><form:errors path="sRPersonLimit"/></font></td>
 	</tr>
 	<tr>
-		<td>SPrice</td><td><form:input path="sPrice"  />
+		<td>SPrice</td><td><form:input path="sPrice" value="${myRoom.sPrice }" />
 		<font color="red"><form:errors path="sPrice"/></font></td>
 	</tr>
-	<tr>
-		<td>SRImg</td><td><form:input path="sRImg" 	 />
-		<font color="red"><form:errors path="sRImg"/></font></td>
-	</tr>
 </table>
- <input type="submit" value="룸 등록하기">
+ <input type="submit" value="수정 완료">
 </form:form> 
 </body>
 </html>

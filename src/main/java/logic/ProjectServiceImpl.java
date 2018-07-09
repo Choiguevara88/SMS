@@ -1,8 +1,12 @@
 package logic;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -42,6 +46,11 @@ public class ProjectServiceImpl implements ProjectService {
 	public int boardcount(String searchType, String searchContent, int kind) {
 		return boDao.count(searchType, searchContent, kind);
 	}
+	
+	@Override
+	public int boardcount(Integer kind, int sNo) {
+		return boDao.count(kind, sNo);
+	}
 
 	@Override
 	public List<Board> boardList(String searchType, String searchContent, Integer pageNum, int limit, int kind) {
@@ -80,6 +89,7 @@ public class ProjectServiceImpl implements ProjectService {
 		board.setRef(num);
 		board.setRefLevel(0);
 		boDao.insert(board);
+
 	}
 	
 	@Override
@@ -100,7 +110,9 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void boardReply(Board board) {
 		boDao.qTypeAdd(board);
+		
 		int num = boDao.maxNum();
+		
 		board.setbNo(++num);
 		board.setRefLevel(board.getRefLevel() + 1);
 		boDao.insert(board);
@@ -136,7 +148,6 @@ public class ProjectServiceImpl implements ProjectService {
 		boDao.update(board);
 
 	}
-
 	@Override
 	public void boardUpdate(Board board) {
 		boDao.update(board);
@@ -155,11 +166,6 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public Reserve getReserve(Integer reNo) {
 		return reDao.getReserve(reNo);
-	}
-
-	@Override
-	public Room getRoom(Integer srNo) {
-		return roomDao.getRoom(srNo);
 	}
 
 	@Override
@@ -207,7 +213,12 @@ public class ProjectServiceImpl implements ProjectService {
 	private String uploadImgCreate(MultipartFile picture, HttpServletRequest request) { // imgUploadMethod()
 		String uploadPath = request.getServletContext().getRealPath("/") + "/picture/"; // upload path setting
 		Date date = new Date();
-		String orgFile = date.getTime() + picture.getOriginalFilename(); // imgFileName setting
+		String orgFile = "";
+		
+		if(!picture.getOriginalFilename().equals("")) {
+			orgFile = date.getTime() + picture.getOriginalFilename(); // imgFileName setting
+		}
+		
 		try {
 			picture.transferTo(new File(uploadPath + orgFile)); // new File(uploadPath + orgFile) : img upload complite
 			return orgFile; // imgFileName Return
@@ -223,15 +234,18 @@ public class ProjectServiceImpl implements ProjectService {
 		String uploadPath = request.getServletContext().getRealPath("/") + "/picture/"; // upload path setting
 		Date date = new Date();
 		String orgFile = "";
+		String fileName = "";
 
 		for (MultipartFile picture : pictures) {
-
-			String fileName = date.getTime() + picture.getOriginalFilename(); // imgFileName setting
-
+			
+			if(!picture.getOriginalFilename().equals("")) {
+				fileName = date.getTime() + picture.getOriginalFilename(); // imgFileName setting
+			}
+			
 			try {
 				picture.transferTo(new File(uploadPath + fileName)); // new File(uploadPath + orgFile) : img upload
 																		// complite
-				orgFile = orgFile + "|" + fileName;
+				orgFile = orgFile + fileName +"|";
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -250,10 +264,7 @@ public class ProjectServiceImpl implements ProjectService {
 		memDao.updateMember(member);
 	}
 
-	@Override
-	public int boardcount(Integer kind, int sNo) {
-		return boDao.count(kind, sNo);
-	}
+
 
 	@Override
 	public List<Board> boardList(Integer kind, int sNo, Integer pageNum, int limit) {
@@ -266,14 +277,13 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public int hostReserveCount(String hostName, Integer sNo, String searchType, String searchContent) {
-		return reDao.hostCount(sNo, hostName, searchType, searchContent);
+	public int hostReserveCount(Integer sNo, String searchType, String searchContent) {
+		return reDao.hostCount(sNo, searchType, searchContent);
 	}
 
 	@Override
-	public List<Reserve> selectHostReserveList(Integer sNo, String hostName, String searchType, String searchContent,
-			Integer pageNum, int limit) {
-		return reDao.hostlist(sNo, hostName, searchType, searchContent, pageNum, limit);
+	public List<Reserve> selectHostReserveList(Integer sNo, String searchType, String searchContent, Integer pageNum, int limit, String startDate, String endDate) {
+		return reDao.hostlist(sNo, searchType, searchContent, pageNum, limit, startDate, endDate);
 	}
 
 	@Override
@@ -293,28 +303,6 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void buildingReg(Building building, HttpServletRequest request) {
-		/*
-		 * if (board.getImg1File() != null) { String img =
-		 * uploadImgCreate(board.getImg1File(),request); if(img != null)
-		 * board.setImg1(img); }
-		 * 
-		 * if (board.getImg2File() != null) { String img =
-		 * uploadImgCreate(board.getImg2File(),request); if(img != null)
-		 * board.setImg2(img); }
-		 * 
-		 * if (board.getImg3File() != null) { String img =
-		 * uploadImgCreate(board.getImg3File(),request); if(img != null)
-		 * board.setImg3(img); }
-		 * 
-		 * if (board.getImg4File() != null) { String img =
-		 * uploadImgCreate(board.getImg1File(),request); if(img != null)
-		 * board.setImg4(img); } int num = boDao.maxNum();
-		 * 
-		 * board.setbNo(++num); board.setRef(num); board.setRefLevel(0);
-		 * 
-		 * boDao.insert(board);
-		 */
-
 		if (building.getsImg1File() != null) {
 			String img1 = uploadImgCreate(building.getsImg1File(), request);
 			if (img1 != null)
@@ -329,9 +317,6 @@ public class ProjectServiceImpl implements ProjectService {
 
 		int sNo = buDao.maxNum();
 		building.setsNo(++sNo);
-		/* 로그인 정보를 받아줄 수 있을때 id 다시해야함 */
-		String id = "id" + sNo;
-		building.setId(id);
 		String sType = listToString(building.getsTypeList());
 		String sTag = listToString(building.getsTagList());
 		String sInfoSub = listToString(building.getsInfoSubList());
@@ -344,10 +329,8 @@ public class ProjectServiceImpl implements ProjectService {
 		building.setsRule(sRule);
 		building.setsBHour(sBHour);
 		building.setsStat(sStat);
-		System.out.println("service" + building);
 		buDao.buRegist(building);
 	}
-
 	private String listToString(List<String> list) {
 		String li = "";
 		for (int i = 0; i < list.size(); i++) {
@@ -411,6 +394,72 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
+	public Building getMyBuildingOne(String sNo) {
+		Building myBuildingOne = buDao.getMyBuildingOne(sNo);
+		String sTypes = myBuildingOne.getsType();
+		String sTags = myBuildingOne.getsTag();
+		String sInfoSubs = myBuildingOne.getsInfoSub();
+		String sRules = myBuildingOne.getsRule();
+		String sBHours = myBuildingOne.getsBHour();
+		String sImg2s = myBuildingOne.getsImg2();
+		List<String> sTypeList = new ArrayList<String>(Arrays.asList(sTypes.split("[|]")));
+		List<String> sTagList = new ArrayList<String>(Arrays.asList(sTags.split("[|]")));
+		List<String> sInfoSubList = new ArrayList<String>(Arrays.asList(sInfoSubs.split("[|]")));
+		List<String> sRuleList = new ArrayList<String>(Arrays.asList(sRules.split("[|]")));
+		List<String> sBHourList = new ArrayList<String>(Arrays.asList(sBHours.split("[|]")));
+		if(sImg2s != null) {
+			List<String> sImg2Name = new ArrayList<String>(Arrays.asList(sImg2s.split("[|]")));
+			myBuildingOne.setsImg2Name(sImg2Name);
+		}
+		myBuildingOne.setsTypeList(sTypeList);
+		myBuildingOne.setsTagList(sTagList);
+		myBuildingOne.setsInfoSubList(sInfoSubList);
+		myBuildingOne.setsRuleList(sRuleList);
+		myBuildingOne.setsBHourList(sBHourList);
+		
+		return myBuildingOne;
+	}
+
+	@Override
+	public void buildingUpdateReg(Building building, HttpServletRequest request) {
+		
+		if (building.getsImg1File() != null) {
+			
+			String img1 = uploadImgCreate(building.getsImg1File(), request);
+			
+			if (img1 != null)
+				building.setsImg1(img1);
+		}
+
+		if (building.getsImg2Files() != null) {
+			
+			String img2 = uploadImgCreate2(building.getsImg2Files(), request);
+			
+			if (img2 != null && !img2.equals(""))
+				building.setsImg2(img2);
+		} else {
+			building.setsImg2(listToString(building.getsImg2Name()));
+		}
+		
+		String sType = listToString(building.getsTypeList());
+		String sTag = listToString(building.getsTagList());
+		String sInfoSub = listToString(building.getsInfoSubList());
+		String sRule = listToString(building.getsRuleList());
+		String sBHour = listToString(building.getsBHourList());
+		building.setsType(sType);
+		building.setsTag(sTag);
+		building.setsInfoSub(sInfoSub);
+		building.setsRule(sRule);
+		building.setsBHour(sBHour);
+		buDao.buUpdateReg(building);
+	}
+	
+	@Override
+	public List<Board> boardList(Integer kind,String id) {
+		return boDao.list(kind,id);
+	}
+
+	@Override
 	public Member find_member_by_email(String email) {
 		return memDao.find_member_by_email(email);
 	}
@@ -421,13 +470,56 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
-	public List<Room> getMyRoom(Integer sNo) {
-		return roomDao.getMyroom(sNo);
+	public Room getMyRoom(Integer sRNo) {
+		return roomDao.getMyRoom(sRNo);
 	}
 
 	@Override
 	public List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate) {
 		return tranDao.searchTransHistory(searchType, searchContent, startDate, endDate);
 	}
+@Override
+	public Map<String, Object> graphTransHistoryCnt(String searchType, String id) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		for(Map<String, Object> m : tranDao.graphTransCnt(searchType, id)) {
+			map.put((String)m.get("key"), m.get("value"));
+		}
+		
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> graphTransHistorySum(String searchType, String id) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		for(Map<String, Object> m : tranDao.graphTransSum(searchType, id)) {
+			map.put((String)m.get("key"), m.get("value"));
+		}
+		
+		return map;
+
+	}
+
+	@Override
+	public List<Room> getmyRoomList(Integer sNo) {
+		return roomDao.getmyRoomList(sNo);
+	}
+
+	@Override
+	public void updateRoom(Room room) {
+		roomDao.updateRoom(room);
+		}
+
+	@Override
+	public void deleteRoom(Integer sRNo) {
+		roomDao.deleteRoom(sRNo);
+		
+	}
+
+
+
 	
-} // ProjectServiceImpl end
+	}// ProjectServiceImpl end

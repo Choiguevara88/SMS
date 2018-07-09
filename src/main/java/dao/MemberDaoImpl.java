@@ -49,7 +49,6 @@ public class MemberDaoImpl implements MemberDao{
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("id",id);
 		sqlSession.update(NS + "hostRegister", map);
-		
 	}
 
 
@@ -71,8 +70,7 @@ public class MemberDaoImpl implements MemberDao{
 		return sqlSession.selectOne(NS+"findmypassword",map);
 	}
 	
-	
-	@Override // ?¸ì?¤í?? ?¹ì?? ??ì²? ëª©ë??? ë¶??¬ì?¤ë?? ë©?????
+	@Override 
 	public List<Member> getHostRegList() {
 		return sqlSession.selectList(NS + "hostRegList");
 	}
@@ -84,5 +82,8 @@ public class MemberDaoImpl implements MemberDao{
 		map.put("email", email);
 		return sqlSession.selectOne(NS+"findmemberbyemail",map);
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
 }

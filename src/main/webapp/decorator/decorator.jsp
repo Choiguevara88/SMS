@@ -47,7 +47,7 @@
   	<a href="wishlist.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>내가 찜한 공간 !</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.memType == '0'}">
   	<hr size="1">
-  	<a href="becomeaHost.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>호스트 등록 !</a></c:if>
+  	<a href="${path }/becomeaHost.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>호스트 등록 !</a></c:if>
   <c:if test="${sessionScope.loginMember.memType == '1' && sessionScope.loginMember.regStatus == '1' }">
   	<hr size="1">
   	<a href="addBuilding.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공간 등록하기 !</a></c:if>

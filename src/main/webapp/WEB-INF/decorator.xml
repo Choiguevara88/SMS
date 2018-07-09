@@ -9,8 +9,13 @@
 	
 	<!-- layout 설정을 제외 함. -->
 	<excludes>
+<<<<<<< HEAD
 		<pattern>/admin/graph*</pattern>
 		<pattern>/user/mygraph*</pattern>
 		<pattern>*find_address*</pattern>
+=======
+		<pattern>/trans/graph*</pattern>
+		<pattern>/qa/questionAdmin.sms*</pattern>
+>>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
 	</excludes>
 </decorators>

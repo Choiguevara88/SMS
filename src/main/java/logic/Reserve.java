@@ -37,10 +37,10 @@ public class Reserve {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Integer getSNo() {
+	public Integer getsNo() {
 		return sNo;
 	}
-	public void setSNo(Integer sNo) {
+	public void setsNo(Integer sNo) {
 		this.sNo = sNo;
 	}
 	public Integer getSrNo() {

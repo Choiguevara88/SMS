@@ -21,8 +21,8 @@ public class ReViewController {
 	@Autowired
 	private ProjectService service;
 	
-	@RequestMapping("review/Rlist")
-	public ModelAndView Rlist(Integer pageNum, Integer sNo) {
+	@RequestMapping("review/Rlist") //http://localhost:8080/TestProject/review/Rlist.sms?sno=2
+	public ModelAndView Rlist(Integer sNo,Integer pageNum) {
 		int kind = 2;
 		if(pageNum == null || pageNum.toString().equals("")) {
 			pageNum = 1;
@@ -33,10 +33,12 @@ public class ReViewController {
 		int limit = 5;		// 한 페이지에 나올 게시글의 숫자
 		int listcount = service.boardcount(kind,sNo);	// 표시될 총 게시글의 수
 		List<Board> boardlist = service.boardList(kind, sNo, pageNum, limit);
-		
+		double avg = 0;
 		if(kind == 2) {	// 리뷰 게시글인 경우 MAV 객체에 해당 Building의 평점을 추가하는 로직
-			List<Board> boardlist2 = service.boardList(kind, sNo);
-			double avg = boardlist2.stream().mapToInt(Board :: getScore).average().getAsDouble();
+			if(boardlist != null && !boardlist.isEmpty() ) {
+				 List<Board> boardlist2 = service.boardList(kind, sNo);
+				 avg = boardlist2.stream().mapToInt(Board :: getScore).average().getAsDouble();
+			}
 			mav.addObject("avgScore",avg);
 		}
 		
@@ -95,6 +97,8 @@ public class ReViewController {
 		ModelAndView mav = new ModelAndView();
 		int sNo = Integer.parseInt(request.getParameter("sNo"));
 		int kind = Integer.parseInt(request.getParameter("kind"));
+		System.out.println(sNo);
+		System.out.println(kind);
 		
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
