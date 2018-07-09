@@ -53,7 +53,7 @@ public class BuildingController {
 		System.out.println(building);
 		service.buildingReg(building, request);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("building/myBuildingList.sms?id="+building.getId());
+		mav.setViewName("redirect:/building/myBuildingList.sms?id="+building.getId());
 		return mav;
 	}
 	

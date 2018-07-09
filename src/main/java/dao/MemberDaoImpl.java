@@ -88,5 +88,4 @@ public class MemberDaoImpl implements MemberDao{
 	public void deleteAccount(Member member) {
 		sqlSession.getMapper(MemberMapper.class).delete(member);
 	}
-
 }

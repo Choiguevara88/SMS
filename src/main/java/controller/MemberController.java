@@ -28,6 +28,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.social.connect.Connection;
@@ -237,6 +239,8 @@ public class MemberController {
 	    		return mav;
 	    }
 	}
+
+
 
 	private String requesFacebooktAccessToken(HttpSession session, String code) throws ClientProtocolException, IOException, ParseException {
 		//code, client_id, client_secret을 이용한	AccessToken얻기

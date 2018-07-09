@@ -13,6 +13,7 @@
 		<pattern>/user/mygraph*</pattern>
 		<pattern>*find_address*</pattern>
 		<pattern>/trans/graph*</pattern>
+		<pattern>/trans/graph*</pattern>
 		<pattern>/qa/questionAdmin.sms*</pattern>
 	</excludes>
 </decorators>
