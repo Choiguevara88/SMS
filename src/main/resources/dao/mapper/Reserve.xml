@@ -35,27 +35,20 @@
 		</if>
 	</select>
 	
-	<!-- [&lt; : <] [&gt; : >] -->
+	
 	<select id="hostCount" resultType="Integer" parameterType="map">
 		select count(*) from reserve 
 		
-		<if test="searchType != null and searchContent != null and startDate == null and endDate == null and sNo != null">
+		<if test="searchType != null and searchContent != null and sNo != null">
 			where ${searchType} like '%${searchContent}%' and sNo = #{sNo}
 		</if>
 		
-		<if test="searchType == null and searchContent == null and startDate == null and endDate == null and sNo != null">
+		<if test="searchType == null and searchContent == null and sNo != null">
 			where sNo = #{sNo}
-		</if>
-		
-		<if test="searchType == reDate and searchContent == null and startDate != null and endDate != null and sNo != null">
-			where #{searchType} &gt; '${startDate}' and #{searchType} &lt; '${endDate}' and sNo = #{sNo}
-		</if>
-		
-		<if test="searchType == regDate and searchContent == null and startDate != null and endDate != null and sNo != null">
-			where #{searchType} &gt; '${startDate}' and #{searchType} &lt; '${endDate}' and sNo = #{sNo}
 		</if>
 	</select>
 	
+	<!-- [&lt; : <] [&gt; : >] -->
 	<select id="selectHostList" resultType="Reserve" parameterType="map">
 		select * from Reserve 
 		
@@ -67,13 +60,14 @@
 			where sNo = #{sNo}
 		</if>
 		
-		<if test="searchType == reDate and searchContent == null and startDate != null and endDate != null and sNo != null">
-			where #{searchType} &gt; '${startDate}' and #{searchType} &lt; '${endDate}' and sNo = #{sNo}
+		<if test="searchType == 'reDate' and searchContent == null and startDate != null and endDate != null and sNo != null">
+			where reDate &gt; #{startDate} and reDate &lt; #{endDate} and sNo = #{sNo}
 		</if>
 		
-		<if test="searchType == regDate and searchContent == null and startDate != null and endDate != null and sNo != null">
-			where #{searchType} &gt; '${startDate}' and #{searchType} &lt; '${endDate}' and sNo = #{sNo}
+		<if test="searchType == 'regDate' and searchContent == null and startDate != null and endDate != null and sNo != null">
+			where regDate &gt; #{startDate} and regDate &lt; #{endDate} and sNo = #{sNo}
 		</if>
+		
 	</select>
 	
 	<update id="cancel" parameterType="map">

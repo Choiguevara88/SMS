@@ -82,13 +82,14 @@ public class ReserveDaoImpl implements ReserveDao {
 	}
 
 	@Override	// Host계정에서 예약리스트 확인 할 때 호출되는 메서드
-	public List<Reserve> hostlist(Integer sNo, String searchType, String searchContent, Integer pageNum, int limit, String startDate, String endDate) {
+	public List<Reserve> hostlist(Integer sNo, String searchType, String searchContent, Integer pageNum, int limit, 
+			String startDate, String endDate) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 /*		int startrow = (pageNum - 1) * limit;
 		map.put("startrow", startrow);
-		map.put("limit", limit);*/
+		map.put("limit", limit); */
 		
 		map.put("sNo", sNo);
 		map.put("searchType", searchType);
@@ -97,6 +98,7 @@ public class ReserveDaoImpl implements ReserveDao {
 		map.put("endDate", endDate);
 		
 		return sqlSession.selectList(NS + "selectHostList", map);
+		
 	}
 
 	@Override	// Guest계정에서 예약을 취소할 때 호출되는 메서드 = 예약취소는 여전히 DB에 남음
