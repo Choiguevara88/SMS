@@ -134,6 +134,7 @@ public class RoomController {
 	public ModelAndView roomDelete(HttpSession session,Integer sRNo,Integer sNo, String pass)throws ProjectException {
 		ModelAndView mav = new ModelAndView();
 		try{
+			
 			Member loginMember = (Member) session.getAttribute("loginMember");
 			String loginMemberPass = loginMember.getPw();
 				if(pass.equals(loginMemberPass)) {
