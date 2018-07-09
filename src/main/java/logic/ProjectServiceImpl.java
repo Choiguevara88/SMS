@@ -110,9 +110,7 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void boardReply(Board board) {
 		boDao.qTypeAdd(board);
-		
 		int num = boDao.maxNum();
-		
 		board.setbNo(++num);
 		board.setRefLevel(board.getRefLevel() + 1);
 		boDao.insert(board);

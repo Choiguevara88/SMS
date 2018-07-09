@@ -14,7 +14,7 @@
 		<pattern>*find_address*</pattern>
 		<pattern>/trans/graph*</pattern>
 		<pattern>/trans/graph*</pattern>
-		<pattern>/qa/questionAdmin.sms*</pattern>
+		<pattern>/qa/questionList.sms*</pattern>
 		<pattern>/review/Qlist.sms*</pattern>
 		<pattern>/review/Rlist.sms*</pattern>
 	</excludes>

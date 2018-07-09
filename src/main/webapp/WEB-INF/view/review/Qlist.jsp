@@ -8,6 +8,13 @@
 		return false;
 	}
 </script>
+<script type="text/javascript">
+	function check() {
+		confirm("정말 삭제 하시겠습니까?")
+		document.d.submit();
+	}
+
+</script>
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
 
@@ -133,7 +140,12 @@ window.onclick = function(event) {
   		<c:if test="${sessionScope.loginMember.id == building.id && board.sNo == building.sNo }">
   		<a href="../review/reply.sms?bNo=${board.bNo}&pageNum=${pageNum}">[답변]</a></c:if>
   		<c:if test="${sessionScope.loginMember.id == board.id }">
-		<a href="../review/delete.sms?bNo=${board.bNo}&pageNum=${pageNum}">[삭제]</a></c:if><br></td>
+  	<form name="d" method="post" action="delete.sms">
+  		<input type="hidden" name="bNo"	value="${board.bNo}">
+		<input type="hidden" name="sNo"	value="${board.sNo}">
+		<input type="hidden" name="kind" value="${board.kind}">
+		<input type="hidden" name="pageNum"	value="${param.pageNum}">
+		<input type="button" value="삭제" onclick="check()" ></form></c:if><br></td>
 <!--  글 밑 부분 -->
 </c:forEach>
 <tr align="center" height="26"><td colspan="2">

@@ -213,7 +213,7 @@ public class ReViewController {
 		return mav;
 	}
 	
-	@RequestMapping(value="review/*delete", method=RequestMethod.POST)
+	@RequestMapping(value="building/*delete", method=RequestMethod.POST)
 	public ModelAndView delete(Integer bNo, Integer pageNum,Integer sNo,Integer kind) {
 		
 		ModelAndView mav = new ModelAndView();

@@ -22,7 +22,7 @@ function listRlist(){
 	console.log("listRlist 호출")
 	$.ajax({
 		type: "get",
-		url : "${path}/review/Rlist.sms?sNo=${param.sNo}",
+		url : "${path}/building/Rlist.sms?sNo=${param.sNo}",
 		success: function(result){
 			console.log(result)
 			$("#listRlist").html(result)
@@ -33,7 +33,7 @@ function listQlist(){
 	console.log("listQlist 호출")
 	$.ajax({
 		type: "get",
-		url : "${path}/review/Qlist.sms?sNo=${param.sNo}",
+		url : "${path}/building/Qlist.sms?sNo=${param.sNo}",
 		success: function(result){
 			console.log(result)
 			$("#listQlist").html(result)

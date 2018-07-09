@@ -6,23 +6,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>1:1 문의</title>
-<script>
-</script>
+
 </head> 
 <body>
-<table border="1">
 <% pageContext.setAttribute("newLineChar","\n"); %>
 	<c:forEach var="board" items="${list}">
+	<c:if test="${board.qType != 0 }">
+<div align="right">
 	<c:set var="str" value="${fn:replace(board.content,'  ','&nbsp;&nbsp;') }"/>
 	<c:set var="str" value="${fn:replace(board.content,newLineChar,'<br>') }"/>
-		<tr>
-			<td border="1">${board.id} 
+		<div>
+			<div>${board.id} 
 			(<fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd a hh:mm:ss"/>)<br>
-		<td>
+		<div>
 		${str}
-		</td>
-		</tr>
+		</div>
+		</div>
+		</div>
+</div>
+	</c:if>
+	<c:if test="${board.qType == 0 }">
+<div align="left">
+	<c:set var="str" value="${fn:replace(board.content,'  ','&nbsp;&nbsp;') }"/>
+	<c:set var="str" value="${fn:replace(board.content,newLineChar,'<br>') }"/>
+		<div>
+			<div>${board.id} 
+			(<fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd a hh:mm:ss"/>)<br>
+		<div>
+		${str}
+		</div>
+		</div>
+		</div>
+</div>
+	</c:if>
 	</c:forEach>
-</table>
+	
 </body>
 </html>
