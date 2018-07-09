@@ -71,7 +71,7 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	
 	@Override 
-	public List<Member> getHostRegList() {
+	public List<Member> getHostRegList() {	// 관리자가 Host전환 신청한 계정들의 정보를 불러올 때 사용
 		return sqlSession.selectList(NS + "hostRegList");
 	}
 
@@ -87,5 +87,76 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public void deleteAccount(Member member) {
 		sqlSession.getMapper(MemberMapper.class).delete(member);
+	}
+
+
+	@Override
+	public List<Member> getMemberList(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum) {
+		
+		Map <String, Object> map = new HashMap<String, Object>();
+		
+		pageNum = (pageNum - 1) * limit;
+		
+		map.put("searchType", searchType);
+		map.put("searchContent", searchContent);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		map.put("limit", limit);
+		map.put("pageNum", pageNum);
+		
+		return sqlSession.selectList(NS + "adminMemberList", map);
+	}
+
+
+	@Override
+	public int getMemberCnt(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum) {
+		
+		Map <String, Object> map = new HashMap<String, Object>();
+		
+		pageNum = (pageNum - 1) * limit;
+		
+		map.put("searchType", searchType);
+		map.put("searchContent", searchContent);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		map.put("limit", limit);
+		map.put("pageNum", pageNum);
+		
+		return sqlSession.selectOne(NS + "adminMemberCnt", map);
+	}
+	
+	@Override
+	public List<Member> getHostList(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum) {
+		
+		Map <String, Object> map = new HashMap<String, Object>();
+		
+		pageNum = (pageNum - 1) * limit;
+		
+		map.put("searchType", searchType);
+		map.put("searchContent", searchContent);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		map.put("limit", limit);
+		map.put("pageNum", pageNum);
+		
+		return sqlSession.selectList(NS + "adminHostList", map);
+	}
+
+
+	@Override
+	public int getHostCnt(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum) {
+		
+		Map <String, Object> map = new HashMap<String, Object>();
+		
+		pageNum = (pageNum - 1) * limit;
+		
+		map.put("searchType", searchType);
+		map.put("searchContent", searchContent);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		map.put("limit", limit);
+		map.put("pageNum", pageNum);
+		
+		return sqlSession.selectOne(NS + "adminHostCnt", map);
 	}
 }

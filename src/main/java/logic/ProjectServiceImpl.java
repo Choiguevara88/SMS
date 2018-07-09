@@ -115,7 +115,7 @@ public class ProjectServiceImpl implements ProjectService {
 		
 		board.setbNo(++num);
 		board.setRefLevel(board.getRefLevel() + 1);
-		boDao.insert(board);
+		boDao.replyInsert(board);
 	}
 
 	@Override // board Update Method()
@@ -521,4 +521,26 @@ public class ProjectServiceImpl implements ProjectService {
 	public void deleteAccount(Member member) {
 		memDao.deleteAccount(member);
 	}
+
+	@Override
+	public List<Member> getMemberList(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum) {
+		return memDao.getMemberList(searchType, searchContent, startDate, endDate, limit, pageNum);
+	}
+
+	@Override
+	public int getMemberCnt(String searchType, String searchContent, String startDate, String endDate, Integer pageNum, Integer limit) {
+		return memDao.getMemberCnt(searchType, searchContent, startDate, endDate, limit, pageNum);
+	}
+
+	@Override
+	public int getHostCnt(String searchType, String searchContent, String startDate, String endDate, Integer pageNum, Integer limit) {
+		return memDao.getHostCnt(searchType, searchContent, startDate, endDate, limit, pageNum);
+	}
+
+	@Override
+	public List<Member> getHostList(String searchType, String searchContent, String startDate, String endDate, Integer pageNum, Integer limit) {
+		return memDao.getHostList(searchType, searchContent, startDate, endDate, limit, pageNum);
+	}
+	
+	
 	}// ProjectServiceImpl end

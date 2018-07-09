@@ -99,7 +99,16 @@ public interface ProjectService {
 	Map<String, Object> graphTransHistoryCnt(String searchType, String id);
 	
 	Map<String, Object> graphTransHistorySum(String searchType, String id);
+	
 	void deleteAccount(Member member);
+	
+	List<Member> getMemberList(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum);
+	
+	int getMemberCnt(String searchType, String searchContent, String startDate, String endDate, Integer pageNum, Integer limit);
+	int getHostCnt(String searchType, String searchContent, String startDate, String endDate, Integer pageNum,
+			Integer limit);
+	List<Member> getHostList(String searchType, String searchContent, String startDate, String endDate, Integer pageNum,
+			Integer limit);
 	
 	
 }
