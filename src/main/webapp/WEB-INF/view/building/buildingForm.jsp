@@ -159,29 +159,6 @@ $(document).ready(function() {
 	});
 });
 
-/* function autohypen(){
-	var x = document.getElementById("tel"); //tel을 선택해서
-	x.value = x.value.replace(/[^0-9]/g, ''); //0-9를 ''으로 바꾼다 x.value는 뭐 암것도 없음. 그냥 변수
-	console.log(x.value); //11111111111 이렇게 나옴
-	var tmp = "";
-	 if (x.value.length > 3 && x.value.length <= 7) { //length구해서 -필요한 곳마다 넣기
-		tmp += x.value.substr(0, 3);
-		tmp += '-';
-		tmp += x.value.substr(3);
-		x.value = tmp;
-		return x.value;
-	} else if (x.value.length > 7) {
-		tmp += x.value.substr(0, 3);
-		tmp += '-';
-		tmp += x.value.substr(3, 4);
-		tmp += '-';
-		tmp += x.value.substr(7);
-		x.value = tmp;
-		return x.value;
-	}
-}
- */
- 
  function chk_tel(str, field){ 
 	  var str; 
 	  str = checkDigit(str); 
@@ -325,8 +302,8 @@ $(document).ready(function() {
          <!-- <tr><td></td><td><input id="directInput" /></td></tr> -->
          </div></td></tr>
     <tr><td align="left">공간 연락처</td>
-		<td><!-- <input type="text" name="tel" id="tel" placeholder="하이픈(-) 없이입력" onkeyup="chk_tel()" maxlength="13"> -->
-		<input type="text" name="tel" onkeyup="chk_tel(this.value,this);" > 
+		<td>
+		<input type="text" name="sTel" onkeyup="chk_tel(this.value,this);" > 
 		</td></tr>
  
     <tr><td>이용시 주의사항(최대 10개)</td>

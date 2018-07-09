@@ -59,38 +59,39 @@ public class ReserveController {
 
 	}
 
-	// 예약 리스트를 확인할 때 호출되는 메서드 (Guest계정용)
-	@RequestMapping(value = "reserve/resList", method = RequestMethod.GET)
-	public ModelAndView reserveList(String id, Integer pageNum, String searchType, String searchContent,
-			HttpSession session) {
+	   // 예약 리스트를 확인할 때 호출되는 메서드 (Guest계정용)
+	   @RequestMapping(value = "reserve/resList", method = RequestMethod.GET)
+	   public ModelAndView reserveList(String id, Integer pageNum, String searchType, String searchContent,
+	         HttpSession session, String startDate, String endDate) {
 
-		if (pageNum == null || pageNum.toString().equals("")) {
-			pageNum = 1;
-		}
+	      if (pageNum == null || pageNum.toString().equals("")) {
+	         pageNum = 1;
+	      }
 
-		ModelAndView mav = new ModelAndView();
+	      ModelAndView mav = new ModelAndView();
 
-		int limit = 100; // 한 페이지에 나올 게시글의 숫자
-		int listcount = service.reserveCount(id, searchType, searchContent); // 표시될 총 게시글의 수
+	      int limit = 100; // 한 페이지에 나올 게시글의 숫자
+	      int listcount = service.reserveCount(id, searchType, searchContent); // 표시될 총 게시글의 수
 
 
-			int maxpage = (int) ((double) listcount / limit + 0.95);
-			int startpage = ((int) ((pageNum / 10.0 + 0.9) - 1)) * 10 + 1; // 시작페이지
-			int endpage = startpage + 9; // 마지막 페이지
-			if (endpage > maxpage)
-				endpage = maxpage;
-			int reservecnt = listcount - (pageNum - 1) * limit;
-			mav.addObject("pageNum", pageNum);
-			mav.addObject("maxpage", maxpage);
-			mav.addObject("startpage", startpage);
-			mav.addObject("endpage", endpage);
-			mav.addObject("listcount", listcount);
-			mav.addObject("list", reservelist);
-			mav.addObject("reservecnt", reservecnt);
-		}
+	      List<Reserve> reservelist = service.selectReserveList(id, searchType, searchContent, pageNum, limit, startDate, endDate);
 
-		return mav;
-	}
+	      int maxpage = (int) ((double) listcount / limit + 0.95);
+	      int startpage = ((int) ((pageNum / 10.0 + 0.9) - 1)) * 10 + 1; // 시작페이지
+	      int endpage = startpage + 9; // 마지막 페이지
+	      if (endpage > maxpage)
+	         endpage = maxpage;
+	      int reservecnt = listcount - (pageNum - 1) * limit;
+	      mav.addObject("pageNum", pageNum);
+	      mav.addObject("maxpage", maxpage);
+	      mav.addObject("startpage", startpage);
+	      mav.addObject("endpage", endpage);
+	      mav.addObject("listcount", listcount);
+	      mav.addObject("list", reservelist);
+	      mav.addObject("reservecnt", reservecnt);
+
+	      return mav;
+	   }
 
 	// 신규예약정보에 대해 확인할 때 호출되는 메서드 (Host계정용)
 	@RequestMapping(value = "reserve/hostResInfo", method = RequestMethod.GET)

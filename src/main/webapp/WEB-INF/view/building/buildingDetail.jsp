@@ -47,6 +47,10 @@
 <div>${building.sHDay}</div>
 <hr>
 
+<h3>전화번호</h3>
+<div>${building.sTel}</div>
+<hr>
+
 <h3>주소</h3>
 <div>${address1}</div>
 <div id="map" style="width:100%;height:200px;"></div>
