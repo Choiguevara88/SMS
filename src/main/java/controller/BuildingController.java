@@ -108,8 +108,13 @@ public class BuildingController {
 	public ModelAndView buildingDetail(Building building, HttpServletRequest request) {
 		String sNo = request.getParameter("sNo");
 		building = service.getMyBuildingOne(sNo);
+		
 		ModelAndView mav = new ModelAndView();
+		String address = building.getsAddress().split(",")[1];
+		String address1 = building.getsAddress().split(",")[1] +" "+building.getsAddress().split(",")[2];
 		mav.addObject("building", building);
+		mav.addObject("address",address);
+		mav.addObject("address1", address1);
 		return mav;
 	}
 }

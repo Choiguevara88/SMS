@@ -159,7 +159,95 @@ $(document).ready(function() {
 	});
 });
 
+/* function autohypen(){
+	var x = document.getElementById("tel"); //tel을 선택해서
+	x.value = x.value.replace(/[^0-9]/g, ''); //0-9를 ''으로 바꾼다 x.value는 뭐 암것도 없음. 그냥 변수
+	console.log(x.value); //11111111111 이렇게 나옴
+	var tmp = "";
+	 if (x.value.length > 3 && x.value.length <= 7) { //length구해서 -필요한 곳마다 넣기
+		tmp += x.value.substr(0, 3);
+		tmp += '-';
+		tmp += x.value.substr(3);
+		x.value = tmp;
+		return x.value;
+	} else if (x.value.length > 7) {
+		tmp += x.value.substr(0, 3);
+		tmp += '-';
+		tmp += x.value.substr(3, 4);
+		tmp += '-';
+		tmp += x.value.substr(7);
+		x.value = tmp;
+		return x.value;
+	}
+}
+ */
+ 
+ function chk_tel(str, field){ 
+	  var str; 
+	  str = checkDigit(str); 
+	  len = str.length; 
+	  
+	  if(len==8){ 
+	  if(str.substring(0,2)==02){ 
+	    error_numbr(str, field); 
+	  }else{ 
+	    field.value  = phone_format(1,str); 
+	  }  
+	  }else if(len==9){ 
+	  if(str.substring(0,2)==02){ 
+	    field.value = phone_format(2,str); 
+	  }else{ 
+	    error_numbr(str, field); 
+	  } 
+	  }else if(len==10){ 
+	  if(str.substring(0,2)==02){ 
+	    field.value = phone_format(2,str); 
+	  }else{ 
+	    field.value = phone_format(3,str); 
+	  } 
+	  }else if(len==11){ 
+	  if(str.substring(0,2)==02){ 
+	    error_numbr(str, field); 
+	  }else{ 
+	    field.value  = phone_format(3,str); 
+	  } 
+	  }else{ 
+	  error_numbr(str, field); 
+	  } 
+	 } 
+	 function checkDigit(num){ 
+	  var Digit = "1234567890"; 
+	  var string = num; 
+	  var len = string.length 
+	  var retVal = ""; 
+	  for (i = 0; i < len; i++){ 
+	  if (Digit.indexOf(string.substring(i, i+1)) >= 0){ 
+	    retVal = retVal + string.substring(i, i+1); 
+	  } 
+	  } 
+	  return retVal; 
+	 } 
+	 function phone_format(type, num){ 
+	  if(type==1){ 
+	  return num.replace(/([0-9]{4})([0-9]{4})/,"$1-$2"); 
+	  }else if(type==2){ 
+	  return num.replace(/([0-9]{2})([0-9]+)([0-9]{4})/,"$1-$2-$3"); 
+	  }else{ 
+	  return num.replace(/(^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3"); 
+	  } 
+	 } 
+/* 	 function error_numbr(str, field){ 
+	  alert("정상적인 번호가 아닙니다."); 
+	  field.value = ""; 
+	  field.focus(); 
+	  return; 
+	 }  */
 </script>
+
+<!-- 지도관련 스크립트 -->
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=2bA8v55yYLf1omsHnKFk&submodules=geocoder"></script>
 </head>
 <body>
 <div>
@@ -200,8 +288,18 @@ $(document).ready(function() {
         <input multiple="multiple" type="file" id="sImg2" name="sImg2Files" accept="image/*" /></td></tr>
     
     <!-- 주소API 추후 사용 -->
-    <tr><td>주소</td><td><form:input path="sAddress" /> </td></tr>
-                     
+    <%-- <tr><td>주소</td><td><form:input path="sAddress" /> </td></tr> --%>
+    <tr>
+			<td><strong>사업자 주소지</strong></td></tr>
+		<tr>
+			<td>우편번호</td><td><input type="text" name="sAddress" id="zipcode" class="postcodify_postcode5" value="" />
+				<input type="button" id="postcodify_search_button" value="검색"></td></tr>
+		<tr>
+			<td>도로명 주소</td><td><input type="text" id="asdf" name="sAddress" class="postcodify_address" value=""/></td></tr>
+		<tr>
+			<td>상세 주소</td><td><input type="text" name="sAddress" id="details" class="postcodify_details" value="" onfocus="drawmap()"/></td></tr>
+		<tr><td colspan="2"><div id="map" style="width:100%;height:200px;"></div></td></tr>
+                
      <tr><td colspan="2" align="center">이용정보</td></tr>
      <tr><td>이용시간</td>
          <td><select name="sBHourList">
@@ -225,17 +323,83 @@ $(document).ready(function() {
          <input type="checkbox" id="direct" /> 직접입력
          <div id="directsHDay"><!-- 직접입력을 누르면 input태그가 생기는 부분 -->
          <!-- <tr><td></td><td><input id="directInput" /></td></tr> -->
-         </div>
+         </div></td></tr>
+    <tr><td align="left">공간 연락처</td>
+		<td><!-- <input type="text" name="tel" id="tel" placeholder="하이픈(-) 없이입력" onkeyup="chk_tel()" maxlength="13"> -->
+		<input type="text" name="tel" onkeyup="chk_tel(this.value,this);" > 
+		</td></tr>
  
     <tr><td>이용시 주의사항(최대 10개)</td>
         <td><input id="rule" />
             <input type="button" id="addrule" value="추가" /></td></tr>
     <tr><td></td><td> <div id="ruleList">
               <!-- 이용시 주의사항 추가시 웹상에서 보여지는 부분 -->
-            </div></td></tr>
+            </div>
      
      <tr><td colspan="2" align="center"><input type="submit" value="공간등록"></td></tr>
   </table>
+
+<!-- 지도관련 스크립트 -->
+  <script>
+function drawmap(){ 
+	var map = new naver.maps.Map('map');
+    var myaddress = $('#asdf').val();// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
+    console.log(myaddress);
+    naver.maps.Service.geocode({address: myaddress}, function(status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+            return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
+        }
+        var result = response.result;
+        // 검색 결과 갯수: result.total
+        // 첫번째 결과 결과 주소: result.items[0].address
+        // 첫번째 검색 결과 좌표: result.items[0].point.y, result.items[0].point.x
+        var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
+        map.setCenter(myaddr); // 검색된 좌표로 지도 이동
+        // 마커 표시
+        var marker = new naver.maps.Marker({
+          position: myaddr,
+          map: map
+        });
+        // 마커 클릭 이벤트 처리
+        naver.maps.Event.addListener(marker, "click", function(e) {
+          if (infowindow.getMap()) {
+              infowindow.close();
+          } else {
+              infowindow.open(map, marker);
+          }
+        });
+    });
+  }
+</script>
+<script>
+var map = new naver.maps.Map('map');
+var myaddress = "한강대로 405";// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
+console.log(myaddress);
+naver.maps.Service.geocode({address: myaddress}, function(status, response) {
+    if (status !== naver.maps.Service.Status.OK) {
+        return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
+    }
+    var result = response.result;
+    // 검색 결과 갯수: result.total
+    // 첫번째 결과 결과 주소: result.items[0].address
+    // 첫번째 검색 결과 좌표: result.items[0].point.y, result.items[0].point.x
+    var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
+    map.setCenter(myaddr); // 검색된 좌표로 지도 이동
+    // 마커 표시
+    var marker = new naver.maps.Marker({
+      position: myaddr,
+      map: map
+    });
+    // 마커 클릭 이벤트 처리
+    naver.maps.Event.addListener(marker, "click", function(e) {
+      if (infowindow.getMap()) {
+          infowindow.close();
+      } else {
+          infowindow.open(map, marker);
+      }
+    });
+});
+</script>
 </form:form>
 </div>
 </body>
