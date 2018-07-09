@@ -24,5 +24,7 @@ public interface MemberDao {
 
 	Member find_member_by_email(String email);
 
+	void deleteAccount(Member member);
+
 	
 }

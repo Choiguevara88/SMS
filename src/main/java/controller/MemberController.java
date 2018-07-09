@@ -9,7 +9,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -21,6 +20,15 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -43,6 +51,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import exception.ProjectException;
 import logic.Member;
 import logic.ProjectService;
 
@@ -231,6 +240,8 @@ public class MemberController {
 	    }
 	}
 
+
+
 	private String requesFacebooktAccessToken(HttpSession session, String code) throws ClientProtocolException, IOException, ParseException {
 		//code, client_id, client_secret을 이용한	AccessToken얻기
 		//AccessToken이 있어야 라인 190에서 처럼 결과를 얻어올수 있다
@@ -361,6 +372,29 @@ public class MemberController {
 		mav.setViewName("redirect: personal_info.sms?id=" + member.getId());
 		return mav;
 	}
+	
+	@RequestMapping(value="personal_info_delete")
+	public ModelAndView personal_info_delete(String id, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/delete_account");
+		return mav;
+	}
+	
+	@RequestMapping(value="personal_info_delete_confirm")
+	public ModelAndView personal_info_delete_confirm(String id, String pw, HttpSession session) {
+		ModelAndView mav  = new ModelAndView();
+		Member member = service.getMember(id);
+		if(member.getPw().equals(pw)) {
+			service.deleteAccount(member);
+			session.invalidate();
+			mav.setViewName("after_delete_account");
+			return mav;
+		}
+		else {
+			throw new ProjectException("비밀번호가 다릅니다.. 다시 시도해주세여","personal_info_delete.sms?id=" +member.getId());
+		}
+	}
+	
 	@RequestMapping(value="checkID") //ID중복확인. 여기서만 나오고 끝남
 	public @ResponseBody String checkID(String id) {
 		Member member = service.getMember(id);

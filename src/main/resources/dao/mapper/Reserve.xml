@@ -6,11 +6,11 @@
 	<select id="count" resultType="Integer" parameterType="map">
 		select count(*) from reserve 
 		
-		<if test="searchType != null and searchContent != null">
+		<if test="searchType != null and searchContent != null and id == 'admin'">
 			where ${searchType} like '%${searchContent}%'	
 		</if>
 		
-		<if test="id != null">
+		<if test="searchType == null and searchContent == null and id != 'admin'">
 			where id = #{id}
 		</if>
 		
@@ -23,18 +23,39 @@
 		</if>
 	</select>
 	
+	<!-- 
+		조건식 1 : id 구분 없이 검색이 필요한 경우 (관리자용)
+		조건식 2 : id로 구분할 경우 (자기 자신의 예약 확인 용)
+		조건식 3 : reDate로 검색할 경우 (자기 자신의 일자 검색 예약 확인 용)
+		조건식 4 : regDate로 검색할 경우 (자기 자신의 일자 검색 예약 확인 용)
+		조건식 5,6 : id 구분 없이 일자별로 검색이 필요한 경우 (관리자용)	 -->
 	<select id="selectList" resultType="Reserve" parameterType="map">
 		select * from Reserve 
 		
-		<if test="searchType != null and searchContent != null">
+		<if test="searchType != null and searchContent != null and startDate == null and endDate == null and id == 'admin'">
 			where ${searchType} like '%${searchContent}%'
 		</if>
 
-		<if test="id != null">
+		<if test="searchType == null and searchContent == null and startDate == null and endDate == null and id != 'admin'">
 			where id = #{id}
 		</if>
+		
+		<if test="searchType == 'reDate' and searchContent == null and startDate != null and endDate != null and id != 'admin'">
+			where reDate &gt; #{startDate} and reDate &lt; #{endDate} and id = #{id}
+		</if>
+		
+		<if test="searchType == 'regDate' and searchContent == null and startDate != null and endDate != null and id != 'admin'">
+			where regDate &gt; #{startDate} and regDate &lt; #{endDate} and id = #{id}
+		</if>
+		
+		<if test="searchType == 'reDate' and searchContent == null and startDate != null and endDate != null and id == 'admin'">
+			where reDate &gt; #{startDate} and reDate &lt; #{endDate}
+		</if>
+		
+		<if test="searchType == 'regDate' and searchContent == null and startDate != null and endDate != null and id == 'admin'">
+			where regDate &gt; #{startDate} and regDate &lt; #{endDate}
+		</if>
 	</select>
-	
 	
 	<select id="hostCount" resultType="Integer" parameterType="map">
 		select count(*) from reserve 

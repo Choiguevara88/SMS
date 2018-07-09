@@ -32,7 +32,7 @@ public interface ProjectService {
 
 	int reserveCount(String id, String searchType, String searchContent);
 	
-	List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum, int limit);
+	List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum, int limit, String startDate, String endDate);
 
 	void reserveInsert(Reserve reserve);
 
@@ -99,6 +99,7 @@ public interface ProjectService {
 	Map<String, Object> graphTransHistoryCnt(String searchType, String id);
 	
 	Map<String, Object> graphTransHistorySum(String searchType, String id);
+	void deleteAccount(Member member);
 	
 	
 }

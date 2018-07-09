@@ -48,7 +48,7 @@
   <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.id != 'admin' }">
   	<hr size="1">
   	<a href="wishlist.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>내가 찜한 공간 !</a></c:if>
-  <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.memType == '0'}">
+  <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.memType == '0' && sessionScope.loginMember.regStatus != '0'}">
   	<hr size="1">
   	<a href="${path }/becomeaHost.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>호스트 등록 !</a></c:if>
   <c:if test="${!empty sessionScope.loginMember}">

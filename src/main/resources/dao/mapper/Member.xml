@@ -22,7 +22,7 @@
 	</select>
 	
 	<update id="hostRegister" parameterType="map">
-		update Member set memType=1 , regStatus = 2 where id=#{id}
+		update Member set memType=1 , regStatus = 1 where id=#{id}
 	</update>
 	
 	<select id="findmyID" resultType="Member" parameterType="map">

@@ -9,8 +9,11 @@
 	
 	<!-- layout 설정을 제외 함. -->
 	<excludes>
+		<pattern>/admin/graph*</pattern>
+		<pattern>/user/mygraph*</pattern>
+		<pattern>*find_address*</pattern>
+		<pattern>/trans/graph*</pattern>
 		<pattern>/trans/graph*</pattern>
 		<pattern>/qa/questionAdmin.sms*</pattern>
-		<pattern>*find_address*</pattern>
 	</excludes>
 </decorators>
