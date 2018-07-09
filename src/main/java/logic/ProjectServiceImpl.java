@@ -519,7 +519,8 @@ public class ProjectServiceImpl implements ProjectService {
 		
 	}
 
-
-
-	
+	@Override
+	public void deleteAccount(Member member) {
+		memDao.deleteAccount(member);
+	}
 	}// ProjectServiceImpl end

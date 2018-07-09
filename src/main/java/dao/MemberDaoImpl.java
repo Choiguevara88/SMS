@@ -82,8 +82,11 @@ public class MemberDaoImpl implements MemberDao{
 		map.put("email", email);
 		return sqlSession.selectOne(NS+"findmemberbyemail",map);
 	}
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
+
+	@Override
+	public void deleteAccount(Member member) {
+		sqlSession.getMapper(MemberMapper.class).delete(member);
+	}
+
 }

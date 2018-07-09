@@ -20,8 +20,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-<<<<<<< HEAD
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,8 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-=======
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.social.connect.Connection;
@@ -52,10 +49,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
+import exception.ProjectException;
 import logic.Member;
 import logic.ProjectService;
 
@@ -81,10 +75,7 @@ public class MemberController {
 	public String joinForm() {
 		return "member/joinForm";
 	}
-	@RequestMapping("find_address")
-	public String find_address() {
-		return "member/find_address";
-	}
+
 	
 	@RequestMapping("member/join") //����媛���
 	public ModelAndView join(@Valid Member member, BindingResult bindingResult) {
@@ -202,7 +193,6 @@ public class MemberController {
 		return mav;
 	}
 	
-<<<<<<< HEAD
 	@RequestMapping(value = "facebooklogin")
 	public String loginbyFB(HttpSession session) {
 		String facebookurl = "https://www.facebook.com/v3.0/dialog/oauth?" + 
@@ -246,152 +236,8 @@ public class MemberController {
 	    		mav.setViewName("main");
 	    		return mav;
 	    }
-=======
-	@RequestMapping(value = "loginbyNaver")
-	public ModelAndView loginbysns(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException, ParseException {
-		String clientId = "Gq6yEGwFqkB9pHnvlf6E";//애플리케이션 클라이언트 아이디값";
-	    String clientSecret = "GPb0l9WxBS";//애플리케이션 클라이언트 시크릿값";
-	    String code = request.getParameter("code");
-	    System.out.println(code);
-	    String state = request.getParameter("state");
-	    System.out.println(state);
-	    String redirectURI = URLEncoder.encode("http://localhost:8080/TestProject/loginbysns.sms", "UTF-8");
-	    String apiURL;
-	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
-	    apiURL += "client_id=" + clientId;
-	    apiURL += "&client_secret=" + clientSecret;
-	    apiURL += "&redirect_uri=" + redirectURI;
-	    apiURL += "&code=" + code;
-	    apiURL += "&state=" + state;
-	    System.out.println("code="+code+",state="+state);
-	    String access_token = "";
-	    String refresh_token = "";
-	    StringBuffer res = new StringBuffer();
-	    System.out.println("apiURL="+apiURL);
-	    try {
-	      URL url = new URL(apiURL);
-	      HttpURLConnection con = (HttpURLConnection)url.openConnection();
-	      con.setRequestMethod("GET");
-	      int responseCode = con.getResponseCode();
-	      BufferedReader br;
-	      System.out.print("responseCode="+responseCode);
-	      if(responseCode==200) { // 정상 호출
-	        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-	      } else {  // 에러 발생
-	        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-	      }
-	      String inputLine;
-	      while ((inputLine = br.readLine()) != null) {
-	        res.append(inputLine);
-	      }
-	      br.close();
-	      if(responseCode==200) {
-	        System.out.println("\n===========res 1:");
-	        System.out.println("res:" + res.toString());
-	      }
-	    } catch (Exception e) {
-	      System.out.println(e);
-	    }
-	    JSONParser parser = new JSONParser(); 
-	    JSONObject json = (JSONObject)parser.parse(res.toString()); //json parsing
-	    String token = (String)json.get("access_token");
-	    System.out.println("\n=====token:"+token);
-	    String header = "Bearer " + token; // Bearer 다음에 공백 추가
-	    try {
-	        apiURL = "https://openapi.naver.com/v1/nid/me";
-//	        apiURL = "https://openapi.naver.com/v1/nid/getUserProfile";
-	        URL url = new URL(apiURL);
-	        HttpURLConnection con = (HttpURLConnection)url.openConnection();
-	        con.setRequestMethod("GET");
-	        con.setRequestProperty("Authorization", header);
-	        int responseCode = con.getResponseCode();
-	        BufferedReader br;
-	        res = new StringBuffer();
-	        if(responseCode==200) { // 정상 호출
-	        	System.out.println("로그인 정보 정상 수신");
-	            br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-	        } else {  // 에러 발생
-	        	System.out.println("로그인 정보 오류 수신");
-	            br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-	        }
-	        String inputLine;
-	        while ((inputLine = br.readLine()) != null) {
-	            res.append(inputLine);
-	        }
-	        br.close();
-	        System.out.println(res.toString());
-	    } catch (Exception e) {
-	        System.out.println(e);
-	    }
-	    json = (JSONObject)parser.parse(res.toString());
-		System.out.println(json);  //json값으로 나옴	
-		JSONObject jsondetail = (JSONObject)json.get("response");
-		String email = (String)jsondetail.get("email");
-		Member loginMember = service.find_member_by_email(email);
-		System.out.println(loginMember);
-		ModelAndView mav = new ModelAndView();
-		if(loginMember == null) {
-			mav.addObject("email", email);
-			mav.addObject("name",(String)jsondetail.get("name"));
-			mav.setViewName("member/joinForm");
-		}
-		else {
-			session.setAttribute("loginMember", loginMember);
-			mav.setViewName("main");
-		}
-		return mav;
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
-	}
-	
-<<<<<<< HEAD
-=======
-	@RequestMapping(value = "facebooklogin")
-	public String loginbyFB(HttpSession session) {
-		String facebookurl = "https://www.facebook.com/v3.0/dialog/oauth?" + 
-				"client_id=223500144933393" + 
-				"&redirect_uri=http://localhost:8080/TestProject/facebookAccessToken.sms" + 
-				"&scope=public_profile,email";
-		return "redirect:" +facebookurl;
-	}
-	
-	@RequestMapping(value="facebookAccessToken")
-	public ModelAndView loginWithFB1(String code, HttpSession session, String state) throws ClientProtocolException, IOException, ParseException {
-		System.out.println(session);
-		System.out.println(code);
-		System.out.println(state);
-		String accessToken = requesFacebooktAccessToken(session,code); //이미 여기서 session으로 accessToken이 등록이 되고 여기로 넘어옴
-		System.out.println("====");
-		System.out.println(accessToken);
-		//facebookUserDataLoadAndSave(accessToken, session);
-		String facebookUrl = "https://graph.facebook.com/me?"+
-	            "access_token="+ accessToken +
-	            "&fields=id,name,email";
-	    HttpClient client = HttpClientBuilder.create().build();
-	    HttpGet getRequest = new HttpGet(facebookUrl);
-	    String rawJsonString = client.execute(getRequest, new BasicResponseHandler());
-
-	    JSONParser jsonParser = new JSONParser();
-	    JSONObject jsonObject = (JSONObject) jsonParser.parse(rawJsonString);
-	    System.out.println(jsonObject.get("id"));
-	    System.out.println(jsonObject.get("name"));
-	    System.out.println(jsonObject.get("email"));
-	    String email = (String)jsonObject.get("email");
-	    String name = (String)jsonObject.get("name");
-	    Member member = service.find_member_by_email(email);
-	    	ModelAndView mav = new ModelAndView();
-	    if(member == null) {
-	    		mav.addObject("name",name);
-	    		mav.addObject("email",email);
-	    		mav.setViewName("member/joinForm");
-	    		return mav;
-	    } else {
-	    		session.setAttribute("loginMember", member);
-	    		mav.setViewName("main");
-	    		return mav;
-	    }
 	}
 
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
 	private String requesFacebooktAccessToken(HttpSession session, String code) throws ClientProtocolException, IOException, ParseException {
 		//code, client_id, client_secret을 이용한	AccessToken얻기
 		//AccessToken이 있어야 라인 190에서 처럼 결과를 얻어올수 있다
@@ -522,6 +368,29 @@ public class MemberController {
 		mav.setViewName("redirect: personal_info.sms?id=" + member.getId());
 		return mav;
 	}
+	
+	@RequestMapping(value="personal_info_delete")
+	public ModelAndView personal_info_delete(String id, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/delete_account");
+		return mav;
+	}
+	
+	@RequestMapping(value="personal_info_delete_confirm")
+	public ModelAndView personal_info_delete_confirm(String id, String pw, HttpSession session) {
+		ModelAndView mav  = new ModelAndView();
+		Member member = service.getMember(id);
+		if(member.getPw().equals(pw)) {
+			service.deleteAccount(member);
+			session.invalidate();
+			mav.setViewName("after_delete_account");
+			return mav;
+		}
+		else {
+			throw new ProjectException("비밀번호가 다릅니다.. 다시 시도해주세여","personal_info_delete.sms?id=" +member.getId());
+		}
+	}
+	
 	@RequestMapping(value="checkID") //ID중복확인. 여기서만 나오고 끝남
 	public @ResponseBody String checkID(String id) {
 		Member member = service.getMember(id);
@@ -584,14 +453,9 @@ public class MemberController {
 	@RequestMapping(value="letsfindmypassword")
 	public ModelAndView letsfindmypassword(String name, String id, String email) {
 		
-		ModelAndView mav = new ModelAndView();
-<<<<<<< HEAD
-		Member member = service.find_password(id,email,name);
-=======
-		
+		ModelAndView mav = new ModelAndView();		
 		Member member = service.find_password(id, email, name);
 		
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
 		if(member == null) {
 			mav.setViewName("member/findpassword_result");
 			
