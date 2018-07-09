@@ -15,20 +15,7 @@
 		</if>
 		
 	</select>
-	
-	<select id="hostCount" resultType="Integer" parameterType="map">
-		select count(*) from reserve 
 		
-		<if test="searchType != null and searchContent != null">
-			where ${searchType} like '%${searchContent}%'	
-		</if>
-		
-		<if test="sNo != null">
-			where sNo = #{sNo}
-		</if>
-		
-	</select>
-	
 	<select id="selectOne" resultType="Reserve" parameterType="map">
 		select * from reserve
 		<if test="reNo != null">
@@ -42,24 +29,51 @@
 		<if test="searchType != null and searchContent != null">
 			where ${searchType} like '%${searchContent}%'
 		</if>
-		
-		<!-- <if test="startrow != null and limit != null">
-			order by ReNo desc limit #{startrow}, #{limit}	
-		</if> -->
-		
+
 		<if test="id != null">
 			where id = #{id}
 		</if>
 	</select>
 	
-	<select id="selectHostList" resultType="Reserve" parameterType="map">
-		select re.reNo, re.srNo, re.id, re.reDate, re.regDate, re.totPrice, re.reCnt, re.reStat
-		from Reserve re, building bu 
-		where re.sNo = bu.sNo
+	<!-- [&lt; : <] [&gt; : >] -->
+	<select id="hostCount" resultType="Integer" parameterType="map">
+		select count(*) from reserve 
 		
-		<if test="id != null and sNo != null">
-			and bu.id = #{id} and re.sNo = #{sNo}
-		</if> 	
+		<if test="searchType != null and searchContent != null and startDate == null and endDate == null and sNo != null">
+			where ${searchType} like '%${searchContent}%' and sNo = #{sNo}
+		</if>
+		
+		<if test="searchType == null and searchContent == null and startDate == null and endDate == null and sNo != null">
+			where sNo = #{sNo}
+		</if>
+		
+		<if test="searchType == reDate and searchContent == null and startDate != null and endDate != null and sNo != null">
+			where #{searchType} &gt; '${startDate}' and #{searchType} &lt; '${endDate}' and sNo = #{sNo}
+		</if>
+		
+		<if test="searchType == regDate and searchContent == null and startDate != null and endDate != null and sNo != null">
+			where #{searchType} &gt; '${startDate}' and #{searchType} &lt; '${endDate}' and sNo = #{sNo}
+		</if>
+	</select>
+	
+	<select id="selectHostList" resultType="Reserve" parameterType="map">
+		select * from Reserve 
+		
+		<if test="searchType != null and searchContent != null and startDate == null and endDate == null and sNo != null">
+			where ${searchType} like '%${searchContent}%' and sNo = #{sNo}
+		</if>
+		
+		<if test="searchType == null and searchContent == null and startDate == null and endDate == null and sNo != null">
+			where sNo = #{sNo}
+		</if>
+		
+		<if test="searchType == reDate and searchContent == null and startDate != null and endDate != null and sNo != null">
+			where #{searchType} &gt; '${startDate}' and #{searchType} &lt; '${endDate}' and sNo = #{sNo}
+		</if>
+		
+		<if test="searchType == regDate and searchContent == null and startDate != null and endDate != null and sNo != null">
+			where #{searchType} &gt; '${startDate}' and #{searchType} &lt; '${endDate}' and sNo = #{sNo}
+		</if>
 	</select>
 	
 	<update id="cancel" parameterType="map">

@@ -120,7 +120,8 @@ public class ReserveController {
 
 	// 예약 리스트를 확인할 때 호출되는 메서드 (Host계정용)
 	@RequestMapping(value = "reserve/hostResList", method = RequestMethod.GET)
-	public ModelAndView hostReserveList(Integer sNo, Integer pageNum, String searchType, String searchContent, HttpSession session) {
+	public ModelAndView hostReserveList(Integer sNo, Integer pageNum, String searchType, String searchContent, HttpSession session,
+			String startDate, String endDate) {
 
 		if (pageNum == null || pageNum.toString().equals("")) {
 			pageNum = 1;
@@ -129,11 +130,12 @@ public class ReserveController {
 		ModelAndView mav = new ModelAndView();
 
 		int limit = 100; // 한 페이지에 나올 게시글의 숫자
-		String id = ((Member) session.getAttribute("loginMember")).getId();
+		
+//		String hostName = ((Member) session.getAttribute("loginMember")).getHostName();
+		
+		int listcount = service.hostReserveCount(sNo, searchType, searchContent); // 표시될 총 게시글의 수
 
-		int listcount = service.hostReserveCount(id, sNo, searchType, searchContent); // 표시될 총 게시글의 수
-
-		List<Reserve> reservelist = service.selectHostReserveList(sNo, id, searchType, searchContent, pageNum, limit);
+		List<Reserve> reservelist = service.selectHostReserveList(sNo, searchType, searchContent, pageNum, limit, startDate, endDate);
 
 		int maxpage = (int) ((double) listcount / limit + 0.95);
 		int startpage = ((int) ((pageNum / 10.0 + 0.9) - 1)) * 10 + 1; // 시작페이지
@@ -149,6 +151,12 @@ public class ReserveController {
 		mav.addObject("listcount", listcount);
 		mav.addObject("list", reservelist);
 		mav.addObject("reservecnt", reservecnt);
+		mav.addObject("sNo", sNo);
+		
+		if(searchType != null && !searchType.equals("")) {
+			mav.addObject("searchType", searchType);
+		}
+
 		return mav;
 	}
 
@@ -177,7 +185,7 @@ public class ReserveController {
 		String hostId = ((Member)session.getAttribute("loginMember")).getId();
 		
 		try {
-			Integer dbSNo = service.getReserve(reNo).getSNo();
+			Integer dbSNo = service.getReserve(reNo).getsNo();
 			List<Integer> hostSNoList = service.hostHaveBuildsNo(hostId);
 
 			for (Integer hostSNo : hostSNoList) {

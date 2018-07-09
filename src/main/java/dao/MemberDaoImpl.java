@@ -82,4 +82,5 @@ public class MemberDaoImpl implements MemberDao{
 		map.put("email", email);
 		return sqlSession.selectOne(NS+"findmemberbyemail",map);
 	}
+
 }

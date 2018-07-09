@@ -18,9 +18,9 @@ public interface ReserveDao {
 
 	void cancel(Integer reNo, Integer reStat);
 
-	int hostCount(Integer sNo, String hostName, String searchType, String searchContent);
+	int hostCount(Integer sNo, String searchType, String searchContent);
 
-	List<Reserve> hostlist(Integer sNo, String id, String searchType, String searchContent, Integer pageNum, int limit);
+	List<Reserve> hostlist(Integer sNo, String searchType, String searchContent, Integer pageNum, int limit, String startDate, String endDate);
 
 	void hostPaymentConfirm(Integer reNo);
 

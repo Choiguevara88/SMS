@@ -55,12 +55,11 @@ public class ReserveDaoImpl implements ReserveDao {
 	}
 	
 	@Override // Host계정에서 본인의 사업장 앞으로 등록된 예약 갯수를 확인 할 때 호출되는 메서드
-	public int hostCount(Integer sNo, String hostName, String searchType, String searchContent) {
+	public int hostCount(Integer sNo, String searchType, String searchContent) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("sNo", sNo);
-		map.put("hostName", hostName);
 		map.put("searchType", searchType);
 		map.put("searchContent", searchContent);
 		
@@ -83,17 +82,19 @@ public class ReserveDaoImpl implements ReserveDao {
 	}
 
 	@Override	// Host계정에서 예약리스트 확인 할 때 호출되는 메서드
-	public List<Reserve> hostlist(Integer sNo, String id, String searchType, String searchContent, Integer pageNum, int limit) {
+	public List<Reserve> hostlist(Integer sNo, String searchType, String searchContent, Integer pageNum, int limit, String startDate, String endDate) {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		int startrow = (pageNum - 1) * limit;
+/*		int startrow = (pageNum - 1) * limit;
+		map.put("startrow", startrow);
+		map.put("limit", limit);*/
 		
 		map.put("sNo", sNo);
-		map.put("id", id);
-		map.put("startrow", startrow);
-		map.put("limit", limit);
 		map.put("searchType", searchType);
 		map.put("searchContent", searchContent);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
 		
 		return sqlSession.selectList(NS + "selectHostList", map);
 	}

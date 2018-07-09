@@ -84,6 +84,9 @@ public class AdminController {
 	public ModelAndView adminAnswerQuestionWrite(Board answerBoard, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 
+		Board board = service.getBoard(answerBoard.getbNo());
+		answerBoard.setId(board.getId());
+		
 		service.boardReply(answerBoard);
 		
 		mav.setViewName("admin/adminManagement");

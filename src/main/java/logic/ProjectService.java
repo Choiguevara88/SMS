@@ -48,9 +48,9 @@ public interface ProjectService {
 
 	void reserveCancel(Integer reNo, Integer reStat);
 
-	int hostReserveCount(String hostName, Integer sNo, String searchType, String searchContent);
+	int hostReserveCount(Integer sNo, String searchType, String searchContent);
 
-	List<Reserve> selectHostReserveList(Integer sNo, String id, String searchType, String searchContent, Integer pageNum, int limit);
+	List<Reserve> selectHostReserveList(Integer sNo, String searchType, String searchContent, Integer pageNum, int limit, String startDate, String endDate);
 
 	List<Integer> hostHaveBuildsNo(String hostId);
 

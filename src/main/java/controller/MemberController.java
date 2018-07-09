@@ -20,9 +20,28 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.google.api.Google;
+import org.springframework.social.google.api.impl.GoogleTemplate;
+import org.springframework.social.google.api.plus.Person;
+import org.springframework.social.google.api.plus.PlusOperations;
+import org.springframework.social.google.connect.GoogleConnectionFactory;
+import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Operations;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +58,12 @@ public class MemberController {
 	@Autowired
 	ProjectService service;
 	
+	@Autowired
+	private GoogleConnectionFactory googleConnectionFactory;
+	
+	@Autowired
+	private OAuth2Parameters googleOAuth2Parameters;
+	
 	@ModelAttribute
 	public Member getMember() {
 		return new Member();
@@ -49,6 +74,7 @@ public class MemberController {
 	public String joinForm() {
 		return "member/joinForm";
 	}
+
 	
 	@RequestMapping("member/join") //����媛���
 	public ModelAndView join(@Valid Member member, BindingResult bindingResult) {
@@ -71,7 +97,6 @@ public class MemberController {
 	public String loginForm() {
 		return "member/loginpage";
 	}
-	
 	@RequestMapping(value = "loginbyNaver")
 	public ModelAndView loginbysns(HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException, ParseException {
 		String clientId = "Gq6yEGwFqkB9pHnvlf6E";//애플리케이션 클라이언트 아이디값";
@@ -175,7 +200,6 @@ public class MemberController {
 				"&scope=public_profile,email";
 		return "redirect:" +facebookurl;
 	}
-	
 	@RequestMapping(value="facebookAccessToken")
 	public ModelAndView loginWithFB1(String code, HttpSession session, String state) throws ClientProtocolException, IOException, ParseException {
 		System.out.println(session);
@@ -191,7 +215,7 @@ public class MemberController {
 	    HttpClient client = HttpClientBuilder.create().build();
 	    HttpGet getRequest = new HttpGet(facebookUrl);
 	    String rawJsonString = client.execute(getRequest, new BasicResponseHandler());
-
+	    System.out.println(rawJsonString); //결과값
 	    JSONParser jsonParser = new JSONParser();
 	    JSONObject jsonObject = (JSONObject) jsonParser.parse(rawJsonString);
 	    System.out.println(jsonObject.get("id"));
@@ -214,7 +238,11 @@ public class MemberController {
 	}
 
 	private String requesFacebooktAccessToken(HttpSession session, String code) throws ClientProtocolException, IOException, ParseException {
-		String facebookurl = "https://graph.facebook.com/v2.8/oauth/access_token?client_id=223500144933393&redirect_uri=http://localhost:8080/TestProject/facebookAccessToken.sms&&client_secret=60704d2d09d27d6fdbe2f034cf0ecdda&code="+code;
+		//code, client_id, client_secret을 이용한	AccessToken얻기
+		//AccessToken이 있어야 라인 190에서 처럼 결과를 얻어올수 있다
+		String facebookurl = "https://graph.facebook.com/v2.8/oauth/access_token?client_id=223500144933393"
+				+ "&redirect_uri=http://localhost:8080/TestProject/facebookAccessToken.sms"
+				+ "&&client_secret=60704d2d09d27d6fdbe2f034cf0ecdda&code="+code;
 		System.out.println("a");
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpGet getRequest = new HttpGet(facebookurl);
@@ -226,7 +254,55 @@ public class MemberController {
 		
 		return faceBookAccessToken;
 	}
+	
+	@RequestMapping("loginwithGoogle")
+	public String loginwithGoogle(HttpServletResponse response, Model model) throws Exception {
+		 OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
+		 String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
+		 model.addAttribute("url", url);
+		 System.out.println(url);
+		 return "member/loginwithGoogle";
+	}
+	@RequestMapping(value ="startwithGoogle", method = RequestMethod.GET)
+	public ModelAndView startwithGoogle(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		String code = request.getParameter("code");
+		System.out.println(code);
+		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
+		AccessGrant accessGrant = oauthOperations.exchangeForAccess(code , googleOAuth2Parameters.getRedirectUri(),null);
+		String accessToken = accessGrant.getAccessToken();
+		Long expireTime = accessGrant.getExpireTime();
+		if (expireTime != null && expireTime < System.currentTimeMillis()) {
+		   accessToken = accessGrant.getRefreshToken();
+		   System.out.printf("accessToken is expired. refresh token = {}", accessToken);
+		}
+		System.out.println("aaa");
+		Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
+		Google google = connection == null ? new GoogleTemplate(accessToken) : connection.getApi();
 
+		PlusOperations plusOperations = google.plusOperations();
+		Person profile = plusOperations.getGoogleProfile();
+		Member member = service.find_member_by_email(profile.getAccountEmail());
+		if(member == null) {
+			mav.addObject("name",profile.getDisplayName());
+			mav.addObject("email",profile.getAccountEmail());
+			mav.setViewName("member/joinForm");
+			return mav;
+		} else {
+			System.out.println(profile.getDisplayName());
+			System.out.println(profile.getAccountEmail());
+			HttpSession session = request.getSession();
+			session.setAttribute("loginMember", member);
+			mav.setViewName("redirect: main.sms");
+			return mav;
+//		vo.setUser_snsId("g"+profile.getId());
+//		HttpSession session = request.getSession();
+//		vo = service.googleLogin(vo);
+
+		//session.setAttribute("login", vo );
+
+		}
+	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST) //id, pw���ν�댁�� 濡�洹몄�� ��瑜� ��
 	public ModelAndView loginForm(@Valid Member member, BindingResult bindingResult, HttpSession session) {
@@ -353,8 +429,7 @@ public class MemberController {
 	@RequestMapping(value="letsfindmypassword")
 	public ModelAndView letsfindmypassword(String name, String id, String email) {
 		
-		ModelAndView mav = new ModelAndView();
-		
+		ModelAndView mav = new ModelAndView();		
 		Member member = service.find_password(id, email, name);
 		
 		if(member == null) {

@@ -9,8 +9,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<meta name="google-signin-client_id" content="45091977731-oco9994onan69pb9jvq4emidqe7bi7vo.apps.googleusercontent.com">
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 <%
 //네이버 로그인
@@ -50,12 +48,9 @@
   				<input type="submit" value="로그인">
   				<input type="button" onclick="location.href='joinForm.sms'" value="가입하기"></td></tr>
   		<tr>
-  			<td colspan="3" style="text-align:center;">
-  			<a href="<%=apiURL%>"><img height="40" src="${path }/picture/네이버Green.PNG"/></a></td>
-  			<td><div class="g-signin2" data-onsuccess="onSignIn"></td>
-  			<td><a href="facebooklogin.sms">
-	<button type="button" class="btn btn-primary">Facebook 로그인</button>
-</a>
+  			<td><a href="<%=apiURL%>"><img style="width:55px; height:55px;" src="${path }/picture/naver.png"></a></td>
+  			<td><a href="loginwithGoogle.sms"><img style="width:55px; height:55px;" src="${path }/picture/google.png"></a></td>
+  			<td><a href="facebooklogin.sms"><img style="width:55px; height:55px;" src="${path }/picture/facebook.png"></a></td>
 		</tr>
  	</table>
  </form:form>
