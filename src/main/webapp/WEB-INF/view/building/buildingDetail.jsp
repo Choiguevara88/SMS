@@ -11,6 +11,35 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	//댓글 목록 출력
+	listRlist();
+	listQlist();
+	//댓글 쓰기
+});
+
+function listRlist(){
+	console.log("listRlist 호출")
+	$.ajax({
+		type: "get",
+		url : "${path}/review/Rlist.sms?sNo=${param.sNo}",
+		success: function(result){
+			console.log(result)
+			$("#listRlist").html(result)
+		}
+	});
+	}
+function listQlist(){
+	console.log("listQlist 호출")
+	$.ajax({
+		type: "get",
+		url : "${path}/review/Qlist.sms?sNo=${param.sNo}",
+		success: function(result){
+			console.log(result)
+			$("#listQlist").html(result)
+		}
+	});
+}
 </script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=2bA8v55yYLf1omsHnKFk&submodules=geocoder"></script>
 </head>

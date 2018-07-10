@@ -11,7 +11,7 @@
 <body>
 <% pageContext.setAttribute("newLineChar","\n"); %>
 	<c:forEach var="board" items="${list}">
-	<c:if test="${board.qType != 0 }">
+	<c:if test="${board.refLevel != 0 }">
 <div align="right">
 	<c:set var="str" value="${fn:replace(board.content,'  ','&nbsp;&nbsp;') }"/>
 	<c:set var="str" value="${fn:replace(board.content,newLineChar,'<br>') }"/>
@@ -25,7 +25,7 @@
 		</div>
 </div>
 	</c:if>
-	<c:if test="${board.qType == 0 }">
+	<c:if test="${board.refLevel == 0 }">
 <div align="left">
 	<c:set var="str" value="${fn:replace(board.content,'  ','&nbsp;&nbsp;') }"/>
 	<c:set var="str" value="${fn:replace(board.content,newLineChar,'<br>') }"/>
