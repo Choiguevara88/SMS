@@ -119,9 +119,9 @@ select {width: 140px; /* 원하는 너비설정 */
 						<td class="td_2" style="text-align:center;">${res.id}</td>
 						
 						<jsp:useBean id="today" class="java.util.Date" />
-						<fmt:formatDate var="today1" value="${today}" type="date" />
-						<fmt:formatDate var="redate" value="${res.reDate}" type="date" /> 
-						<fmt:formatDate var="regdate" value="${res.regDate}" type="date" />
+						<fmt:formatDate var="today1" value="${today}" pattern="yyyyMMddhhmm" type="date" />
+						<fmt:formatDate var="redate" value="${res.reDate}" pattern="yyyyMMddhhmm" type="date" /> 
+						<fmt:formatDate var="regdate" value="${res.regDate}" pattern="yyyyMMddhhmm" type="date" />
 
  						<c:if test="${today1 == redate}">
 							<td style="text-align:center;"><fmt:formatDate value="${res.reDate}" pattern="hh:mm:ss" /></td>
@@ -138,11 +138,11 @@ select {width: 140px; /* 원하는 너비설정 */
 							<c:if test="${res.reStat == 0}">예약요청 : <a href="hostResConfirm.sms?reNo=${res.reNo}">[결제확인하기]</a></c:if>
 							<c:if test="${res.reStat == 1}">
 								
-								<c:if test="${today1 > redate}">
+								<c:if test="${today1 >= redate}">
 									[이용완료]
 								</c:if>
 								
-								<c:if test="${today1 <= redate}">
+								<c:if test="${today1 < redate}">
 									[결제완료:이용대기 중]
 								</c:if>
 								
