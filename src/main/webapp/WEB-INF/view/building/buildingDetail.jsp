@@ -113,8 +113,7 @@ function listQlist(){
 <div>휴무일: ${building.sHDay}</div>
 <div>이용시간: ${building.sBHourList}</div>
 <div>전화번호: ${building.sTel}</div>
-<h3>주소</h3>
-<div>${address1}</div>
+<div>주소: ${address1}</div>
 <div id="map" style="width:100%;height:200px;"></div>
 <hr size="1">
 
