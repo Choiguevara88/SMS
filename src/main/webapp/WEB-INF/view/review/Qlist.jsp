@@ -2,20 +2,129 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp" %>    
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>목록보기</title>
 <script type="text/javascript">
 	function list(pageNum) {
-		location.href="list.sms?pageNum=" + pageNum +"&sNo="+${param.sNo}+"&kind="+${param.kind};
+		location.href="Qlist.sms?pageNum=" + pageNum +"&sNo="+${param.sNo};
 		return false;
 	}
 </script>
-</head>
-<body>
-<div align="center"><a href="${path}/review/Qwrite.sms?sNo=${param.sNo}">질문 작성하기</a></div>
+<script type="text/javascript">
+	function check() {
+		confirm("정말 삭제 하시겠습니까?")
+		document.d.submit();
+	}
+
+</script>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+#table2{
+	display:block;
+	align:center;
+}
+</style>
+<!-- Trigger/Open The Modal -->
+<div align="right"><button id="myBtn">질문하기</button></div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>
+<form:form modelAttribute="board" action="Qwrite.sms" method="post" name="f">
+<form:hidden path="kind" value="3"/>
+<input type="hidden" name="pageNum" value="1"/>
+<form:hidden path="sNo" value="1"/>
+<form:hidden path="id" value="${sessionScope.loginMember.id}"/>
+	<div align="center" id="table2"><table cellpadding="0" cellspacing="0" align="center" >
+		<caption><h3>질문 글 등록하기</h3></caption>
+		<tr><td align="center">제목</td>
+			<td><form:input path="subject"/>
+			<font color="red">
+			<form:errors path="subject"/>
+			</font></td>
+		</tr>
+		
+		<tr><td align="center" colspan="2">내용</td></tr>
+        <tr><td colspan="2"><form:textarea rows="15" cols="80" path="content"/>
+        <font color="red"><form:errors path="content"/></font></td></tr>
+        <tr><td colspan="2" align="center">
+        <a href="javascript:document.f.submit()">[질문등록]</a>
+		<a href="javascript:document.f.reset()">[다시작성]</a>
+		<a href="javascript:history.go(-1)">[뒤로가기]</a>
+		</td></tr>
+	</table></div>
+</form:form></p>
+  </div>
+
+</div>
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
 <!--  리뷰 목록부분 -->
 <table border="1" style="margin-top:30px" width="80%" align="center">
 
@@ -27,12 +136,16 @@
 	</tr>
 	<tr>
 		<td><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd H:mm:ss"/></td>
-  		<td align="right">
+  	<td align="right">
   		<c:if test="${sessionScope.loginMember.id == building.id && board.sNo == building.sNo }">
-  		<a href="../review/reply.sms?bNo=${board.bNo}&pageNum=${pageNum}">[답변]</a></c:if>
+  	<a href="../review/reply.sms?bNo=${board.bNo}&pageNum=${pageNum}">[답변]</a></c:if>
   		<c:if test="${sessionScope.loginMember.id == board.id }">
-		<a href="../review/Qupdate.sms?bNo=${board.bNo}&pageNum=${pageNum}">[수정]</a>
-		<a href="../review/delete.sms?bNo=${board.bNo}&pageNum=${pageNum}">[삭제]</a></c:if><br></td>
+  	<form name="d" method="post" action="delete.sms">
+  		<input type="hidden" name="bNo"	value="${board.bNo}">
+		<input type="hidden" name="sNo"	value="${board.sNo}">
+		<input type="hidden" name="kind" value="${board.kind}">
+		<input type="hidden" name="pageNum"	value="${param.pageNum}">
+		<input type="button" value="삭제" onclick="check()" ></form></c:if><br></td>
 <!--  글 밑 부분 -->
 </c:forEach>
 <tr align="center" height="26"><td colspan="2">
@@ -55,6 +168,3 @@
 	 <tr><td colspan="5">등록된 게시물이 없습니다.</td></tr>
 	 </c:if>
 </table>
-
-</body>
-</html>

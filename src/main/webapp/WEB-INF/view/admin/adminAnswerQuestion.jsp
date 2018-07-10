@@ -36,9 +36,8 @@
 			<form:hidden path="bNo" value="${board.bNo}"/>	
 			<form:hidden path="ref" value="${board.ref}"/>
 			<form:hidden path="refLevel" value="${board.refLevel}"/>
-			<tr><th>제목</th><td><form:input path="subject"/></td></tr>
-			<tr><th>내용</th><td><form:textarea path="content"/></td></tr>
-			<tr><td colspan="2"><input type="submit" value="작성"></td></tr>
+			<tr><td>답변작성</td><th>내용</th><td><form:textarea path="content"/></td></tr>
+			<tr><td colspan="3"><input type="submit" value="작성"></td></tr>
 		</table>
 		</form:form>
 	</div>

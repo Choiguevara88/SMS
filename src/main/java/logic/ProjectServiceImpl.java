@@ -79,7 +79,7 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 
 		if (board.getImg4File() != null) {
-			String img = uploadImgCreate(board.getImg1File(), request);
+			String img = uploadImgCreate(board.getImg4File(), request);
 			if (img != null)
 				board.setImg4(img);
 		}
@@ -109,13 +109,11 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void boardReply(Board board) {
-		boDao.qTypeAdd(board);
-		
 		int num = boDao.maxNum();
-		
 		board.setbNo(++num);
 		board.setRefLevel(board.getRefLevel() + 1);
 		boDao.replyInsert(board);
+		boDao.qTypeAdd(board);
 	}
 
 	@Override // board Update Method()
@@ -319,7 +317,6 @@ public class ProjectServiceImpl implements ProjectService {
 
 		int sNo = buDao.maxNum();
 		building.setsNo(++sNo);
-		
 		String sType = listToString(building.getsTypeList());
 		String sTag = listToString(building.getsTagList());
 		String sInfoSub = listToString(building.getsInfoSubList());
@@ -545,6 +542,13 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<Member> getHostList(String searchType, String searchContent, String startDate, String endDate, Integer pageNum, Integer limit) {
 		return memDao.getHostList(searchType, searchContent, startDate, endDate, limit, pageNum);
+	}
+
+	@Override
+	public List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum,
+			int limit) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
