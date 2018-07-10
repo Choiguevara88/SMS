@@ -17,5 +17,7 @@
 		<pattern>/qa/questionList.sms*</pattern>
 		<pattern>/building/Qlist.sms*</pattern>
 		<pattern>/building/Rlist.sms*</pattern>
+		<pattern>/building/Rreply.sms*</pattern>
+		<pattern>/building/Qreply.sms*</pattern>
 	</excludes>
 </decorators>

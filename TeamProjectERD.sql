@@ -34,7 +34,7 @@ CREATE TABLE Alert
    RegDate datetime COMMENT '알림이 등록된 시간',
    -- 0 = 읽지않음
    -- 1 = 읽음
-   AStat int COMMENT '0 = 읽지않음
+   AStat int COMMENT '0 = 읽지않음'
 	-- 알람관리고유번호
 	ANo int NOT NULL COMMENT '알림번호 : 알람관리고유번호',
 	-- 회원 ID
@@ -87,7 +87,7 @@ CREATE TABLE Board
    -- 0 : Review
    -- 1 : 상품문의 (Guest -> Host)
    -- 2 : 관리자문의 (User -> Admin)
-   Kind int COMMENT '0 : Review
+   Kind int COMMENT '0 : Review'
 	-- Review&상품문의 게시글 관리번호
 	BNo int NOT NULL COMMENT '게시글관리번호 : Review&상품문의 게시글 관리번호',
 	-- 건물관리고유번호
@@ -121,7 +121,7 @@ CREATE TABLE Board
 	-- 0 : Review
 	-- 1 : 상품문의 (Guest -> Host)
 	-- 2 : 관리자문의 (User -> Admin)
-	Kind int COMMENT '종류 : 0 : Review
+	Kind int COMMENT '종류 : 0 : Review'
 	-- Review&상품문의 게시글 관리번호
 	BNo int NOT NULL COMMENT '게시글관리번호 : Review&상품문의 게시글 관리번호',
 	-- 건물관리고유번호
@@ -177,7 +177,7 @@ CREATE TABLE Building
    SContent varchar(1200) COMMENT '공간에 대한 세부 설명',
    -- 제공하는 서비스 종류
    --  ex) 회의실, 세미나실, 연습실 등등
-   SType varchar(1200) COMMENT '제공하는 서비스 종류
+   SType varchar(1200) COMMENT '제공하는 서비스 종류',
 	-- 건물관리고유번호
 	SNo int NOT NULL COMMENT '건물관리번호 : 건물관리고유번호',
 	-- 회원 ID

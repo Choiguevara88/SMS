@@ -27,7 +27,7 @@ public class ReViewController {
 		return new Board();
 	}
 	
-	@RequestMapping("review/Rlist") //http://localhost:8080/TestProject/review/Rlist.sms?sno=2
+	/*@RequestMapping("review/Rlist") //http://localhost:8080/TestProject/review/Rlist.sms?sno=2
 	public ModelAndView Rlist(Integer sNo,Integer pageNum) {
 		int kind = 2;
 		if(pageNum == null || pageNum.toString().equals("")) {
@@ -240,5 +240,5 @@ public class ReViewController {
 		mav.addObject("kind",kind);
 		mav.addObject("board", board);
 		return mav;
-	}
+	}*/
 }

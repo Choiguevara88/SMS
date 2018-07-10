@@ -268,6 +268,7 @@ public class MemberController {
 		 System.out.println(url);
 		 return "member/loginwithGoogle";
 	}
+	
 	@RequestMapping(value ="startwithGoogle", method = RequestMethod.GET)
 	public ModelAndView startwithGoogle(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -287,6 +288,7 @@ public class MemberController {
 
 		PlusOperations plusOperations = google.plusOperations();
 		Person profile = plusOperations.getGoogleProfile();
+		System.out.println(profile);
 		Member member = service.find_member_by_email(profile.getAccountEmail());
 		if(member == null) {
 			mav.addObject("name",profile.getDisplayName());
