@@ -52,46 +52,46 @@ a {
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none;right:0;" id="rightMenu">
   <button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
   <c:if test="${empty sessionScope.loginMember.id}"><a href="${path }/login.sms" class="w3-bar-item w3-button">
-  	<i class="fa fa-arrow-circle-right"></i>로그인/회원가입!</a></c:if>
+  	<i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;로그인/회원가입!</a></c:if>
    <c:if test="${!empty sessionScope.loginMember.id }">
   	<hr size="1">
-  	<a href="#" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>${sessionScope.loginMember.name }님 환영해여~&gt;&lt;</a></c:if>
+  	<a href="#" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;${sessionScope.loginMember.name }님 환영해여~&gt;&lt;</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.id != 'admin' }">
   	<hr size="1">
-  	<a href="${path }/personal_info.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>나의 소중한 정보 !</a></c:if>
+  	<a href="${path }/personal_info.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;나의 소중한 정보 !</a></c:if>
   <c:if test="${sessionScope.loginMember.id == 'admin' }">
   	<hr size="1">
-  	<a href="${path }/admin/adminManagement.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>관리자 페이지 !</a></c:if>
+  	<a href="${path }/admin/adminManagement.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;관리자 페이지 !</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.id != 'admin' }">
   	<hr size="1">
-  	<a href="${path }/reserve/resList.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>나의 예약정보 !</a></c:if>
+  	<a href="${path }/reserve/resList.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;나의 예약정보 !</a></c:if>
   <c:if test="${sessionScope.loginMember.memType == 1 }">
   	<hr size="1">
-  	<a href="${path }/building/myBuildingList.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공간 관리하기 !</a></c:if>
+  	<a href="${path }/building/myBuildingList.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;공간 관리하기 !</a></c:if>
   <c:if test="${sessionScope.loginMember.memType == 1 && sessionScope.loginMember.id != 'admin'}">
   	<hr size="1">
-  	<a href="${path }/reserve/hostResInfo.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공간 예약관리 하기 !</a></c:if>
+  	<a href="${path }/reserve/hostResInfo.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;공간 예약관리 하기 !</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.id != 'admin' }">
   	<hr size="1">
-  	<a href="wishlist.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>내가 찜한 공간 !</a></c:if>
+  	<a href="wishlist.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;내가 찜한 공간 !</a></c:if>
   <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.memType == '0'}">
   	<hr size="1">
-  	<a href="${path }/becomeaHost.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>호스트 등록 !</a></c:if>
+  	<a href="${path }/becomeaHost.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;호스트 등록 !</a></c:if>
   <c:if test="${!empty sessionScope.loginMember}">
   	<hr size="1">
-  	<a href="${path}/qa/questionAdmin.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>1 : 1 문의 !</a></c:if>
+  	<a href="${path}/qa/questionAdmin.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;1 : 1 문의 !</a></c:if>
   <hr size="1">
-  <a href="${path }/notice/list.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>공지사항 !</a>
+  <a href="${path }/notice/list.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;공지사항 !</a>
   <hr size="1">
-  <a href="${path }/terms_and_condition.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>이용약관 !</a>
+  <a href="${path }/terms_and_condition.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;이용약관 !</a>
   <hr size="1">
-  <c:if test="${!empty sessionScope.loginMember.id }"><a href="${path }/logout.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>로그아웃..ㅜ</a></c:if>
+  <c:if test="${!empty sessionScope.loginMember.id }"><a href="${path }/logout.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;로그아웃..ㅜ</a></c:if>
 </div>
 
 
 <div class="w3-purple" style="height:450px" >
    <div class="header w3-purple" id="myHeader" style="height: 90px;">
-   		<h1><strong><a href="${path }/main.sms">Share My Space</a></strong>
+   		<h1><strong><a href="${path }/main.sms" style="text-decoration:none">Share My Space</a></strong>
    			<button class="w3-button w3-purple w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button></h1></div>
 <script>
 window.onscroll = function() {myFunction()};
@@ -108,11 +108,11 @@ function myFunction() {
 }
 </script>  			 		
   <div class="w3-content w3-center w3-section" style="max-width:500px">
-	  <img class="mySlides" src="${path }/picture/mainimage.jpg" style="width:100%">
-	  <img class="mySlides" src="${path }/picture/mainimage2.jpg" style="width:100%">
-	  <img class="mySlides" src="${path }/picture/mainimage3.jpg" style="width:100%">
-  	  <img class="mySlides" src="${path }/picture/mainimage4.jpg" style="width:100%">
-  	  <img class="mySlides" src="${path }/picture/mainimage5.jpg" style="width:100%">
+	  <img class="mySlides" src="${path}/picture/mainimage.jpg" style="width:100%">
+	  <img class="mySlides" src="${path}/picture/mainimage2.jpg" style="width:100%">
+	  <img class="mySlides" src="${path}/picture/mainimage3.jpg" style="width:100%">
+  	  <img class="mySlides" src="${path}/picture/mainimage4.jpg" style="width:100%">
+  	  <img class="mySlides" src="${path}/picture/mainimage5.jpg" style="width:100%">
       </div></div>
 
 <script>
@@ -146,9 +146,10 @@ function closeRightMenu() {
 <decorator:body/>
 </div>
 <div class="w3-container w3-light-gray" align="right"><p>	
-동해물과 백두산이<br>
-마르고 닳도록<br>
-</p></div>
+<h2>
+This is Sparta!!!!!
+</h2>
+</div>
 
 </body>
 </html>

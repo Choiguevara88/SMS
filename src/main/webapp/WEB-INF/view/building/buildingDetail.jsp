@@ -13,8 +13,8 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	//댓글 목록 출력
-	listRlist();
-	listQlist();
+	listRlist(1);
+	listQlist(1);
 	
 /*태그 관련 스크립트*/
 var tagih = "";
@@ -50,7 +50,7 @@ var ruleidx = 1;
 	ruleidx++;
 </c:forEach>
 	ruletag.innerHTML = ruleih;
-	
+
 /*이미지 관련 스크립트*/
 var imgarr = new Array();
 var imgidx = 0;
@@ -58,23 +58,28 @@ var imgidx = 0;
 imgarr[imgidx++] = ("${item}");
 </c:forEach>
 });
+	
+/*룸리스트 스크립트*/
+/* var room = new Array();
+var roomidx = 0;
+<c:forEach items="${roomList}" var="item">
+room[roomidx++] = ("${item}");
+</c:forEach> */
+});
 
-function listRlist(){
-	console.log("listRlist 호출")
+function listRlist(pageNum){
 	$.ajax({
 		type: "get",
-		url : "${path}/building/Rlist.sms?sNo=${param.sNo}",
+		url : "${path}/building/Rlist.sms?sNo=${param.sNo}&pageNum="+pageNum,
 		success: function(result){
-			console.log(result)
 			$("#listRlist").html(result)
 		}
 	});
-}
-function listQlist(){
-	console.log("listQlist 호출")
+	}
+function listQlist(pageNum){
 	$.ajax({
 		type: "get",
-		url : "${path}/building/Qlist.sms?sNo=${param.sNo}",
+		url : "${path}/building/Qlist.sms?sNo=${param.sNo}&pageNum="+pageNum,
 		success: function(result){
 			console.log(result)
 			$("#listQlist").html(result)

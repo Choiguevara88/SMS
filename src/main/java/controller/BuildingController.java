@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import exception.ProjectException;
 import logic.Board;
 import logic.Building;
 import logic.ProjectService;
@@ -154,6 +157,7 @@ public class BuildingController {
 			}
 			mav.addObject("avgScore",avg);
 		}
+		Building building = service.getMyBuildingOne(sNo.toString());
 		
 		int maxpage = (int)((double)listcount/limit + 0.95);
 		int startpage = ((int)((pageNum/5.0 + 0.9) - 1)) * 5 + 1; // 시작페이지
@@ -169,7 +173,181 @@ public class BuildingController {
 		mav.addObject("boardcnt",boardcnt);
 		mav.addObject("kind",kind);
 		mav.addObject("sNo",sNo);
+		mav.addObject("building",building);
 				
 		return mav;
 	}
+	@RequestMapping("building/Qlist")
+	public ModelAndView Qlist(Integer pageNum, Integer sNo) {
+		int kind = 3;
+		if(pageNum == null || pageNum.toString().equals("")) {
+			pageNum = 1;
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		
+		int limit = 5;		// 한 페이지에 나올 게시글의 숫자
+		int listcount = service.boardcount(kind, sNo);	// 표시될 총 게시글의 수
+		List<Board> boardlist = service.boardList(kind, sNo, pageNum, limit);
+		Building building = service.getMyBuildingOne(sNo.toString());
+		int maxpage = (int)((double)listcount/limit + 0.95);
+		int startpage = ((int)((pageNum/5.0 + 0.9) - 1)) * 5 + 1; // 시작페이지
+		int endpage = startpage + 4;	// 마지막 페이지
+		if(endpage > maxpage) endpage = maxpage;
+		int boardcnt = listcount - (pageNum - 1) * limit;
+		mav.addObject("pageNum", pageNum);
+		mav.addObject("maxpage", maxpage);
+		mav.addObject("startpage", startpage);
+		mav.addObject("endpage", endpage);
+		mav.addObject("listcount",listcount);
+		mav.addObject("boardlist",boardlist);
+		mav.addObject("boardcnt",boardcnt);
+		mav.addObject("kind",kind);
+		mav.addObject("sNo",sNo);
+		mav.addObject("building",building);
+				
+		return mav;
+	}
+	@RequestMapping(value="building/Rwrite", method=RequestMethod.POST) // 게시글 작성 시 호출되는 메서드
+	public ModelAndView Rwrite(@Valid Board board, BindingResult bindingResult, HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		int sNo = Integer.parseInt(request.getParameter("sNo"));
+		int kind = Integer.parseInt(request.getParameter("kind"));
+		System.out.println(sNo);
+		System.out.println(kind);
+		
+		if(bindingResult.hasErrors()) {
+			mav.getModel().putAll(bindingResult.getModel());
+			return mav;
+		}
+		
+		try {
+			service.boardWrite(board, request);
+			mav.setViewName("redirect:/building/builidingDetail.sms");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ProjectException("오류가 발생하였습니다." , "/building/buildingDetail.sms");
+		}
+		mav.addObject("sNo",sNo);
+		mav.addObject("kind",kind);
+		return mav;
+	}
+	@RequestMapping(value="building/Qwrite", method=RequestMethod.POST) // 게시글 작성 시 호출되는 메서드
+	public ModelAndView Qwrite(@Valid Board board, BindingResult bindingResult, HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		int sNo = Integer.parseInt(request.getParameter("sNo"));
+		int kind = Integer.parseInt(request.getParameter("kind"));
+		
+		if(bindingResult.hasErrors()) {
+			mav.getModel().putAll(bindingResult.getModel());
+			return mav;
+		}
+		
+		try {
+			service.boardWrite(board);
+			mav.setViewName("redirect:/building/buildingDetail.sms");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ProjectException("오류가 발생하였습니다." , "/building/buildingDetail.sms");
+		}
+		mav.addObject("sNo",sNo);
+		mav.addObject("kind",kind);
+		return mav;
+	}
+	@RequestMapping(value="building/Rreply", method=RequestMethod.GET) 
+	public ModelAndView Rdetail(Integer bNo, HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		int kind = 2;
+		Board board = new Board();
+		
+		if(bNo != null) {
+			board = service.getBoard(bNo);
+		}
+		mav.addObject("kind",kind);
+		mav.addObject("board", board);
+		return mav;
+	}
+	@RequestMapping(value="building/Rreply", method=RequestMethod.POST) // 댓글 작성 시 호출되는 메서드
+	public ModelAndView Rreply(@Valid Board board,HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		int sNo = board.getsNo();
+		int kind = board.getKind();
+				
+		try {
+			service.boardReply(board);
+			//mav.setViewName("redirect:/building/buildingDetail.sms");
+			mav.setViewName("building/qlistsuccess");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ProjectException("오류가 발생하였습니다." , "/building/buildingDetail.sms");
+		}
+		mav.addObject("kind",kind);
+		mav.addObject("sNo",sNo);
+		return mav;
+	}
+	@RequestMapping(value="building/Qreply", method=RequestMethod.GET) // 게시글 작성 View로 접속할 때 호출되는 메서드
+	public ModelAndView Qdetail(Integer bNo, HttpServletRequest request) {
+				
+		ModelAndView mav = new ModelAndView();
+		
+		Board board = new Board();
+		int kind = 3;
+		System.out.println(bNo);
+		board = service.getBoard(bNo);
+		mav.addObject("kind",kind);
+		mav.addObject("board", board);
+		return mav;
+	}
+	@RequestMapping(value="building/Qreply", method=RequestMethod.POST) // 댓글 작성 시 호출되는 메서드
+	public ModelAndView Qreply(@Valid Board board,HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		int kind = board.getKind();
+		int sNo = board.getsNo();
+		try {
+			service.boardReply(board);
+//			mav.setViewName("redirect:/building/buildingDetail.sms");
+			mav.setViewName("building/qlistsuccess");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ProjectException("오류가 발생하였습니다." , "/building/buildingDetail.sms");
+		}
+		mav.addObject("kind",kind);
+		mav.addObject("sNo",sNo);
+		return mav;
+	}
+	@RequestMapping(value="building/delete", method=RequestMethod.POST)
+	public ModelAndView delete(Integer bNo, Integer sNo,Integer kind) {
+		
+		ModelAndView mav = new ModelAndView();
+		service.boardDelete(bNo);
+		mav.setViewName("redirect:/building/buildingDetail.sms?sNo="+sNo);
+		return mav;
+	}
+	
+	/*@RequestMapping(value="building/*", method=RequestMethod.GET) // 게시글 작성 View로 접속할 때 호출되는 메서드
+	public ModelAndView detail(Integer bNo, HttpServletRequest request) {
+				
+		ModelAndView mav = new ModelAndView();
+		
+		Board board = new Board();
+		int kind = 2;
+		if(bNo != null) {
+			board = service.getBoard(bNo);
+			String url = request.getServletPath();
+			
+			if(url.contains("/review/detail.sms")) {
+				service.updateReadCnt(bNo);
+			}
+		}
+		mav.addObject("kind",kind);
+		mav.addObject("board", board);
+		return mav;
+	}*/
 }

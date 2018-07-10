@@ -1,7 +1,23 @@
 package controller;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -11,10 +27,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.ProjectException;
 import logic.Board;
+import logic.Mail;
 import logic.Member;
 import logic.ProjectService;
 import logic.TransactionHistory;
@@ -203,6 +221,7 @@ public class AdminController {
 		return mav;
 	}
 	
+	// 회원 ID 체크한 후 메일 작성 폼으로 이동
 	@RequestMapping(value="admin/adminMailForm", method = RequestMethod.POST)
 	public ModelAndView adminMailForm(HttpSession session, String[] idchks) {
 		
@@ -216,6 +235,141 @@ public class AdminController {
 		mav.addObject("memberList", list);
 		
 		return mav;
+	}
+	
+	@RequestMapping(value="admin/mailSend", method=RequestMethod.POST) // 메일 전송을 눌렀을 때 호출되는 메서드
+	public ModelAndView adminMailSend(Mail mail, HttpSession session, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("admin/mailSuccess");
+		
+		mailSendExcutor(mail, request); // 본격 메일 전송 메서드, 개 어려움. 뭔 말인지 모르겠음.
+		// 근데 해냄
+		
+		return mav;
+	}
+	
+	// 정확하게는 모르겠는데, 메일 보낼 때 사용 되는 내부 클래스 :: File 업로드용
+	private BodyPart bodyPart(MultipartFile mf, String path) {
+		
+		MimeBodyPart body = new MimeBodyPart();
+		
+		String orgFile = mf.getOriginalFilename();
+		
+		File f1 = new File(path + "picture/" + orgFile);
+
+		try {
+			mf.transferTo(f1);		// 서버에 임시로 파일을 저장
+			body.attachFile(f1);	// 저장된 파일을 메일에 첨부
+			body.setFileName(new String(orgFile.getBytes("UTF-8"), "8859_1"));	// 첨부된 파일의 이름을 설정
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return body;
+	}
+	
+	
+	// 정확하게는 모르겠는데, 메일 보낼 때 사용 되는 내부 클래스(2) :: email 사용 검증 객체
+	private final class MyAuthenticator extends Authenticator {
+		
+		private String id;
+		private String pw;
+
+		public MyAuthenticator(String id, String pw) {
+			this.id = id;
+			this.pw = pw;
+		}
+
+		@Override
+		protected PasswordAuthentication getPasswordAuthentication() { 
+			return new PasswordAuthentication(id, pw);
+		}
+	}
+
+	// 본격 메일 전송 메서드의 몸통, 2개의 내부 클래스 사용 : MyAuthenticator, BodyPart
+	private void mailSendExcutor(Mail mail, HttpServletRequest request) {
+
+		String naverid = mail.getNaverid(); // 입력된 NaverId (@ 앞까지만 기재해야함.)
+		String naverpass = mail.getNaverpass(); // 입력된 NaverPass
+		
+		String host = "smtp.naver.com";
+		String popHost = "smtp.pop.com";
+		int port = 465;
+		
+		String path = request.getServletContext().getRealPath("/");
+
+		MyAuthenticator auth = new MyAuthenticator(naverid, naverpass); // email 사용 검증 객체
+		
+		Properties prop = System.getProperties(); // email 사용 설정 객체
+		
+		// 사용 설정
+		prop.put("mail.smtp.host", host);
+		prop.put("mail.pop3.host", popHost);
+		prop.put("mail.smtp.port", port);
+		prop.put("mail.smtp.auth", "true");
+		prop.put("mail.smtp.ssl.enable", "true");
+		prop.put("mail.stmp.ssl.trust", host);
+		prop.put("mail.smtp.socketFactory.port", port);
+		prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		prop.put("mail.smtp.socketFactory.fallback", "false");
+		// 사용 설정
+		
+		Session mailSession = Session.getInstance(prop, auth); // Naver에게 Email사용 검증하는 작업
+		
+		mailSession.setDebug(true); // for debug
+		
+		MimeMessage msg = new MimeMessage(mailSession); // 메일 전송 객체
+
+		try {
+			
+			msg.setFrom(new InternetAddress(naverid)); // 메일(문자열)을 주소화 시킴
+			
+			List<InternetAddress> addrs = new ArrayList<InternetAddress>();
+			
+			String[] emails = mail.getRecipient().split(","); // mail.getRecipient() : E-mail을 받는 사람들
+			
+			for (int i = 0; i < emails.length; i++) {
+				try {
+					addrs.add(new InternetAddress(new String(emails[i].getBytes("UTF-8"), "8859_1"))); 
+					// 8859_1 = 브라우저의 기본 Encoding
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+			}
+
+			InternetAddress[] arr = new InternetAddress[emails.length];
+
+			for (int i = 0; i < addrs.size(); i++) {
+				arr[i] = addrs.get(i);
+			}
+
+			msg.setSentDate(new Date()); // Mail을 보낸 일시
+
+			InternetAddress from = new InternetAddress(naverid);
+
+			msg.setFrom(from);
+			msg.setRecipients(Message.RecipientType.TO, arr); // 받는 사람들
+			msg.setSubject(mail.getTitle()); // 제목
+			
+			MimeMultipart multipart = new MimeMultipart();
+			MimeBodyPart message = new MimeBodyPart();
+
+			message.setContent(mail.getContents(), mail.getMtype()); 
+			
+			multipart.addBodyPart(message); // 글의 내용 부분을 Part로 지정
+
+			for (MultipartFile mf : mail.getFile1()) {
+				if ((mf != null) && (!mf.isEmpty())) {
+					multipart.addBodyPart(bodyPart(mf, path));
+				}
+			}
+
+			msg.setContent(multipart);
+			Transport.send(msg);
+
+		} catch (MessagingException me) {
+			me.printStackTrace();
+		}
 	}
 	
 	// 공지사항 작성 = GET
