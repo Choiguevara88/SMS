@@ -24,6 +24,20 @@ DROP TABLE IF EXISTS Room;
 -- 알람관리
 CREATE TABLE Alert
 (
+<<<<<<< HEAD
+=======
+   -- 알람관리고유번호
+   ANo int NOT NULL COMMENT '알람관리고유번호',
+   -- 회원 ID
+   ID varchar(30) COMMENT '회원 ID',
+   -- 알림 내용
+   AContent varchar(50) COMMENT '알림 내용',
+   -- 알림이 등록된 시간
+   RegDate datetime COMMENT '알림이 등록된 시간',
+   -- 0 = 읽지않음
+   -- 1 = 읽음
+   AStat int COMMENT '0 = 읽지않음'
+>>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
 	-- 알람관리고유번호
 	ANo int NOT NULL COMMENT '알림번호 : 알람관리고유번호',
 	-- 회원 ID
@@ -43,6 +57,77 @@ CREATE TABLE Alert
 -- 리뷰&문의
 CREATE TABLE Board
 (
+<<<<<<< HEAD
+=======
+   -- Review&상품문의 게시글 관리번호
+   BNo int NOT NULL COMMENT 'Review&상품문의 게시글 관리번호',
+   -- 건물관리고유번호
+   SNo int COMMENT '건물관리고유번호',
+   -- 회원 ID
+   ID varchar(30) COMMENT '회원 ID',
+   -- 회원 Email
+   Email varchar(40) COMMENT '회원 Email',
+   -- 게시글제목작성(1:1문의용에 사용)
+   Subject varchar(1200) COMMENT '게시글제목작성(1:1문의용에 사용)',
+   -- 게시글의 내용
+   Content varchar(1200) COMMENT '게시글의 내용',
+   -- 문의 성격을 표시
+   QType varchar(40) COMMENT '문의 성격을 표시',
+   -- 게시글 작성 시간
+   RegDate datetime NOT NULL COMMENT '게시글 작성 시간',
+   -- 원글 댓글 구분용 게시글원번호
+   Ref int COMMENT '원글 댓글 구분용 게시글원번호',
+   -- 원글 댓글 구분용 게시글 단계번호
+   RefLevel int COMMENT '원글 댓글 구분용 게시글 단계번호',
+   -- 1~5로 평점
+   Score int COMMENT '1~5로 평점',
+   -- 리뷰용 사진
+   Img1 varchar(50) COMMENT '리뷰용 사진',
+   -- 리뷰용 사진
+   Img2 varchar(50) COMMENT '리뷰용 사진',
+   -- 리뷰용 사진
+   Img3 varchar(50) COMMENT '리뷰용 사진',
+   -- 리뷰용 사진
+   Img4 varchar(50) COMMENT '리뷰용 사진',
+   -- 0 : Review
+   -- 1 : 상품문의 (Guest -> Host)
+   -- 2 : 관리자문의 (User -> Admin)
+   Kind int COMMENT '0 : Review'
+	-- Review&상품문의 게시글 관리번호
+	BNo int NOT NULL COMMENT '게시글관리번호 : Review&상품문의 게시글 관리번호',
+	-- 건물관리고유번호
+	SNo int COMMENT '건물관리번호 : 건물관리고유번호',
+	-- 회원 ID
+	ID varchar(30) COMMENT '회원ID : 회원 ID',
+	-- 회원 Email
+	Email varchar(40) COMMENT '이메일 : 회원 Email',
+	-- 게시글제목작성(1:1문의용에 사용)
+	Subject varchar(1200) COMMENT '제목 : 게시글제목작성(1:1문의용에 사용)',
+	-- 게시글의 내용
+	Content varchar(1200) COMMENT '내용 : 게시글의 내용',
+	-- 문의 성격을 표시
+	QType varchar(40) COMMENT '문의유형 : 문의 성격을 표시',
+	-- 게시글 작성 시간
+	RegDate datetime NOT NULL COMMENT '작성시간 : 게시글 작성 시간',
+	-- 원글 댓글 구분용 게시글원번호
+	Ref int COMMENT '게시글원번호 : 원글 댓글 구분용 게시글원번호',
+	-- 원글 댓글 구분용 게시글 단계번호
+	RefLevel int COMMENT '게시글단계 : 원글 댓글 구분용 게시글 단계번호',
+	-- 1~5로 평점
+	Score int COMMENT '별점 : 1~5로 평점',
+	-- 리뷰용 사진
+	Img1 varchar(50) COMMENT '사진1 : 리뷰용 사진',
+	-- 리뷰용 사진
+	Img2 varchar(50) COMMENT '사진2 : 리뷰용 사진',
+	-- 리뷰용 사진
+	Img3 varchar(50) COMMENT '사진3 : 리뷰용 사진',
+	-- 리뷰용 사진
+	Img4 varchar(50) COMMENT '사진4 : 리뷰용 사진',
+	-- 0 : Review
+	-- 1 : 상품문의 (Guest -> Host)
+	-- 2 : 관리자문의 (User -> Admin)
+	Kind int COMMENT '종류 : 0 : Review'
+>>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
 	-- Review&상품문의 게시글 관리번호
 	BNo int NOT NULL COMMENT '게시글관리번호 : Review&상품문의 게시글 관리번호',
 	-- 건물관리고유번호
@@ -86,6 +171,22 @@ CREATE TABLE Board
 -- 공간관리
 CREATE TABLE Building
 (
+<<<<<<< HEAD
+=======
+   -- 건물관리고유번호
+   SNo int NOT NULL COMMENT '건물관리고유번호',
+   -- 회원 ID
+   ID varchar(30) NOT NULL COMMENT '회원 ID',
+   -- 공간의 이름
+   SName varchar(50) COMMENT '공간의 이름',
+   -- 공간 한 줄 소개
+   SPreview varchar(80) COMMENT '공간 한 줄 소개',
+   -- 공간에 대한 세부 설명
+   SContent varchar(1200) COMMENT '공간에 대한 세부 설명',
+   -- 제공하는 서비스 종류
+   --  ex) 회의실, 세미나실, 연습실 등등
+   SType varchar(1200) COMMENT '제공하는 서비스 종류',
+>>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
 	-- 건물관리고유번호
 	SNo int NOT NULL COMMENT '건물관리번호 : 건물관리고유번호',
 	-- 회원 ID

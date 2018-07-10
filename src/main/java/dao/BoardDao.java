@@ -38,6 +38,8 @@ public interface BoardDao {
 	List<Board> list(Integer kind, String id);
 
 	void replyInsert(Board board);
+
+	List<Board> getbuildingNo_by_score();
 	
 }
 

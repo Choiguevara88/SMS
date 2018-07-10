@@ -147,5 +147,9 @@ public class BoardDaoImpl implements BoardDao{
 		return sqlSession.selectList(NS + "list", map);
 	}
 
-
+	@Override
+	public List<Board> getbuildingNo_by_score() {
+		return sqlSession.selectList(NS+"buildingNo_by_score");
+	}
+	
 }
