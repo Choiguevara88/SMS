@@ -113,7 +113,7 @@ public class ProjectServiceImpl implements ProjectService {
 		int num = boDao.maxNum();
 		board.setbNo(++num);
 		board.setRefLevel(board.getRefLevel() + 1);
-		boDao.insert(board);
+		boDao.replyInsert(board);
 	}
 
 	@Override // board Update Method()
@@ -271,6 +271,8 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void insertRoom(Room room) {
+		int sRNo = roomDao.maxNum();
+		room.setsRNo(++sRNo);
 		roomDao.insertRoom(room);
 	}
 
@@ -325,6 +327,7 @@ public class ProjectServiceImpl implements ProjectService {
 		building.setsInfoSub(sInfoSub);
 		building.setsRule(sRule);
 		building.setsBHour(sBHour);
+		System.out.println(sType);
 		buDao.buRegist(building);
 	}
 	private String listToString(List<String> list) {
@@ -522,9 +525,31 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
+	public List<Member> getMemberList(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum) {
+		return memDao.getMemberList(searchType, searchContent, startDate, endDate, limit, pageNum);
+	}
+
+	@Override
+	public int getMemberCnt(String searchType, String searchContent, String startDate, String endDate, Integer pageNum, Integer limit) {
+		return memDao.getMemberCnt(searchType, searchContent, startDate, endDate, limit, pageNum);
+	}
+
+	@Override
+	public int getHostCnt(String searchType, String searchContent, String startDate, String endDate, Integer pageNum, Integer limit) {
+		return memDao.getHostCnt(searchType, searchContent, startDate, endDate, limit, pageNum);
+	}
+
+	@Override
+	public List<Member> getHostList(String searchType, String searchContent, String startDate, String endDate, Integer pageNum, Integer limit) {
+		return memDao.getHostList(searchType, searchContent, startDate, endDate, limit, pageNum);
+	}
+
+	@Override
 	public List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum,
 			int limit) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 	}// ProjectServiceImpl end

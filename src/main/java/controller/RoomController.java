@@ -29,13 +29,16 @@ public class RoomController {
 	public Room getRoom() {
 		return new Room();
 	}
-	@RequestMapping("room/roomForm")
-	public ModelAndView roomForm(HttpServletRequest request) {
+	@RequestMapping("building/roomForm")
+	public ModelAndView roomForm(HttpServletRequest request, Room room) {
 		ModelAndView mav = new ModelAndView("room/roomForm");
-		mav.addObject(new Room());
+		String sNo = Integer.toString(room.getsNo());
+		Building building = service.getMyBuildingOne(sNo);
+		mav.addObject("building", building);
+		mav.addObject("room",room);
 	return mav;
 	}
-	@RequestMapping("room/roomSuccess")
+	@RequestMapping("building/roomSuccess")
 	public ModelAndView roomSuccess(@Valid Room room, BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
@@ -65,6 +68,7 @@ public class RoomController {
 			Integer sNo = building.getsNo();
 		try {
 			List<Room> myRoomList = service.getmyRoomList(sNo);
+			mav.addObject("sNo",sNo);
 			mav.addObject("myRoomList",myRoomList);
 			mav.addObject("sNo", sNo);
 			mav.setViewName("room/roomList");

@@ -73,8 +73,9 @@ public class ReserveController {
 		int limit = 100; // 한 페이지에 나올 게시글의 숫자
 		int listcount = service.reserveCount(id, searchType, searchContent); // 표시될 총 게시글의 수
 
-		if (id != null) {
-			List<Reserve> reservelist = service.selectReserveList(id, searchType, searchContent, pageNum, limit);
+
+	      List<Reserve> reservelist = service.selectReserveList(id, searchType, searchContent, pageNum, limit, startDate, endDate);
+
 
 			int maxpage = (int) ((double) listcount / limit + 0.95);
 			int startpage = ((int) ((pageNum / 10.0 + 0.9) - 1)) * 10 + 1; // 시작페이지
@@ -89,7 +90,6 @@ public class ReserveController {
 			mav.addObject("listcount", listcount);
 			mav.addObject("list", reservelist);
 			mav.addObject("reservecnt", reservecnt);
-		}
 
 		return mav;
 	}
@@ -165,7 +165,7 @@ public class ReserveController {
 		ModelAndView mav = new ModelAndView();
 
 		Reserve reserve = service.getReserve(reNo);
-				
+		
 		Room room = new Room();
 		room.setsRNo(reserve.getSrNo());
 		room =service.getMyRoom(room);

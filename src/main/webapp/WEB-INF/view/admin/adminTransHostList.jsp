@@ -52,7 +52,7 @@
 		<tr><th>호스트ID</th><th>상호명</th><th>Room이름</th><th>예약일자</th><th>발생수익</th><th>구매자</th></tr>
 	<c:forEach var="th" items="${thList}">
 		<tr><td>${th.host}</td><td>${th.hostName}</td><td>${th.sRName}</td><td><fmt:formatDate value="${th.reDate}" pattern="yyyy-MM-dd"/></td>
-			<td>${th.totPrice}</td><td>${th.guest}</td></tr>
+			<td><fmt:formatNumber value="${th.totPrice}" pattern="###,###"/></td><td>${th.guest}</td></tr>
 	</c:forEach>
 </table>
 </div>
