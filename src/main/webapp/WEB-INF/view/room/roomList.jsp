@@ -21,7 +21,10 @@
   <div class="w3-card-4" style="width:30%">
     <div class="w3-container w3-center">
       <p>sRName : ${room.sRName}</p><br>	
+      <p>sRNo : ${room.sNo}</p><br>
       <p>sRNo : ${room.sRNo}</p><br>
+        
+   			<form:hidden path="sNo" value="${room.sNo}" />
    		<form:hidden path="sRNo" value="${room.sRNo}" />
     </div>
   </div>

@@ -165,7 +165,11 @@ public class ReserveController {
 		ModelAndView mav = new ModelAndView();
 
 		Reserve reserve = service.getReserve(reNo);
-		Room room = service.getMyRoom(reserve.getSrNo());
+				
+		Room room = new Room();
+		room.setsRNo(reserve.getSrNo());
+		room =service.getMyRoom(room);
+		//Room room = service.getMyRoom(reserve.getSrNo());
 
 		mav.addObject("reserve", reserve);
 		mav.addObject("room", room); // 세부공간에 대한 세부정보

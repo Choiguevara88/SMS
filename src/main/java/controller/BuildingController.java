@@ -64,8 +64,10 @@ public class BuildingController {
 		String id = request.getParameter("id");
 		ModelAndView mav = new ModelAndView();
 		List<Building> MyBuildingList = service.getMyBuildings(id);
+		int buildCnt = service.hostBuildCount(id);
 		mav.addObject("myBuildingList",MyBuildingList);
 		mav.addObject("id", id);
+		mav.addObject("buildCnt", buildCnt);
 		return mav;
 	}
 	
@@ -83,10 +85,16 @@ public class BuildingController {
 		sTypeNames.add("카페");
 		sTypeNames.add("파티룸");
 		sTypeNames.add("공연장");
+		String address1 = myBuildingOne.getsAddress().split(",")[0];
+		String address2 = myBuildingOne.getsAddress().split(",")[1];
+		String address3 = myBuildingOne.getsAddress().split(",")[2];
 		System.out.println(myBuildingOne);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("building", myBuildingOne);
 		mav.addObject("sTypeNames", sTypeNames);
+		mav.addObject("address1", address1);
+		mav.addObject("address2", address2);
+		mav.addObject("address3", address3);
 		return mav;
 	}
 	
@@ -107,8 +115,13 @@ public class BuildingController {
 	public ModelAndView buildingDetail(Building building, HttpServletRequest request) {
 		String sNo = request.getParameter("sNo");
 		building = service.getMyBuildingOne(sNo);
+		
 		ModelAndView mav = new ModelAndView();
+		String address = building.getsAddress().split(",")[1];
+		String address1 = building.getsAddress().split(",")[1] +" "+building.getsAddress().split(",")[2];
 		mav.addObject("building", building);
+		mav.addObject("address",address);
+		mav.addObject("address1", address1);
 		return mav;
 	}
 	@ModelAttribute
