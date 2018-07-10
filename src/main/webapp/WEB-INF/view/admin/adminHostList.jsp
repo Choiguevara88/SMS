@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- w3 css 사용 선언-->
 
-<title>:::회원정보 보기:::</title>
+<title>:::회원정보보기:::</title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -126,9 +126,8 @@
 		<th style="text-align:center;">Mob</th>
 		<th style="text-align:center;">가입일자</th>
 		<th style="text-align:center;">상호명</th>
-		<th style="text-align:center;">상호주소</th>
+		<th>상호주소</th>
 		<th style="text-align:center;">계좌</th>
-		<th style="text-align:center;">전체선택&nbsp;&nbsp;<input type="checkbox" name="allchk" onchange="allchkbox(this)"></th>
 	</tr>
 	<c:if test="${listCnt == 0 }">
 		<tr><td colspan="9" rowspan="4" style="text-align:center;">검색 결과가 없습니다.</td></tr>
@@ -136,16 +135,39 @@
 	<c:if test="${listCnt != 0 }">
 	<c:forEach var="mem" items="${list}" >
 	<tr>
-		<td>${mem.id}</td><td>${mem.name}</td><td>${mem.email}</td><td>${mem.mob}</td>
-		<td><fmt:formatDate value="${mem.regDate}" pattern="yyyy-MM-dd"/></td>
-		<td>${mem.hostName}</td><td>${mem.address}</td><td>${mem.accountNo}</td>
-		<td style="text-align:center;"><input type="checkbox" name="idchks" value="${mem.id}"></td>
+		<td class="w3-small" style="text-align:center;">${mem.id}</td>
+		<td class="w3-small" style="text-align:center;">${mem.name}</td>
+		<td class="w3-small" style="text-align:center;">${mem.email}</td>
+		<td class="w3-small" style="text-align:center;">${mem.mob}</td>
+		<td class="w3-small" style="text-align:center;"><fmt:formatDate value="${mem.regDate}" pattern="yyyy-MM-dd"/></td>
+		<td class="w3-small" style="text-align:center;">${mem.hostName}</td>
+		<td class="w3-small" >${mem.address}</td>
+		<td class="w3-small" style="text-align:center;">${mem.accountNo}</td>
 	</tr>
 	</c:forEach>
 		
 	<tr>
-		<td colspan="9" align="center">
-			<input type="submit" value="SendEmail">
+		<td colspan="8" style="text-align:center;">
+		
+		<c:if test="${pageNum <= 1}">&nbsp;</c:if> 
+		<c:if test="${pageNum > 1}">
+			<a href="javascript:pageGo(${pageNum-1})">[이전]</a>&nbsp;
+		</c:if> 
+		
+		<c:forEach var="a" begin="${startpage}" end="${endpage}">
+			<c:if test="${a == pageNum}">[${a}]	</c:if>
+					
+			<c:if test="${a != 0}">	
+			<c:if test="${a != pageNum }">
+				<a href="javascript:pageGo(${a})">[${a}]</a>
+			</c:if>
+			</c:if>
+		</c:forEach> 
+			
+		<c:if test="${pageNum >= maxpage }">&nbsp;</c:if> 
+		<c:if test="${pageNum < maxpage }">
+			<a href="javascript:pageGo(${pageNum+1})">[다음]</a>
+		</c:if>
 		</td>
 	</tr>
 	</c:if>
@@ -156,22 +178,8 @@
 <div class="w3-container w3-margin">
 	<table>
 	<tr align="center">
-		<td colspan="7"><c:if test="${pageNum <= 1}">&nbsp;</c:if> 
-		<c:if test="${pageNum > 1}">
-			<a href="javascript:pageGo(${pageNum-1})">[이전]</a>&nbsp;</c:if> 
-			<c:forEach var="a" begin="${startpage}" end="${endpage}">
-				<c:if test="${a == pageNum}">[${a}]	</c:if>
-					
-				<c:if test="${a != 0}">	
-				<c:if test="${a != pageNum }">
-					<a href="javascript:pageGo(${a})">[${a}]</a>
-				</c:if>
-				</c:if>
-			</c:forEach> 
-				<c:if test="${pageNum >= maxpage }">&nbsp;</c:if> 
-				<c:if test="${pageNum < maxpage }">
-					<a href="javascript:pageGo(${pageNum+1})">[다음]</a>
-				</c:if>
+		<td colspan="7">
+		
 		</td>
 	</tr>
 	</table>

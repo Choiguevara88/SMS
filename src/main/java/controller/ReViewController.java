@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,7 +22,12 @@ public class ReViewController {
 	@Autowired
 	private ProjectService service;
 	
-	@RequestMapping("review/Rlist") //http://localhost:8080/TestProject/review/Rlist.sms?sno=2
+	@ModelAttribute
+	public Board getBoard() {
+		return new Board();
+	}
+	
+	/*@RequestMapping("review/Rlist") //http://localhost:8080/TestProject/review/Rlist.sms?sno=2
 	public ModelAndView Rlist(Integer sNo,Integer pageNum) {
 		int kind = 2;
 		if(pageNum == null || pageNum.toString().equals("")) {
@@ -117,7 +123,7 @@ public class ReViewController {
 		mav.addObject("kind",kind);
 		return mav;
 	}
-	@RequestMapping(value="review/Qwrite", method=RequestMethod.POST) // 게시글 작성 시 호출되는 메서드
+	@RequestMapping(value="building/Qwrite", method=RequestMethod.POST) // 게시글 작성 시 호출되는 메서드
 	public ModelAndView Qwrite(@Valid Board board, BindingResult bindingResult, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -131,7 +137,7 @@ public class ReViewController {
 		
 		try {
 			service.boardWrite(board);
-			mav.setViewName("redirect:/review/Qlist.sms");
+			mav.setViewName("redirect:/building/buildingDetail.sms");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -207,17 +213,13 @@ public class ReViewController {
 		return mav;
 	}
 	
-	@RequestMapping(value="review/*delete", method=RequestMethod.POST)
+	@RequestMapping(value="building/*delete", method=RequestMethod.POST)
 	public ModelAndView delete(Integer bNo, Integer pageNum,Integer sNo,Integer kind) {
 		
 		ModelAndView mav = new ModelAndView();
 		service.boardDelete(bNo);
-		if(kind==2) {
-			mav.setViewName("redirect:/review/Rlist.sms?sNo="+sNo);
-		}else {
-			mav.setViewName("redirect:/review/Qlist.sms?sNo="+sNo);
-		}
-			return mav;
+		mav.setViewName("redirect:/building/buildingDetail.sms?sNo="+sNo);
+		return mav;
 	}
 	
 	@RequestMapping(value="review/*", method=RequestMethod.GET) // 게시글 작성 View로 접속할 때 호출되는 메서드
@@ -238,5 +240,5 @@ public class ReViewController {
 		mav.addObject("kind",kind);
 		mav.addObject("board", board);
 		return mav;
-	}
+	}*/
 }

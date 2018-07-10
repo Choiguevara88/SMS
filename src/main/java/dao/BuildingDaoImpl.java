@@ -68,4 +68,13 @@ public class BuildingDaoImpl implements BuildingDao {
 		sqlSession.getMapper(BuildingMapper.class).update(building);
 	}
 
+
+	@Override
+	public Building getbuilding_mainpage(int sNo) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("sNo", sNo);
+		return sqlSession.selectOne(NS+"mainpagebuilding", map);
+	}
+
+
 }

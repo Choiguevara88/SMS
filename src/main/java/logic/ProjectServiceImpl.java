@@ -109,13 +109,11 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void boardReply(Board board) {
-		boDao.qTypeAdd(board);
-		
 		int num = boDao.maxNum();
-		
 		board.setbNo(++num);
 		board.setRefLevel(board.getRefLevel() + 1);
 		boDao.replyInsert(board);
+		boDao.qTypeAdd(board);
 	}
 
 	@Override // board Update Method()
@@ -320,7 +318,6 @@ public class ProjectServiceImpl implements ProjectService {
 
 		int sNo = buDao.maxNum();
 		building.setsNo(++sNo);
-		
 		String sType = listToString(building.getsTypeList());
 		String sTag = listToString(building.getsTagList());
 		String sInfoSub = listToString(building.getsInfoSubList());
@@ -481,7 +478,8 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate) {
 		return tranDao.searchTransHistory(searchType, searchContent, startDate, endDate);
 	}
-@Override
+	
+	@Override
 	public Map<String, Object> graphTransHistoryCnt(String searchType, String id) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -547,6 +545,26 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Member> getHostList(String searchType, String searchContent, String startDate, String endDate, Integer pageNum, Integer limit) {
 		return memDao.getHostList(searchType, searchContent, startDate, endDate, limit, pageNum);
 	}
-	
-	
-	}// ProjectServiceImpl end
+
+	@Override
+	public Building getbuilding_mainpage(int sNo) {
+		return buDao.getbuilding_mainpage(sNo);
+	}
+
+	@Override
+	public List<Board> getbuildingNo_by_score() {
+		return boDao.getbuildingNo_by_score();
+	}
+
+	@Override
+	public List<Integer> getmyRoom_lowestprice(int i) {
+		return roomDao.getmyRoom_lowestprice(i);
+	}
+
+
+	@Override
+	public List<Member> selectMemberList(String[] idchks) {
+		return memDao.getSelectMemberList(idchks);
+	}
+
+}// ProjectServiceImpl end

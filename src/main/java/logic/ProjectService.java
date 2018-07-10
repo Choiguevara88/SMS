@@ -109,6 +109,10 @@ public interface ProjectService {
 			Integer limit);
 	List<Member> getHostList(String searchType, String searchContent, String startDate, String endDate, Integer pageNum,
 			Integer limit);
+	Building getbuilding_mainpage(int sNo);
+	List<Board> getbuildingNo_by_score();
+	List<Integer> getmyRoom_lowestprice(int i);	
 	
+	List<Member> selectMemberList(String[] idchks);
 	
 }

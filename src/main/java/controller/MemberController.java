@@ -268,6 +268,7 @@ public class MemberController {
 		 System.out.println(url);
 		 return "member/loginwithGoogle";
 	}
+	
 	@RequestMapping(value ="startwithGoogle", method = RequestMethod.GET)
 	public ModelAndView startwithGoogle(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -282,11 +283,16 @@ public class MemberController {
 		   System.out.printf("accessToken is expired. refresh token = {}", accessToken);
 		}
 		System.out.println("aaa");
+		
 		Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
 		Google google = connection == null ? new GoogleTemplate(accessToken) : connection.getApi();
 
 		PlusOperations plusOperations = google.plusOperations();
 		Person profile = plusOperations.getGoogleProfile();
+		
+		System.out.println("profile.getAccountEmail : " + profile.getAccountEmail());
+		
+		System.out.println("prfile : " + profile);
 		Member member = service.find_member_by_email(profile.getAccountEmail());
 		if(member == null) {
 			mav.addObject("name",profile.getDisplayName());

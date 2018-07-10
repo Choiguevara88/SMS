@@ -34,8 +34,8 @@
 <bean id="googleConnectionFactory"
   class="org.springframework.social.google.connect.GoogleConnectionFactory">
   <constructor-arg
-    value="45091977731-09gqohq32gi0bvsr3kq6q9dvas5rag6s.apps.googleusercontent.com" />
-  <constructor-arg value="GO7AfnD6llChOKAWCzBTBb58" />
+    value="85235160836-acvjr9t0jpeken5bbbb652721idufadl.apps.googleusercontent.com" />
+  <constructor-arg value="gqZtcocePZeALgpNMOuVKwcD" />
 </bean>
 
 <bean id="googleOAuth2Parameters"

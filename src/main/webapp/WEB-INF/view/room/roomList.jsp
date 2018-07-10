@@ -13,7 +13,7 @@
 </script>
 </head>
 <body>
-<h1>${id}님의 세부공간 정보 관리</h1>
+<h1>${id}님의 ${sName}공간의 세부공간 관리</h1>
 
 <c:forEach var="room" items="${myRoomList}">
 <form:form modelAttribute="room" action="roomDetail.sms" method="post">

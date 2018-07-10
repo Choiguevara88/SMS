@@ -17,6 +17,7 @@
 
 	function allchkbox(chk) {
 		var chks = document.getElementsByName("idchks")
+		
 		for(var i=0; i < chks.length; i++) {
 			chks[i].checked = chk.checked;
 		}
@@ -112,9 +113,10 @@
 	</form>
 </div>
 
+
+<form action="adminMailForm.sms" method="POST" name="mf">
 <div class="w3-container w3-margin">
-<form action="mailForm.shop" method="post">
-<table class="w3-table w3-striped">
+<table class="w3-table w3-striped w3-border">
 
 	<tr>
 		<th style="text-align:center;">ID</th>
@@ -133,27 +135,23 @@
 	<c:if test="${listCnt != 0 }">
 	<c:forEach var="mem" items="${list}" >
 	<tr>
-		<td>${mem.id}</td><td>${mem.name}</td><td>${mem.email}</td><td>${mem.mob}</td>
-		<td><fmt:formatDate value="${mem.regDate}" pattern="yyyy-MM-dd"/></td>
-		<td>${mem.memType == 0 ? 'Guest' : mem.memType == 1 ? 'Host' : 'Host Cancel'}</td>
-		<td style="text-align:center;"><input type="checkbox" name="idchks" value="${user.userId}"></td>
+		<td style="text-align:center;" class="w3-small">${mem.id}</td>
+		<td style="text-align:center;" class="w3-small">${mem.name}</td>
+		<td style="text-align:center;" class="w3-small">${mem.email}</td>
+		<td style="text-align:center;" class="w3-small">${mem.mob}</td>
+		<td style="text-align:center;" class="w3-small"><fmt:formatDate value="${mem.regDate}" pattern="yyyy-MM-dd"/></td>
+		<td style="text-align:center;" class="w3-small">${mem.memType == 0 ? 'Guest' : mem.memType == 1 ? 'Host' : 'Host Cancel'}</td>
+		<td style="text-align:center;" class="w3-small"><input type="checkbox" name="idchks" value="${mem.id}"></td>
 	</tr>
 	</c:forEach>
-		
-	<tr>
-		<td colspan="7" align="center">
-			<input type="submit" value="SendEmail">
-		</td>
-	</tr>
 	</c:if>
 </table>
-</form>
 </div>
 
-<div class="w3-container w3-margin">
-	<table>
-	<tr align="center">
-		<td colspan="8"><c:if test="${pageNum <= 1}">&nbsp;</c:if> 
+<div class="w3-container">
+	<table class="w3-table">
+	<tr>
+		<td colspan="8" style="text-align:center;"><c:if test="${pageNum <= 1}">&nbsp;</c:if> 
 		<c:if test="${pageNum > 1}">
 			<a href="javascript:pageGo(${pageNum-1})">[이전]</a>&nbsp;</c:if> 
 			<c:forEach var="a" begin="${startpage}" end="${endpage}">
@@ -173,6 +171,12 @@
 	</tr>
 	</table>
 </div>
+
+<div class="w3-container w3-margin" style="text-align:center;">
+	<input type="submit" value="Send Email" class="w3-button w3-black" style="width:40%;">
+</div>
+
+</form>
 
 </body>
 </html>

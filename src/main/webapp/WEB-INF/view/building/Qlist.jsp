@@ -9,11 +9,18 @@
 	}
 </script>
 <script type="text/javascript">
-	function check() {
+	function check5() {
 		confirm("정말 삭제 하시겠습니까?")
 		document.d.submit();
+		//return false;
 	}
 
+</script>
+<script type="text/javascript">
+	function win_openQ(num)	{
+		var op = "width=800,height=700,scrollbars=yes,left=50,top=150";
+			window.open("../building/Qreply.sms?bNo="+num,"reply",op);
+	}
 </script>
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
@@ -22,7 +29,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 101; /* Sit on top */
     padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
@@ -138,28 +145,30 @@ window.onclick = function(event) {
 		<td><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd H:mm:ss"/></td>
   	<td align="right">
   		<c:if test="${sessionScope.loginMember.id == building.id && board.sNo == building.sNo }">
-  	<a href="../review/reply.sms?bNo=${board.bNo}&pageNum=${pageNum}">[답변]</a></c:if>
+  		<c:if test="${board.refLevel == 0  }">
+  		<c:if test="${board.qType == 0 }">
+  	<a href="javascript:win_openQ('${board.bNo}')">[답변]</a></c:if></c:if></c:if>
   		<c:if test="${sessionScope.loginMember.id == board.id }">
   	<form name="d" method="post" action="delete.sms">
   		<input type="hidden" name="bNo"	value="${board.bNo}">
 		<input type="hidden" name="sNo"	value="${board.sNo}">
 		<input type="hidden" name="kind" value="${board.kind}">
-		<input type="hidden" name="pageNum"	value="${param.pageNum}">
-		<input type="button" value="삭제" onclick="check()" ></form></c:if><br></td>
+		<input type="button" value="삭제" onclick="check5()" >
+	</form></c:if><br></td>
 <!--  글 밑 부분 -->
 </c:forEach>
 <tr align="center" height="26"><td colspan="2">
 		<c:if test="${pageNum >1 }">
-			<a href="javascript:list(${pageNum -1 })"> [이전]</a>
+			<a href="javascript:listQlist(${pageNum -1 })"> [이전]</a>
 		</c:if>&nbsp;
 		<c:if test="${pageNum <= 1}">[이전]</c:if>&nbsp;
 		<c:forEach var="a" begin="${startpage }" end="${endpage}"> 
 			<c:if test="${a == pageNum}">[${a}]</c:if>
 			<c:if test="${a != pageNum}">
-				<a href="javascript:list(${a})">[${a}]</a></c:if>
+				<a href="javascript:listQlist(${a})">[${a}]</a></c:if>
 		</c:forEach>
 			<c:if test="${pageNum < maxpage}">
-				<a href="javascript:list(${pageNum+1 })">[다음]</a>
+				<a href="javascript:listQlist(${pageNum+1 })">[다음]</a>
 			</c:if>&nbsp;
 			<c:if test="${pageNum >= maxpage}">[다음]</c:if>&nbsp;
 			</td></tr>

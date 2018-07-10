@@ -19,7 +19,7 @@
 		</if>
 		
 		<if test="id != null">
-			and id #{id} 
+			and id = #{id} 
 		</if> 
 		
 		<if test="searchType != null and searchContent != null">
@@ -46,9 +46,6 @@
 	<select id="count" resultType="Integer" parameterType="map">
 		select count(*) from board 
 		
-		<if test="searchType != null and searchContent != null">
-			where ${searchType} like '%${searchContent}%'	
-		</if>
 		
 		<if test="kind != null and sNo != null">
 			where kind = #{kind} and sNo = #{sNo}	
@@ -56,6 +53,9 @@
 		
 		<if test="kind != null and sNo == null">
 			where kind = #{kind}	
+		</if>
+		<if test="searchType != null and searchContent != null">
+			and ${searchType} like '%${searchContent}%'	
 		</if>
 	</select>
 	
@@ -65,6 +65,9 @@
 	
 	<select id="hostQuestion" resultType="Board">
 		select * from board where kind = 5 and qType=0
+	</select>
+	<select id="buildingNo_by_score" resultType="Board">
+		select sno, avg(score) from board order by avg(score) desc limit 6
 	</select>
 	
 </mapper>
