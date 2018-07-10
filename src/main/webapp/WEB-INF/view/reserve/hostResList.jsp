@@ -133,9 +133,7 @@ select {width: 140px; /* 원하는 너비설정 */
 						</c:if>
 						
 						<td style="text-align:center;"><fmt:formatDate value="${res.regDate}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
-
-						<td style="text-align:center;">${res.totPrice}</td>
- 
+						<td style="text-align:center;"><fmt:formatNumber value="${res.totPrice}" pattern="###,###"/></td>
 						<td style="text-align:center;">
 							<c:if test="${res.reStat == 0}">예약요청 : <a href="hostResConfirm.sms?reNo=${res.reNo}">[결제확인하기]</a></c:if>
 							<c:if test="${res.reStat == 1}">

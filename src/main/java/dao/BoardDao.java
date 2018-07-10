@@ -36,6 +36,8 @@ public interface BoardDao {
 	void qTypeAdd(Board board);
 
 	List<Board> list(Integer kind, String id);
+
+	void replyInsert(Board board);
 	
 }
 

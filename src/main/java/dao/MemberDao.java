@@ -26,5 +26,12 @@ public interface MemberDao {
 
 	void deleteAccount(Member member);
 
+	List<Member> getMemberList(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum);
+
+	int getMemberCnt(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum);
+
+	List<Member> getHostList(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum);
 	
+	int getHostCnt(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum);
+
 }
