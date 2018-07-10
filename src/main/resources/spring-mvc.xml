@@ -41,7 +41,7 @@
 <bean id="googleOAuth2Parameters"
   class="org.springframework.social.oauth2.OAuth2Parameters">
   <property name="scope"
-    value="https://www.googleapis.com/auth/plus.login" />
+    value="email" />
   <property name="redirectUri"
     value="http://localhost:8080/TestProject/startwithGoogle.sms" />
 </bean>

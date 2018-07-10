@@ -293,7 +293,11 @@ public class MemberController {
 		System.out.println("profile.getAccountEmail : " + profile.getAccountEmail());
 		
 		System.out.println("prfile : " + profile);
+		
 		Member member = service.find_member_by_email(profile.getAccountEmail());
+		
+		System.out.println(member);
+		
 		if(member == null) {
 			mav.addObject("name",profile.getDisplayName());
 			mav.addObject("email",profile.getAccountEmail());
