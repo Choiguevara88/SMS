@@ -113,7 +113,7 @@
 </div>
 
 
-<form action="mailForm.shop" method="post">
+<form action="adminMailForm.sms" method="POST" name="mf">
 <div class="w3-container w3-margin">
 <table class="w3-table w3-striped w3-border">
 

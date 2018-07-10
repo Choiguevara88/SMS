@@ -545,12 +545,10 @@ public class ProjectServiceImpl implements ProjectService {
 		return memDao.getHostList(searchType, searchContent, startDate, endDate, limit, pageNum);
 	}
 
+
 	@Override
-	public List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum,
-			int limit) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Member> selectMemberList(String[] idchks) {
+		return memDao.getSelectMemberList(idchks);
 	}
-	
-	
-	}// ProjectServiceImpl end
+
+}// ProjectServiceImpl end

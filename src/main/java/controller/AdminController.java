@@ -203,6 +203,21 @@ public class AdminController {
 		return mav;
 	}
 	
+	@RequestMapping(value="admin/adminMailForm", method = RequestMethod.POST)
+	public ModelAndView adminMailForm(HttpSession session, String[] idchks) {
+		
+		ModelAndView mav = new ModelAndView("admin/adminMailWrite");
+		
+		if(idchks == null || idchks.length == 0) {
+			throw new ProjectException("메일을 보낼 대상자를 선택하세요.", "adminMemberList.sms");
+		}
+		
+		List<Member> list = service.selectMemberList(idchks);
+		mav.addObject("memberList", list);
+		
+		return mav;
+	}
+	
 	// 공지사항 작성 = GET
 	@RequestMapping(value = "notice/write", method = RequestMethod.GET)
 	public ModelAndView adminNoticeWrite(HttpSession session) {
