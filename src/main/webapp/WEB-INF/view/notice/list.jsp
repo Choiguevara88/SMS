@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp" %>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>목록보기</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function list(pageNum) {
 		if(searchType == null || searchType.length == 0) {
@@ -45,14 +46,14 @@
 <table border="1" style="margin-top:30px" width="80%" align="center">
 <c:if test="${listcount > 0}">
 <c:forEach var="board" items="${boardlist}" varStatus="i">
-	<tr class="subject" id="${i.count}">
+	<tr>
 		<td width="10%" align="center">공지사항</td>
 		<td width="80%" align="center">
-		<a href="javascript:onclick()"><div style="float:center; display: inline;">${board.subject}</div>
+		<a href="#" class="subject"><div style="float:center; display: inline;">${board.subject}</div>
 		<span style="float:right"><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd"/></span></a></td>
 		
 	</tr>
-	<tr class="content" id="${i.count}-view">
+	<tr>
   		<td colspan="3" align="center" class="content">
   		<c:if test="${sessionScope.loginMember.id == 'admin' }">
 		<a href="../notice/update.sms?bNo=${board.bNo}&pageNum=${pageNum}">[수정]</a>
