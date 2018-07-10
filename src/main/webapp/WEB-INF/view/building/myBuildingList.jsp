@@ -28,7 +28,7 @@
       </a>
       <br>
       <a href="buildingUpdate.sms?sNo=${build.sNo}" class="w3-btn w3-black">공간수정</a>
-      <a href="roomList.sms?sNo=${build.sNo}" class="w3-btn w3-black">세부공간추가/수정</a>
+      <a href="../room/roomList.sms?sNo=${build.sNo}" class="w3-btn w3-black">세부공간추가/수정</a>
       <a href="buildingDelete.sms?sNo=${build.sNo}" class="w3-btn w3-black">삭제</a>
     </div>
   </div>
