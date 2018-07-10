@@ -81,7 +81,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <form:form modelAttribute="board" action="Qwrite.sms" method="post" name="f">
 <form:hidden path="kind" value="3"/>
 <input type="hidden" name="pageNum" value="1"/>
-<form:hidden path="sNo" value="1"/>
+<form:hidden path="sNo" value="${param.sNo }"/>
 <form:hidden path="id" value="${sessionScope.loginMember.id}"/>
 	<div align="center" id="table2"><table cellpadding="0" cellspacing="0" align="center" >
 		<caption><h3>질문 글 등록하기</h3></caption>

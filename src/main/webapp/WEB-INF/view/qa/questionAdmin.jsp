@@ -55,7 +55,7 @@ function listReply(){
 <form method="post" name="f" action="questionAdmin.sms">
 	<input type="hidden" name="kind" value="${kind}">
 	<input type="hidden" name="id" value="${sessionScope.loginMember.id }"/>
-	<table border="1" align="center">
+	<table border="1" align="center" >
 		<tr><td><textarea rows="2" cols="80" id="content" placeholder="입력해 주세요."></textarea>
 	</td><td>
 		<input type="button" id="btnReply" value="댓글쓰기">

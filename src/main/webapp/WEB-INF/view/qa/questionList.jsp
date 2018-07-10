@@ -12,11 +12,11 @@
 <% pageContext.setAttribute("newLineChar","\n"); %>
 	<c:forEach var="board" items="${list}">
 	<c:if test="${board.refLevel != 0 }">
-<div align="right">
+<div align="left">
 	<c:set var="str" value="${fn:replace(board.content,'  ','&nbsp;&nbsp;') }"/>
 	<c:set var="str" value="${fn:replace(board.content,newLineChar,'<br>') }"/>
 		<div>
-			<div>${board.id} 
+			<div>관리자 
 			(<fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd a hh:mm:ss"/>)<br>
 		<div>
 		${str}
@@ -26,7 +26,7 @@
 </div>
 	</c:if>
 	<c:if test="${board.refLevel == 0 }">
-<div align="left">
+<div align="right">
 	<c:set var="str" value="${fn:replace(board.content,'  ','&nbsp;&nbsp;') }"/>
 	<c:set var="str" value="${fn:replace(board.content,newLineChar,'<br>') }"/>
 		<div>
