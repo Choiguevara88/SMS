@@ -289,7 +289,7 @@ public class MemberController {
 		
 		System.out.println("profile.getAccountEmail : " + profile.getAccountEmail());
 		
-		System.out.println("prfile : " + profile);
+		System.out.println("profile : " + profile);
 		
 		Member member = service.find_member_by_email(profile.getAccountEmail());
 		if(member == null) {
