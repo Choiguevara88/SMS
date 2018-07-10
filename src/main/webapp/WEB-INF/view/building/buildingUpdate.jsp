@@ -133,7 +133,7 @@ function infodel(di) {
 	 $("#addinfo" ).attr( 'disabled', false );
 }
 
-/*시설안내관련 스크립트*/
+/*이용규칙관련 스크립트*/
 var rulearr = new Array(10);
 var ruleidx=0;
 var rule;
