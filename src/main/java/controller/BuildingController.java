@@ -122,6 +122,8 @@ public class BuildingController {
 		building = service.getMyBuildingOne(sNo);
 		List<Room> roomList = service.getmyRoomList(ssNo);
 		System.out.println(roomList);
+		String startHour = building.getsBHourList().get(0);
+		String endHour = building.getsBHourList().get(1);
 		ModelAndView mav = new ModelAndView();
 		String address = building.getsAddress().split(",")[1];
 		String address1 = building.getsAddress().split(",")[1] +" "+building.getsAddress().split(",")[2];
