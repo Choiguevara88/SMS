@@ -16,6 +16,8 @@ public interface RoomDao {
 
 	void deleteRoom(Room room);
 
+	int maxNum();
+
 
 
 	

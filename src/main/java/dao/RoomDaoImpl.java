@@ -59,4 +59,9 @@ public class RoomDaoImpl implements RoomDao{
 		sqlSession.selectOne(NS + "oneD",map);
 		
 	}
+	@Override
+	public int maxNum() {
+		
+		return sqlSession.getMapper(RoomMapper.class).maxNum();
+	}
 }

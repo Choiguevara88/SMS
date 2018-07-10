@@ -273,6 +273,8 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void insertRoom(Room room) {
+		int sRNo = roomDao.maxNum();
+		room.setsRNo(++sRNo);
 		roomDao.insertRoom(room);
 	}
 
@@ -317,6 +319,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 		int sNo = buDao.maxNum();
 		building.setsNo(++sNo);
+		
 		String sType = listToString(building.getsTypeList());
 		String sTag = listToString(building.getsTagList());
 		String sInfoSub = listToString(building.getsInfoSubList());
@@ -327,6 +330,7 @@ public class ProjectServiceImpl implements ProjectService {
 		building.setsInfoSub(sInfoSub);
 		building.setsRule(sRule);
 		building.setsBHour(sBHour);
+		System.out.println(sType);
 		buDao.buRegist(building);
 	}
 	private String listToString(List<String> list) {

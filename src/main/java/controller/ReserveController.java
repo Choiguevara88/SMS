@@ -85,9 +85,8 @@ public class ReserveController {
 			mav.addObject("startpage", startpage);
 			mav.addObject("endpage", endpage);
 			mav.addObject("listcount", listcount);
-			mav.addObject("list", reservelist);
+			//mav.addObject("list", reservelist);
 			mav.addObject("reservecnt", reservecnt);
-		}
 
 		return mav;
 	}
