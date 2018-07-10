@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import logic.Board;
 import logic.Building;
 import logic.ProjectService;
+import logic.Room;
 
 @Controller
 public class BuildingController {
@@ -114,14 +115,17 @@ public class BuildingController {
 	@RequestMapping(value="building/buildingDetail", method=RequestMethod.GET)
 	public ModelAndView buildingDetail(Building building, HttpServletRequest request) {
 		String sNo = request.getParameter("sNo");
+		Integer ssNo = Integer.parseInt(sNo);
 		building = service.getMyBuildingOne(sNo);
-		
+		List<Room> roomList = service.getmyRoomList(ssNo);
+		System.out.println(roomList);
 		ModelAndView mav = new ModelAndView();
 		String address = building.getsAddress().split(",")[1];
 		String address1 = building.getsAddress().split(",")[1] +" "+building.getsAddress().split(",")[2];
 		mav.addObject("building", building);
 		mav.addObject("address",address);
 		mav.addObject("address1", address1);
+		mav.addObject("roomList", roomList);
 		return mav;
 	}
 	@ModelAttribute
