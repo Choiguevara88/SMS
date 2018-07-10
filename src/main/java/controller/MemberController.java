@@ -282,12 +282,17 @@ public class MemberController {
 		   System.out.printf("accessToken is expired. refresh token = {}", accessToken);
 		}
 		System.out.println("aaa");
+		
 		Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
 		Google google = connection == null ? new GoogleTemplate(accessToken) : connection.getApi();
 
 		PlusOperations plusOperations = google.plusOperations();
 		Person profile = plusOperations.getGoogleProfile();
+		
+		System.out.println("profile.getAccountEmail : " + profile.getAccountEmail());
+		
 		Member member = service.find_member_by_email(profile.getAccountEmail());
+		
 		if(member == null) {
 			mav.addObject("name",profile.getDisplayName());
 			mav.addObject("email",profile.getAccountEmail());
