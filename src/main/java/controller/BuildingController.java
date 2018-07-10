@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,8 +123,6 @@ public class BuildingController {
 		building = service.getMyBuildingOne(sNo);
 		List<Room> roomList = service.getmyRoomList(ssNo);
 		System.out.println(roomList);
-		String startHour = building.getsBHourList().get(0);
-		String endHour = building.getsBHourList().get(1);
 		ModelAndView mav = new ModelAndView();
 		String address = building.getsAddress().split(",")[1];
 		String address1 = building.getsAddress().split(",")[1] +" "+building.getsAddress().split(",")[2];
@@ -206,6 +205,15 @@ public class BuildingController {
 		mav.addObject("sNo",sNo);
 		mav.addObject("building",building);
 				
+		return mav;
+	}
+	@RequestMapping(value="building/Rwrite", method=RequestMethod.GET) // 게시글 작성 시 호출되는 메서드
+	public ModelAndView write(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		int kind = 2;
+		Board board = new Board();
+		mav.addObject("kind",kind);
+		mav.addObject("board", board);
 		return mav;
 	}
 	@RequestMapping(value="building/Rwrite", method=RequestMethod.POST) // 게시글 작성 시 호출되는 메서드
