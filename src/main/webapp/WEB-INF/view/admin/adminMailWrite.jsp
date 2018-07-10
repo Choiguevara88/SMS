@@ -16,11 +16,11 @@
 		<table border="1" cellpadding="0" cellspacing="0" width="100%">
 			<tr>
 				<td>보내는사람</td>
-				<td>${sessionScope.loginUser.email}</td>
+				<td>${sessionScope.loginMember.email}</td>
 			</tr>
 			<tr>
 				<td>받는사람</td>
-				<td><input type="text" name="recipient" size="100" value='<c:forEach items="${userList}" var="user">${user.userName}&lt; ${user.email}&gt;</c:forEach>'></td>
+				<td><input type="text" name="recipient" size="100" value='<c:forEach items="${memberList}" var="mem">${mem.name}&lt; ${mem.email}&gt;</c:forEach>'></td>
 			</tr>
 			<tr>
 				<td>제목</td>	<td><input type="text" name="title" size="100"></td>

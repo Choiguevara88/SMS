@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,7 +91,7 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 
-	@Override
+	@Override	// Administrator Process
 	public List<Member> getMemberList(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum) {
 		
 		Map <String, Object> map = new HashMap<String, Object>();
@@ -108,7 +109,7 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 
-	@Override
+	@Override	// Administrator Process
 	public int getMemberCnt(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum) {
 		
 		Map <String, Object> map = new HashMap<String, Object>();
@@ -125,7 +126,7 @@ public class MemberDaoImpl implements MemberDao{
 		return sqlSession.selectOne(NS + "adminMemberCnt", map);
 	}
 	
-	@Override
+	@Override	// Administrator Process
 	public List<Member> getHostList(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum) {
 		
 		Map <String, Object> map = new HashMap<String, Object>();
@@ -143,7 +144,7 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 
-	@Override
+	@Override	// Administrator Process
 	public int getHostCnt(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum) {
 		
 		Map <String, Object> map = new HashMap<String, Object>();
@@ -158,5 +159,14 @@ public class MemberDaoImpl implements MemberDao{
 		map.put("pageNum", pageNum);
 		
 		return sqlSession.selectOne(NS + "adminHostCnt", map);
+	}
+
+
+	@Override	// Administrator Process
+	public List<Member> getSelectMemberList(String[] idchks) {
+		
+		List<String> list = Arrays.asList(idchks);
+		
+		return sqlSession.selectList(NS + "selectList", list);
 	}
 }

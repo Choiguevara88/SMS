@@ -22,4 +22,9 @@
 	<select id="hostCount" resultType="Integer" parameterType="map">
 		select count(*) from Building where id = #{id}
 	</select>
+	
+	<select id="mainpagebuilding" resultType="Building" parameterType="map">
+		select * from building where sNo=#{sNo}
+	</select>
+
 </mapper>

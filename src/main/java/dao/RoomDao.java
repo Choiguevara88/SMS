@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import logic.Building;
 import logic.Room;
 
 public interface RoomDao {
@@ -15,6 +16,9 @@ public interface RoomDao {
 	void updateRoom(Room room);
 
 	void deleteRoom(Room room);
+
+	List<Integer> getmyRoom_lowestprice(int i);
+
 
 	int maxNum();
 

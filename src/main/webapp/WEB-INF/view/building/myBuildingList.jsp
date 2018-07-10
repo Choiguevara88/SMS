@@ -18,22 +18,26 @@
 등록된 건물이 없습니다.
 </c:if>
 <a href="../building/buildingForm.sms?id=${sessionScope.loginMember.id}">[공간등록하기]</a>
+<div class="w3-row-padding">
 <c:forEach var="build" items="${myBuildingList}">
-<div class="w3-container">
-  <div class="w3-card-4" style="width:30%">
-    <img src="../picture/${build.sImg1}" style="width:100%">
-    <div class="w3-container w3-center">
-      <a href="buildingDetail.sms?sNo=${build.sNo}">
-      <p>${build.sName}</p>
+<div class = "w3-third">
+  <div class="w3-card-4 w3-margin-top w3-margin-bottom">
+    <img src="../picture/${build.sImg1}" style="width:100%; height:250px">
+      <div class="w3-container w3-margin-left w3-margin-top">
+      <a href="buildingDetail.sms?sNo=${build.sNo}" class="w3-btn w3-white">
+      <font class="w3-large">${build.sName}</font>
       </a>
-      <br>
+      </div>
+      <div class="w3-container w3-center w3-margin-top">
       <a href="buildingUpdate.sms?sNo=${build.sNo}" class="w3-btn w3-black">공간수정</a>
-      <a href="../room/roomList.sms?sNo=${build.sNo}" class="w3-btn w3-black">세부공간추가/수정</a>
+      <a href="roomList.sms?sNo=${build.sNo}" class="w3-btn w3-black">세부공간추가/수정</a>
       <a href="buildingDelete.sms?sNo=${build.sNo}" class="w3-btn w3-black">삭제</a>
-    </div>
+      </div>
+    <br>
   </div>
-</div>
+  </div>
 </c:forEach>
+</div>
 
 </body>
 </html>

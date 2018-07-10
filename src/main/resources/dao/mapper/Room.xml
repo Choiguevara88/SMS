@@ -21,5 +21,11 @@
 			where sNo = #{sNo} and sRNo = #{sRNo}
 		</if>
 	</select>
-	
+	<select id="lowestprice_main" resultType="room" parameterType="map">
+		select * from room
+		<if test="sNo != null">
+			where sNo = #{sNo}
+		</if>
+		order by sPrice asc limit 1
+	</select>
 </mapper>

@@ -9,15 +9,7 @@
 			where id = #{id}
 		</if>
 	</select>
-	
-	<select id="selectList" resultType="Member" parameterType="list">
-		select * from Member where id in 
-		<foreach collection="list" item="value" separator="," open="(" close=")">
-			#{value}
-		</foreach>
-		and not id = 'admin'
-	</select>
-	
+
 	<!-- adminPage 관련 start -->
 	<!-- [&lt; = <] [&gt; = >] -->
 	<select id="adminMemberCnt" resultType="int" parameterType="map">
@@ -77,6 +69,14 @@
 	<update id="hostRegister" parameterType="map">
 		update Member set memType=1 , regStatus = 1 where id=#{id}
 	</update>
+	
+	<select id="selectList" resultType="Member" parameterType="list">
+		select * from Member where id in 
+		<foreach collection="list" item="value" separator="," open="(" close=")">
+			#{value}
+		</foreach>
+		and not id = 'admin'
+	</select>
 	
 	<!-- adminPage 관련 end -->
 	

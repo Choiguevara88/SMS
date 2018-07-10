@@ -79,7 +79,7 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 
 		if (board.getImg4File() != null) {
-			String img = uploadImgCreate(board.getImg4File(), request);
+			String img = uploadImgCreate(board.getImg1File(), request);
 			if (img != null)
 				board.setImg4(img);
 		}
@@ -477,7 +477,8 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate) {
 		return tranDao.searchTransHistory(searchType, searchContent, startDate, endDate);
 	}
-@Override
+	
+	@Override
 	public Map<String, Object> graphTransHistoryCnt(String searchType, String id) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -545,11 +546,24 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum,
-			int limit) {
-		// TODO Auto-generated method stub
-		return null;
+	public Building getbuilding_mainpage(int sNo) {
+		return buDao.getbuilding_mainpage(sNo);
 	}
-	
-	
-	}// ProjectServiceImpl end
+
+	@Override
+	public List<Board> getbuildingNo_by_score() {
+		return boDao.getbuildingNo_by_score();
+	}
+
+	@Override
+	public List<Integer> getmyRoom_lowestprice(int i) {
+		return roomDao.getmyRoom_lowestprice(i);
+	}
+
+
+	@Override
+	public List<Member> selectMemberList(String[] idchks) {
+		return memDao.getSelectMemberList(idchks);
+	}
+
+}// ProjectServiceImpl end

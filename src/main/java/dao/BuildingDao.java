@@ -21,4 +21,7 @@ public interface BuildingDao {
 	Building getMyBuildingOne(String sNo);
 
 	void buUpdateReg(Building building);
+
+	Building getbuilding_mainpage(int sNo);
+
 }
