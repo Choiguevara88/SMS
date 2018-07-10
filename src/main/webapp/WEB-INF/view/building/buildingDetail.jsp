@@ -15,7 +15,41 @@ $(document).ready(function(){
 	//댓글 목록 출력
 	listRlist();
 	listQlist();
-	//댓글 쓰기
+	
+/*태그 관련 스크립트*/
+var tagih = "";
+var tagstag = document.getElementById("tags");
+var tag = "";
+<c:forEach items="${building.sTagList}" var="item">
+    tag= ("${item}");
+	tagih+="<span class='w3-tag w3-white w3-round-xlarge w3-border w3-border-gray w3-center'>#"
+	+tag+"</span>&nbsp;&nbsp;"
+	</c:forEach>
+	tagstag.innerHTML = tagih;
+	
+/*시설안내 스크립트*/
+var infoSubih="";
+var infoSubstag = document.getElementById("infoSubs");
+var infoSub = "";
+var infoSubidx = 1;
+<c:forEach items="${building.sInfoSubList}" var="item">
+	infoSub = ("${item}");
+	infoSubih+="<div>"+infoSubidx+". "+infoSub+"</div>&nbsp;&nbsp;"
+	infoSubidx++;
+	</c:forEach>
+	infoSubstag.innerHTML = infoSubih;
+
+/*이용규칙 스크립트*/
+var ruleih="";
+var ruletag = document.getElementById("rules");
+var rule = "";
+var ruleidx = 1;
+<c:forEach items="${building.sRuleList}" var="item">
+	rule = ("${item}");
+	ruleih+="<div>"+ruleidx+". "+rule+"</div>&nbsp;&nbsp;"
+	ruleidx++;
+	</c:forEach>
+	ruletag.innerHTML = ruleih;
 });
 
 function listRlist(){
@@ -48,43 +82,49 @@ function listQlist(){
 <img src="../picture/${building.sImg1}" style="width:100% ; height:300px">
 <div><h1>${building.sName}</h1></div>
 <div><h4>${building.sPreview}</h4></div>
-<div><h5>${building.sTagList}</h5></div>
+<div id="tags">
+<!-- 태그가 보여질 곳 -->
+</div>
 <hr>
 
+<!-- 공간상세, Q&A, 댓글(리뷰) start -->
 <div class="w3-row">
 <div class="w3-col s7">
 <!-- 공간(Building)정보 -->
 <div>
-
-<h3>공간소개</h3>
+<div class="w3-panel w3-leftbar w3-border-purple">
+ <h3>공간소개</h3>
+</div>
 <div>${building.sContent}</div>
 <hr>
 
 <%-- <div>${building.sTypeList}</div> --%>
-<h3>이용정보</h3>
-<div>${building.sInfoSubList}</div>
+<div class="w3-panel w3-leftbar w3-border-purple">
+<h3>시설안내</h3>
+</div>
+<div id="infoSubs">
+<!-- 시설안내가 보여질 곳 -->
+</div>
 <hr>
 
-<h3>이용규칙</h3>
-<div>${building.sRuleList}</div>
-<hr>
-
-<h3>이용시간</h3>
-<div>${building.sBHourList}</div>
-<hr>
-
-<h3>휴무일</h3>
-<div>${building.sHDay}</div>
-<hr>
-
-<h3>전화번호</h3>
-<div>${building.sTel}</div>
-<hr>
-
+<div class="w3-panel w3-leftbar w3-border-purple">
+<h3>이용안내</h3>
+</div>
+<div>휴무일: ${building.sHDay}</div>
+<div>이용시간: ${building.sBHourList}</div>
+<div>전화번호: ${building.sTel}</div>
 <h3>주소</h3>
 <div>${address1}</div>
 <div id="map" style="width:100%;height:200px;"></div>
 <hr size="1">
+
+<div class="w3-panel w3-leftbar w3-border-purple">
+ <h3>공간 이용시 주의사항</h3>
+</div>
+<div id = "rules">
+<!-- 이용규칙가 보여질 곳 -->
+</div>
+ <hr>
 
 <!-- 이용후기, Q&A -->
 <div id="listRlist"></div> 
