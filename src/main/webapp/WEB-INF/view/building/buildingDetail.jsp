@@ -58,14 +58,6 @@ var imgidx = 0;
 imgarr[imgidx++] = ("${item}");
 </c:forEach>
 });
-	
-/*룸리스트 스크립트*/
-/* var room = new Array();
-var roomidx = 0;
-<c:forEach items="${roomList}" var="item">
-room[roomidx++] = ("${item}");
-</c:forEach> */
-});
 
 function listRlist(pageNum){
 	$.ajax({
