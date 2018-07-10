@@ -31,9 +31,8 @@ public class TransactionHistoryDaoImpl implements TransactionHistoryDao {
 		
 		if(!searchType.equals("") && searchType != null) {
 			map.put("searchType", searchType);
+			map.put("searchContent", searchContent);
 		}
-		
-		map.put("searchContent", searchContent);
 		
 		if(!startDate.equals("") && startDate != null) {
 			map.put("startDate", startDate);

@@ -137,7 +137,7 @@ public class AdminController {
 		
 		service.hostRegister(id);	// host 계정으로 전환
 		
-		mav.setViewName("admin/adminManagement");
+		mav.setViewName("redirect:/admin/adminManagement.sms");
 		
 		return mav;
 	}
