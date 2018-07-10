@@ -15,7 +15,7 @@
 		<pattern>/trans/graph*</pattern>
 		<pattern>/trans/graph*</pattern>
 		<pattern>/qa/questionList.sms*</pattern>
-		<pattern>/review/Qlist.sms*</pattern>
-		<pattern>/review/Rlist.sms*</pattern>
+		<pattern>/building/Qlist.sms*</pattern>
+		<pattern>/building/Rlist.sms*</pattern>
 	</excludes>
 </decorators>
