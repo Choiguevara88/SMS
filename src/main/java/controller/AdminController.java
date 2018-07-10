@@ -137,7 +137,7 @@ public class AdminController {
 		
 		service.hostRegister(id);	// host 계정으로 전환
 		
-		mav.setViewName("admin/adminManagement");
+		mav.setViewName("redirect:/admin/adminManagement.sms");
 		
 		return mav;
 	}
@@ -199,6 +199,21 @@ public class AdminController {
 				service.searchTransHistoryList(searchType, searchContent, startDate, endDate); // 거래관리대장 검색용
 		
 		mav.addObject("thList", transHostList);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="admin/adminMailForm", method = RequestMethod.POST)
+	public ModelAndView adminMailForm(HttpSession session, String[] idchks) {
+		
+		ModelAndView mav = new ModelAndView("admin/adminMailWrite");
+		
+		if(idchks == null || idchks.length == 0) {
+			throw new ProjectException("메일을 보낼 대상자를 선택하세요.", "adminMemberList.sms");
+		}
+		
+		List<Member> list = service.selectMemberList(idchks);
+		mav.addObject("memberList", list);
 		
 		return mav;
 	}

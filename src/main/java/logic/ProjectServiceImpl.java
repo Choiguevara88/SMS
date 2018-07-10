@@ -477,7 +477,8 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate) {
 		return tranDao.searchTransHistory(searchType, searchContent, startDate, endDate);
 	}
-@Override
+	
+	@Override
 	public Map<String, Object> graphTransHistoryCnt(String searchType, String id) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -544,12 +545,10 @@ public class ProjectServiceImpl implements ProjectService {
 		return memDao.getHostList(searchType, searchContent, startDate, endDate, limit, pageNum);
 	}
 
+
 	@Override
-	public List<Reserve> selectReserveList(String id, String searchType, String searchContent, Integer pageNum,
-			int limit) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Member> selectMemberList(String[] idchks) {
+		return memDao.getSelectMemberList(idchks);
 	}
-	
-	
-	}// ProjectServiceImpl end
+
+}// ProjectServiceImpl end

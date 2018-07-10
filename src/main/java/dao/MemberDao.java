@@ -34,4 +34,6 @@ public interface MemberDao {
 	
 	int getHostCnt(String searchType, String searchContent, String startDate, String endDate, Integer limit, Integer pageNum);
 
+	List<Member> getSelectMemberList(String[] idchks);
+
 }
