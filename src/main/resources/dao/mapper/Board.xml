@@ -66,5 +66,8 @@
 	<select id="hostQuestion" resultType="Board">
 		select * from board where kind = 5 and qType=0
 	</select>
+	<select id="buildingNo_by_score" resultType="Board">
+		select sno, avg(score) from board order by avg(score) desc limit 6
+	</select>
 	
 </mapper>
