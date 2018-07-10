@@ -44,7 +44,7 @@ public interface ProjectService {
 
 	int hostBuildCount(String hostName);
 
-	void insertRoom(Room room);
+	void insertRoom(Room room, HttpServletRequest request);
 
 	void reserveCancel(Integer reNo, Integer reStat);
 

@@ -286,7 +286,11 @@ public class MemberController {
 
 		PlusOperations plusOperations = google.plusOperations();
 		Person profile = plusOperations.getGoogleProfile();
-		System.out.println(profile);
+		
+		System.out.println("profile.getAccountEmail : " + profile.getAccountEmail());
+		
+		System.out.println("prfile : " + profile);
+		
 		Member member = service.find_member_by_email(profile.getAccountEmail());
 		if(member == null) {
 			mav.addObject("name",profile.getDisplayName());

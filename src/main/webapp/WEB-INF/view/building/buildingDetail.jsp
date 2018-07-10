@@ -13,8 +13,8 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	//댓글 목록 출력
-	listRlist();
-	listQlist();
+	listRlist(1);
+	listQlist(1);
 	
 /*태그 관련 스크립트*/
 var tagih = "";
@@ -36,7 +36,7 @@ var infoSubidx = 1;
 	infoSub = ("${item}");
 	infoSubih+="<div>"+infoSubidx+". "+infoSub+"</div>&nbsp;&nbsp;"
 	infoSubidx++;
-	</c:forEach>
+</c:forEach>
 	infoSubstag.innerHTML = infoSubih;
 
 /*이용규칙 스크립트*/
@@ -48,26 +48,38 @@ var ruleidx = 1;
 	rule = ("${item}");
 	ruleih+="<div>"+ruleidx+". "+rule+"</div>&nbsp;&nbsp;"
 	ruleidx++;
-	</c:forEach>
+</c:forEach>
 	ruletag.innerHTML = ruleih;
+
+/*이미지 관련 스크립트*/
+var imgarr = new Array();
+var imgidx = 0;
+<c:forEach items="${building.sImg2Name}" var="item">
+imgarr[imgidx++] = ("${item}");
+</c:forEach>
+});
+	
+/*룸리스트 스크립트*/
+/* var room = new Array();
+var roomidx = 0;
+<c:forEach items="${roomList}" var="item">
+room[roomidx++] = ("${item}");
+</c:forEach> */
 });
 
-function listRlist(){
-	console.log("listRlist 호출")
+function listRlist(pageNum){
 	$.ajax({
 		type: "get",
-		url : "${path}/building/Rlist.sms?sNo=${param.sNo}",
+		url : "${path}/building/Rlist.sms?sNo=${param.sNo}&pageNum="+pageNum,
 		success: function(result){
-			console.log(result)
 			$("#listRlist").html(result)
 		}
 	});
 	}
-function listQlist(){
-	console.log("listQlist 호출")
+function listQlist(pageNum){
 	$.ajax({
 		type: "get",
-		url : "${path}/building/Qlist.sms?sNo=${param.sNo}",
+		url : "${path}/building/Qlist.sms?sNo=${param.sNo}&pageNum="+pageNum,
 		success: function(result){
 			console.log(result)
 			$("#listQlist").html(result)
@@ -89,39 +101,54 @@ function listQlist(){
 
 <!-- 공간상세, Q&A, 댓글(리뷰) start -->
 <div class="w3-row">
-<div class="w3-col s7">
+<div class="w3-col s7 w3-padding">
 <!-- 공간(Building)정보 -->
 <div>
+
+<div id="img1"></div>
+<div id="img2"></div>
+
 <div class="w3-panel w3-leftbar w3-border-purple">
  <h3>공간소개</h3>
 </div>
-<div>${building.sContent}</div>
+<div class="w3-margin-left">${building.sContent}</div>
 <hr>
 
-<%-- <div>${building.sTypeList}</div> --%>
+<div id="img3"></div>
+<div id="img4"></div>
+
 <div class="w3-panel w3-leftbar w3-border-purple">
 <h3>시설안내</h3>
 </div>
-<div id="infoSubs">
+<div id="infoSubs" class="w3-margin-left">
 <!-- 시설안내가 보여질 곳 -->
 </div>
 <hr>
 
+<div id="img5"></div>
+<div id="img6"></div>
+
 <div class="w3-panel w3-leftbar w3-border-purple">
 <h3>이용안내</h3>
 </div>
-<div>휴무일: ${building.sHDay}</div>
-<div>이용시간: ${building.sBHourList}</div>
-<div>전화번호: ${building.sTel}</div>
-<div>주소: ${address1}</div>
-<div id="map" style="width:100%;height:200px;"></div>
+<div class="w3-margin-left w3-margin-bottom">
+<div class="w3-margin-top"><span><b>휴무일</b></span>&nbsp;&nbsp;&nbsp;<span>${building.sHDay}</span></div>
+<div class="w3-margin-top"><span><b>이용시간</b></span>&nbsp;&nbsp;&nbsp;<span>${building.sBHourList[0]} ~ ${building.sBHourList[1]}</span></div>
+<div class="w3-margin-top"><span><b>연락처</b></span>&nbsp;&nbsp;&nbsp;<span>${building.sTel}</span></div>
+</div>
+<br>
+<div class="w3-light-gray w3-padding">
+<div><h3>${building.sName}</h3></div>
+<div>${address1}</div>
+</div>
+<div id="map" style="width:100%;height:400px;"></div>
 <hr size="1">
 
 <div class="w3-panel w3-leftbar w3-border-purple">
  <h3>공간 이용시 주의사항</h3>
 </div>
-<div id = "rules">
-<!-- 이용규칙가 보여질 곳 -->
+<div id = "rules" class="w3-margin-left">
+<!-- 이용규칙이 보여질 곳 -->
 </div>
  <hr>
 
@@ -136,8 +163,19 @@ function listQlist(){
 </div>
 </div>
 <!-- 세부공간(Room)정보 -->
-<div class="w3-col s5">
+<div class="w3-col s5 w3-padding">
 <h1>룸정보가 들어올 공간</h1>
+<div></div>
+<c:forEach items="${roomList}" var="room">
+<div>
+${room.sNo}
+${room.sRNo}
+${room.sRName}
+${room.sRType}
+${room.sRContent}
+${room.sRInfo}
+</div>
+</c:forEach>
 </div>
 </div>
 

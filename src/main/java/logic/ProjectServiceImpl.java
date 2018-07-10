@@ -270,7 +270,8 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public void insertRoom(Room room) {
+	public void insertRoom(Room room,HttpServletRequest request) {
+		
 		int sRNo = roomDao.maxNum();
 		room.setsRNo(++sRNo);
 		roomDao.insertRoom(room);

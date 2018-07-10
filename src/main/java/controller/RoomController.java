@@ -1,5 +1,6 @@
 package controller;
 
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,29 +32,34 @@ public class RoomController {
 	}
 	@RequestMapping("building/roomForm")
 	public ModelAndView roomForm(HttpServletRequest request, Room room) {
-		ModelAndView mav = new ModelAndView("room/roomForm");
+		ModelAndView mav = new ModelAndView();
+		System.out.println(room.getsNo());
 		String sNo = Integer.toString(room.getsNo());
 		Building building = service.getMyBuildingOne(sNo);
 		mav.addObject("building", building);
 		mav.addObject("room",room);
+		mav.setViewName("room/roomForm");
 	return mav;
 	}
 	@RequestMapping("building/roomSuccess")
-	public ModelAndView roomSuccess(@Valid Room room, BindingResult bindingResult) {
+	public ModelAndView roomSuccess(HttpServletRequest request,@Valid Room room, BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
+			String sNo = Integer.toString(room.getsNo());
+			Building building = service.getMyBuildingOne(sNo);
+			mav.addObject("building", building);
 			mav.setViewName("room/roomForm");
 			return mav;
 		}
 		try{
-			service.insertRoom(room);
-			mav.setViewName("redirect:/NewFile.sms"); // 이게 자꾸 404가 나오는데 왜그러죠?
+			Integer sNo = room.getsNo();
+			service.insertRoom(room,request);
+			mav.setViewName("redirect:roomList.sms?sNo="+sNo);
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new ProjectException("throw new ProjectException(string,string주소)","roomForm.sms");
 		}
-	
 	return mav;
 }
 	@RequestMapping("NewFile")
@@ -70,7 +76,7 @@ public class RoomController {
 			List<Room> myRoomList = service.getmyRoomList(sNo);
 			mav.addObject("sNo",sNo);
 			mav.addObject("myRoomList",myRoomList);
-			mav.addObject("sNo", sNo);
+			mav.addObject("sNo", sNo); 
 			mav.setViewName("room/roomList");
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -111,7 +117,7 @@ public class RoomController {
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
-			mav.setViewName("redirect:roomUpdateForm");
+			mav.setViewName("room/roomUpdateForm");
 			return mav;
 		}
 		try{
