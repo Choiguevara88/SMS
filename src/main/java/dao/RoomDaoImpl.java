@@ -66,4 +66,9 @@ public class RoomDaoImpl implements RoomDao{
 		map.put("sNo", i);
 		return sqlSession.selectList(NS+"lowestprice_main",map);
 	}
+	@Override
+	public int maxNum() {
+		
+		return sqlSession.getMapper(RoomMapper.class).maxNum();
+	}
 }

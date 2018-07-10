@@ -20,12 +20,13 @@
 
 <table align="center" cellpadding="1" cellspacing="1" border = "1">
 	
-	<tr><td>SNo </td><td><form:input path="sNo" placeholder="primarykey"/>
-		<font color="red"><form:errors path="sNo"/></font></td></tr>
+	<form:hidden path="sNo" value="${room.sNo }"/>
 	
-	<tr><td>SRNo </td><td><form:input path="sRNo" placeholder="primarykey" />
-		<font color="red"><form:errors path="sRNo"/></font></td></tr>
+	<c:forEach var="building1" items="${building.sTypeList }">
+	<tr><td>SType : ${building1}</td>
 	
+	</tr>
+	</c:forEach>
 	<tr><td>SRName </td><td><form:input path="sRName" />
 		<font color="red"><form:errors path="sRName"/></font></td></tr>
 	<tr>

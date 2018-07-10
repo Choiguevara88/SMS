@@ -109,13 +109,11 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void boardReply(Board board) {
-		boDao.qTypeAdd(board);
-		
 		int num = boDao.maxNum();
-		
 		board.setbNo(++num);
 		board.setRefLevel(board.getRefLevel() + 1);
 		boDao.replyInsert(board);
+		boDao.qTypeAdd(board);
 	}
 
 	@Override // board Update Method()
@@ -273,6 +271,8 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void insertRoom(Room room) {
+		int sRNo = roomDao.maxNum();
+		room.setsRNo(++sRNo);
 		roomDao.insertRoom(room);
 	}
 
@@ -327,6 +327,7 @@ public class ProjectServiceImpl implements ProjectService {
 		building.setsInfoSub(sInfoSub);
 		building.setsRule(sRule);
 		building.setsBHour(sBHour);
+		System.out.println(sType);
 		buDao.buRegist(building);
 	}
 	private String listToString(List<String> list) {
@@ -476,7 +477,8 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<TransactionHistory> searchTransHistoryList(String searchType, String searchContent, String startDate, String endDate) {
 		return tranDao.searchTransHistory(searchType, searchContent, startDate, endDate);
 	}
-@Override
+	
+	@Override
 	public Map<String, Object> graphTransHistoryCnt(String searchType, String id) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -559,5 +561,9 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 
-	
-	}// ProjectServiceImpl end
+	@Override
+	public List<Member> selectMemberList(String[] idchks) {
+		return memDao.getSelectMemberList(idchks);
+	}
+
+}// ProjectServiceImpl end

@@ -113,4 +113,6 @@ public interface ProjectService {
 	List<Board> getbuildingNo_by_score();
 	List<Integer> getmyRoom_lowestprice(int i);	
 	
+	List<Member> selectMemberList(String[] idchks);
+	
 }

@@ -13,6 +13,8 @@ public interface RoomMapper {
 	void insert(Room room);
 	@Update("update room set srname=#{sRName},srtype=#{sRType},srcontent=#{sRContent},srinfo=#{sRInfo},srestype=#{sResType},srpersonlimit=#{sRPersonLimit},sprice=#{sPrice} where srno=#{sRNo} and sNo=#{sNo}")
 	void update(Room room);
+	@Select("select ifnull(max(sRNo),0) from room")
+	int maxNum();
 
 	//@Select("select * from room where sRNo=#{value}")
 	//Room selectMyRoom(Integer sRNo);

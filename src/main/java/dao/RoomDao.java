@@ -20,6 +20,8 @@ public interface RoomDao {
 	List<Integer> getmyRoom_lowestprice(int i);
 
 
+	int maxNum();
+
 
 
 	

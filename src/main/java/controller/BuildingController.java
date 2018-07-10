@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import logic.Board;
 import logic.Building;
 import logic.ProjectService;
 
@@ -121,6 +122,48 @@ public class BuildingController {
 		mav.addObject("building", building);
 		mav.addObject("address",address);
 		mav.addObject("address1", address1);
+		return mav;
+	}
+	@ModelAttribute
+	public Board getBoard() {
+		return new Board();
+	}
+	@RequestMapping("building/Rlist") //http://localhost:8080/TestProject/review/Rlist.sms?sno=2
+	public ModelAndView Rlist(Integer sNo,Integer pageNum) {
+		int kind = 2;
+		if(pageNum == null || pageNum.toString().equals("")) {
+			pageNum = 1;
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		
+		int limit = 5;		// 한 페이지에 나올 게시글의 숫자
+		int listcount = service.boardcount(kind,sNo);	// 표시될 총 게시글의 수
+		List<Board> boardlist = service.boardList(kind, sNo, pageNum, limit);
+		double avg = 0;
+		if(kind == 2) {	// 리뷰 게시글인 경우 MAV 객체에 해당 Building의 평점을 추가하는 로직
+			if(boardlist != null && !boardlist.isEmpty() ) {
+				 List<Board> boardlist2 = service.boardList(kind, sNo);
+				 avg = boardlist2.stream().mapToInt(Board :: getScore).average().getAsDouble();
+			}
+			mav.addObject("avgScore",avg);
+		}
+		
+		int maxpage = (int)((double)listcount/limit + 0.95);
+		int startpage = ((int)((pageNum/5.0 + 0.9) - 1)) * 5 + 1; // 시작페이지
+		int endpage = startpage + 4;	// 마지막 페이지
+		if(endpage > maxpage) endpage = maxpage;
+		int boardcnt = listcount - (pageNum - 1) * limit;
+		mav.addObject("pageNum", pageNum);
+		mav.addObject("maxpage", maxpage);
+		mav.addObject("startpage", startpage);
+		mav.addObject("endpage", endpage);
+		mav.addObject("listcount",listcount);
+		mav.addObject("boardlist",boardlist);
+		mav.addObject("boardcnt",boardcnt);
+		mav.addObject("kind",kind);
+		mav.addObject("sNo",sNo);
+				
 		return mav;
 	}
 }
