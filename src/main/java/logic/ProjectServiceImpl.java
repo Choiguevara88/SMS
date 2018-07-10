@@ -79,7 +79,7 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 
 		if (board.getImg4File() != null) {
-			String img = uploadImgCreate(board.getImg4File(), request);
+			String img = uploadImgCreate(board.getImg1File(), request);
 			if (img != null)
 				board.setImg4(img);
 		}
@@ -543,6 +543,21 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<Member> getHostList(String searchType, String searchContent, String startDate, String endDate, Integer pageNum, Integer limit) {
 		return memDao.getHostList(searchType, searchContent, startDate, endDate, limit, pageNum);
+	}
+
+	@Override
+	public Building getbuilding_mainpage(int sNo) {
+		return buDao.getbuilding_mainpage(sNo);
+	}
+
+	@Override
+	public List<Board> getbuildingNo_by_score() {
+		return boDao.getbuildingNo_by_score();
+	}
+
+	@Override
+	public List<Integer> getmyRoom_lowestprice(int i) {
+		return roomDao.getmyRoom_lowestprice(i);
 	}
 
 

@@ -28,7 +28,7 @@ public class BuildingController {
 //		return new Building();
 //	}
 	
-	//빌딩폼 만들기
+	//鍮��⑺�� 留��ㅺ린
 	@RequestMapping(value="building/buildingForm")
 	public ModelAndView buildingForm(HttpServletRequest request) {
 		Building building = new Building();
@@ -49,7 +49,7 @@ public class BuildingController {
 		return mav;
 	}
 	
-	//빌딩폼 등록
+	//鍮��⑺�� �깅�
 	@RequestMapping(value="building/buildingReg", method=RequestMethod.POST)
 	public ModelAndView buildingReg(Building building, HttpServletRequest request) {
 		System.out.println(building);
@@ -59,7 +59,7 @@ public class BuildingController {
 		return mav;
 	}
 	
-	//등록된 내 빌딩폼 리스트 불러오기
+	//�깅��� �� 鍮��⑺�� 由ъ�ㅽ�� 遺��ъ�ㅺ린
 	@RequestMapping(value="building/myBuildingList", method=RequestMethod.GET)
 	public ModelAndView myBuildingList(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -72,7 +72,7 @@ public class BuildingController {
 		return mav;
 	}
 	
-	//빌딩정보 수정하기
+	//鍮��⑹��蹂� ������湲�
 	@RequestMapping(value="building/buildingUpdate", method=RequestMethod.GET)
 	public ModelAndView buildingUpdate(HttpServletRequest request) {
 		String sNo = request.getParameter("sNo");
@@ -99,7 +99,7 @@ public class BuildingController {
 		return mav;
 	}
 	
-	//빌딩정보 수정사항 등록하기
+	//鍮��⑹��蹂� �����ы�� �깅���湲�
 	@RequestMapping(value="building/buildingUpdateReg", method=RequestMethod.POST)
 	public ModelAndView buildingUpdateReg(Building building, HttpServletRequest request) {
 		System.out.println(building);
@@ -111,7 +111,7 @@ public class BuildingController {
 		return mav;
 	}
 	
-	//빌딩 상세정보 보기
+	//鍮��� ���몄��蹂� 蹂닿린
 	@RequestMapping(value="building/buildingDetail", method=RequestMethod.GET)
 	public ModelAndView buildingDetail(Building building, HttpServletRequest request) {
 		String sNo = request.getParameter("sNo");

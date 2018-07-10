@@ -14,9 +14,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href='http://fonts.googleapis.com/earlyaccess/hanna.css' rel='stylesheet'>
 <style>
 .mySlides {display:none;}
+
+.header {
+  padding: 10px 16px;
+  color: #f1f1f1;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+#preview {
+	transition: width 2s, height 2s;
+	}
+#preview {transition-timing-function: ease-in;}
+#preview:hover {
+    width: 265px;
+    height: 265px;
+}
+h2{
+	font-family: 'Hanna';
+}
+a {
+	font-family: 'Hanna';
+}
 </style>
+
 <title>
 <decorator:title/>
 </title>
@@ -64,17 +90,30 @@
 
 
 <div class="w3-purple" style="height:450px" >
-   <div>
+   <div class="header w3-purple" id="myHeader" style="height: 90px;">
    		<h1><strong><a href="${path }/main.sms">Share My Space</a></strong>
-   			<button class="w3-button w3-purple w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button></h1>
-   			 		
+   			<button class="w3-button w3-purple w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button></h1></div>
+<script>
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
+</script>  			 		
   <div class="w3-content w3-center w3-section" style="max-width:500px">
 	  <img class="mySlides" src="${path }/picture/mainimage.jpg" style="width:100%">
 	  <img class="mySlides" src="${path }/picture/mainimage2.jpg" style="width:100%">
 	  <img class="mySlides" src="${path }/picture/mainimage3.jpg" style="width:100%">
   	  <img class="mySlides" src="${path }/picture/mainimage4.jpg" style="width:100%">
   	  <img class="mySlides" src="${path }/picture/mainimage5.jpg" style="width:100%">
-      </div></div></div>
+      </div></div>
 
 <script>
 //사진 이동

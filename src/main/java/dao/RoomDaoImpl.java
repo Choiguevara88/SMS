@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import dao.mapper.BuildingMapper;
 import dao.mapper.RoomMapper;
+import logic.Building;
 import logic.Room;
 
 @Repository
@@ -58,6 +59,12 @@ public class RoomDaoImpl implements RoomDao{
 		map.put("sNo", sNo);
 		sqlSession.selectOne(NS + "oneD",map);
 		
+	}
+	@Override
+	public List<Integer> getmyRoom_lowestprice(int i) {
+		Map <String, Integer> map = new HashMap<String, Integer>();
+		map.put("sNo", i);
+		return sqlSession.selectList(NS+"lowestprice_main",map);
 	}
 	@Override
 	public int maxNum() {
