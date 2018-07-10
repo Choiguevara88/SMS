@@ -24,6 +24,8 @@ DROP TABLE IF EXISTS Room;
 -- 알람관리
 CREATE TABLE Alert
 (
+<<<<<<< HEAD
+=======
    -- 알람관리고유번호
    ANo int NOT NULL COMMENT '알람관리고유번호',
    -- 회원 ID
@@ -35,6 +37,7 @@ CREATE TABLE Alert
    -- 0 = 읽지않음
    -- 1 = 읽음
    AStat int COMMENT '0 = 읽지않음'
+>>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
 	-- 알람관리고유번호
 	ANo int NOT NULL COMMENT '알림번호 : 알람관리고유번호',
 	-- 회원 ID
@@ -54,6 +57,8 @@ CREATE TABLE Alert
 -- 리뷰&문의
 CREATE TABLE Board
 (
+<<<<<<< HEAD
+=======
    -- Review&상품문의 게시글 관리번호
    BNo int NOT NULL COMMENT 'Review&상품문의 게시글 관리번호',
    -- 건물관리고유번호
@@ -122,6 +127,7 @@ CREATE TABLE Board
 	-- 1 : 상품문의 (Guest -> Host)
 	-- 2 : 관리자문의 (User -> Admin)
 	Kind int COMMENT '종류 : 0 : Review'
+>>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
 	-- Review&상품문의 게시글 관리번호
 	BNo int NOT NULL COMMENT '게시글관리번호 : Review&상품문의 게시글 관리번호',
 	-- 건물관리고유번호
@@ -165,6 +171,8 @@ CREATE TABLE Board
 -- 공간관리
 CREATE TABLE Building
 (
+<<<<<<< HEAD
+=======
    -- 건물관리고유번호
    SNo int NOT NULL COMMENT '건물관리고유번호',
    -- 회원 ID
@@ -178,6 +186,7 @@ CREATE TABLE Building
    -- 제공하는 서비스 종류
    --  ex) 회의실, 세미나실, 연습실 등등
    SType varchar(1200) COMMENT '제공하는 서비스 종류',
+>>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
 	-- 건물관리고유번호
 	SNo int NOT NULL COMMENT '건물관리번호 : 건물관리고유번호',
 	-- 회원 ID
@@ -192,15 +201,6 @@ CREATE TABLE Building
 	--  ex) 회의실, 세미나실, 연습실 등등
 	SType varchar(1200) COMMENT '공간유형 : 제공하는 서비스 종류
  ex) 회의실, 세미나실, 연습실 등등',
-   -- 공간 꼬리표 / 검색에 사용
-   STag varchar(30) COMMENT '공간 꼬리표 / 검색에 사용',
-   -- 추가적으로 기입하는 시설 안내
-   SInfoSub varchar(1200) COMMENT '추가적으로 기입하는 시설 안내',
-   -- 공간 이용 시 주의사항 기입
-   SRule varchar(1200) COMMENT '공간 이용 시 주의사항 기입',
-   -- 공간 업무 운영 시간
-   -- ex) 0024 : 00시 부터 24시까지
-   SBHour varchar(130) COMMENT '공간 업무 운영 시간
 	-- 공간 꼬리표 / 검색에 사용
 	STag varchar(30) COMMENT '태그 : 공간 꼬리표 / 검색에 사용',
 	-- 추가적으로 기입하는 시설 안내
@@ -211,18 +211,10 @@ CREATE TABLE Building
 	-- ex) 0024 : 00시 부터 24시까지
 	SBHour varchar(130) COMMENT '운영시간 : 공간 업무 운영 시간
 ex) 0024 : 00시 부터 24시까지',
-   -- 사업주 휴무요일
-   -- ex) 토일월
-   SHDay varchar(15) COMMENT '사업주 휴무요일
 	-- 사업주 휴무요일
 	-- ex) 토일월
 	SHDay varchar(15) COMMENT '휴무요일 : 사업주 휴무요일
 ex) 토일월',
-   -- 공간 대표 커버 이미지
-   SImg1 varchar(30) COMMENT '공간 대표 커버 이미지',
-   -- \t로 구분자 사용
-   -- ex ) img.png\timg2.jpg\t
-   SImg2 varchar(1200) COMMENT '\t로 구분자 사용
 	-- 공간 대표 커버 이미지
 	SImg1 varchar(30) COMMENT '대표이미지 : 공간 대표 커버 이미지',
 	-- \t로 구분자 사용
@@ -239,11 +231,6 @@ ex ) img.png\timg2.jpg\t',
 -- 좋아요관리
 CREATE TABLE Favorite
 (
-   -- 회원 ID
-   ID varchar(30) NOT NULL COMMENT '회원 ID',
-   -- 건물관리고유번호
-   SNo int NOT NULL COMMENT '건물관리고유번호'
-);
 	-- 회원 ID
 	ID varchar(30) NOT NULL COMMENT '회원ID : 회원 ID',
 	-- 건물관리고유번호
@@ -254,22 +241,6 @@ CREATE TABLE Favorite
 -- 회원관리
 CREATE TABLE Member
 (
-   -- Guest 회원 ID
-   ID varchar(30) NOT NULL COMMENT 'Guest 회원 ID',
-   -- 회원 패스워드
-   PW varchar(30) NOT NULL COMMENT '회원 패스워드',
-   -- 회원 이름
-   Name varchar(30) NOT NULL COMMENT '회원 이름',
-   -- 회원 Email
-   Email varchar(40) NOT NULL COMMENT '회원 Email',
-   -- 회원 휴대폰 번호
-   Mob varchar(20) COMMENT '회원 휴대폰 번호',
-   -- 회원 가입한 일자
-   RegDate datetime NOT NULL COMMENT '회원 가입한 일자',
-   -- Guest = 0
-   -- Host = 1
-   -- Admin = 2
-   MemType int COMMENT 'Guest = 0
 	-- Guest 회원 ID
 	ID varchar(30) NOT NULL COMMENT '회원ID : Guest 회원 ID',
 	-- 회원 패스워드
@@ -309,19 +280,6 @@ Admin = 2',
 -- 예약구매관리
 CREATE TABLE Reserve
 (
-   -- 한 거래당 발생하는 거래관리고유번호
-   ReNo int NOT NULL COMMENT '한 거래당 발생하는 거래관리고유번호',
-   -- 회원 ID
-   ID varchar(30) COMMENT '회원 ID',
-   -- 건물관리고유번호
-   SNo int COMMENT '건물관리고유번호',
-   -- 세부공간관리번호
-   SRNo int COMMENT '세부공간관리번호',
-   -- 상품의 예약 날짜
-   ReDate datetime NOT NULL COMMENT '상품의 예약 날짜',
-   -- 상품 예약을 등록한 일시
-   -- 
-   RegDate datetime NOT NULL COMMENT '상품 예약을 등록한 일시
 	-- 한 거래당 발생하는 거래관리고유번호
 	ReNo int NOT NULL COMMENT '예약관리코드 : 한 거래당 발생하는 거래관리고유번호',
 	-- 회원 ID
@@ -336,20 +294,10 @@ CREATE TABLE Reserve
 	-- 
 	RegDate datetime NOT NULL COMMENT '예약관리일자 : 상품 예약을 등록한 일시
 ',
-   -- 상품의 가격 * 수량
-   --  = 총 지불 해야 할(한) 금액
-   TotPrice int COMMENT '상품의 가격 * 수량
 	-- 상품의 가격 * 수량
 	--  = 총 지불 해야 할(한) 금액
 	TotPrice int COMMENT '결제대금 : 상품의 가격 * 수량
  = 총 지불 해야 할(한) 금액',
-   -- 상품을 예약/구매한 숫자
-   ReCnt int COMMENT '상품을 예약/구매한 숫자',
-   -- 0 = 예약 / 결제대기
-   -- 1 = 결제완료
-   -- 2 = 취소/환불
-   -- 3 = 환불완료
-   ReStat int COMMENT '0 = 예약 / 결제대기
 	-- 상품을 예약/구매한 숫자
 	ReCnt int COMMENT '수량 : 상품을 예약/구매한 숫자',
 	-- 0 = 예약 / 결제대기
@@ -367,15 +315,6 @@ CREATE TABLE Reserve
 -- 세부공간관리
 CREATE TABLE Room
 (
-   -- 건물관리고유번호
-   SNo int NOT NULL COMMENT '건물관리고유번호',
-   -- 세부공간관리번호
-   SRNo int NOT NULL COMMENT '세부공간관리번호',
-   -- 세부 공간 이름
-   SRName varchar(30) COMMENT '세부 공간 이름',
-   -- 제공하는 서비스 종류
-   -- ex)세미나실, 회의실, 연습실 등등
-   SRType varchar(50) COMMENT '제공하는 서비스 종류
 	-- 건물관리고유번호
 	SNo int NOT NULL COMMENT '건물관리번호 : 건물관리고유번호',
 	-- 세부공간관리번호
@@ -386,13 +325,6 @@ CREATE TABLE Room
 	-- ex)세미나실, 회의실, 연습실 등등
 	SRType varchar(50) COMMENT '세부공간유형 : 제공하는 서비스 종류
 ex)세미나실, 회의실, 연습실 등등',
-   -- 세부공간에 대한 설명
-   SRContent varchar(1200) COMMENT '세부공간에 대한 설명',
-   -- 세부 공간의 시설 안내
-   SRInfo varchar(1200) COMMENT '세부 공간의 시설 안내',
-   -- 0 = 시간 단위
-   -- 1 = 일자 단위
-   SResType int COMMENT '0 = 시간 단위
 	-- 세부공간에 대한 설명
 	SRContent varchar(1200) COMMENT '세부공간설명 : 세부공간에 대한 설명',
 	-- 세부 공간의 시설 안내
@@ -401,13 +333,6 @@ ex)세미나실, 회의실, 연습실 등등',
 	-- 1 = 일자 단위
 	SResType int COMMENT '예약유형설정 : 0 = 시간 단위
 1 = 일자 단위',
-   -- 공간을 이용하는 이용객 제한 설정
-   SRPersonLimit varchar(30) COMMENT '공간을 이용하는 이용객 제한 설정',
-   -- 단위 당(시간or일자) 가격 설정
-   SPrice int COMMENT '단위 당(시간or일자) 가격 설정',
-   -- 세부공간을 표현하는 이미지 설정
-   SRImg varchar(1200) COMMENT '세부공간을 표현하는 이미지 설정',
-   PRIMARY KEY (SNo, SRNo)
 	-- 공간을 이용하는 이용객 제한 설정
 	SRPersonLimit varchar(30) COMMENT '예약제한인원 : 공간을 이용하는 이용객 제한 설정',
 	-- 단위 당(시간or일자) 가격 설정

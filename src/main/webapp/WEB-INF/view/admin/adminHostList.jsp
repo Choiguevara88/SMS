@@ -128,7 +128,6 @@
 		<th style="text-align:center;">상호명</th>
 		<th>상호주소</th>
 		<th style="text-align:center;">계좌</th>
-		<th style="text-align:center;">전체선택&nbsp;&nbsp;<input type="checkbox" name="allchk" onchange="allchkbox(this)"></th>
 	</tr>
 	<c:if test="${listCnt == 0 }">
 		<tr><td colspan="9" rowspan="4" style="text-align:center;">검색 결과가 없습니다.</td></tr>
@@ -144,12 +143,11 @@
 		<td class="w3-small" style="text-align:center;">${mem.hostName}</td>
 		<td class="w3-small" >${mem.address}</td>
 		<td class="w3-small" style="text-align:center;">${mem.accountNo}</td>
-		<td class="w3-small" style="text-align:center;"><input type="checkbox" name="idchks" value="${mem.id}"></td>
 	</tr>
 	</c:forEach>
 		
 	<tr>
-		<td colspan="9" style="text-align:center;">
+		<td colspan="8" style="text-align:center;">
 		
 		<c:if test="${pageNum <= 1}">&nbsp;</c:if> 
 		<c:if test="${pageNum > 1}">
