@@ -34,14 +34,14 @@
 <bean id="googleConnectionFactory"
   class="org.springframework.social.google.connect.GoogleConnectionFactory">
   <constructor-arg
-    value="45091977731-09gqohq32gi0bvsr3kq6q9dvas5rag6s.apps.googleusercontent.com" />
-  <constructor-arg value="GO7AfnD6llChOKAWCzBTBb58" />
+    value="45091977731-0mf641oej94vr2kac3rf2drqif8bkkiv.apps.googleusercontent.com" />
+  <constructor-arg value="yb9qgYNdQscjR0-8CsIl7bKY" />
 </bean>
 
 <bean id="googleOAuth2Parameters"
   class="org.springframework.social.oauth2.OAuth2Parameters">
   <property name="scope"
-    value="https://www.googleapis.com/auth/plus.login" />
+    value="email" />
   <property name="redirectUri"
     value="http://localhost:8080/TestProject/startwithGoogle.sms" />
 </bean>
