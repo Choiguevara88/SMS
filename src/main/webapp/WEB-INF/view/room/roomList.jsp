@@ -32,6 +32,7 @@
   <input type="submit" value="sRNo=${room.sRNo } 세부정보 보기"/>
 </form:form>
 </c:forEach>
-
+	
+<a href="roomForm.sms?sNo=${sNo}" class="w3-button w3-black">세부 공간 추가하기</a>
 </body>
 </html>

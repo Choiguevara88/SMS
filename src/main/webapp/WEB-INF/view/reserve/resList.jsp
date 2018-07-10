@@ -68,18 +68,12 @@ select {width: 140px; /* 원하는 너비설정 */
 			searchContent.innerHTML = cont
 		 })
 	})
-	
-		function pageGo(pageNum) {
-			document.sf.pageNum.value = pageNum;
-			document.sf.submit();
-		}
-	
 </script>
 
 
 </head>
 <body>
-	<c:set var="path" value="${pageContext.request.contextPath}" />
+	<c:set var="path" value="${pageContext.request.contextPath}"/>
 	<div class="w3-container w3-margin">
 		<h2>예약목록조회</h2>
 	</div>
@@ -135,13 +129,13 @@ select {width: 140px; /* 원하는 너비설정 */
 						<td style="text-align:center;">[${res.sNo}]</td>
 						<td style="text-align:center;">[${res.srNo}]</td>
 						
-						<jsp:useBean id="today" class="java.util.Date" />
-						<fmt:formatDate var="today1" value="${today}" type="date" />
-						<fmt:formatDate var="redate" value="${res.reDate}" type="date" /> 
-						<fmt:formatDate var="regdate" value="${res.regDate}" type="date" />
+						<jsp:useBean id="today" class="java.util.Date"/>
+						<fmt:formatDate var="today1" value="${today}" type="date"/>
+						<fmt:formatDate var="redate" value="${res.reDate}" type="date"/> 
+						<fmt:formatDate var="regdate" value="${res.regDate}" type="date"/>
 
  						<c:if test="${today1 == redate}">
-							<td style="text-align:center;"><fmt:formatDate value="${res.reDate}" pattern="hh:mm:ss" /></td>
+							<td style="text-align:center;"><fmt:formatDate value="${res.reDate}" pattern="hh:mm:ss"/></td>
 						</c:if>
 
 						<c:if test="${today1 != redate}">
@@ -149,9 +143,9 @@ select {width: 140px; /* 원하는 너비설정 */
 									pattern="yyyy-MM-dd hh시" /></td>
 						</c:if>
 						
-						<td style="text-align:center;"><fmt:formatDate value="${res.regDate}" pattern="yyyy-MM-dd hh:mm" /></td>
+						<td style="text-align:center;"><fmt:formatDate value="${res.regDate}" pattern="yyyy-MM-dd hh:mm"/></td>
 
-						<td style="text-align:center;">${res.totPrice}</td>
+						<td style="text-align:center;"><fmt:formatNumber value="${res.totPrice}" pattern="###,###"/></td>
 
 						<td style="text-align:center;">${res.reCnt}</td> 
 						<td style="text-align:center;">

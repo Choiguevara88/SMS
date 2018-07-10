@@ -76,22 +76,22 @@ public class ReserveController {
 
 	      List<Reserve> reservelist = service.selectReserveList(id, searchType, searchContent, pageNum, limit, startDate, endDate);
 
-	      int maxpage = (int) ((double) listcount / limit + 0.95);
-	      int startpage = ((int) ((pageNum / 10.0 + 0.9) - 1)) * 10 + 1; // 시작페이지
-	      int endpage = startpage + 9; // 마지막 페이지
-	      if (endpage > maxpage)
-	         endpage = maxpage;
-	      int reservecnt = listcount - (pageNum - 1) * limit;
-	      mav.addObject("pageNum", pageNum);
-	      mav.addObject("maxpage", maxpage);
-	      mav.addObject("startpage", startpage);
-	      mav.addObject("endpage", endpage);
-	      mav.addObject("listcount", listcount);
-	      mav.addObject("list", reservelist);
-	      mav.addObject("reservecnt", reservecnt);
+			int maxpage = (int) ((double) listcount / limit + 0.95);
+			int startpage = ((int) ((pageNum / 10.0 + 0.9) - 1)) * 10 + 1; // 시작페이지
+			int endpage = startpage + 9; // 마지막 페이지
+			if (endpage > maxpage)
+				endpage = maxpage;
+			int reservecnt = listcount - (pageNum - 1) * limit;
+			mav.addObject("pageNum", pageNum);
+			mav.addObject("maxpage", maxpage);
+			mav.addObject("startpage", startpage);
+			mav.addObject("endpage", endpage);
+			mav.addObject("listcount", listcount);
+			mav.addObject("list", reservelist);
+			mav.addObject("reservecnt", reservecnt);
 
-	      return mav;
-	   }
+		return mav;
+	}
 
 	// 신규예약정보에 대해 확인할 때 호출되는 메서드 (Host계정용)
 	@RequestMapping(value = "reserve/hostResInfo", method = RequestMethod.GET)

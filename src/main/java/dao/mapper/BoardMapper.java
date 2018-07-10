@@ -27,4 +27,10 @@ public interface BoardMapper {
 
 	@Update("update board set qType = ifnull(qType,0) + 1 where ref=#{ref}")
 	void qTypeAdd(Board board);
+
+	@Insert("insert into board(bNo, sNo, id, email, subject, content, qType, regDate, ref, refLevel, score, img1, img2, img3, img4, kind) "
+			+ "values(#{bNo}, #{sNo}, #{id}, #{email},#{subject}, #{content}, #{qType}, now(), #{ref}, #{refLevel}, #{score}, "
+			+ "#{img1}, #{img2}, #{img3}, #{img4}, #{kind})")
+	void rInsert(Board board);
+
 }
