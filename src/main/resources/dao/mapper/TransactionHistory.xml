@@ -8,10 +8,7 @@
 	<select id="transHistoryList" resultType="TransactionHistory">
 		select host, guest, hostName, email, address, regDate, tel, accountNo, sNo, sName, srNo, srName, reNo, reDate, totPrice, count(*) 'cnt'	
 		from transactionHistory where reDate &gt; date_format(now(), '%Y-%m-01') and reDate &lt; now()
-	
-		<if test="sum == first">
-			group by sNo
-		</if>
+		group by sNo
 	</select>
 	
 	<!-- [&lt; : <] [&gt; : >] -->
