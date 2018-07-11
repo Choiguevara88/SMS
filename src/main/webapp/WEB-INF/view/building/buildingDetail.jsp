@@ -96,7 +96,7 @@ function listQlist(pageNum){
 </head>
 <body>
 <!-- 공간(Building)헤더정보 -->
-<img src="../picture/${building.sImg1}" style="width:100% ; height:300px">
+
 <div><h1>${building.sName}</h1></div>
 <div><h4>${building.sPreview}</h4></div>
 <div id="tags">

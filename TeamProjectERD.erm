@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2018-06-21 16:04:45</creation_date>
-			<updated_date>2018-07-10 18:10:28</updated_date>
+			<updated_date>2018-07-11 14:01:52</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -798,7 +798,7 @@
 		</word>
 		<word>
 			<id>39</id>
-			<length>30</length>
+			<length>200</length>
 			<decimal>null</decimal>
 			<array>false</array>
 			<array_dimension>null</array_dimension>
@@ -814,7 +814,7 @@
 		</word>
 		<word>
 			<id>40</id>
-			<length>1200</length>
+			<length>2000</length>
 			<decimal>null</decimal>
 			<array>false</array>
 			<array_dimension>null</array_dimension>
@@ -1054,7 +1054,7 @@
 		</word>
 		<word>
 			<id>55</id>
-			<length>30</length>
+			<length>100</length>
 			<decimal>null</decimal>
 			<array>false</array>
 			<array_dimension>null</array_dimension>
