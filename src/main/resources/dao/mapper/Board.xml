@@ -61,9 +61,15 @@
 	<select id="guestQuestion" resultType="Board">
 		select * from board where kind = 4 and qType=0
 	</select>
+	<select id="guestQuestion1" resultType="Board">
+		select * from board where kind = 4 
+	</select>
 	
 	<select id="hostQuestion" resultType="Board">
 		select * from board where kind = 5 and qType=0
+	</select>
+	<select id="hostQuestion1" resultType="Board">
+		select * from board where kind = 5 
 	</select>
 	
 	<select id="hostQuestCnt" resultType="Integer" parameterType="map">
