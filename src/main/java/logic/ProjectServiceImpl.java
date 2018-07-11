@@ -79,7 +79,7 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 
 		if (board.getImg4File() != null) {
-			String img = uploadImgCreate(board.getImg1File(), request);
+			String img = uploadImgCreate(board.getImg4File(), request);
 			if (img != null)
 				board.setImg4(img);
 		}
@@ -199,7 +199,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void reserveInsert(Reserve reserve) {
-		reserve.setReNo(reserve.getSrNo() + (int) new Date().getTime());
+		reserve.setReNo(reserve.getSrNo() + Math.abs((int)new Date().getTime()));
 		reDao.insert(reserve);
 	}
 
@@ -351,10 +351,18 @@ if (room.getsRImgList() != null) {
 	public List<Board> guestQuestionList() {
 		return boDao.guestQuestionList();
 	}
+	@Override
+	public List<Board> guestQuestionList1() {
+		return boDao.guestQuestionList1();
+	}
 
 	@Override
 	public List<Board> hostQuestionList() {
 		return boDao.hostQuestionList();
+	}
+	@Override
+	public List<Board> hostQuestionList1() {
+		return boDao.hostQuestionList1();
 	}
 
 	@Override
@@ -580,5 +588,17 @@ if (room.getsRImgList() != null) {
 	public List<Member> selectMemberList(String[] idchks) {
 		return memDao.getSelectMemberList(idchks);
 	}
+
+	@Override
+	public int hostBoardCountQuest(Integer sNo) {
+		return boDao.hostBoardCntQuest(sNo);
+	}
+
+	@Override
+	public void reserveStatusUpdate(int reNo) {
+		reDao.resStatUpdate(reNo);
+		
+	}
+
 
 }// ProjectServiceImpl end

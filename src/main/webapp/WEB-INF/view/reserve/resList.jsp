@@ -62,7 +62,7 @@ select {width: 140px; /* 원하는 너비설정 */
 			}
 			
 			if(search == "reStat") {
-				cont += "<select name='searchContent'><option value=''>선택하세요.</option><option value='0'>신규예약</option><option value='1'>이용/결제완료</option>"
+				cont += "<select name='searchContent'><option value=''>선택하세요.</option><option value='0'>결제대기</option><option value='1'>이용/결제완료</option>"
 				+ "<option value='2'>예약취소</option>	<option value='3'>환불완료</option></select>"
 				+ "&nbsp;&nbsp;<input type='submit' class='inputButton' value='검색'>"
 			}
@@ -159,7 +159,7 @@ select {width: 140px; /* 원하는 너비설정 */
 								</c:if>
 
 								<c:if test="${today1 > redate}">
-									[이용완료] <a href="../building/Rwrite.sms?sNo=${res.sNo}&kind=2">[리뷰 작성]</a>
+									[이용완료] <a href="../building/Rwrite.sms?sNo=${res.sNo}&kind=2&reN0=${res.reNo}">[리뷰 작성]</a>
 								</c:if>
 							</c:if>
 							<c:if test="${res.reStat == 2}">환불 예정 : <a href="resCancel.sms?reNo=${res.reNo}&reStat=${res.reStat}">[환불 확인]</a></c:if>

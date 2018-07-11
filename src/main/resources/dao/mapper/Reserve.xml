@@ -35,6 +35,10 @@
 		<if test="searchType != null and searchContent != null and startDate == null and endDate == null and id == 'admin'">
 			where ${searchType} like '%${searchContent}%' order by reNo desc
 		</if>
+		
+		<if test="searchType != null and searchContent != null and startDate == null and endDate == null and id != 'admin'">
+			where id=#{id} and ${searchType} like '%${searchContent}%' order by reNo desc
+		</if>
 
 		<if test="searchType == null and searchContent == null and startDate == null and endDate == null and id != 'admin'">
 			where id = #{id} order by reNo desc
@@ -56,6 +60,7 @@
 			where regDate &gt; #{startDate} and regDate &lt; #{endDate} order by regDate desc
 		</if>
 		
+			limit #{startrow}, #{limit}
 	</select>
 	
 	<select id="hostCount" resultType="Integer" parameterType="map">
@@ -102,6 +107,10 @@
 	
 	<update id="paymentConfirm" parameterType="map">
 		update Reserve set reStat=1 where reNo = #{reNo}
+	</update>
+	
+	<update id="reviewWrite" parameterType="map">
+		update Reserve set reStat=5 where reNo = #{reNo}
 	</update>
 	
 </mapper>
