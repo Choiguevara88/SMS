@@ -32,17 +32,17 @@
  		<font color="red">
  			<c:forEach items="${errors.globalErrors }" var="error">
  				<spring:message code="${error.code }"/>
- 			</c:forEach>
+ 			</c:forEach>	
  		</font>
  	</spring:hasBindErrors>
  	<table align="center" cellpadding="1" cellspacing="1" border="1" height="150" width="400">
  		<tr>
- 			<td align="center" width="20%">아이디</td><td colspan="2"><form:input path="id" size="35"/>
+ 			<td colspan="3"><form:input path="id" placeholder="아이디" size="60px"/>
  			<font color="red"><form:errors path="id"/></font></td></tr>
  		<tr>
- 			<td align="center">비밀번호</td><td colspan="2"><form:password align="middle" path="pw" size="35"/>
+ 			<td colspan="3"><form:password align="middle" placeholder="비밀번호" path="pw" size="60px"/>
  			<font color="red"><form:errors path="pw"/></font></td></tr>
- 		<tr><td colspan="3" align="center"><a href="findmyID.sms"><font size="1">ID 찾기 !</font></a>&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;<a href="findmypassword.sms"><font size="1">비밀번호 찾기 !</font></a></td></tr>
+ 		<tr><td colspan="3" align="center"><a href="findmyID.sms"><font size="2">ID 찾기 !</font></a>&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;<a href="findmypassword.sms"><font size="2">비밀번호 찾기 !</font></a></td></tr>
  		<tr>
   			<td colspan="3" align="center">
   				<input type="submit" value="로그인">&nbsp;&nbsp;

@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://fonts.googleapis.com/css?family=Gothic+A1" rel="stylesheet">
 <link href='http://fonts.googleapis.com/earlyaccess/hanna.css' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/css?family=Gothic+A1" rel="stylesheet">
 <style>
 .mySlides {display:none;}
 #myHeader{
@@ -38,14 +39,11 @@
     width: 180px;
     height: 180px;
 }
-h2{
-	font-family: 'Hanna';
-	color: '#ffffff';
+
+input,h2,a,td {
+	font-family: 'Gothic A1', sans-serif;
 }
-a {
-	font-family: 'Hanna';
-	color: ''
-}
+
 input {
 	font-family: 'Gothic A1', sans-serif;
 	color: 'black'
@@ -55,7 +53,6 @@ td {
 	color: 'black'
 }
 </style>
-
 <title>
 <decorator:title/>
 </title>
