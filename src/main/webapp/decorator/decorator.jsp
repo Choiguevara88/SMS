@@ -65,19 +65,19 @@ a {
   <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.id != 'admin' }">
   	<hr size="1">
   	<a href="${path }/reserve/resList.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;나의 예약정보 !</a></c:if>
+  <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.id != 'admin' }">
+  	<hr size="1">
+  	<a href="wishlist.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;내가 찜한 공간 !</a></c:if>
   <c:if test="${sessionScope.loginMember.memType == 1 }">
   	<hr size="1">
   	<a href="${path }/building/myBuildingList.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;공간 관리하기 !</a></c:if>
   <c:if test="${sessionScope.loginMember.memType == 1 && sessionScope.loginMember.id != 'admin'}">
   	<hr size="1">
   	<a href="${path }/reserve/hostResInfo.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;공간 예약관리 하기 !</a></c:if>
-  <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.id != 'admin' }">
-  	<hr size="1">
-  	<a href="wishlist.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;내가 찜한 공간 !</a></c:if>
-  <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.memType == '0'}">
+  <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.memType == '0' && sessionScope.loginMember.id != 'admin'}">
   	<hr size="1">
   	<a href="${path }/becomeaHost.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;호스트 등록 !</a></c:if>
-  <c:if test="${!empty sessionScope.loginMember}">
+  <c:if test="${!empty sessionScope.loginMember && sessionScope.loginMember.id != 'admin'}">
   	<hr size="1">
   	<a href="${path}/qa/questionAdmin.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;1 : 1 문의 !</a></c:if>
   <hr size="1">
