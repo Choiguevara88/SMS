@@ -50,7 +50,9 @@ function chkboxcheck2() {
 </script>
 </head>
 <body>
-
+<div class="w3-row">
+<div class="w3-col s2"><p>&nbsp;</p></div>
+<div class="w3-col s8">
 <form:form modelAttribute="room" action="roomSuccess.sms" method="post" commandName="room" enctype="multipart/form-data">
 
 <spring:hasBindErrors name="room"> <!-- ? -->
@@ -62,41 +64,42 @@ function chkboxcheck2() {
 </spring:hasBindErrors>
 
 <div class="w3-container w3-margin w3-padding">
-	<h1 style="font-family:'Hanna';">세부 공간 등록</h1>
+	<h1 style="font-family:'Hanna'">세부 공간 등록</h1>
 </div>
 
 <div class="w3-container">
-<div class="w3-container w3-margin w3-card w3-padding-16" style="width:80%;">
+<div class="w3-container w3-margin w3-card w3-padding-16">
 <p>
-    <div class="rows w3-container w3-margin">
-    	<div class="cols-8"><label class="w3-small">세부 공간 이름</label><form:input path="sRName" class="w3-input" placeholder="공간의 이름을 작성해주세요."/></div>
-    	<div class="cols-4"><font color="red"><form:errors path="sRName"/></font>
+    <div class="w3-container w3-margin w3-row">
+    	<div class="w3-col s8"><label style="font-family:'Hanna'">세부 공간 이름</label><form:input path="sRName" class="w3-input" placeholder="공간의 이름을 작성해주세요."/></div>
+    	<div class="w3-cols s4"><font color="red"><form:errors path="sRName"/></font>
     </div>
 	</div>
-	<div class="rows w3-container w3-margin">
-    	<div class="cols-8"><label class="w3-small">세부 공간 내용</label><form:input path="sRContent" class="w3-input" placeholder="공간에 대한 설명을 작성해주세요."/></div>
-		<div class="cols-4"><font color="red"><form:errors path="sRContent"/></font></div>
+	<div class="w3-row w3-container w3-margin">
+    	<div class="w3-col s8"><label style="font-family:'Hanna'">세부 공간 내용</label><form:input path="sRContent" class="w3-input" placeholder="공간에 대한 설명을 작성해주세요."/></div>
+		<div class="w3-col s4"><font color="red"><form:errors path="sRContent"/></font></div>
+	</div>
+	
+	<div class="w3-row w3-container w3-margin">
+    	<div class="w3-col s8"><label style="font-family:'Hanna'">세부 공간 내용</label><form:input path="sRContent" class="w3-input" placeholder="공간에 대한 설명을 작성해주세요."/></div>
+		<div class="w3-col s4"><font color="red"><form:errors path="sRContent"/></font></div>
+	</div>
+	
+	<div class="w3-container w3-margin w3-row">
+		<div class="w3-col s5 w3-margin">
+		<label style="font-family:'Hanna'">세부 공간 유형 (1개만 체크 가능)</label>
+		<form:checkboxes path="sRType" items="${building.sTypeList}" onchange="chkboxcheck()" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;" class="w3-checkbox"/>
+		</div>
+		<div class="w3-col s2"><p>&nbsp;</p></div>
+		<div class="w3-col s5 w3-margin">
+		<label style="font-family:'Hanna'">예약 유형 (1개만 체크 가능)</label>
+		<form:checkbox path="sResType" value="0" label="시간 단위" onchange="chkboxcheck2()"/>&nbsp; &nbsp;
+		<form:checkbox path="sResType" value="1" label="일 단위" onchange="chkboxcheck2()"/>
+		</div>
 	</div>
 	
 	<div class="w3-container w3-margin">
-	<div class="rows">
-		<div class="cols-4"><label class="w3-small">세부 공간 유형 (1개만 체크 가능)</label></div>
-		<div class="cols-8 w3-margin"><form:checkboxes path="sRType" items="${building.sTypeList}" onchange="chkboxcheck()" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;" class="w3-checkbox"/></div>
-	</div>
-	</div>
-	
-	
-	
-	
-	<div class="w3-container w3-margin">
-	<div class="rows">
-		<div class="cols-4"><label class="w3-small">예약 유형 (1개만 체크 가능)</label></div>
-		<div class="cols-8 w3-margin"><form:checkbox path="sResType" value="0" label="시간 단위" onchange="chkboxcheck2()"/>&nbsp; &nbsp;<form:checkbox path="sResType" value="1" label="일 단위" onchange="chkboxcheck2()"/></div>
-	</div>
-	</div>
-	
-	<div class="w3-container w3-margin">
-	<p class="w3-small">편의 시설</p>
+	<p style="font-family:'Hanna'">편의 시설</p>
 	<table class="w3-table w3-border">
 	<tr>
 		<td><form:checkbox path="sRInfo" value="TV/프로젝터" label="TV/프로젝터" /></td>
@@ -131,37 +134,41 @@ function chkboxcheck2() {
 	</table>
     </div>
 
-	<div class="rows w3-container w3-margin">
-    	<div class="cols-8"><label class="w3-small">최소 인원</label>
-    	<form:select path="sRPersonLimit" class="w3-select">
-    		<form:option value="1"> 1명 </form:option>
-    		<form:option value="2"> 2명 </form:option>
-    		<form:option value="3"> 3명 </form:option>
-    		<form:option value="4"> 4명 </form:option>
-    		<form:option value="5"> 5명 </form:option>
-    		<form:option value="10"> 10명 </form:option>
-    		<form:option value="20"> 20명 </form:option>
-    		<form:option value="50"> 50명 </form:option>
-    	</form:select></div>
-		<div class="cols-4"><font color="red"><form:errors path="sRPersonLimit"/></font></div>
-	</div>
-	
-    <div class="rows w3-container w3-margin">
-    	<div class="cols-8"><label class="w3-small">예약 단위당 가격</label><form:input path="sPrice" class="w3-input" placeholder="숫자만 입력하세요."/></div>
-    	<div class="cols-4"><font color="red"><form:errors path="sPrice"/></font></div>
+	<div class="w3-container w3-margin w3-row">
+    	<div class="w3-col s5" style="vertical-align:middle;">
+    		<label style="font-family:'Hanna'">최소 인원</label><br>
+    		<form:select path="sRPersonLimit" class="w3-select">
+    			<form:option value="1"> 1명 </form:option>
+    			<form:option value="2"> 2명 </form:option>
+    			<form:option value="3"> 3명 </form:option>
+    			<form:option value="4"> 4명 </form:option>
+    			<form:option value="5"> 5명 </form:option>
+    			<form:option value="10"> 10명 </form:option>
+    			<form:option value="20"> 20명 </form:option>
+    			<form:option value="50"> 50명 </form:option>
+    		</form:select><font color="red"><form:errors path="sRPersonLimit"/></font>
+    	</div>
+    	<div class="w3-col s2"><p>&nbsp;</p></div>
+    	<div class="w3-col s5" style="vertical-align:middle;">
+    		<label style="font-family:'Hanna'">예약 단위당 가격</label><br>
+    		<form:input path="sPrice" class="w3-input" placeholder="숫자만 입력하세요."/>
+    		<font color="red"><form:errors path="sPrice"/></font>
+    	</div>
+    
 	</div>
 	
 	<div class="rows w3-container w3-margin" style="text-align:center;">
 		<input type="submit" value="등록하기" class="w3-btn w3-black" style="font-family:'Hanna'; width:30%;">
 	</div>
 </div>
+
 <div>
 <form:hidden path="sNo" value="${room.sNo}"/>
-	
 </div>
 </div>
 </form:form>
- 
-
+</div>
+<div class="w3-col s2"><p>&nbsp;</p></div> 
+</div>
 </body>
 </html>

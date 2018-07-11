@@ -2,5 +2,5 @@
     pageEncoding="EUC-KR"%>
 <script>
 	alert("메일전송이 완료 되었습니다.")
-	location.href="admin/adminMemberList.sms";
+	location.href="adminMemberList.sms";
 </script>
