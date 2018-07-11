@@ -94,10 +94,19 @@ td {
 </div>
 
 
-<div class="w3-purple" style="height:450px" >
-   <div class="header w3-purple" id="myHeader" style="height: 90px;">
+<div class="w3-purple" style="height:90px" >
+   <div class="header w3-purple" id="myHeader" style="height:90px;">
    		<h1><strong><a href="${path }/main.sms" style="text-decoration:none">Share My Space</a></strong>
    			<button class="w3-button w3-purple w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button></h1></div>
+      </div>	
+	  <img class="mySlides" src="${path}/picture/mainimage1.jpg" style="width:100%; height:370px">
+	  <img class="mySlides" src="${path}/picture/mainimage2.jpg" style="width:100%; height:370px">
+	  <img class="mySlides" src="${path}/picture/mainimage3.jpg" style="width:100%; height:370px">
+  	  <img class="mySlides" src="${path}/picture/mainimage4.jpg" style="width:100%; height:370px">
+  	  <img class="mySlides" src="${path}/picture/mainimage5.jpg" style="width:100%; height:370px">
+<div class="w3-content" style="max-width:1400px">
+<decorator:body/>
+</div>
 <script>
 window.onscroll = function() {myFunction()};
 
@@ -112,13 +121,7 @@ function myFunction() {
   }
 }
 </script>  			 		
-  <div class="w3-content w3-center w3-section" style="max-width:500px">
-	  <img class="mySlides" src="${path}/picture/mainimage.jpg" style="width:100%">
-	  <img class="mySlides" src="${path}/picture/mainimage2.jpg" style="width:100%">
-	  <img class="mySlides" src="${path}/picture/mainimage3.jpg" style="width:100%">
-  	  <img class="mySlides" src="${path}/picture/mainimage4.jpg" style="width:100%">
-  	  <img class="mySlides" src="${path}/picture/mainimage5.jpg" style="width:100%">
-      </div></div>
+  
 
 <script>
 //사진 이동
@@ -147,9 +150,6 @@ function closeRightMenu() {
     document.getElementById("rightMenu").style.display = "none";
 }
 </script>
-<div class="w3-content" style="max-width:1400px">
-<decorator:body/>
-</div>
 <div class="w3-container w3-light-gray" align="right"><p>	
 <h2>
 This is Sparta!!!!!

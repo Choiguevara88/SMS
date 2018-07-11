@@ -39,6 +39,8 @@ public class MainController {
 			building1.add(service.getbuilding_mainpage(sNo[i]));
 			sPrice1 = service.getmyRoom_lowestprice(sNo[i]);
 		}
+		System.out.println(building1);
+		System.out.println(sPrice1);
 		
 		//건물 평점 평균 내서 건물 번호랑 평균 평점 가져오기
 		List<Integer> sPrice2 = new ArrayList<Integer>();
