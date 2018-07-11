@@ -123,4 +123,6 @@ public interface ProjectService {
 	void reserveStatusUpdate(int reNo);
 	List<Board> guestQuestionList1();
 	List<Board> hostQuestionList1();
+	
+	Room getRoom(Integer sNo, Integer sRNo);
 }

@@ -125,7 +125,8 @@
 		<th style="text-align:center;">Mob</th>
 		<th style="text-align:center;">가입일자</th>
 		<th style="text-align:center;">회원상태</th>
-		<th style="text-align:center;">전체선택&nbsp;&nbsp;<input type="checkbox" name="allchk" onchange="allchkbox(this)"></th>
+		<th style="text-align:center;">전체선택&nbsp;&nbsp;
+			<input type="checkbox" name="allchk" onchange="allchkbox(this)" class="form-check"></th>
 	</tr>
 	
 	<c:if test="${listCnt == 0 }">
@@ -135,13 +136,13 @@
 	<c:if test="${listCnt != 0 }">
 	<c:forEach var="mem" items="${list}" >
 	<tr>
-		<td style="text-align:center;" class="w3-small">${mem.id}</td>
-		<td style="text-align:center;" class="w3-small">${mem.name}</td>
-		<td style="text-align:center;" class="w3-small">${mem.email}</td>
-		<td style="text-align:center;" class="w3-small">${mem.mob}</td>
-		<td style="text-align:center;" class="w3-small"><fmt:formatDate value="${mem.regDate}" pattern="yyyy-MM-dd"/></td>
-		<td style="text-align:center;" class="w3-small">${mem.memType == 0 ? 'Guest' : mem.memType == 1 ? 'Host' : 'Host Cancel'}</td>
-		<td style="text-align:center;" class="w3-small"><input type="checkbox" name="idchks" value="${mem.id}"></td>
+		<td style="text-align:center;">${mem.id}</td>
+		<td style="text-align:center;">${mem.name}</td>
+		<td style="text-align:center;">${mem.email}</td>
+		<td style="text-align:center;">${mem.mob}</td>
+		<td style="text-align:center;"><fmt:formatDate value="${mem.regDate}" pattern="yyyy-MM-dd"/></td>
+		<td style="text-align:center;">${mem.memType == 0 ? 'Guest' : mem.memType == 1 ? 'Host' : 'Host Cancel'}</td>
+		<td style="text-align:center;"><input type="checkbox" name="idchks" value="${mem.id}" class="form-check"></td>
 	</tr>
 	</c:forEach>
 	</c:if>

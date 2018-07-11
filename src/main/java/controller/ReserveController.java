@@ -24,10 +24,31 @@ public class ReserveController {
 
 	@Autowired
 	private ProjectService service;
+	
+	
+	// 예약을 등록할 때 호출되는 메서드 : GET
+	@RequestMapping(value = "reserve/regReserve", method = RequestMethod.GET)
+	public ModelAndView regReserveForm(Integer sNo, Integer sRNo, HttpSession session) {
 
-	// 예약을 등록할 때 호출되는 메서드
-	@RequestMapping(value = "reserve/roomReserve", method = RequestMethod.POST)
-	public ModelAndView roomReserve(Reserve reserve, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+
+		Room room = service.getRoom(sNo, sRNo);
+		Building building = service.getMyBuildingOne("" + sNo);
+		Member hostMember = service.getMember(building.getId());
+		
+		mav.addObject("room", room); 			 // 예약할 룸 정보를 가진 객체
+		mav.addObject("building", building);	 // 예약할 빌딩 정보를 가진 객체
+		mav.addObject("hostMember", hostMember); // 해당 호스트 정보를 가진 객체
+		mav.addObject("reserve", new Reserve()); // 예약 객체
+		
+		mav.setViewName("reserve/regReserve");
+		
+		return mav;
+	}
+
+	// 예약을 등록할 때 호출되는 메서드 : POST
+	@RequestMapping(value = "reserve/regReserve", method = RequestMethod.POST)
+	public ModelAndView regReserve(Reserve reserve, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
 

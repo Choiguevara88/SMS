@@ -371,6 +371,8 @@ public class AdminController {
 			me.printStackTrace();
 		}
 	}
+	
+	// 관리자페이지에서 Host계정의 모든 문의 목록 보여주기
 	@RequestMapping(value="admin/Hlist", method=RequestMethod.GET)
 	public ModelAndView adminHlist(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -381,11 +383,14 @@ public class AdminController {
 		
 		return mav;
 	}
+
+	// 관리자페이지에서 Guest계정의 모든 문의 목록 보여주기	
 	@RequestMapping(value="admin/Glist", method=RequestMethod.GET)
 	public ModelAndView adminGlist(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
 		List<Board> guestQuestionList = service.guestQuestionList1();			// guest 문의 목록
+		
 		mav.addObject("gList",guestQuestionList);
 		
 		return mav;

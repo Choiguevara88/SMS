@@ -71,4 +71,11 @@ public class RoomDaoImpl implements RoomDao{
 		
 		return sqlSession.getMapper(RoomMapper.class).maxNum();
 	}
+	@Override
+	public Room getRoom(Integer sNo, Integer sRNo) {
+		Map <String, Integer> map = new HashMap<String, Integer>();
+		map.put("sNo", sNo);
+		map.put("sRNo", sRNo);
+		return sqlSession.selectOne(NS + "one", map);
+	}
 }

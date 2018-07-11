@@ -22,6 +22,8 @@ public interface RoomDao {
 
 	int maxNum();
 
+	Room getRoom(Integer sNo, Integer sRNo);
+
 
 
 	
