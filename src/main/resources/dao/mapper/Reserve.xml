@@ -33,28 +33,29 @@
 		select * from Reserve 
 		
 		<if test="searchType != null and searchContent != null and startDate == null and endDate == null and id == 'admin'">
-			where ${searchType} like '%${searchContent}%'
+			where ${searchType} like '%${searchContent}%' order by reNo desc
 		</if>
 
 		<if test="searchType == null and searchContent == null and startDate == null and endDate == null and id != 'admin'">
-			where id = #{id}
+			where id = #{id} order by reNo desc
 		</if>
 		
 		<if test="searchType == 'reDate' and searchContent == null and startDate != null and endDate != null and id != 'admin'">
-			where reDate &gt; #{startDate} and reDate &lt; #{endDate} and id = #{id}
+			where reDate &gt; #{startDate} and reDate &lt; #{endDate} and id = #{id} order by reDate desc
 		</if>
 		
 		<if test="searchType == 'regDate' and searchContent == null and startDate != null and endDate != null and id != 'admin'">
-			where regDate &gt; #{startDate} and regDate &lt; #{endDate} and id = #{id}
+			where regDate &gt; #{startDate} and regDate &lt; #{endDate} and id = #{id} order by regDate desc
 		</if>
 		
 		<if test="searchType == 'reDate' and searchContent == null and startDate != null and endDate != null and id == 'admin'">
-			where reDate &gt; #{startDate} and reDate &lt; #{endDate}
+			where reDate &gt; #{startDate} and reDate &lt; #{endDate} order by reDate desc
 		</if>
 		
 		<if test="searchType == 'regDate' and searchContent == null and startDate != null and endDate != null and id == 'admin'">
-			where regDate &gt; #{startDate} and regDate &lt; #{endDate}
+			where regDate &gt; #{startDate} and regDate &lt; #{endDate} order by regDate desc
 		</if>
+		
 	</select>
 	
 	<select id="hostCount" resultType="Integer" parameterType="map">
@@ -74,19 +75,19 @@
 		select * from Reserve 
 		
 		<if test="searchType != null and searchContent != null and startDate == null and endDate == null and sNo != null">
-			where ${searchType} like '%${searchContent}%' and sNo = #{sNo}
+			where ${searchType} like '%${searchContent}%' and sNo = #{sNo} order by reNo desc
 		</if>
 		
 		<if test="searchType == null and searchContent == null and startDate == null and endDate == null and sNo != null">
-			where sNo = #{sNo}
+			where sNo = #{sNo} order by reNo desc
 		</if>
 		
 		<if test="searchType == 'reDate' and searchContent == null and startDate != null and endDate != null and sNo != null">
-			where reDate &gt; #{startDate} and reDate &lt; #{endDate} and sNo = #{sNo}
+			where reDate &gt; #{startDate} and reDate &lt; #{endDate} and sNo = #{sNo} order by reDate desc
 		</if>
 		
 		<if test="searchType == 'regDate' and searchContent == null and startDate != null and endDate != null and sNo != null">
-			where regDate &gt; #{startDate} and regDate &lt; #{endDate} and sNo = #{sNo}
+			where regDate &gt; #{startDate} and regDate &lt; #{endDate} and sNo = #{sNo} order by reDate desc
 		</if>
 		
 	</select>

@@ -330,8 +330,7 @@ public class AdminController {
 			
 			for (int i = 0; i < emails.length; i++) {
 				try {
-					addrs.add(new InternetAddress(new String(emails[i].getBytes("UTF-8"), "8859_1"))); 
-					// 8859_1 = 브라우저의 기본 Encoding
+					addrs.add(new InternetAddress(new String(emails[i].getBytes("euc-kr"), "8859_1"))); // 8859_1 = 브라우저의 기본 Encoding 
 				} catch (UnsupportedEncodingException e) {
 					e.printStackTrace();
 				}

@@ -130,9 +130,9 @@ select {width: 140px; /* 원하는 너비설정 */
 						<td style="text-align:center;">[${res.srNo}]</td>
 						
 						<jsp:useBean id="today" class="java.util.Date"/>
-						<fmt:formatDate var="today1" value="${today}" type="date"/>
-						<fmt:formatDate var="redate" value="${res.reDate}" type="date"/> 
-						<fmt:formatDate var="regdate" value="${res.regDate}" type="date"/>
+						<fmt:formatDate var="today1" value="${today}" type="date" pattern="yyyyMMdd"/>
+						<fmt:formatDate var="redate" value="${res.reDate}" type="date" pattern="yyyyMMdd"/> 
+						<fmt:formatDate var="regdate" value="${res.regDate}" type="date" pattern="yyyyMMdd"/>
 
  						<c:if test="${today1 == redate}">
 							<td style="text-align:center;"><fmt:formatDate value="${res.reDate}" pattern="hh:mm:ss"/></td>
@@ -158,7 +158,7 @@ select {width: 140px; /* 원하는 너비설정 */
 								</c:if>
 
 								<c:if test="${today1 > redate}">
-									[이용완료] <a href="resCancel.sms?sNo=${res.sNo}&kind=2">[리뷰 작성]</a>
+									[이용완료] <a href="../building/Rwrite.sms?sNo=${res.sNo}&kind=2">[리뷰 작성]</a>
 								</c:if>
 							</c:if>
 							<c:if test="${res.reStat == 2}">환불 예정 : <a href="resCancel.sms?reNo=${res.reNo}&reStat=${res.reStat}">[환불 확인]</a></c:if>

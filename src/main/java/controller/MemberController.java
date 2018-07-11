@@ -384,7 +384,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping(value="personal_info_delete_confirm")
+	@RequestMapping(value="personal_info_delete_confirm" )
 	public ModelAndView personal_info_delete_confirm(String id, String pw, HttpSession session) {
 		ModelAndView mav  = new ModelAndView();
 		Member member = service.getMember(id);
@@ -459,7 +459,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="letsfindmypassword")
-	public ModelAndView letsfindmypassword(String name, String id, String email) {
+	public ModelAndView letsfindmypassword(String name,String email, String id) {
 		
 		ModelAndView mav = new ModelAndView();		
 		Member member = service.find_password(id, email, name);
