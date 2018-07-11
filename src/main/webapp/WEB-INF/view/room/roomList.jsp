@@ -13,26 +13,30 @@
 </script>
 </head>
 <body>
-<h1>${id}님의 ${sName}공간의 세부공간 관리</h1>
+<h1><span style="color:blue;">${id}</span>님의 ${building.sName}공간의 세부공간 관리</h1>
 
 <c:forEach var="room" items="${myRoomList}">
 <form:form modelAttribute="room" action="roomDetail.sms" method="post">
 <div class="w3-container">
   <div class="w3-card-4" style="width:30%">
     <div class="w3-container w3-center">
-      <p>sRName : ${room.sRName}</p><br>	
-      <p>sRNo : ${room.sNo}</p><br>
-      <p>sRNo : ${room.sRNo}</p><br>
-        
+      <c:forEach var="roomImg" items="${room.sRImgNameList}">
+      <div >
+      <img src="../picture/${roomImg}" style="width:100%; height:250px">
+      </div>
+      </c:forEach>
+      <p>세부 공간 이름 : ${room.sRName}</p><br>	
+      <p>설명 : ${room.sRContent}</p><br>
+      <p>공간 유형 : ${room.sRType}</p><br>
    			<form:hidden path="sNo" value="${room.sNo}" />
    		<form:hidden path="sRNo" value="${room.sRNo}" />
     </div>
   </div>
 </div>
-  <input type="submit" value="sRNo=${room.sRNo } 세부정보 보기"/>
+  <input type="submit" value="세부정보 보기" class="w3-button w3-black" style="font-family:'Hanna'; width:30%;"/>
 </form:form>
 </c:forEach>
-	
-<a href="roomForm.sms?sNo=${sNo}" class="w3-button w3-black">세부 공간 추가하기</a>
+	<br>
+<a href="roomForm.sms?sNo=${sNo}" class="w3-button w3-black" style="font-family:'Hanna'; width:30%;">세부 공간 추가하기</a>
 </body>
 </html>

@@ -99,7 +99,7 @@ function chkboxcheck2() {
 	<div class="w3-container w3-margin">
 		<label style="font-family:'Hanna'">사진 업로드(여러 장 가능)</label>
 		<div>
-		<input type="file" multiple="multiple" name="sRImgList" class="w3-button">
+		<input type="file" multiple="multiple" id="sRImg" name="sRImgList" class="w3-button">
 		</div>
 	</div>
 	

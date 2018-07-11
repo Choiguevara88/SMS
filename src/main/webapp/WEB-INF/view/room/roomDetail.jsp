@@ -13,20 +13,29 @@
 </script>
 </head>
 <body>
-<h1>${id}님의 세부공간 정보</h1>
+<h1><span style="color:blue;">${id}</span>님의 세부공간 정보</h1>
 
 <div class="w3-container">
   <div class="w3-card-4" style="width:30%">
     <div class="w3-container w3-center">
-      <p>sRName : ${myRoom.sRName}</p><br>	
-      <p>sRNo : ${myRoom.sRNo}</p><br>	
+     <c:forEach var="roomImg" items="${room.sRImgNameList}">
+      <div >
+      <img src="../picture/${roomImg}" style="width:100%; height:250px">
+      </div>
+      </c:forEach>
+      <p>세부 공간 이름 : ${room.sRName}</p><br>	
+      <p>설명 : ${room.sRContent}</p><br>
+      <p>공간 유형 : ${room.sRType}</p><br>
+      <p>시설 안내 : ${room.sRInfo}</p><br>
+      <p>예약 유형 : ${room.sResType}</p><br>
+	  <p>최소 인원 : ${room.sRPersonLimit}</p><br>
+	  <p>시간/일 가격 : ${room.sPrice}</p><br>
     </div>
   </div>
 </div>
-<p>roomDetail</p>
-<a href="roomList.sms?sNo=${myRoom.sNo}" class="w3-button w3-black">리스트로 가기</a>
-<a href="roomUpdateForm.sms?sRNo=${myRoom.sRNo }&sNo=${myRoom.sNo}" class="w3-button w3-black">수정</a>
-<a href="roomDeleteForm.sms?sRNo=${myRoom.sRNo }&sNo=${myRoom.sNo}" class="w3-button w3-black">삭제</a>
+<a href="roomList.sms?sNo=${room.sNo}" class="w3-button w3-black">리스트로 가기</a>
+<a href="roomUpdateForm.sms?sRNo=${room.sRNo }&sNo=${room.sNo}" class="w3-button w3-black">수정</a>
+<a href="roomDeleteForm.sms?sRNo=${room.sRNo }&sNo=${room.sNo}" class="w3-button w3-black">삭제</a>
 
 
 </body>

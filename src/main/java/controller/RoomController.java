@@ -69,13 +69,19 @@ public class RoomController {
 		return mav;
 	}
 	@RequestMapping(value="building/roomList", method=RequestMethod.GET)
-	public ModelAndView myBuildingList(HttpServletRequest request,Building building) {		
+	public ModelAndView myBuildingList(HttpServletRequest request,Building building,HttpSession session) {		
 		ModelAndView mav = new ModelAndView();
 			Integer sNo = building.getsNo();
 		try {
+			Member loginMember = (Member) session.getAttribute("loginMember");
+			String id= loginMember.getId(); 
+			mav.addObject("id", id);	
 			List<Room> myRoomList = service.getmyRoomList(sNo);
 			mav.addObject("sNo",sNo);
 			mav.addObject("myRoomList",myRoomList);
+			String sNo1 = Integer.toString(sNo);
+			building = service.getMyBuildingOne(sNo1);
+			mav.addObject("building", building);
 			mav.addObject("sNo", sNo); 
 			mav.setViewName("room/roomList");
 		}catch(Exception e) {
@@ -85,12 +91,15 @@ public class RoomController {
 		return mav;
 	}
 	@RequestMapping("building/roomDetail")
-	public ModelAndView roomDetail(HttpServletRequest request,Room room) {
+	public ModelAndView roomDetail(HttpServletRequest request,Room room,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		try {
-	
+			Member loginMember = (Member) session.getAttribute("loginMember");
+			String id= loginMember.getId(); 
+			mav.addObject("id", id);	
 		Room myRoom = service.getMyRoom(room);
-		mav.addObject("myRoom", myRoom);
+		mav.addObject("room", myRoom);
+		System.out.println(room.getsRImgNameList());
 		mav.setViewName("room/roomDetail");
 		}catch(Exception e){
 			Integer sNo = room.getsNo();
@@ -135,8 +144,10 @@ public class RoomController {
 	@RequestMapping("building/roomDeleteForm")
 	public ModelAndView roomDeleteForm(HttpServletRequest request,Room room) {
 		ModelAndView mav = new ModelAndView("room/roomDeleteForm");
+		
 		Room myRoom = service.getMyRoom(room);
-		mav.addObject("myRoom", myRoom);
+
+		mav.addObject("room", myRoom);
 	return mav;	
 	}
 	
