@@ -268,12 +268,10 @@ public class MemberController {
 		 System.out.println(url);
 		 return "member/loginwithGoogle";
 	}
-	
-	@RequestMapping(value ="startwithGoogle", method = RequestMethod.GET)
+	@RequestMapping(value ="startwithGoogle", method=RequestMethod.GET)
 	public ModelAndView startwithGoogle(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String code = request.getParameter("code");
-		System.out.println(code);
 		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
 		AccessGrant accessGrant = oauthOperations.exchangeForAccess(code , googleOAuth2Parameters.getRedirectUri(),null);
 		String accessToken = accessGrant.getAccessToken();
@@ -283,7 +281,6 @@ public class MemberController {
 		   System.out.printf("accessToken is expired. refresh token = {}", accessToken);
 		}
 		System.out.println("aaa");
-		
 		Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
 		Google google = connection == null ? new GoogleTemplate(accessToken) : connection.getApi();
 
@@ -292,7 +289,8 @@ public class MemberController {
 		
 		System.out.println("profile.getAccountEmail : " + profile.getAccountEmail());
 		
-		System.out.println("prfile : " + profile);
+		System.out.println("profile : " + profile);
+		
 		Member member = service.find_member_by_email(profile.getAccountEmail());
 		if(member == null) {
 			mav.addObject("name",profile.getDisplayName());
@@ -386,7 +384,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping(value="personal_info_delete_confirm")
+	@RequestMapping(value="personal_info_delete_confirm" )
 	public ModelAndView personal_info_delete_confirm(String id, String pw, HttpSession session) {
 		ModelAndView mav  = new ModelAndView();
 		Member member = service.getMember(id);
@@ -461,7 +459,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="letsfindmypassword")
-	public ModelAndView letsfindmypassword(String name, String id, String email) {
+	public ModelAndView letsfindmypassword(String name,String email, String id) {
 		
 		ModelAndView mav = new ModelAndView();		
 		Member member = service.find_password(id, email, name);

@@ -17,7 +17,7 @@
  
     <div class="w3-col w3-container" style="width:22%">
   	<div class="w3-card-4" id="preview">
-  		<a href="#"><img src="./picture/lemon.jpg" style="width:100%">
+  		<a href="#"><img id="picturee" src="./picture/lemon.jpg" style="width:100%">
   		<div class="w3-container w3-center">
       		<p>The Troll's tongue in Hardanger, Norway</p></div></a></div></div>
       		
