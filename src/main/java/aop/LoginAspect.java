@@ -43,6 +43,74 @@ public class LoginAspect {
 		Object ret = joinPoint.proceed(); // CoreAlgolism 실행
 		return ret;
 	}
+	@Around("execution(* controller.Member*.become*(..))")
+	public Object becomeahost(ProceedingJoinPoint joinPoint) throws Throwable {
+
+		HttpSession	session = (HttpSession) joinPoint.getArgs()[0];
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		
+		if (loginMember == null) {throw new ProjectException("로그인 안한거 다 알아요~ 로그인 하세요~ ><", "main.sms");}
+		if (loginMember.getId().equals("admin")) {
+			throw new ProjectException("본인 아닌거 다 알아여~ 본인꺼만 쓰세여~ ><", "main.sms");
+		}
+		Object ret = joinPoint.proceed(); // CoreAlgolism 실행
+		return ret;
+	}
+	@Around("execution(* controller.Member*.addhost*(..))")
+	public Object addhostdata(ProceedingJoinPoint joinPoint) throws Throwable {
+		String id = null;
+		HttpSession session = null;
+		Member paramMember = null;
+		if (joinPoint.getArgs()[0] instanceof Member) {
+			paramMember = (Member) joinPoint.getArgs()[0];
+			session = (HttpSession) joinPoint.getArgs()[1];
+			id = paramMember.getId();
+		} else {
+			id = (String) joinPoint.getArgs()[0]; // 파라미터 id 값
+			session = (HttpSession) joinPoint.getArgs()[1]; // session 값
+		}
+
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		
+		if (loginMember == null) {throw new ProjectException("로그인 안한거 다 알아요~ 로그인 하세요~ ><", "main.sms");}
+		if (!id.equals(loginMember.getId()) && !loginMember.getId().equals("admin")) {
+			throw new ProjectException("본인 아닌거 다 알아여~ 본인꺼만 쓰세여~ ><", "main.sms");
+		}
+		
+		Object ret = joinPoint.proceed(); // CoreAlgolism 실행
+		return ret;
+	}
+	@Around("execution(* controller.Member*.letsfindID(..))")
+	public Object findid_result(ProceedingJoinPoint joinPoint) throws Throwable {
+
+		HttpSession session = null;
+		Member paramMember = null;
+		String name = (String)joinPoint.getArgs()[0];
+		String email = (String)joinPoint.getArgs()[1];
+
+		if (name == null && email == null) {
+			throw new ProjectException("그전 단계를 거치셔야해요~ ><", "findmyID.sms");
+			}
+
+		Object ret = joinPoint.proceed(); // CoreAlgolism 실행
+		return ret;
+	}
+	@Around("execution(* controller.Member*.letsfindmypassword(..))")
+	public Object findpassword_result(ProceedingJoinPoint joinPoint) throws Throwable {
+
+		HttpSession session = null;
+		Member paramMember = null;
+		String name = (String)joinPoint.getArgs()[0];
+		String email = (String)joinPoint.getArgs()[1];
+		String id = (String)joinPoint.getArgs()[2];
+
+		if (name == null && email == null && id == null) {
+			throw new ProjectException("그전 단계를 거치셔야해요~ ><", "findmypassword.sms");
+			}
+
+		Object ret = joinPoint.proceed(); // CoreAlgolism 실행
+		return ret;
+	}
 	
 	//adminLoginCheck() 메서드
 	@Around("execution(* controller.Admin*.admin*(..))")

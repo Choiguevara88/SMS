@@ -27,13 +27,13 @@
   top: 0;
   width: 100%;
 }
-#preview {
+#picturee {
 	transition: width 2s, height 2s;
 	}
-#preview {transition-timing-function: ease-in;}
-#preview:hover {
-    width: 265px;
-    height: 265px;
+#picturee {transition-timing-function: ease-in;}
+#picturee:hover {
+    width: 180px;
+    height: 180px;
 }
 h2{
 	font-family: 'Hanna';
