@@ -40,6 +40,8 @@ public interface BoardDao {
 	void replyInsert(Board board);
 
 	List<Board> getbuildingNo_by_score();
+
+	int hostBoardCntQuest(Integer sNo);
 	
 }
 

@@ -46,7 +46,6 @@
 	<select id="count" resultType="Integer" parameterType="map">
 		select count(*) from board 
 		
-		
 		<if test="kind != null and sNo != null">
 			where kind = #{kind} and sNo = #{sNo}	
 		</if>
@@ -66,6 +65,11 @@
 	<select id="hostQuestion" resultType="Board">
 		select * from board where kind = 5 and qType=0
 	</select>
+	
+	<select id="hostQuestCnt" resultType="Integer" parameterType="map">
+		select count(*) from board where qType=0 and sNo = #{sNo}
+	</select>
+	
 	<select id="buildingNo_by_score" resultType="Board">
 		select sno, avg(score) from board order by avg(score) desc limit 6
 	</select>

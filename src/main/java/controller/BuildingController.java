@@ -222,8 +222,12 @@ public class BuildingController {
 		ModelAndView mav = new ModelAndView();
 		int sNo = Integer.parseInt(request.getParameter("sNo"));
 		int kind = Integer.parseInt(request.getParameter("kind"));
+		int reNo = Integer.parseInt(request.getParameter("reNo"));
+		
 		System.out.println(sNo);
 		System.out.println(kind);
+		
+		service.reserveStatusUpdate(reNo);
 		
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());

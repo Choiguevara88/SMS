@@ -26,4 +26,6 @@ public interface ReserveDao {
 
 	void update(Reserve reserve);
 
+	void resStatUpdate(int reNo);
+
 }

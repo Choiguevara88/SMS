@@ -151,5 +151,12 @@ public class BoardDaoImpl implements BoardDao{
 	public List<Board> getbuildingNo_by_score() {
 		return sqlSession.selectList(NS+"buildingNo_by_score");
 	}
+
+	@Override
+	public int hostBoardCntQuest(Integer sNo) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("sNo",sNo);
+		return sqlSession.selectOne(NS + "hostQuestCnt", map);
+	}
 	
 }

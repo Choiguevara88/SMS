@@ -79,7 +79,7 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 
 		if (board.getImg4File() != null) {
-			String img = uploadImgCreate(board.getImg1File(), request);
+			String img = uploadImgCreate(board.getImg4File(), request);
 			if (img != null)
 				board.setImg4(img);
 		}
@@ -199,7 +199,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void reserveInsert(Reserve reserve) {
-		reserve.setReNo(reserve.getSrNo() + (int) new Date().getTime());
+		reserve.setReNo(reserve.getSrNo() + Math.abs((int)new Date().getTime()));
 		reDao.insert(reserve);
 	}
 
@@ -566,5 +566,17 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Member> selectMemberList(String[] idchks) {
 		return memDao.getSelectMemberList(idchks);
 	}
+
+	@Override
+	public int hostBoardCountQuest(Integer sNo) {
+		return boDao.hostBoardCntQuest(sNo);
+	}
+
+	@Override
+	public void reserveStatusUpdate(int reNo) {
+		reDao.resStatUpdate(reNo);
+		
+	}
+
 
 }// ProjectServiceImpl end

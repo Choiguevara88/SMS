@@ -118,4 +118,11 @@ public class ReserveDaoImpl implements ReserveDao {
 		map.put("reNo", reNo);
 		sqlSession.update(NS + "paymentConfirm", map);
 	}
+
+	@Override
+	public void resStatUpdate(int reNo) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("reNo", reNo);
+		sqlSession.update(NS + "reviewWrite", map);
+	}
 }
