@@ -54,9 +54,22 @@ var ruleidx = 1;
 /*이미지 관련 스크립트*/
 var imgarr = new Array();
 var imgidx = 0;
+var it = "";
 <c:forEach items="${building.sImg2Name}" var="item">
-imgarr[imgidx++] = ("${item}");
+imgarr[imgidx++] = ("${item}"); 
 </c:forEach>
+if(imgidx > 4) {
+	for(var i = 0 ; i < imgarr.length ; i++) {
+		it="<img src='../picture/"+imgarr[i]+"' style='width:100%'>"
+		document.getElementById("img"+i).innerHTML = it;
+	}
+}
+if(imgidx < 5) {
+	for(var i = 0 ; i < imgarr.length ; i += 2) {
+		it="<img src='../picture/"+imgarr[i]+"' style='width:100%'>"
+		document.getElementById("img"+i).innerHTML = it;
+	}
+}
 });
 
 function listRlist(pageNum){
@@ -97,8 +110,8 @@ function listQlist(pageNum){
 <!-- 공간(Building)정보 -->
 <div>
 
+<div id="img0"></div>
 <div id="img1"></div>
-<div id="img2"></div>
 
 <div class="w3-panel w3-leftbar w3-border-purple">
  <h3>공간소개</h3>
@@ -106,8 +119,8 @@ function listQlist(pageNum){
 <div class="w3-margin-left">${building.sContent}</div>
 <hr>
 
+<div id="img2"></div>
 <div id="img3"></div>
-<div id="img4"></div>
 
 <div class="w3-panel w3-leftbar w3-border-purple">
 <h3>시설안내</h3>
@@ -117,8 +130,8 @@ function listQlist(pageNum){
 </div>
 <hr>
 
+<div id="img4"></div>
 <div id="img5"></div>
-<div id="img6"></div>
 
 <div class="w3-panel w3-leftbar w3-border-purple">
 <h3>이용안내</h3>
@@ -136,6 +149,9 @@ function listQlist(pageNum){
 <div id="map" style="width:100%;height:400px;"></div>
 <hr size="1">
 
+<div id="img6"></div>
+<div id="img7"></div>
+
 <div class="w3-panel w3-leftbar w3-border-purple">
  <h3>공간 이용시 주의사항</h3>
 </div>
@@ -143,6 +159,9 @@ function listQlist(pageNum){
 <!-- 이용규칙이 보여질 곳 -->
 </div>
  <hr>
+ 
+<div id="img8"></div>
+<div id="img9"></div>
 
 <!-- 이용후기, Q&A -->
 <div id="listRlist"></div> 
