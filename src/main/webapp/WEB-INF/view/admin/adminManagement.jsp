@@ -25,22 +25,25 @@
 <div class="col-4">
 	<table class="w3-table w3-striped w3-small">
 		<tr align="center" valign="middle">
-			<td colspan="4" style="text-align:center; font-color:gray"><b>Host 전환 신청</b></td>
+			<td colspan="4" style="text-align:center;  font-size:medium;">
+			<font class="btn btn-outline-dark btn-block disabled" style="font-family:'Hanna'; text-align:center;">Host 전환 신청</font>
+			</td>
 		</tr>
 	<c:if test="${!empty hRegList}">
 		<tr align="center" valign="middle">
 			<th style="text-align:center;">id</th>
 			<th style="text-align:center;">상호명</th>
-			<th style="text-align:center;">이메일</th>
+			<th style="text-align:center;">지역</th>
 			<th style="text-align:center;">비고</th>
 		</tr>
 		<c:forEach var="hostMem" items="${hRegList}">
 		<tr align="center" valign="middle">
-			<td style="text-align:center;">${hostMem.id}</td>
-			<td style="text-align:center;">${hostMem.hostName}</td>
-			<td style="text-align:center;">${hostMem.email}</td>
-			<td style="text-align:center;"><a href="adminHostRegDetail.sms?id=${hostMem.id}">[정보]</a>&nbsp;
-										   <a href="adminHostRegister.sms?id=${hostMem.id}">[승인]</a></td>
+			<td style="text-align:center; vertical-align:middle;">${hostMem.id}</td>
+			<td style="text-align:center; vertical-align:middle;">${hostMem.hostName}</td>
+			<td style="text-align:center; vertical-align:middle;">${fn:substring(hostMem.address,6,8)}</td>
+			<td style="text-align:center; vertical-align:middle;">
+			<a href="adminHostRegDetail.sms?id=${hostMem.id}" style="font-family:'Hanna'" class="btn btn-outline-secondary btn-sm">정보</a>&nbsp;
+			<a href="adminHostRegister.sms?id=${hostMem.id}" style="font-family:'Hanna'" class="btn btn-outline-secondary btn-sm">승인</a></td>
 		</tr>
 		</c:forEach>
 	</c:if>
@@ -53,7 +56,9 @@
 <div class="col-4">
 	<table class="w3-table w3-striped w3-small">
 		<tr align="center" valign="middle">
-			<td colspan="4" style="text-align:center; font-color:gray"><b>Guest 고객문의</b></td>
+			<td colspan="4" style=" font-size:medium;">
+			<a href="adminGList.sms" class="btn btn-outline-danger btn-block" style="font-family:'Hanna'; text-align:center;">Guest 고객 문의</a>
+			</td>
 		</tr>
 	<c:if test="${!empty gList}">
 
@@ -65,10 +70,10 @@
 		</tr>
 		<c:forEach var="gueQue" items="${gList}">
 		<tr align="center" valign="middle">
-			<td>${gueQue.id}</td>
-			<td><a href="adminQuestionDetail.sms?bNo=${gueQue.bNo}">${fn:substring(gueQue.content,0,15)}...</a></td>
-			<td><fmt:formatDate value="${gueQue.regDate}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
-			<td><a href="adminAnswerQuestion.sms?bNo=${gueQue.bNo}">[답변]</a></td>
+			<td style="text-align:center; vertical-align:middle;">${gueQue.id}</td>
+			<td style="text-align:center; vertical-align:middle;">${fn:substring(gueQue.content,0,15)}...</td>
+			<td style="text-align:center; vertical-align:middle;"><fmt:formatDate value="${gueQue.regDate}" pattern="yy-MM-dd hh:mm:ss" /></td>
+			<td style="text-align:center; vertical-align:middle;"><a href="adminAnswerQuestion.sms?bNo=${gueQue.bNo}" style="font-family:'Hanna'" class="btn btn-outline-danger btn-sm">답변</a></td>
 		</tr>
 		</c:forEach>
 	</c:if>
@@ -81,18 +86,23 @@
 <div class="col-4">
 	<table class="w3-table w3-striped w3-small">
 		<tr align="center" valign="middle">
-			<td colspan="4" style="text-align:center; font-color:gray"><b>Host 고객문의</b></td>
+			<td colspan="4" style="font-size:medium;">
+			<a href="adminHList.sms" class="btn btn-outline-primary btn-block" style="font-family:'Hanna'; text-align:center;">Host 고객 문의</a>
+			</td>
 		</tr>
 	<c:if test="${!empty hList}">
 		<tr align="center" valign="middle">
-			<th>id</th><th>내 용</th><th>date</th><th>비고</th>
+			<th style="text-align:center;">아이디</th>
+			<th style="text-align:center;">내 용</th>
+			<th style="text-align:center;">등록일자</th>
+			<th style="text-align:center;">비고</th>
 		</tr>
 		<c:forEach var="hosQue" items="${hList}">
 		<tr align="center" valign="middle">
-			<td>${hosQue.id}</td>
-			<td><a href="adminQuestionDetail.sms?bNo=${hosQue.bNo}">${fn:substring(hosQue.content,0,15)}...</a></td>
-			<td><fmt:formatDate value="${hosQue.regDate}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
-			<td><a href="adminAnswerQuestion.sms?bNo=${hosQue.bNo}">[답변]</a></td>
+			<td style="text-align:center; vertical-align:middle;">${hosQue.id}</td>
+			<td style="text-align:center; vertical-align:middle;">${fn:substring(hosQue.content,0,15)}...</td>
+			<td style="text-align:center; vertical-align:middle;"><fmt:formatDate value="${hosQue.regDate}" pattern="yy-MM-dd hh:mm:ss" /></td>
+			<td style="text-align:center; vertical-align:middle;"><a href="adminAnswerQuestion.sms?bNo=${hosQue.bNo}" style="font-family:'Hanna'" class="btn btn-outline-primary btn-sm">답변</a></td>
 		</tr>
 		</c:forEach>
 	</c:if>
@@ -108,13 +118,13 @@
 	<table class="w3-table">
 		<tr>
 			<td style="text-align:center;">
-				<a href="adminTransHostList.sms" class="w3-button w3-black w3-block w3-round-xxlarge">총 거래대장</a>
+				<a href="adminTransHostList.sms" class="w3-button w3-black w3-block w3-round-xxlarge" style="font-family:'Hanna';">총 거래대장</a>
 			</td>
 			<td style="text-align:center;">
-				<a href="adminMemberList.sms" class="w3-button w3-black w3-block w3-round-xxlarge">총 회원 정보</a>
+				<a href="adminMemberList.sms" class="w3-button w3-black w3-block w3-round-xxlarge" style="font-family:'Hanna';">총 회원 정보</a>
 			</td>
 			<td style="text-align:center;">
-				<a href="adminHostList.sms" class="w3-button w3-black w3-block w3-round-xxlarge">Host 정보</a>
+				<a href="adminHostList.sms" class="w3-button w3-black w3-block w3-round-xxlarge" style="font-family:'Hanna';">Host 정보</a>
 			</td>
 		</tr>
 	</table>

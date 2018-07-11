@@ -102,6 +102,8 @@ public class ReserveController {
 		ModelAndView mav = new ModelAndView();
 
 		String hostId = ((Member) session.getAttribute("loginMember")).getId();
+		
+		Member hostMember = service.getMember(hostId);
 
 		List<Integer> hostHaveBuild = service.hostHaveBuildsNo(hostId); // 해당 Host 앞으로 등록된 Building들의 건물관리번호를 List로 저장
 
@@ -120,6 +122,7 @@ public class ReserveController {
 		}
 
 		mav.addObject("list", list);
+		mav.addObject("hMember", hostMember);
 		mav.addObject("buildCnt", buildCnt);
 		mav.addObject("questCnt", questCnt);
 

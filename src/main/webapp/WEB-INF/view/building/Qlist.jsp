@@ -144,11 +144,11 @@ window.onclick = function(event) {
 	<tr>
 		<td><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd H:mm:ss"/></td>
   	<td align="right">
-  		<c:if test="${sessionScope.loginMember.id == building.id && board.sNo == building.sNo }">
+  		<c:if test="${sessionScope.loginMember.id == building.id}">
   		<c:if test="${board.refLevel == 0  }">
   		<c:if test="${board.qType == 0 }">
   	<a href="javascript:win_openQ('${board.bNo}')">[답변]</a></c:if></c:if></c:if>
-  		<c:if test="${sessionScope.loginMember.id == board.id }">
+  		<c:if test="${sessionScope.loginMember.id == board.id}">
   	<form name="d" method="post" action="delete.sms">
   		<input type="hidden" name="bNo"	value="${board.bNo}">
 		<input type="hidden" name="sNo"	value="${board.sNo}">

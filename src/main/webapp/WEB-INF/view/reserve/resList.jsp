@@ -2,19 +2,28 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
 
-<fmt:requestEncoding value="UTF-8" />
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>예약 목록 조회</title>
+
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<fmt:requestEncoding value="UTF-8" />
+
+<!-- 부트스트랩 사용 선언 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<!-- 부트스트랩 사용 선언-->
+
+<!-- w3 css 사용 선언 -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- w3 css 사용 선언 -->
+
+<title>예약 목록 조회</title>
 
 <script type="text/javascript">
 	function pageGo(pageNum) {
@@ -76,7 +85,7 @@ select {width: 140px; /* 원하는 너비설정 */
 <body>
 	<c:set var="path" value="${pageContext.request.contextPath}"/>
 	<div class="w3-container w3-margin">
-		<h2>예약목록조회</h2>
+		<h1 style="font-family:'Hanna';">예약목록조회</h1>
 	</div>
 	<div class="w3-container w3-margin">
 		<form action="resList.sms" method="GET" name="sf">
@@ -108,7 +117,8 @@ select {width: 140px; /* 원하는 너비설정 */
 		<table class="w3-table w3-striped w3-hoverable w3-border">
 			
 			<c:if test="${reservecnt == 0 }">
-				<td>등록된 예약이 없습니다.<a href="${path}/main.sms">[메인페이지로 가기]</a></td>
+				<td>등록된 예약이 없습니다.&nbsp;&nbsp;
+				<a href="${path}/main.sms" style="font-family:'Hanna';" class="text-secondary">[메인페이지로 가기]</a></td>
 			</c:if>
 			
 			<c:if test="${reservecnt != 0 }">
@@ -126,7 +136,8 @@ select {width: 140px; /* 원하는 너비설정 */
 				<c:forEach var="res" items="${list}">
 					<tr>
 
-						<td style="text-align:center;"><a href="resDetail.sms?reNo=${res.reNo}">${res.reNo}</a></td>
+						<td style="text-align:center;">
+						<a href="resDetail.sms?reNo=${res.reNo}" style="font-family:'Hanna';" class="text-secondary">${res.reNo}</a></td>
 						<td style="text-align:center;">[${res.sNo}]</td>
 						<td style="text-align:center;">[${res.srNo}]</td>
 						
@@ -159,12 +170,15 @@ select {width: 140px; /* 원하는 너비설정 */
 								</c:if>
 
 								<c:if test="${today1 > redate}">
-									[이용완료] <a href="../building/Rwrite.sms?sNo=${res.sNo}&kind=2&reN0=${res.reNo}">[리뷰 작성]</a>
+									[이용완료]&nbsp;&nbsp;
+									<a href="../building/Rwrite.sms?sNo=${res.sNo}&kind=2&reN0=${res.reNo}" style="font-family:'Hanna';" class="text-primary">[리뷰 작성]</a>
 								</c:if>
 							</c:if>
-							<c:if test="${res.reStat == 2}">환불 예정 : <a href="resCancel.sms?reNo=${res.reNo}&reStat=${res.reStat}">[환불 확인]</a></c:if>
+							<c:if test="${res.reStat == 2}">환불 예정 :&nbsp; 
+							<a href="resCancel.sms?reNo=${res.reNo}&reStat=${res.reStat}" style="font-family:'Hanna';" class="text-danger">[환불 확인]</a></c:if>
 							<c:if test="${res.reStat == 3}">[환불완료]	</c:if>
 							<c:if test="${res.reStat == 4}">[예약취소]	</c:if>
+							<c:if test="${res.reStat == 5}">[이용완료]	</c:if>
 						</c:if>
 						<c:if test="${loginMember.id == 'admin'}">
 							예약자 : ${res.id}

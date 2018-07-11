@@ -82,41 +82,43 @@
 		<fmt:formatDate var="redate" value="${reserve.reDate}" pattern="yyyyMMddhhmm" type="date" /> 
 		<!-- 날짜 비교용 날짜 객체들 -->
 		
+		<c:if test="${loginMember.id == reserve.id }">
 		<tr>
 			<td style="vertical-align : middle;">진행상태</td>
 			<td class="w3-text-gray" style="vertical-align : middle;">
-				<c:if test="${reserve.reStat == 0}">예약 [결제 대기]&nbsp;&nbsp;&nbsp;<a href="resCancel.sms?reNo=${reserve.reNo}&reStat=${reserve.reStat}" class="btn btn-outline-danger btn-sm">예약취소</a></c:if>
+				<c:if test="${reserve.reStat == 0}">예약 [결제 대기]&nbsp;&nbsp;&nbsp;<a href="resCancel.sms?reNo=${reserve.reNo}&reStat=${reserve.reStat}" class="btn btn-outline-danger btn-sm" style="font-family:'Hanna';">예약취소</a></c:if>
 				<c:if test="${reserve.reStat == 1}">
 					<c:if test="${today1 > redate }">
 						[이용 완료]
 					</c:if>
 					<c:if test="${today1 <= redate }">
 						예약 [결제 완료]&nbsp;&nbsp;&nbsp;
-						<a href="resCancel.sms?reNo=${reserve.reNo}&reStat=${reserve.reStat}" class="btn btn-outline-danger btn-sm">예약취소신청</a>	
+						<a href="resCancel.sms?reNo=${reserve.reNo}&reStat=${reserve.reStat}" class="btn btn-outline-danger btn-sm" style="font-family:'Hanna';">예약취소신청</a>	
 					</c:if>
 				</c:if>
-				<c:if test="${reserve.reStat == 2}">환불 확인 중&nbsp;&nbsp;&nbsp;<a href="resCancel.sms?reNo=${reserve.reNo}&reStat=${reserve.reStat}" class="btn btn-outline-dark btn-sm">환불확인</a></c:if>
+				<c:if test="${reserve.reStat == 2}">환불 확인 중&nbsp;&nbsp;&nbsp;<a href="resCancel.sms?reNo=${reserve.reNo}&reStat=${reserve.reStat}" class="btn btn-outline-dark btn-sm" style="font-family:'Hanna';">환불확인</a></c:if>
 				<c:if test="${reserve.reStat == 3}">[환불완료]</c:if>
 				<c:if test="${reserve.reStat == 4}">[예약취소완료]</c:if>
 			</td>
 		</tr>
+		</c:if>
 		</table>
 	</div>
-	
+	<c:if test="${loginMember.id == reserve.id }">
 	<div class="w3-container w3-margin" style="text-align:center;">
 		<c:if test="${reserve.reStat==1 && today1 > redate}">
-			<a href="../building/Rwrite.sms?sNo=${reserve.sNo}&reNo=${reserve.reNo}" class="btn btn-outline-primary btn-lg">리뷰작성 하러가기</a>
+			<a href="../building/Rwrite.sms?sNo=${reserve.sNo}&reNo=${reserve.reNo}" style="font-family:'Hanna';" class="btn btn-outline-primary btn-lg">리뷰작성 하러가기</a>
 		</c:if>
 
 		<c:if test="${reserve.reStat==0 && today1 <= redate}">
-			<a href="resUpdate.sms?reNo=${reserve.reNo}" class="btn btn-outline-dark btn-lg">예약정보수정</a>
+			<a href="resUpdate.sms?reNo=${reserve.reNo}" style="font-family:'Hanna';" class="btn btn-outline-dark btn-lg">예약정보수정</a>
 		</c:if>
 
 		<c:if test="${reserve.reStat==5}">
-			<a href="../building/buildingDetail.sms?sNo=${reserve.sNo}" class="btn btn-outline-primary btn-lg">작성된 리뷰 보러가기</a>
+			<a href="../building/buildingDetail.sms?sNo=${reserve.sNo}" style="font-family:'Hanna';" class="btn btn-outline-primary btn-lg">작성된 리뷰 보러가기</a>
 		</c:if>
 	</div>
-	
+	</c:if>
 </div>
 </div>
 <div class="w3-col s2"><p>&nbsp;</p></div><!-- 좌우 공간 확보용 -->

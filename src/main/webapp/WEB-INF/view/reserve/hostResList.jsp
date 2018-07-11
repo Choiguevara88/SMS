@@ -5,10 +5,22 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <fmt:requestEncoding value="UTF-8" />
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- 부트스트랩 사용 선언 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<!-- 부트스트랩 사용 선언-->
+
+<!-- w3 css 사용 선언 -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- w3 css 사용 선언 -->
+
 <title>Host 계정용 예약 목록 조회</title>
 
 <style type="text/css">
@@ -19,6 +31,7 @@ select {width: 140px; /* 원하는 너비설정 */
 		-webkit-appearance: none; /* 네이티브 외형 감추기 */ 
 		-moz-appearance: none; 
 		appearance: none; }
+
 .inputText {
 		width: 500px; /* 원하는 너비설정 */ 
 		padding: .1em .1em; /* 여백으로 높이 설정 */}
@@ -27,7 +40,6 @@ select {width: 140px; /* 원하는 너비설정 */
 		padding: .2em .2em; /* 여백으로 높이 설정 */}
 </style>
 
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -68,7 +80,7 @@ select {width: 140px; /* 원하는 너비설정 */
 <body>
 	<c:set var="path" value="${pageContext.request.contextPath}" />
 	<div class="w3-container w3-margin">
-		<h2>예약목록조회</h2>
+		<h1 style="font-family:'Hanna';">예약목록조회</h1>
 	</div>
 	<div class="w3-container w3-margin">
 		<form action="hostResList.sms" method="GET" name="sf">
@@ -109,14 +121,16 @@ select {width: 140px; /* 원하는 너비설정 */
 					<th style="text-align:center;">예약일자</th>
 					<th style="text-align:center;">등록일자</th>
 					<th style="text-align:center;">이용금액</th>
-					<th style="text-align:center;">비고</th>
+					<th style="text-align:center;">비  고</th>
 				</tr>
 
 				<c:forEach var="res" items="${list}">
 					<tr>
 
-						<td class="td_1" style="text-align:center;">${res.reNo}</td>
-						<td class="td_2" style="text-align:center;">${res.id}</td>
+						<td style="text-align:center; vertical-align:middle;">
+							<a href="resDetail.sms?reNo=${res.reNo}" style="font-family:'Hanna';" class="text-secondary">${res.reNo}</a>
+						</td>
+						<td style="text-align:center; vertical-align:middle;">${res.id}</td>
 						
 						<jsp:useBean id="today" class="java.util.Date" />
 						<fmt:formatDate var="today1" value="${today}" pattern="yyyyMMddhhmm" type="date" />
@@ -124,18 +138,22 @@ select {width: 140px; /* 원하는 너비설정 */
 						<fmt:formatDate var="regdate" value="${res.regDate}" pattern="yyyyMMddhhmm" type="date" />
 
  						<c:if test="${today1 == redate}">
-							<td style="text-align:center;"><fmt:formatDate value="${res.reDate}" pattern="hh:mm:ss" /></td>
+							<td style="text-align:center; vertical-align:middle;"><fmt:formatDate value="${res.reDate}" pattern="hh:mm:ss" /></td>
 						</c:if>
 
 						<c:if test="${today1 != redate}">
-							<td style="text-align:center;"><fmt:formatDate value="${res.reDate}"
+							<td style="text-align:center; vertical-align:middle;"><fmt:formatDate value="${res.reDate}"
 									pattern="yyyy-MM-dd hh시" /></td>
 						</c:if>
 						
-						<td style="text-align:center;"><fmt:formatDate value="${res.regDate}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
-						<td style="text-align:center;"><fmt:formatNumber value="${res.totPrice}" pattern="###,###"/></td>
-						<td style="text-align:center;">
-							<c:if test="${res.reStat == 0}">예약요청 : <a href="hostResConfirm.sms?reNo=${res.reNo}">[결제확인하기]</a></c:if>
+						<td style="text-align:center; vertical-align:middle;">
+							<fmt:formatDate value="${res.regDate}" pattern="yyyy-MM-dd hh:mm:ss" />
+						</td>
+						<td style="text-align:center; vertical-align:middle;">
+							<fmt:formatNumber value="${res.totPrice}" pattern="###,###"/>
+						</td>
+						<td style="text-align:center; vertical-align:middle;">
+							<c:if test="${res.reStat == 0}">예약요청 : <a href="hostResConfirm.sms?reNo=${res.reNo}" style="font-family:'Hanna';" class="text-primary" >[결제 확인하기]</a></c:if>
 							<c:if test="${res.reStat == 1}">
 								
 								<c:if test="${today1 >= redate}">
@@ -143,13 +161,14 @@ select {width: 140px; /* 원하는 너비설정 */
 								</c:if>
 								
 								<c:if test="${today1 < redate}">
-									[결제완료:이용대기 중]
+									[결제완료 : 이용대기 중]
 								</c:if>
 								
 							</c:if>
-							<c:if test="${res.reStat == 2}">[예약취소요청:환불확인중]</c:if>
+							<c:if test="${res.reStat == 2}">[예약취소요청 : 환불확인중]</c:if>
 							<c:if test="${res.reStat == 3}">[환불완료]</c:if>
 							<c:if test="${res.reStat == 4}">[예약취소]</c:if>
+							<c:if test="${res.reStat == 5}">[이용완료:리뷰작성완료]</c:if>
 						</td>
 					</tr>
 				</c:forEach>
