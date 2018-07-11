@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ include file="/WEB-INF/view/jspHeader.jsp" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/view/jspHeader.jsp" %>
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -80,21 +79,27 @@ function chkboxcheck2() {
 		<div class="w3-col s4"><font color="red"><form:errors path="sRContent"/></font></div>
 	</div>
 	
-	<div class="w3-row w3-container w3-margin">
-    	<div class="w3-col s8"><label style="font-family:'Hanna'">세부 공간 내용</label><form:input path="sRContent" class="w3-input" placeholder="공간에 대한 설명을 작성해주세요."/></div>
-		<div class="w3-col s4"><font color="red"><form:errors path="sRContent"/></font></div>
-	</div>
-	
 	<div class="w3-container w3-margin w3-row">
-		<div class="w3-col s5 w3-margin">
+		<div class="w3-col s5">
 		<label style="font-family:'Hanna'">세부 공간 유형 (1개만 체크 가능)</label>
+		<div>
 		<form:checkboxes path="sRType" items="${building.sTypeList}" onchange="chkboxcheck()" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;" class="w3-checkbox"/>
 		</div>
+		</div>
 		<div class="w3-col s2"><p>&nbsp;</p></div>
-		<div class="w3-col s5 w3-margin">
+		<div class="w3-col s5">
 		<label style="font-family:'Hanna'">예약 유형 (1개만 체크 가능)</label>
+		<div>
 		<form:checkbox path="sResType" value="0" label="시간 단위" onchange="chkboxcheck2()"/>&nbsp; &nbsp;
 		<form:checkbox path="sResType" value="1" label="일 단위" onchange="chkboxcheck2()"/>
+		</div>
+		</div>
+	</div>
+	
+	<div class="w3-container w3-margin">
+		<label style="font-family:'Hanna'">사진 업로드(여러 장 가능)</label>
+		<div>
+		<input type="file" multiple="multiple" name="sRImgList" class="w3-button">
 		</div>
 	</div>
 	
@@ -136,7 +141,7 @@ function chkboxcheck2() {
 
 	<div class="w3-container w3-margin w3-row">
     	<div class="w3-col s5" style="vertical-align:middle;">
-    		<label style="font-family:'Hanna'">최소 인원</label><br>
+    		<label style="font-family:'Hanna'">최소 인원</label>
     		<form:select path="sRPersonLimit" class="w3-select">
     			<form:option value="1"> 1명 </form:option>
     			<form:option value="2"> 2명 </form:option>
@@ -150,14 +155,13 @@ function chkboxcheck2() {
     	</div>
     	<div class="w3-col s2"><p>&nbsp;</p></div>
     	<div class="w3-col s5" style="vertical-align:middle;">
-    		<label style="font-family:'Hanna'">예약 단위당 가격</label><br>
+    		<label style="font-family:'Hanna'">예약 단위당 가격</label>
     		<form:input path="sPrice" class="w3-input" placeholder="숫자만 입력하세요."/>
     		<font color="red"><form:errors path="sPrice"/></font>
     	</div>
-    
 	</div>
 	
-	<div class="rows w3-container w3-margin" style="text-align:center;">
+	<div class="w3-container w3-section w3-padding" style="text-align:center;">
 		<input type="submit" value="등록하기" class="w3-btn w3-black" style="font-family:'Hanna'; width:30%;">
 	</div>
 </div>
