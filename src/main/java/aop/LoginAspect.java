@@ -112,7 +112,7 @@ public class LoginAspect {
 		return ret;
 	}
 	
-	//adminLoginCheck() 메서드
+	//adminLoginCheck() 메서드 : 관리자 업무 메서드에 대한 AOP
 	@Around("execution(* controller.Admin*.admin*(..))")
 	public Object adminLoginCheck(ProceedingJoinPoint joinPoint) throws Throwable {
 		
@@ -148,7 +148,7 @@ public class LoginAspect {
 	
 	
 	
-	//HostLoginCheck() 메서드 : 댓글 작성에 필요한 부분
+	//HostLoginCheck() 메서드 : HOST 계정 업무 메서드에 대한 AOP
 	@Around("execution(* controller.*.host*(..))") // host로 시작하는 메서드에 적용
 		public Object hostLoginCheck(ProceedingJoinPoint joinPoint) throws Throwable {
 			

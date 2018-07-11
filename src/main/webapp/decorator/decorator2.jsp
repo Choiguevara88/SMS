@@ -7,7 +7,7 @@
 <%@ page import="java.math.BigInteger" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/> <!-- 어느 곳에서나 login.sms할수 있도록 할려고 경로를 만들어 준 것-->
 <%-- /WebContent/decorator/decorator_test_bar.jsp --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -109,9 +109,11 @@ td {
    		<h1><strong><a href="${path }/main.sms" style="text-decoration:none">Share My Space</a></strong>
    			<button class="w3-button w3-purple w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button></h1></div>
      </div>
+<c:if test="${!empty building}">
 <div class="mainImg"> <div class="centered">
      <img id="mainImg" src="../picture/${building.sImg1}">
 </div></div>
+</c:if>
 <script>
 window.onscroll = function() {myFunction()};
 

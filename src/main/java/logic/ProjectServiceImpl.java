@@ -600,5 +600,26 @@ if (room.getsRImgList() != null) {
 		
 	}
 
+	@Override
+	public Room getRoom(Integer sNo, Integer sRNo) {
+		
+		Room returnRoom = roomDao.getRoom(sNo, sRNo);
+		
+		List<String> imgList = new ArrayList<String>();
+		List<String> infoList = new ArrayList<String>();
+		
+		if(returnRoom.getsRImg() != null && !returnRoom.getsRImg().equals("")) {
+			imgList = Arrays.asList(returnRoom.getsRImg().split("|"));
+		}
+		
+		if(returnRoom.getsRInfo() != null && !returnRoom.getsRInfo().equals("")) {
+			infoList = Arrays.asList(returnRoom.getsRInfo().split(","));
+		}
+		
+		returnRoom.setsRImgNameList(imgList);
+		returnRoom.setsRInfoList(infoList);
+	
+		return returnRoom;
+	}
 
 }// ProjectServiceImpl end
