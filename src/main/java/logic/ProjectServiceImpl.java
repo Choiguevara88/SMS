@@ -271,7 +271,15 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void insertRoom(Room room,HttpServletRequest request) {
-		
+if (room.getsRImgList() != null) {
+			
+			String img2 = uploadImgCreate2(room.getsRImgList(), request);
+			
+			if (img2 != null && !img2.equals(""))
+				room.setsRImg(img2);
+		} else {
+			room.setsRImg(listToString(room.getsRImgNameList()));
+		}
 		int sRNo = roomDao.maxNum();
 		room.setsRNo(++sRNo);
 		roomDao.insertRoom(room);
@@ -471,7 +479,13 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	@Override
 	public Room getMyRoom(Room room) {
-		return roomDao.getMyRoom(room);
+		Room myRoom = roomDao.getMyRoom(room);
+		String sRImg = myRoom.getsRImg();
+		if(sRImg != null) {
+			List<String> sRImgName = new ArrayList<String>(Arrays.asList(sRImg.split("[|]")));
+			myRoom.setsRImgNameList(sRImgName);
+		}
+		return myRoom;
 	}
 
 	@Override

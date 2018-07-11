@@ -24,12 +24,10 @@ function emailcheck(){
 <form action="letsfindID.sms" method="POST" name="f">
 		<table cellspacing="1" cellpadding="1" border="1">
 			<tr>
-				<td>이름 입력</td><td><input type="text" name="name"></td>
+				<td>이름 입력</td><td><input type="text" name="name"></td><td rowspan="2"><input type="button" onclick="emailcheck()" value="아이디 찾기"></td>
 			</tr>
 			<tr>
 				<td>이메일 입력</td><td><input type="text" name="email" id="email"></td>
-			</tr>
-			<tr><td colspan="2"><input type="button" onclick="emailcheck()" value="아이디 찾기"></td>
 			</tr>
 		</table>
 	</form>

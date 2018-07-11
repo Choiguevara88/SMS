@@ -118,11 +118,6 @@
 	</div>
 	
 </div>
-
-
-
-
-
 </div>
 <div class="w3-col s2"><p>&nbsp;</p></div><!-- 좌우 공간 확보용 -->
 </body>

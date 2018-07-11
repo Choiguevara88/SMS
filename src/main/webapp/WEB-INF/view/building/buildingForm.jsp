@@ -11,8 +11,6 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 /*건물유형 관련 스크립트*/
-
-
 function chkboxcheck() {
 	var sTypeList = document.getElementsByName("sTypeList")
 	var cnt = 0;

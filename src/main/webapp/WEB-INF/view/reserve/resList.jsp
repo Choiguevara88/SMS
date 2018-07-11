@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <fmt:requestEncoding value="UTF-8" />
 
@@ -107,7 +108,7 @@ select {width: 140px; /* 원하는 너비설정 */
 		<table class="w3-table w3-striped w3-hoverable w3-border">
 			
 			<c:if test="${reservecnt == 0 }">
-				<td>등록된 예약이 없습니다.<a href="main.sms">[메인페이지로 가기]</a></td>
+				<td>등록된 예약이 없습니다.<a href="${path}/main.sms">[메인페이지로 가기]</a></td>
 			</c:if>
 			
 			<c:if test="${reservecnt != 0 }">
