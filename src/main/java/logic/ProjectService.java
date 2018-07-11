@@ -121,4 +121,6 @@ public interface ProjectService {
 	int hostBoardCountQuest(Integer sNo);
 	
 	void reserveStatusUpdate(int reNo);
+	List<Board> guestQuestionList1();
+	List<Board> hostQuestionList1();
 }

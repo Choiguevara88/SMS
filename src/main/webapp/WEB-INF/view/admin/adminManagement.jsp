@@ -53,8 +53,7 @@
 <div class="col-4">
 	<table class="w3-table w3-striped w3-small">
 		<tr align="center" valign="middle">
-			<td colspan="4" style="text-align:center; font-color:gray"><b>Guest 고객문의</b></td>
-		</tr>
+			<td colspan="4" style="text-align:center; font-color:gray"><b><a href="Glist.sms">Guest 고객문의</a></b></td>
 	<c:if test="${!empty gList}">
 
 		<tr align="center" valign="middle">
@@ -81,7 +80,7 @@
 <div class="col-4">
 	<table class="w3-table w3-striped w3-small">
 		<tr align="center" valign="middle">
-			<td colspan="4" style="text-align:center; font-color:gray"><b>Host 고객문의</b></td>
+			<td colspan="4" style="text-align:center; font-color:gray"><b><a href="Hlist.sms">Host 고객문의</a></b></td>
 		</tr>
 	<c:if test="${!empty hList}">
 		<tr align="center" valign="middle">

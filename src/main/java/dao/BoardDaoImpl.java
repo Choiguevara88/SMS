@@ -128,10 +128,18 @@ public class BoardDaoImpl implements BoardDao{
 	public List<Board> guestQuestionList() {
 		return sqlSession.selectList(NS + "guestQuestion");
 	}
+	@Override
+	public List<Board> guestQuestionList1() {
+		return sqlSession.selectList(NS + "guestQuestion1");
+	}
 
 	@Override
 	public List<Board> hostQuestionList() {
 		return sqlSession.selectList(NS + "hostQuestion");
+	}
+	@Override
+	public List<Board> hostQuestionList1() {
+		return sqlSession.selectList(NS + "hostQuestion1");
 	}
 
 	@Override

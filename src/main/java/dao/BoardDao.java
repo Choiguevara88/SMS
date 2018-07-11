@@ -42,6 +42,10 @@ public interface BoardDao {
 	List<Board> getbuildingNo_by_score();
 
 	int hostBoardCntQuest(Integer sNo);
+
+	List<Board> guestQuestionList1();
+
+	List<Board> hostQuestionList1();
 	
 }
 

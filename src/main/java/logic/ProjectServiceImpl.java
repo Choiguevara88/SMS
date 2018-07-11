@@ -351,10 +351,18 @@ if (room.getsRImgList() != null) {
 	public List<Board> guestQuestionList() {
 		return boDao.guestQuestionList();
 	}
+	@Override
+	public List<Board> guestQuestionList1() {
+		return boDao.guestQuestionList1();
+	}
 
 	@Override
 	public List<Board> hostQuestionList() {
 		return boDao.hostQuestionList();
+	}
+	@Override
+	public List<Board> hostQuestionList1() {
+		return boDao.hostQuestionList1();
 	}
 
 	@Override
