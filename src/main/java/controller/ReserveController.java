@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,11 +47,13 @@ public class ReserveController {
 		return mav;
 	}
 
-	// 예약을 등록할 때 호출되는 메서드 : POST
+	// 예약을 등록할 때 호출되는 메서드
 	@RequestMapping(value = "reserve/regReserve", method = RequestMethod.POST)
-	public ModelAndView regReserve(Reserve reserve, HttpSession session) {
-
+	public ModelAndView registerReserve(Reserve reserve, String reDate, HttpSession session, HttpServletRequest request) {
+		System.out.println(reDate);
 		ModelAndView mav = new ModelAndView();
+		
+		System.out.println("reserve : " + reserve);
 
 		try {
 			service.reserveInsert(reserve);
