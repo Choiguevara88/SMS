@@ -24,4 +24,5 @@ public interface BuildingDao {
 
 	Building getbuilding_mainpage(int sNo);
 
+	void budelete(Integer sNo);
 }

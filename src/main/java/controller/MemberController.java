@@ -408,20 +408,33 @@ public class MemberController {
 	@RequestMapping(value="becomeaHost")
 	public ModelAndView becomeaHost(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		Member member = (Member)session.getAttribute("loginMember");
+		System.out.println("asdf");
+		System.out.println(member);
+		System.out.println(member.getRegStatus());
+		if(member.getRegStatus() != null && member.getRegStatus() == 0) {
+			mav.setViewName("member/waitforcompletion");
+			return mav;
+		}else {
 		mav.setViewName("member/becomeaHost");
 		return mav;
+		}
 	}
 	@RequestMapping(value="addhostdata")
 	public ModelAndView addhostdata(Member member, HttpSession session, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(member);
 		service.becomeaHost(member,request);
+		Member member1 = service.getMember(member.getId());
+		session.setAttribute("loginMember", member1);
 		mav.setViewName("redirect: becomeahost_complete.sms");
 		return mav;
 	}
 	@RequestMapping(value="becomeahost_complete")
 	public ModelAndView becomeahost_complete(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		System.out.println("AAAA");
+		System.out.println(session.getAttribute("loginMember"));
 		mav.setViewName("member/becomeahost_complete");
 		return mav;
 	}

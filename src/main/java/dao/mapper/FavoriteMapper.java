@@ -12,5 +12,8 @@ public interface FavoriteMapper {
 
 	@Delete("delete from favorite where id=#{id} and sNo=#{sNo}")
 	void delete(Map<String, Object> map);
+
+	@Delete("delete from favorite where sNo=#{value}")
+	void budelete(Integer sNo);
 	
 }

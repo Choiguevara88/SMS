@@ -67,40 +67,37 @@ td {
 <body>
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none;right:0;" id="rightMenu">
   <button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large w3-hover-light-grey">닫기 &times;</button>
-  <hr size="1">
+<<<<<<< HEAD
+  	<hr size="1">
+=======
+>>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
   <c:if test="${empty sessionScope.loginMember.id}"><a href="${path }/login.sms" class="w3-bar-item w3-button w3-hover-light-grey">
-  	<i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;로그인/회원가입!</a></c:if>
+  	<i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;로그인/회원가입!</a><hr></c:if>
    <c:if test="${!empty sessionScope.loginMember.id }">
-  	<hr size="1">
-  	<a href="#" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;${sessionScope.loginMember.name }님 환영해여~&gt;&lt;</a></c:if>
+  	<a href="#" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;${sessionScope.loginMember.name }님 환영해여~&gt;&lt;</a><hr size="1"></c:if>
+  	
   <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.id != 'admin' }">
-  	<hr size="1">
-  	<a href="${path }/personal_info.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button w3-hover-light-grey"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;나의 소중한 정보 !</a></c:if>
+  	<a href="${path }/personal_info.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button w3-hover-light-grey"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;나의 소중한 정보 !</a><hr size="1"></c:if>
+  	
   <c:if test="${sessionScope.loginMember.id == 'admin' }">
-  	<hr size="1">
-  	<a href="${path }/admin/adminManagement.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button w3-hover-light-grey"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;관리자 페이지 !</a></c:if>
+  	<a href="${path }/admin/adminManagement.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button w3-hover-light-grey"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;관리자 페이지 !</a><hr size="1"></c:if>
+  	
   <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.id != 'admin' }">
-  	<hr size="1">
-  	<a href="${path }/reserve/resList.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button w3-hover-light-grey"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;나의 예약정보 !</a></c:if>
+  	<a href="${path }/reserve/resList.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button w3-hover-light-grey"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;나의 예약정보 !</a><hr size="1"></c:if>
   <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.id != 'admin' }">
-  	<hr size="1">
-  	<a href="wishlist.sms" class="w3-bar-item w3-button w3-hover-light-grey"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;내가 찜한 공간 !</a></c:if>
+  	<a href="wishlist.sms" class="w3-bar-item w3-button w3-hover-light-grey"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;내가 찜한 공간 !</a><hr size="1"></c:if>
   <c:if test="${sessionScope.loginMember.memType == 1 }">
-  	<hr size="1">
-  	<a href="${path }/building/myBuildingList.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;공간 관리하기 !</a></c:if>
+  	<a href="${path }/building/myBuildingList.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;공간 관리하기 !</a><hr size="1"></c:if>
   <c:if test="${sessionScope.loginMember.memType == 1 && sessionScope.loginMember.id != 'admin'}">
-  	<hr size="1">
-  	<a href="${path }/reserve/hostResInfo.sms" class="w3-bar-item w3-button w3-hover-light-grey" ><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;공간 예약관리 하기 !</a></c:if>
-  <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.memType == '0' && sessionScope.loginMember.id != 'admin'}">
-  	<hr size="1">
-  	<a href="${path }/becomeaHost.sms" class="w3-bar-item w3-button w3-hover-light-grey"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;호스트 등록 !</a></c:if>
+  	<a href="${path }/reserve/hostResInfo.sms" class="w3-bar-item w3-button w3-hover-light-grey" ><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;공간 예약관리 하기 !</a><hr size="1"></c:if>
+  <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.memType == '0' && sessionScope.loginMember.regStatus != '0' && sessionScope.loginMember.id != 'admin'}">
+  	<a href="${path }/becomeaHost.sms" class="w3-bar-item w3-button w3-hover-light-grey"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;호스트 등록 !</a><hr size="1"></c:if>
   <c:if test="${!empty sessionScope.loginMember && sessionScope.loginMember.id != 'admin'}">
+  	<a href="${path}/qa/questionAdmin.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;1 : 1 문의 !</a><hr size="1"></c:if>
+  	<a href="${path }/notice/list.sms" class="w3-bar-item w3-button w3-hover-light-grey"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;공지사항 !</a>
   	<hr size="1">
-  	<a href="${path}/qa/questionAdmin.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;1 : 1 문의 !</a></c:if>
-  <hr size="1">
-  <a href="${path }/notice/list.sms" class="w3-bar-item w3-button w3-hover-light-grey"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;공지사항 !</a>
-  <hr size="1">
   <button onclick="document.getElementById('id01').style.display='block'" class="w3-bar-item w3-white w3-hover-light-grey"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;이용약관 !</button>
+ 	<hr size="1">
   <div id="id01" class="w3-modal w3-animate-opacity">
     <div class="w3-modal-content">
       <div class="w3-container">
@@ -231,12 +228,12 @@ td {
       </div>
     </div>
   </div>
-  <hr size="1">
   <c:if test="${!empty sessionScope.loginMember.id }"><a href="${path }/logout.sms" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;로그아웃..ㅜ</a></c:if>
+  <hr size="1">
 </div>
 
 
-<div class="w3-purple" style="height:90px" >
+<div class="w3-deep-purple" style="height:90px" >
    <div class="header w3-deep-purple" id="myHeader" style="height:90px;">
    		<h1><strong><a href="${path }/main.sms" style="text-decoration:none">Share My Space</a></strong>
    			<button class="w3-button w3-deep-purple w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button></h1></div>

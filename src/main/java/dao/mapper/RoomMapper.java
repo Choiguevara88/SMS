@@ -15,6 +15,9 @@ public interface RoomMapper {
 	void update(Room room);
 	@Select("select ifnull(max(sRNo),0) from room")
 	int maxNum();
+	
+	@Delete("delete from favorite where sNo=#{value}")
+	void budelete(Integer sNo);
 
 	//@Select("select * from room where sRNo=#{value}")
 	//Room selectMyRoom(Integer sRNo);

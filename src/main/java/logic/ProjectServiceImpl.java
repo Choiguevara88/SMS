@@ -660,4 +660,12 @@ if (room.getsRImgList() != null) {
 		faDao.deleteFavorite(id, sNo);
 	}
 
+	@Override
+	public void buildingDelete(Integer sNo) {
+		buDao.budelete(sNo);
+		faDao.budelete(sNo);
+		boDao.budelete(sNo);
+		roomDao.budelete(sNo);
+	}
+
 }// ProjectServiceImpl end

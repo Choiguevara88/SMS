@@ -9,6 +9,13 @@
 </head>
 <body>
 <form:form modelAttribute="board" action="Rwrite.sms" method="post" name="f" enctype="multipart/form-data">
+<spring:hasBindErrors name="board">
+ 		<font color="red">
+ 			<c:forEach items="${errors.globalErrors }" var="error">
+ 				<spring:message code="${error.code }"/>
+ 			</c:forEach>	
+ 		</font>
+ 	</spring:hasBindErrors>
 <form:hidden path="kind" value="2"/>
 <input type="hidden" name="pageNum" value="1"/>
 <input type="hidden" name="reNo" value="${param.reNo}"/>
