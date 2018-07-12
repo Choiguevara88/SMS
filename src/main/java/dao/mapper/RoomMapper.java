@@ -11,7 +11,7 @@ public interface RoomMapper {
 
 	@Insert("insert into room (sno,srno,srname,srtype,srcontent,srinfo,srestype,srpersonlimit,sprice,srimg) values(#{sNo},#{sRNo},#{sRName},#{sRType},#{sRContent},#{sRInfo},#{sResType},#{sRPersonLimit},#{sPrice},#{sRImg})")
 	void insert(Room room);
-	@Update("update room set srname=#{sRName},srtype=#{sRType},srcontent=#{sRContent},srinfo=#{sRInfo},srestype=#{sResType},srpersonlimit=#{sRPersonLimit},sprice=#{sPrice} where srno=#{sRNo} and sNo=#{sNo}")
+	@Update("update room set srname=#{sRName},srtype=#{sRType},srcontent=#{sRContent},srinfo=#{sRInfo},srestype=#{sResType},srpersonlimit=#{sRPersonLimit},sprice=#{sPrice},sRImg=#{sRImg} where srno=#{sRNo} and sNo=#{sNo}")
 	void update(Room room);
 	@Select("select ifnull(max(sRNo),0) from room")
 	int maxNum();
