@@ -18,9 +18,9 @@
  	<br>
  	<br>
  	<div>
- 		<input class="w3-button w3-xlarge w3-purple" type="button" align="left" onclick="location.href='main.sms'" value="메인페이지">
- 		<input class="w3-button w3-xlarge w3-purple" type="button" align="right" onclick="document.getElementById('id01').style.display='block'" value="이용약관보기">
- 		<input class="w3-button w3-xlarge w3-purple" type="button" align="right" onclick="location.href='main.sms'" value="1:1 문의하기"></div>
+ 		<input class="w3-button w3-xlarge w3-deep-purple" type="button" align="left" onclick="location.href='main.sms'" value="메인페이지">
+ 		<input class="w3-button w3-xlarge w3-deep-purple" type="button" align="right" onclick="document.getElementById('id01').style.display='block'" value="이용약관보기">
+ 		<input class="w3-button w3-xlarge w3-deep-purple" type="button" align="right" onclick="location.href='main.sms'" value="1:1 문의하기"></div>
  	<div></div>
  </div>
  </div>

@@ -171,7 +171,7 @@ select {width: 140px; /* 원하는 너비설정 */
 
 								<c:if test="${today1 > redate}">
 									[이용완료]&nbsp;&nbsp;
-									<a href="../building/Rwrite.sms?sNo=${res.sNo}&kind=2&reN0=${res.reNo}" style="font-family:'Hanna';" class="text-primary">[리뷰 작성]</a>
+									<a href="../building/Rwrite.sms?sNo=${res.sNo}&kind=2&reNo=${res.reNo}" style="font-family:'Hanna';" class="text-primary">[리뷰 작성]</a>
 								</c:if>
 							</c:if>
 							<c:if test="${res.reStat == 2}">환불 예정 :&nbsp; 

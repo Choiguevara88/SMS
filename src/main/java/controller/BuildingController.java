@@ -233,11 +233,9 @@ public class BuildingController {
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
 		}
-		
 		try {
 			service.boardWrite(board, request);
 			mav.setViewName("redirect:/building/builidingDetail.sms");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ProjectException("오류가 발생하였습니다." , "/building/buildingDetail.sms");

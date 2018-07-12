@@ -16,7 +16,7 @@ public interface MemberMapper {
 	@Update("update Member set pw=#{pw}, email=#{email}, mob=#{mob} where id=#{id}")
 	void update(Member member);
 
-	@Insert("update Member set hostName=#{hostName}, pictureUrl=#{pictureUrl}, hostRegNo=#{hostRegNo}, address=#{address}, accountNo=#{accountNo}, tel=#{tel}, regStatus=#{regStatus} where id=#{id}")
+	@Insert("update Member set hostName=#{hostName}, pictureUrl=#{pictureUrl}, hostRegNo=#{hostRegNo}, address=#{address}, accountNo=#{accountNo}, tel=#{tel}, regStatus=0 where id=#{id}")
 	void becomeaHost(Member member);
 
 	@Delete("Delete from Member where id=#{id}")
