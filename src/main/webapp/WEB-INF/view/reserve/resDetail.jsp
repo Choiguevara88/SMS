@@ -17,8 +17,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <!-- 부트스트랩 사용 선언 -->
 
-
-
 <title>:::나의 주문 정보:::</title>
 
 </head>
@@ -68,7 +66,7 @@
 		
 		<tr>
 			<td style="vertical-align : middle;">공간 한 줄 설명</td>
-			<td class="w3-text-gray" style="vertical-align : middle;">${room.sRInfo}</td>
+			<td class="w3-text-gray" style="vertical-align : middle;">${room.sRContent}</td>
 		</tr>
 		
 		<tr>

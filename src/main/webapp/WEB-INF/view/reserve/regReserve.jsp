@@ -16,7 +16,6 @@
 <!-- w3 css 사용 선언 -->
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <script>
 $(document).ready(function() {
 	var selDate = ""
@@ -52,6 +51,7 @@ $(document).ready(function() {
 		selTime = document.getElementById("selectReTime").value
 		chkDate = document.getElementById("chkReDate")
 		chkDate.innerHTML = selDate
+		var sres = ${room.sResType}
 		
 		if(selcnt != 0) {
 			totPrice = document.getElementById("totPrice1")
@@ -68,15 +68,14 @@ $(document).ready(function() {
 			console.log(dateTime)
 			reserveDate1.value = dateTime
 			
-		} else if (${room.sResType == 1}) {
+		} 
+		
+		if (sres == 1) {
 			reserveDate = document.getElementById("reserveDate1")
 			var dateTime = selDate.replace(/-/gi, "") + "000000"
 			console.log(typeof dateTime)
 			console.log(dateTime)
 			reserveDate.value = dateTime
-			
-			
-			
 		}
 	})
 	
@@ -151,7 +150,7 @@ $(document).ready(function() {
 		<h1 style="font-family:'Hanna'" class="w3-text-gray">${room.sRName}</h1>
 	</div>
 	
-	<div class="w3-container w3-margin">
+	<div class="w3-container w3-margin w3-padding">
 		<table class="w3-table w3-bordered">
 		<tr>
 			<td style="width:30%; vertical-align:middle; font-size:large;">한 줄 설명</td>
@@ -188,6 +187,7 @@ $(document).ready(function() {
 			<td style="width:30%; vertical-align:middle; font-size:large;">예약 일자</td>
 			<td style="width:60%; vertical-align:middle;" class="w3-text-gray">
 				<input type="date" name="reDate" class="w3-border-0 w3-hover-light-gray" placeholder="예약일자" id="selectReDate">
+				<input type="hidden" id="selectReTime">
 			</td>
 		</c:if>
 		</tr>
@@ -225,13 +225,13 @@ $(document).ready(function() {
 		</c:forEach>	
 	</div>
 </div>
-<%-- 	<div class="w3-container w3-margin">
+ <div class="w3-container w3-margin w3-row">
 	<c:forEach items="${room.sRImgNameList}" var="sRImg">
-		<div class="w3-container" style="text-align:center;">
-		<img src="../picture/${sRImg}" class="w3-image w3-hover-opacity" width="500" height="300">
+		<div class="w3-col s6" style="text-align:center;">
+		<img src="../picture/${sRImg}" class="w3-image w3-hover-opacity" width="200px" height="100px">
 		</div>
 	</c:forEach>
-	</div> --%>
+</div>
 </div>
 
 <div class="w3-container w3-margin w3-border w3-round">
@@ -309,7 +309,7 @@ $(document).ready(function() {
 
 </div>
 
-<div class="w3-col s3 w3-margin">
+<div class="w3-col s3 w3-margin" id="floatMenu">
 	<div class="w3-container w3-margin">
 		<h2 style="font-family:'Hanna'" class="w3-text-gray">결제 예정 금액</h2>
 	</div>
@@ -357,9 +357,6 @@ $(document).ready(function() {
 <div class="w3-col s1"><p>&nbsp;</p></div><!-- 좌우공간확보용 -->
 </div>
 </body>
-
-
-
 
 
 <!-- 달력 스크립트 ::: 일단 봉인함. ㅠㅠ --> 
@@ -447,7 +444,6 @@ $(document).ready(function() {
              }
         }
 </script> -->
-
 <!-- 달력 스크립트 -->
 
 <!-- 달력 HTML 페이지 부분 ::: 눈물을 머금고 봉인 -->
@@ -471,6 +467,7 @@ $(document).ready(function() {
     </tr> 
 </table>
 <script type="text/javascript">
-    buildCalendar();//
+    buildCalendar();
 </script>
-</div> -->
+</div>
+ -->

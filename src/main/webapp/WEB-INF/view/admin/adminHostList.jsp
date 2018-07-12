@@ -80,7 +80,7 @@
 
 <body>
 <div class="w3-container w3-margin">
-	<h2>회원목록조회</h2>
+	<h2 style="font-family:'Hanna';">회원목록조회</h2>
 </div>
 	
 <div class="w3-container w3-margin">
