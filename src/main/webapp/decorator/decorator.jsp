@@ -16,11 +16,13 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://fonts.googleapis.com/css?family=Gothic+A1" rel="stylesheet">
 <link href='http://fonts.googleapis.com/earlyaccess/hanna.css' rel='stylesheet'>
-<link href="https://fonts.googleapis.com/css?family=Gothic+A1" rel="stylesheet">
 <style>
 .mySlides {display:none;}
 #myHeader{
 	z-index: 101;
+}
+#rightMenu{
+    z-index: 103;
 }
 .header {
   padding: 10px 16px;
@@ -39,7 +41,6 @@
     width: 180px;
     height: 180px;
 }
-
 input,h2,a,td {
 	font-family: 'Gothic A1', sans-serif;
 }
@@ -52,6 +53,9 @@ td {
 	font-family: 'Hanna';
 	color: 'black'
 }
+.mainImg { position: relative; padding-top: 500px; /* 1:1 ratio */ overflow: hidden; } 
+.mainImg .centered { position: absolute; top: 0; left: 0; right: 0; bottom: 0; -webkit-transform: translate(50%,50%); -ms-transform: translate(50%,50%); transform: translate(50%,50%); } 
+.mainImg .centered #mainImg { position: absolute; top: 0; left: 0; max-width: 100%; height: auto; -webkit-transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); transform: translate(-50%,-50%); }
 </style>
 <title>
 <decorator:title/>
@@ -103,12 +107,14 @@ td {
    <div class="header w3-purple" id="myHeader" style="height:90px;">
    		<h1><strong><a href="${path }/main.sms" style="text-decoration:none">Share My Space</a></strong>
    			<button class="w3-button w3-purple w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button></h1></div>
-      </div>	
-	  <img class="mySlides" src="${path}/picture/mainimage1.jpg" style="width:100%; height:370px">
-	  <img class="mySlides" src="${path}/picture/mainimage2.jpg" style="width:100%; height:370px">
-	  <img class="mySlides" src="${path}/picture/mainimage3.jpg" style="width:100%; height:370px">
-  	  <img class="mySlides" src="${path}/picture/mainimage4.jpg" style="width:100%; height:370px">
-  	  <img class="mySlides" src="${path}/picture/mainimage5.jpg" style="width:100%; height:370px">
+      </div>
+      <div class="mainImg"> <div class="centered">	
+	  <img id="mainImg" class="mySlides" src="${path}/picture/main1.jpg">
+	  <img id="mainImg" class="mySlides" src="${path}/picture/main22.jpg">
+	  <img id="mainImg" class="mySlides" src="${path}/picture/main3.jpg">
+  	  <img id="mainImg" class="mySlides" src="${path}/picture/main4.jpg">
+  	  <img id="mainImg" class="mySlides" src="${path}/picture/main5.jpg">
+  	  </div></div>
 <div class="w3-content" style="max-width:1400px">
 <decorator:body/>
 </div>

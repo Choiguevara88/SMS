@@ -7,7 +7,7 @@
 <%@ page import="java.math.BigInteger" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/> <!-- 어느 곳에서나 login.sms할수 있도록 할려고 경로를 만들어 준 것-->
 <%-- /WebContent/decorator/decorator_test_bar.jsp --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -20,6 +20,9 @@
 .mySlides {display:none;}
 #myHeader{
 	z-index: 101;
+}
+#rightMenu{
+    z-index: 103;
 }
 .header {
   padding: 10px 16px;
@@ -38,21 +41,22 @@
     width: 180px;
     height: 180px;
 }
-h2{
-	font-family: 'Hanna';
+input,h2,a,td {
+	font-family: 'Gothic A1', sans-serif;
 }
-a {
-	font-family: 'Hanna';
-}
+
 input {
 	font-family: 'Gothic A1', sans-serif;
+	color: 'black'
 }
 td {
 	font-family: 'Hanna';
+	color: 'black'
 }
-div {
-   color : black;
-}
+.mainImg { position: relative; padding-top: 420px; /* 1:1 ratio */ overflow: hidden; } 
+.mainImg .centered { position: absolute; top: 0; left: 0; right: 0; bottom: 0; -webkit-transform: translate(50%,50%); -ms-transform: translate(50%,50%); transform: translate(50%,50%); } 
+.mainImg .centered #mainImg { position: absolute; top: 0; left: 0; max-width: 100%; height: auto; -webkit-transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); transform: translate(-50%,-50%); }
+
 </style>
 <title>
 <decorator:title/>
@@ -105,7 +109,11 @@ div {
    		<h1><strong><a href="${path }/main.sms" style="text-decoration:none">Share My Space</a></strong>
    			<button class="w3-button w3-purple w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button></h1></div>
      </div>
-     <img src="../picture/${building.sImg1}" style="width:100% ; height:420px">
+<c:if test="${!empty building}">
+<div class="mainImg"> <div class="centered">
+     <img id="mainImg" src="../picture/${building.sImg1}">
+</div></div>
+</c:if>
 <script>
 window.onscroll = function() {myFunction()};
 

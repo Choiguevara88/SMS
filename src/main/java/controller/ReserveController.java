@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -23,10 +24,31 @@ public class ReserveController {
 
 	@Autowired
 	private ProjectService service;
+	
+	
+	// 예약을 등록할 때 호출되는 메서드 : GET
+	@RequestMapping(value = "reserve/regReserve", method = RequestMethod.GET)
+	public ModelAndView regReserveForm(Integer sNo, Integer sRNo, HttpSession session) {
 
-	// 예약을 등록할 때 호출되는 메서드
-	@RequestMapping(value = "reserve/roomReserve", method = RequestMethod.POST)
-	public ModelAndView roomReserve(Reserve reserve, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+
+		Room room = service.getRoom(sNo, sRNo);
+		Building building = service.getMyBuildingOne("" + sNo);
+		Member hostMember = service.getMember(building.getId());
+		
+		mav.addObject("room", room); 			 // 예약할 룸 정보를 가진 객체
+		mav.addObject("building", building);	 // 예약할 빌딩 정보를 가진 객체
+		mav.addObject("hostMember", hostMember); // 해당 호스트 정보를 가진 객체
+		mav.addObject("reserve", new Reserve()); // 예약 객체
+		
+		mav.setViewName("reserve/regReserve");
+		
+		return mav;
+	}
+
+	// 예약을 등록할 때 호출되는 메서드 : POST
+	@RequestMapping(value = "reserve/regReserve", method = RequestMethod.POST)
+	public ModelAndView regReserve(Reserve reserve, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
 
@@ -101,19 +123,29 @@ public class ReserveController {
 		ModelAndView mav = new ModelAndView();
 
 		String hostId = ((Member) session.getAttribute("loginMember")).getId();
+		
+		Member hostMember = service.getMember(hostId);
 
 		List<Integer> hostHaveBuild = service.hostHaveBuildsNo(hostId); // 해당 Host 앞으로 등록된 Building들의 건물관리번호를 List로 저장
 
 		List<Building> list = new ArrayList<Building>();
+		
+		int buildCnt = service.hostBuildCount(hostId);
+		
+		int questCnt = 0;
 
 		for (Integer sNo : hostHaveBuild) {	// 건물관리별로 Building 정보를 가져와서 list<Building>에 저장
 			list.add(service.selectHostReserveInfo(hostId, sNo));
 		}
-
-		int buildCnt = service.hostBuildCount(hostId);
+		
+		for (Integer sNo : hostHaveBuild) {
+			questCnt += service.hostBoardCountQuest(sNo);
+		}
 
 		mav.addObject("list", list);
+		mav.addObject("hMember", hostMember);
 		mav.addObject("buildCnt", buildCnt);
+		mav.addObject("questCnt", questCnt);
 
 		return mav;
 	}
@@ -167,12 +199,23 @@ public class ReserveController {
 		Reserve reserve = service.getReserve(reNo);
 		
 		Room room = new Room();
+		
 		room.setsRNo(reserve.getSrNo());
-		room =service.getMyRoom(room);
-		//Room room = service.getMyRoom(reserve.getSrNo());
+		room.setsNo(reserve.getsNo());
+		room = service.getMyRoom(room);
+		
+		Date endDate = new Date();
+		long plusTime = reserve.getReDate().getTime();
+		
+		if(room.getsResType() == 0) { // 예약화면에서 보여질 내용
+			endDate.setTime(plusTime + (3600000 * reserve.getReCnt()));
+		} else {
+			endDate.setTime(plusTime + (86400000 * reserve.getReCnt()));
+		}
 
 		mav.addObject("reserve", reserve);
 		mav.addObject("room", room); // 세부공간에 대한 세부정보
+		mav.addObject("endDate", endDate);
 
 		return mav;
 

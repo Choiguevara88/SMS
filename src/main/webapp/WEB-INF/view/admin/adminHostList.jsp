@@ -135,14 +135,14 @@
 	<c:if test="${listCnt != 0 }">
 	<c:forEach var="mem" items="${list}" >
 	<tr>
-		<td class="w3-small" style="text-align:center;">${mem.id}</td>
-		<td class="w3-small" style="text-align:center;">${mem.name}</td>
-		<td class="w3-small" style="text-align:center;">${mem.email}</td>
-		<td class="w3-small" style="text-align:center;">${mem.mob}</td>
-		<td class="w3-small" style="text-align:center;"><fmt:formatDate value="${mem.regDate}" pattern="yyyy-MM-dd"/></td>
-		<td class="w3-small" style="text-align:center;">${mem.hostName}</td>
-		<td class="w3-small" >${mem.address}</td>
-		<td class="w3-small" style="text-align:center;">${mem.accountNo}</td>
+		<td style="text-align:center;">${mem.id}</td>
+		<td style="text-align:center;">${mem.name}</td>
+		<td style="text-align:center;">${mem.email}</td>
+		<td style="text-align:center;">${mem.mob}</td>
+		<td style="text-align:center;"><fmt:formatDate value="${mem.regDate}" pattern="yyyy-MM-dd"/></td>
+		<td style="text-align:center;">${mem.hostName}</td>
+		<td>${mem.address}</td>
+		<td style="text-align:center;">${mem.accountNo}</td>
 	</tr>
 	</c:forEach>
 		

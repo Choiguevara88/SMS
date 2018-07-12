@@ -128,10 +128,18 @@ public class BoardDaoImpl implements BoardDao{
 	public List<Board> guestQuestionList() {
 		return sqlSession.selectList(NS + "guestQuestion");
 	}
+	@Override
+	public List<Board> guestQuestionList1() {
+		return sqlSession.selectList(NS + "guestQuestion1");
+	}
 
 	@Override
 	public List<Board> hostQuestionList() {
 		return sqlSession.selectList(NS + "hostQuestion");
+	}
+	@Override
+	public List<Board> hostQuestionList1() {
+		return sqlSession.selectList(NS + "hostQuestion1");
 	}
 
 	@Override
@@ -150,6 +158,13 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public List<Board> getbuildingNo_by_score() {
 		return sqlSession.selectList(NS+"buildingNo_by_score");
+	}
+
+	@Override
+	public int hostBoardCntQuest(Integer sNo) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("sNo",sNo);
+		return sqlSession.selectOne(NS + "hostQuestCnt", map);
 	}
 	
 }

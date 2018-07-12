@@ -212,6 +212,7 @@ public class AdminController {
 		String searchContent = request.getParameter("searchContent");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
+		
 
 		List<TransactionHistory> transHostList = 
 				service.searchTransHistoryList(searchType, searchContent, startDate, endDate); // 거래관리대장 검색용
@@ -370,6 +371,31 @@ public class AdminController {
 			me.printStackTrace();
 		}
 	}
+	
+	// 관리자페이지에서 Host계정의 모든 문의 목록 보여주기
+	@RequestMapping(value="admin/Hlist", method=RequestMethod.GET)
+	public ModelAndView adminHlist(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		
+		List<Board> hostQuestionList = service.hostQuestionList1();				// host 문의 목록
+		
+		mav.addObject("hList",hostQuestionList);
+		
+		return mav;
+	}
+
+	// 관리자페이지에서 Guest계정의 모든 문의 목록 보여주기	
+	@RequestMapping(value="admin/Glist", method=RequestMethod.GET)
+	public ModelAndView adminGlist(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		
+		List<Board> guestQuestionList = service.guestQuestionList1();			// guest 문의 목록
+		
+		mav.addObject("gList",guestQuestionList);
+		
+		return mav;
+	}
+	
 	
 	// 공지사항 작성 = GET
 	@RequestMapping(value = "notice/write", method = RequestMethod.GET)

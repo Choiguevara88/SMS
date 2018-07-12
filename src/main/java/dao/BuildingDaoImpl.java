@@ -33,7 +33,7 @@ public class BuildingDaoImpl implements BuildingDao {
 	public int hostBuildCnt(String hostName) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("id", hostName);
-		return sqlSession.selectOne(NS + "hostCount", map);
+	return sqlSession.selectOne(NS + "hostCount", map);
 	}
 
 	@Override
@@ -75,6 +75,5 @@ public class BuildingDaoImpl implements BuildingDao {
 		map.put("sNo", sNo);
 		return sqlSession.selectOne(NS+"mainpagebuilding", map);
 	}
-
 
 }
