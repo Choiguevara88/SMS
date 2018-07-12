@@ -92,7 +92,7 @@ public interface ProjectService {
 	
 	List<Room> getmyRoomList(Integer sNo);
 	
-	void updateRoom(Room room);
+	void updateRoom(Room room, HttpServletRequest request);
 	
 	void deleteRoom(Room room);
 	
@@ -114,7 +114,7 @@ public interface ProjectService {
 	
 	List<Board> getbuildingNo_by_score();
 	
-	List<Integer> getmyRoom_lowestprice(int i);	
+	Room getmyRoom_lowestprice(int i);	
 	
 	List<Member> selectMemberList(String[] idchks);
 	

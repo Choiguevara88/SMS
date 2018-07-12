@@ -61,17 +61,17 @@ public class RoomDaoImpl implements RoomDao{
 		
 	}
 	@Override
-	public List<Integer> getmyRoom_lowestprice(int i) {
+	public Room getmyRoom_lowestprice(int i) {
 		Map <String, Integer> map = new HashMap<String, Integer>();
 		map.put("sNo", i);
-		return sqlSession.selectList(NS+"lowestprice_main",map);
+		return sqlSession.selectOne(NS+"lowestprice_main",map);
 	}
 	@Override
 	public int maxNum() {
 		
 		return sqlSession.getMapper(RoomMapper.class).maxNum();
 	}
-	@Override
+		@Override
 	public Room getRoom(Integer sNo, Integer sRNo) {
 		Map <String, Integer> map = new HashMap<String, Integer>();
 		map.put("sNo", sNo);

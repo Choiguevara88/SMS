@@ -16,7 +16,7 @@
 <!-- 부트스트랩 사용 선언 -->
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>room/roomForm.jsp</title>
+<title>세부 공간 등록</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 

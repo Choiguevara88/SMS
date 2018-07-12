@@ -271,12 +271,10 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void insertRoom(Room room,HttpServletRequest request) {
-if (room.getsRImgList() != null) {
-			
-			String img2 = uploadImgCreate2(room.getsRImgList(), request);
-			
-			if (img2 != null && !img2.equals(""))
-				room.setsRImg(img2);
+		if (room.getsRImgList() != null) {
+			String imgs = uploadImgCreate2(room.getsRImgList(), request);
+			if (imgs != null && !imgs.equals(""))
+				room.setsRImg(imgs);
 		} else {
 			room.setsRImg(listToString(room.getsRImgNameList()));
 		}
@@ -489,9 +487,15 @@ if (room.getsRImgList() != null) {
 	public Room getMyRoom(Room room) {
 		Room myRoom = roomDao.getMyRoom(room);
 		String sRImg = myRoom.getsRImg();
+		String sRInfo = myRoom.getsRInfo();
 		if(sRImg != null) {
 			List<String> sRImgName = new ArrayList<String>(Arrays.asList(sRImg.split("[|]")));
 			myRoom.setsRImgNameList(sRImgName);
+		}
+		if(sRInfo != null) {
+			List<String> sRInfoList = new ArrayList<String>(Arrays.asList(sRInfo.split("[,]")));
+			myRoom.setsRInfoList(sRInfoList);
+		
 		}
 		return myRoom;
 	}
@@ -532,7 +536,16 @@ if (room.getsRImgList() != null) {
 	}
 
 	@Override
-	public void updateRoom(Room room) {
+	public void updateRoom(Room room,HttpServletRequest request) {
+if (room.getsRImgList() != null) {
+			
+			String img2 = uploadImgCreate2(room.getsRImgList(), request);
+			
+			if (img2 != null && !img2.equals(""))
+				room.setsRImg(img2);
+		} else {
+			room.setsRImg(listToString(room.getsRImgNameList()));
+		}
 		roomDao.updateRoom(room);
 		}
 
@@ -579,7 +592,7 @@ if (room.getsRImgList() != null) {
 	}
 
 	@Override
-	public List<Integer> getmyRoom_lowestprice(int i) {
+	public Room getmyRoom_lowestprice(int i) {
 		return roomDao.getmyRoom_lowestprice(i);
 	}
 

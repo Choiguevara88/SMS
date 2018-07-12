@@ -1,57 +1,202 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ include file="/WEB-INF/view/jspHeader.jsp" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/view/jspHeader.jsp" %>
+<!DOCTYPE html>
 <html>
 <head>
+
+<!-- w3 css 사용 선언 -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- w3 css 사용 선언-->
+
+<!-- 부트스트랩 사용 선언 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<!-- 부트스트랩 사용 선언 -->
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>room/roomForm.jsp</title>
+<title>세부 공간 수정</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+$("#sRImg").attr('disabled', true)
+
+$("#img1_btn").click(function() {
+       $("#sImg1").val("");
+       $("#file1_desc").empty();
+       $("#sRImg").attr('disabled', false)
+    });
+});
+
+function chkboxcheck() {
+	var sRType = document.getElementsByName("sRType")
+	var cnt = 0;
+	for(var i=0;i<sRType.length;i++) {
+		if (sRType[i].checked) cnt++;
+		if(cnt > 1)	{
+			alert("공간 유형은 1개만 선택 가능합니다.");
+			sRType[i].checked=false;
+			return
+		}
+	}
+}
+//$(document).ready(function() {
+	//$(".sRInfo").att("checked",true)
+//});
+
+
+
+function chkboxcheck2() {
+	var sResType = document.getElementsByName("sResType")
+	var cnt = 0;
+	for(var i=0;i<sResType.length;i++) {
+		if (sResType[i].checked) cnt++;
+		if(cnt > 1)	{
+			alert("예약 유형은 1개만 선택 가능합니다.");
+			sResType[i].checked=false;
+			return
+		}
+	}
+}
+
+</script>
 </head>
 <body>
-<form:form modelAttribute="room" action="roomUpdateSuccess.sms" method="post" commandName="room">
+<div class="w3-row">
+<div class="w3-col s2"><p>&nbsp;</p></div>
+<div class="w3-col s8">
+<form:form modelAttribute="room" action="roomUpdateSuccess.sms" method="post" commandName="room" enctype="multipart/form-data">
+<input type="hidden" name="sNo" value="${building.sNo}">
+<input type="hidden" name="sRNo" value="${room.sRNo}">
+
+
 <spring:hasBindErrors name="room"> <!-- ? -->
 		<font color="tomato">
 			<c:forEach items="${errors.globalErrors }" var="error">
 				<spring:message code="${error.code }"/>
 			</c:forEach>
 		</font>
-	</spring:hasBindErrors>
+</spring:hasBindErrors>
 
-<table align="center" cellpadding="1" cellspacing="1" border = "1">
-		
-		
-	<tr><td>sNo = ${myRoom.sNo }</td><td>네가 수정 할 수 있을까?</td></tr>
-	<form:hidden path="sNo" value="${myRoom.sNo }" />	
-	<tr><td>sRNo = ${myRoom.sRNo }</td><td>수정해라 수정!</td></tr>
-	<form:hidden path="sRNo" value="${myRoom.sRNo }" />
+<div class="w3-container w3-margin w3-padding">
+	<h1 style="font-family:'Hanna'">세부 공간 등록</h1>
+</div>
+
+<div class="w3-container">
+<div class="w3-container w3-margin w3-card w3-padding-16">
+<p>
+    <div class="w3-container w3-margin w3-row">
+    	<div class="w3-col s8"><label style="font-family:'Hanna'">세부 공간 이름</label><form:input path="sRName" class="w3-input" placeholder="공간의 이름을 작성해주세요." value="${sRName }"/></div>
+    	<div class="w3-cols s4"><font color="red"><form:errors path="sRName"/></font>
+    </div>
+	</div>
+	<div class="w3-row w3-container w3-margin">
+    	<div class="w3-col s8"><label style="font-family:'Hanna'">세부 공간 내용</label><form:input path="sRContent" class="w3-input" placeholder="공간에 대한 설명을 작성해주세요." value="${sRContent }"/></div>
+		<div class="w3-col s4"><font color="red"><form:errors path="sRContent"/></font></div>
+	</div>
+	
+	<div class="w3-container w3-margin w3-row">
+		<div class="w3-col s5">
+		<label style="font-family:'Hanna'">세부 공간 유형 (1개만 체크 가능)</label>
+		<div>
+		<form:checkboxes path="sRType" items="${building.sTypeList}" onchange="chkboxcheck()" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;" class="w3-checkbox"/>
+		</div>
+		</div>
+		<div class="w3-col s2"><p>&nbsp;</p></div>
+		<div class="w3-col s5">
+		<label style="font-family:'Hanna'">예약 유형 (1개만 체크 가능)</label>
+		<div>
+		<form:checkbox path="sResType" value="0" label="시간 단위" onchange="chkboxcheck2()"/>&nbsp; &nbsp;
+		<form:checkbox path="sResType" value="1" label="일 단위" onchange="chkboxcheck2()"/>
+		</div>
+		</div>
+	</div>
+	
+	<div class="w3-container w3-margin">
+		<label style="font-family:'Hanna'">사진 업로드(여러 장 가능)</label>
+		<c:if test="${!empty room.sRImg }">
+            <div id="file1_desc">
+            <c:forEach var="roomImg" items="${room.sRImgNameList}">
+      <div >
+      <img src="../picture/${roomImg}" style="width:100%; height:250px">
+      </div>
+      </c:forEach>
+              <div>
+              <input type="button" id="img1_btn" value="기존이미지삭제" /> 
+              </div>
+            </div> 
+          </c:if>
+		<div>
+		<input type="file" multiple="multiple" id="sRImg" name="sRImgList" class="w3-button">
+		</div>
+	</div>
+	
+	<div class="w3-container w3-margin">
+	<p style="font-family:'Hanna'">편의 시설</p>
+	<table class="w3-table w3-border" cellpadding="1px" >
+	
+	<tr><td >
+		<form:checkboxes path="sRInfoList" items="${sRInfoNames1}" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="w3-checkbox"/>
+	<tr><td>
+	
+	<tr><td>
+		<form:checkboxes path="sRInfoList" items="${sRInfoNames2}" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="w3-checkbox"/>
+	<tr><td>
+	
+	<tr><td>
+		<form:checkboxes path="sRInfoList" items="${sRInfoNames3}" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="w3-checkbox"/>
+	<tr><td>
+	
+	<tr><td>
+		<form:checkboxes path="sRInfoList" items="${sRInfoNames4}" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="w3-checkbox"/>
+	<tr><td>
+	
+	<tr><td>
+		<form:checkboxes path="sRInfoList" items="${sRInfoNames5}" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="w3-checkbox"/>
+	<tr><td>
 	
 	
-	<tr><td>SRName</td><td><form:input path="sRName" value="${myRoom.sRName}"  />
-		<font color="red"><form:errors path="sRName"/></font></td></tr>
-	<tr>
-		<td>SRType</td><td><form:input path="sRType" value="${myRoom.sRType }" />
-		 <font color="red"><form:errors path="sRType"/></font></td></tr>
-	<tr>
-		<td>SRContent</td><td><form:input path="sRContent" value="${myRoom.sRContent }" />
-		<font color="red"><form:errors path="sRContent"/></font></td>
-		</tr>
-	<tr>
-		<td>SRInfo</td><td><form:input path="sRInfo" value="${myRoom.sRInfo }" />
-		<font color="red"><form:errors path="sRInfo"/></font></td>
-	</tr>
-	<tr>
-		<td>SResType</td><td><form:input path="sResType" value="${myRoom.sResType }"/>
-		<font color="red"><form:errors path="sResType"/></font></td></tr>
-	<tr>
-		<td>SRPersonLimit</td><td><form:input path="sRPersonLimit" value="${myRoom.sRPersonLimit }" />
-		<font color="red"><form:errors path="sRPersonLimit"/></font></td>
-	</tr>
-	<tr>
-		<td>SPrice</td><td><form:input path="sPrice" value="${myRoom.sPrice }" />
-		<font color="red"><form:errors path="sPrice"/></font></td>
-	</tr>
-</table>
- <input type="submit" value="수정 완료">
-</form:form> 
+	
+	
+  
+	</table>
+    </div>
+
+	<div class="w3-container w3-margin w3-row">
+    	<div class="w3-col s5" style="vertical-align:middle;">
+    		<label style="font-family:'Hanna'">최소 인원</label>
+    		<form:select path="sRPersonLimit" class="w3-select">
+    			<form:option value="1"> 1명 </form:option>
+    			<form:option value="2"> 2명 </form:option>
+    			<form:option value="3"> 3명 </form:option>
+    			<form:option value="4"> 4명 </form:option>
+    			<form:option value="5"> 5명 </form:option>
+    			<form:option value="10"> 10명 </form:option>
+    			<form:option value="20"> 20명 </form:option>
+    			<form:option value="50"> 50명 </form:option>
+    		</form:select><font color="red"><form:errors path="sRPersonLimit"/></font>
+    	</div>
+    	<div class="w3-col s2"><p>&nbsp;</p></div>
+    	<div class="w3-col s5" style="vertical-align:middle;">
+    		<label style="font-family:'Hanna'">예약 단위당 가격</label>
+    		<form:input path="sPrice" class="w3-input" placeholder="숫자만 입력하세요." value="${room.sPrice }"/>
+    		<font color="red"><form:errors path="sPrice"/></font>
+    	</div>
+	</div>
+	
+	<div class="w3-container w3-section w3-padding" style="text-align:center;">
+		<input type="submit" value="수정하기" class="w3-btn w3-black" style="font-family:'Hanna'; width:30%;">
+	</div>
+</div>
+
+<div>
+<form:hidden path="sNo" value="${room.sNo}"/>
+</div>
+</div>
+</form:form>
+</div>
+<div class="w3-col s2"><p>&nbsp;</p></div> 
+</div>
 </body>
 </html>

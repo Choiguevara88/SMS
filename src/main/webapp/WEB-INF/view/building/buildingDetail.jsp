@@ -12,6 +12,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	
 	//댓글 목록 출력
 	listRlist(1);
 	listQlist(1);
@@ -70,6 +71,15 @@ if(imgidx < 5) {
 		document.getElementById("img"+i).innerHTML = it;
 	}
 }
+
+/*룸 선택 관련 스크립트*/
+$("input:radio[name=room]").click(function(){
+selectedRoom = $("input:radio[name=room]:checked").val();
+});
+$("#res").click(function(){
+	location.href = "../reserve/regReserve.sms?sNo="+${param.sNo}+"&sRNo="+selectedRoom;
+});
+
 });
 
 function listRlist(pageNum){
@@ -86,21 +96,38 @@ function listQlist(pageNum){
 		type: "get",
 		url : "${path}/building/Qlist.sms?sNo=${param.sNo}&pageNum="+pageNum,
 		success: function(result){
-			console.log(result)
 			$("#listQlist").html(result)
 		}
 	});
+
+function favorite() {
+	
+}
 }
 </script>
+
+<!-- 지도관련 스크립트 -->
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=2bA8v55yYLf1omsHnKFk&submodules=geocoder"></script>
 </head>
 <body>
-<!-- 공간(Building)헤더정보 -->
 
-<div><h1>${building.sName}</h1></div>
+<!-- 공간(Building)헤더정보 -->
+<br>
+<br>
+<div class="w3-row">
+<div class="w3-col s11">
+<div><span><font class="w3-xxlarge">${building.sName}</font></span>
+     <span class="w3-right">
+     <a href="javascript:">
+     <i class="fa fa-heart-o" style="font-size:36px; color:gray"></i>
+     </a>
+     </span>
+</div>
 <div><h4>${building.sPreview}</h4></div>
 <div id="tags">
 <!-- 태그가 보여질 곳 -->
+</div>
+</div>
 </div>
 <hr>
 
@@ -110,8 +137,10 @@ function listQlist(pageNum){
 <!-- 공간(Building)정보 -->
 <div>
 
+<div class="w3-padding">
 <div id="img0"></div>
 <div id="img1"></div>
+</div>
 
 <div class="w3-panel w3-leftbar w3-border-purple">
  <h3>공간소개</h3>
@@ -119,8 +148,10 @@ function listQlist(pageNum){
 <div class="w3-margin-left">${building.sContent}</div>
 <hr>
 
+<div class="w3-padding">
 <div id="img2"></div>
 <div id="img3"></div>
+</div>
 
 <div class="w3-panel w3-leftbar w3-border-purple">
 <h3>시설안내</h3>
@@ -130,8 +161,10 @@ function listQlist(pageNum){
 </div>
 <hr>
 
+<div class="w3-padding">
 <div id="img4"></div>
 <div id="img5"></div>
+</div>
 
 <div class="w3-panel w3-leftbar w3-border-purple">
 <h3>이용안내</h3>
@@ -149,8 +182,10 @@ function listQlist(pageNum){
 <div id="map" style="width:100%;height:400px;"></div>
 <hr size="1">
 
+<div class="w3-padding">
 <div id="img6"></div>
 <div id="img7"></div>
+</div>
 
 <div class="w3-panel w3-leftbar w3-border-purple">
  <h3>공간 이용시 주의사항</h3>
@@ -159,9 +194,11 @@ function listQlist(pageNum){
 <!-- 이용규칙이 보여질 곳 -->
 </div>
  <hr>
- 
+
+<div class="w3-padding">
 <div id="img8"></div>
 <div id="img9"></div>
+</div>
 
 <!-- 이용후기, Q&A -->
 <div id="listRlist"></div> 
@@ -173,21 +210,28 @@ function listQlist(pageNum){
 
 </div>
 </div>
+
 <!-- 세부공간(Room)정보 -->
 <div class="w3-col s5 w3-padding">
-<h1>룸정보가 들어올 공간</h1>
-<div></div>
+<h5><b>세부공간 선택</b></h5>
+<div class="w3-panel w3-border w3-border-purple">
+
 <c:forEach items="${roomList}" var="room">
-<div>
-${room.sNo}
-${room.sRNo}
-${room.sRName}
-${room.sRType}
-${room.sRContent}
-${room.sRInfo}
-</div>
+<hr>
+<input type="radio" name="room" value="${room.sRNo}">
+<span>${room.sRName}</span>
+<span class="w3-right"><font class="w3-xlarge w3-text-purple">￦ ${room.sPrice}</font> &nbsp;/
+  <c:if test="${room.sResType == 0}">시간</c:if>
+  <c:if test="${room.sResType == 1}">일</c:if>
+</span>
 </c:forEach>
+<hr style="border: solid 1px gray;">
+<div class="w3-center w3-margin-bottom">
+<input type="button" class="w3-btn w3-purple" id="res" value="예약하기">
 </div>
+</div>
+</div>
+
 </div>
 
 <!-- 지도관련 스크립트 -->

@@ -8,136 +8,61 @@
 <title>ProjectMain</title>
 </head>
 <body>
+<%--forEach 통해서 메인에 뿌리기 --%>
 <section align="center">
 <h2 align="center"><strong>오늘의 추천 공간! &gt;&lt;</strong></h2>
 <br/>
 <%-- 첫번째 row시작 --%>
 <div class="w3-row w3-container" id="row_row">
   <div class="w3-col w3-container" style="width:14%">빈공간</div>
- 
+  <c:forEach var="building" items="${today_buildings }" varStatus="status">
     <div class="w3-col w3-container" style="width:22%">
   	<div class="w3-card-4" id="preview">
-  		<a href="#"><img id="picturee" src="./picture/lemon.jpg" style="width:100%">
+  		<a href="building/buildingDetail.sms?sNo=${building.sNo }"><img id="picturee" src="./picture/${building.sImg1 }" style="width:100%; height:200px">
   		<div class="w3-container w3-center">
-      		<p>The Troll's tongue in Hardanger, Norway</p></div></a></div></div>
-      		
-  <div class="w3-col w3-container" style="width:3%">빈공간</div>
- 
-  <div class="w3-col w3-container" style="width:22%">
-  	<div class="w3-card-4" id="preview">
-  		<a href="#"><img src="./picture/lemon.jpg" style="width:100%">
-  		<div class="w3-container w3-center">
-      		<p>The Troll's tongue in Hardanger, Norway</p></div></a></div></div>
-      		
-  <div class="w3-col w3-container" style="width:3%">빈공간</div>
-
-  <div class="w3-col w3-container" style="width:22%">
-  	<div class="w3-card-4" id="preview">
-  		<a href="#"><img src="./picture/lemon.jpg" style="width:100%">
-  		<div class="w3-container w3-center">
-      		<p>The Troll's tongue in Hardanger, Norway</p></div></a></div></div>
-      		
-  <div class="w3-col w3-container" style="width:14%">빈공간</div></div>
+      		<p align="left"><strong>${building.sPreview }</strong></p>
+      		<p>${building.sTag }</p>
+      		<p>${today_buildings_price[status.index]}</p></div></a></div></div>
+    <c:if test="${status.index == 0 || status.index == 1 ||status.index == 3 ||status.index == 4}"><div class="w3-col w3-container" style="width:3%">빈공간</div></c:if>
+    <c:if test="${status.index == 2 }"><div class="w3-col w3-container" style="width:14%">빈공간</div></div>
   <br>
   <br>
-<%-- row끝 --%>
-<%-- 두번째 row시작 --%>
+	<%-- row끝 --%>
+	<%-- 두번째 row시작 --%>
   <div class="w3-row w3-container" id="row_row">
+  <div class="w3-col w3-container" style="width:14%">빈공간</div></c:if>
     
-  <div class="w3-col w3-container" style="width:14%">빈공간</div>
-	  
-  <div class="w3-col w3-container" style="width:22%">
-  	<div class="w3-card-4" id="preview">
-  		<a href="#"><img src="./picture/lemon.jpg" style="width:100%">
-  		<div class="w3-container w3-center">
-      		<p>The Troll's tongue in Hardanger, Norway</p></div></a></div></div>
-  	
-    
-  <div class="w3-col  w3-container" style="width:3%">빈공간</div>
-  
-  <div class="w3-col w3-container" style="width:22%">
-  	<div class="w3-card-4" id="preview">
-  		<a href="#"><img src="./picture/lemon.jpg" style="width:100%">
-  		<div class="w3-container w3-center">
-      		<p>The Troll's tongue in Hardanger, Norway</p></div></a></div></div>
-        
-  <div class="w3-col  w3-container" style="width:3%">빈공간</div>
-
-  <div class="w3-col w3-container" style="width:22%">
-  	<div class="w3-card-4" id="preview">
-  		<a href="#"><img src="./picture/lemon.jpg" style="width:100%">
-  		<div class="w3-container w3-center">
-      		<p>The Troll's tongue in Hardanger, Norway</p></div></a></div></div>
-   
-  <div class="w3-col w3-container" style="width:14%">빈공간</div>
-  			</div><br/></section>
-<%-- row끝 --%>
+   <c:if test="${status.index == 5 }"><div class="w3-col w3-container" style="width:14%">빈공간</div>
+  			</div><br/></section></c:if></c:forEach>
+<%--forEach 통해서 메인에 뿌리기 끝 --%>
 
 <hr size="1">
+<!--  91-96 -->
 <section align="center">
 <h2 align="center"><strong>평점 좋은 공간! &gt;&lt;</strong></h2>
 <br/>
 <%-- 첫번째 row시작 --%>
 <div class="w3-row w3-container" id="row_row">
   <div class="w3-col w3-container" style="width:14%">빈공간</div>
- 
+<c:forEach var="building" items="${today_buildings }" varStatus="status">
     <div class="w3-col w3-container" style="width:22%">
   	<div class="w3-card-4" id="preview">
-  		<a href="#"><img src="./picture/lemon.jpg" style="width:100%">
+  		<a href="#"><img id="picturee" src="./picture/${building.sImg1 }" style="width:100%; height:200px">
   		<div class="w3-container w3-center">
-      		<p>The Troll's tongue in Hardanger, Norway</p></div></a></div></div>
-      		
-  <div class="w3-col w3-container" style="width:3%">빈공간</div>
- 
-  <div class="w3-col w3-container" style="width:22%">
-  	<div class="w3-card-4" id="preview">
-  		<a href="#"><img src="./picture/lemon.jpg" style="width:100%">
-  		<div class="w3-container w3-center">
-      		<p>The Troll's tongue in Hardanger, Norway</p></div></a></div></div>
-      		
-  <div class="w3-col w3-container" style="width:3%">빈공간</div>
-
-  <div class="w3-col w3-container" style="width:22%">
-  	<div class="w3-card-4" id="preview">
-  		<a href="#"><img src="./picture/lemon.jpg" style="width:100%">
-  		<div class="w3-container w3-center">
-      		<p>The Troll's tongue in Hardanger, Norway</p></div></a></div></div>
-      		
-  <div class="w3-col w3-container" style="width:14%">빈공간</div></div>
+      		<p>${building.sPreview }</p>
+      		<p>${building.sTag }</p>
+      		<p>${today_buildings_price[status.index]}</p></div></a></div></div>
+    <c:if test="${status.index == 0 || status.index == 1 ||status.index == 3 ||status.index == 4}"><div class="w3-col w3-container" style="width:3%">빈공간</div></c:if>
+    <c:if test="${status.index == 2 }"><div class="w3-col w3-container" style="width:14%">빈공간</div></div>
   <br>
   <br>
-<%-- row끝 --%>
-<%-- 두번째 row시작 --%>
+	<%-- row끝 --%>
+	<%-- 두번째 row시작 --%>
   <div class="w3-row w3-container" id="row_row">
+  <div class="w3-col w3-container" style="width:14%">빈공간</div></c:if>
     
-  <div class="w3-col w3-container" style="width:14%">빈공간</div>
-	  
-  <div class="w3-col w3-container" style="width:22%">
-  	<div class="w3-card-4" id="preview">
-  		<a href="#"><img src="./picture/lemon.jpg" style="width:100%">
-  		<div class="w3-container w3-center">
-      		<p>The Troll's tongue in Hardanger, Norway</p></div></a></div></div>
-  	
-    
-  <div class="w3-col  w3-container" style="width:3%">빈공간</div>
-  
-  <div class="w3-col w3-container" style="width:22%">
-  	<div class="w3-card-4" id="preview">
-  		<a href="#"><img src="./picture/lemon.jpg" style="width:100%">
-  		<div class="w3-container w3-center">
-      		<p>The Troll's tongue in Hardanger, Norway</p></div></a></div></div>
-        
-  <div class="w3-col  w3-container" style="width:3%">빈공간</div>
-
-  <div class="w3-col w3-container" style="width:22%">
-  	<div class="w3-card-4" id="preview">
-  		<a href="#"><img src="./picture/lemon.jpg" style="width:100%">
-  		<div class="w3-container w3-center">
-      		<p>The Troll's tongue in Hardanger, Norway</p></div></a></div></div>
-   
-  <div class="w3-col w3-container" style="width:14%">빈공간</div>
-  			</div><br/></section>
-<%-- row끝 --%>
+   <c:if test="${status.index == 5 }"><div class="w3-col w3-container" style="width:14%">빈공간</div>
+  			</div><br/></section></c:if></c:forEach>
 <hr size="1">
 </body>
 </html>
