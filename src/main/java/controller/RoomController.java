@@ -1,6 +1,7 @@
 package controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,9 +32,8 @@ public class RoomController {
 		return new Room();
 	}
 	@RequestMapping("building/roomForm")
-	public ModelAndView roomForm(HttpServletRequest request, Room room) {
+	public ModelAndView roomForm(Room room) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println(room.getsNo());
 		String sNo = Integer.toString(room.getsNo());
 		Building building = service.getMyBuildingOne(sNo);
 		mav.addObject("building", building);
@@ -62,20 +62,11 @@ public class RoomController {
 		}
 	return mav;
 }
-	@RequestMapping("NewFile")
-	public ModelAndView NewFile() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("room/NewFile");
-		return mav;
-	}
 	@RequestMapping(value="building/roomList", method=RequestMethod.GET)
 	public ModelAndView myBuildingList(HttpServletRequest request,Building building,HttpSession session) {		
 		ModelAndView mav = new ModelAndView();
 			Integer sNo = building.getsNo();
 		try {
-			Member loginMember = (Member) session.getAttribute("loginMember");
-			String id= loginMember.getId(); 
-			mav.addObject("id", id);	
 			List<Room> myRoomList = service.getmyRoomList(sNo);
 			mav.addObject("sNo",sNo);
 			mav.addObject("myRoomList",myRoomList);
@@ -94,12 +85,8 @@ public class RoomController {
 	public ModelAndView roomDetail(HttpServletRequest request,Room room,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			Member loginMember = (Member) session.getAttribute("loginMember");
-			String id= loginMember.getId(); 
-			mav.addObject("id", id);	
 		Room myRoom = service.getMyRoom(room);
 		mav.addObject("room", myRoom);
-		System.out.println(room.getsRImgNameList());
 		mav.setViewName("room/roomDetail");
 		}catch(Exception e){
 			Integer sNo = room.getsNo();
@@ -112,8 +99,42 @@ public class RoomController {
 	public ModelAndView roomUpdateForm(HttpServletRequest request,Room room) {
 		ModelAndView mav = new ModelAndView();
 		try {
-		Room myRoom = service.getMyRoom(room);
-		mav.addObject("myRoom", myRoom);
+			String sNo = Integer.toString(room.getsNo());
+			Building building = service.getMyBuildingOne(sNo);
+			mav.addObject("building", building);
+			Room myRoom = service.getMyRoom(room);
+			List<String> sRInfoNames1 = new ArrayList<String>();
+			sRInfoNames1.add("TV/프로젝터");
+			sRInfoNames1.add("복사기/인쇄기");
+			sRInfoNames1.add("주류반입가능");
+			sRInfoNames1.add("샤워시설");
+			List<String> sRInfoNames2 = new ArrayList<String>();
+			sRInfoNames2.add("인터넷/WIFI");
+			sRInfoNames2.add("화이트보드");
+			sRInfoNames2.add("음향/마이크");
+			sRInfoNames2.add("취사시설");
+			List<String> sRInfoNames3 = new ArrayList<String>();
+			sRInfoNames3.add("음식물반입가능");
+			sRInfoNames3.add("주차");
+			sRInfoNames3.add("금연");
+			sRInfoNames3.add("PC/노트북");
+			List<String> sRInfoNames4 = new ArrayList<String>();
+			sRInfoNames4.add("의자/테이블");
+			sRInfoNames4.add("내부화장실");
+			sRInfoNames4.add("탈의실");
+			sRInfoNames4.add("테라스/루프탑");
+			List<String> sRInfoNames5 = new ArrayList<String>();
+			sRInfoNames5.add("공용라운지");
+			sRInfoNames5.add("전신거울");
+			sRInfoNames5.add("바베큐시설");
+			sRInfoNames5.add("도어락");
+			mav.addObject("sRInfoNames1", sRInfoNames1);
+			mav.addObject("sRInfoNames2", sRInfoNames2);
+			mav.addObject("sRInfoNames3", sRInfoNames3);
+			mav.addObject("sRInfoNames4", sRInfoNames4);
+			mav.addObject("sRInfoNames5", sRInfoNames5);
+			
+		mav.addObject("room", myRoom);
 		mav.setViewName("room/roomUpdateForm");
 		}catch (Exception e){
 			e.printStackTrace();
@@ -132,7 +153,9 @@ public class RoomController {
 		try{
 			Integer sNo= room.getsNo();
 			Integer sRNo = room.getsRNo();
-			service.updateRoom(room);
+			System.out.println(room);
+			service.updateRoom(room,request);
+			
 			mav.setViewName("redirect:roomDetail.sms?sRNo="+sRNo+"&sNo="+sNo); 
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -169,7 +192,7 @@ public class RoomController {
 				}
 			}catch(Exception e) {
 			e.printStackTrace();
-			throw new ProjectException("로그인하세요. try catch구문은 한번 밖에 못쓰나? 두 번 쓰면 안됨?","redirect:roomDeleteForm");
+			throw new ProjectException("로그인하세요.","redirect:roomDeleteForm");
 		}
 	return mav;
 	}

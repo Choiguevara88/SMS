@@ -17,7 +17,7 @@ public interface RoomDao {
 
 	void deleteRoom(Room room);
 
-	List<Integer> getmyRoom_lowestprice(int i);
+	Room getmyRoom_lowestprice(int i);
 
 
 	int maxNum();

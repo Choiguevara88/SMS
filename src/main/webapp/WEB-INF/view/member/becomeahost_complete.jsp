@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<spring:hasBindErrors name="room"> <!— ? —>
+<spring:hasBindErrors name="room"> <!-- ? -->
 		<font color="tomato">
 			<c:forEach items="${errors.globalErrors }" var="error">
 				<spring:message code="${error.code }"/>
