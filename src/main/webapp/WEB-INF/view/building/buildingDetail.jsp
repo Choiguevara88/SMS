@@ -12,6 +12,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	
 	//댓글 목록 출력
 	listRlist(1);
 	listQlist(1);
@@ -70,6 +71,15 @@ if(imgidx < 5) {
 		document.getElementById("img"+i).innerHTML = it;
 	}
 }
+
+/*룸 선택 관련 스크립트*/
+$("input:radio[name=room]").click(function(){
+selectedRoom = $("input:radio[name=room]:checked").val();
+});
+$("#res").click(function(){
+	location.href = "../reserve/regReserve.sms?sNo="+${param.sNo}+"&sRNo="+selectedRoom;
+});
+
 });
 
 function listRlist(pageNum){
@@ -92,11 +102,13 @@ function listQlist(pageNum){
 	});
 }
 </script>
+
+<!-- 지도관련 스크립트 -->
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=2bA8v55yYLf1omsHnKFk&submodules=geocoder"></script>
 </head>
 <body>
 <!-- 공간(Building)헤더정보 -->
-<img src="../picture/${building.sImg1}" style="width:100% ; height:300px">
+
 <div><h1>${building.sName}</h1></div>
 <div><h4>${building.sPreview}</h4></div>
 <div id="tags">
@@ -173,21 +185,28 @@ function listQlist(pageNum){
 
 </div>
 </div>
+
 <!-- 세부공간(Room)정보 -->
 <div class="w3-col s5 w3-padding">
-<h1>룸정보가 들어올 공간</h1>
-<div></div>
+<h5><b>세부공간 선택</b></h5>
+<div class="w3-panel w3-border w3-border-purple">
+
 <c:forEach items="${roomList}" var="room">
-<div>
-${room.sNo}
-${room.sRNo}
-${room.sRName}
-${room.sRType}
-${room.sRContent}
-${room.sRInfo}
-</div>
+<hr>
+<input type="radio" name="room" value="${room.sRNo}">
+<span>${room.sRName}</span>
+<span class="w3-right">￦ ${room.sPrice} /
+  <c:if test="'${room.sResType}' == 0"><span>일</span></c:if>
+  <c:if test="'${room.sResType}' == 1"><span>월</span></c:if>
+</span>
 </c:forEach>
+<hr style="border: solid 1px gray;">
+<div class="w3-center w3-margin-bottom">
+<input type="button" class="w3-btn w3-purple" id="res" value="예약하기">
 </div>
+</div>
+</div>
+
 </div>
 
 <!-- 지도관련 스크립트 -->

@@ -5,9 +5,8 @@
 	
 	<select id="hostInfo" resultType="Building" parameterType="map">
 		select sNo, sName, 
-		(select count(*) from Reserve r ,Board b where r.sNo = b.sNo) 'boCnt',
+		(select count(*) from Board where qType = 0 and sNo = #{sNo} and kind = 3) 'boCnt',
 		(select count(*) from Reserve where sNo = #{sNo} and reStat = 0) 'reCnt'
-		
 		from Building
 
 		<if test="id != null">

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../jspHeader.jsp" %>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,7 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
- <div></div>
+<spring:hasBindErrors name="room"> <!-- ? -->
+		<font color="tomato">
+			<c:forEach items="${errors.globalErrors }" var="error">
+				<spring:message code="${error.code }"/>
+			</c:forEach>
+		</font>
+</spring:hasBindErrors>
+
  <div id="complete" align="center">
  	<table style="width:400px; height:400px;" border="1px">
  		<tr><td style="text-align:center;">빠른 시일 내에 호스트 등록 결과를 알려 드리겠습니다</td></tr>

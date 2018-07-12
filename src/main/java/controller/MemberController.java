@@ -95,7 +95,6 @@ public class MemberController {
 		}
 		return mav;
 	}
-	
 	@RequestMapping(value = "login", method = RequestMethod.GET) //URL濡� 寃����댁�� �ㅼ�� ���� ��
 	public String loginForm() {
 		return "member/loginpage";
@@ -108,7 +107,7 @@ public class MemberController {
 	    System.out.println(code);
 	    String state = request.getParameter("state");
 	    System.out.println(state);
-	    String redirectURI = URLEncoder.encode("http://localhost:8080/TestProject/loginbysns.sms", "UTF-8");
+	    String redirectURI = URLEncoder.encode("http://192.168.0.107:8080/TestProject/loginbysns.sms", "UTF-8");
 	    String apiURL;
 	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
 	    apiURL += "client_id=" + clientId;

@@ -11,6 +11,7 @@
 <form:form modelAttribute="board" action="Rwrite.sms" method="post" name="f" enctype="multipart/form-data">
 <form:hidden path="kind" value="2"/>
 <input type="hidden" name="pageNum" value="1"/>
+<input type="hidden" name="reNo" value="${param.reNo}"/>
 <form:hidden path="sNo" value="${param.sNo}"/>
 <form:hidden path="id" value="${sessionScope.loginMember.id}"/>
 	<table border="1" cellpadding="0" cellspacing="0" align="center">

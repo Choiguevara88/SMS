@@ -7,7 +7,7 @@
 <%@ page import="java.math.BigInteger" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/> <!-- 어느 곳에서나 login.sms할수 있도록 할려고 경로를 만들어 준 것-->
 <%-- /WebContent/decorator/decorator_test_bar.jsp --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -53,9 +53,10 @@ td {
 	font-family: 'Hanna';
 	color: 'black'
 }
-.mainImg { position: relative; padding-top: 500px; /* 1:1 ratio */ overflow: hidden; } 
+.mainImg { position: relative; padding-top: 420px; /* 1:1 ratio */ overflow: hidden; } 
 .mainImg .centered { position: absolute; top: 0; left: 0; right: 0; bottom: 0; -webkit-transform: translate(50%,50%); -ms-transform: translate(50%,50%); transform: translate(50%,50%); } 
 .mainImg .centered #mainImg { position: absolute; top: 0; left: 0; max-width: 100%; height: auto; -webkit-transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); transform: translate(-50%,-50%); }
+
 </style>
 <title>
 <decorator:title/>
@@ -104,20 +105,15 @@ td {
 
 
 <div class="w3-purple" style="height:90px" >
-   <div class="header w3-purple" id="myHeader" style="height:90px;">
+   <div class="header w3-purple" id="myHeader" style="height: 90px;">
    		<h1><strong><a href="${path }/main.sms" style="text-decoration:none">Share My Space</a></strong>
    			<button class="w3-button w3-purple w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button></h1></div>
-      </div>
-      <div class="mainImg"> <div class="centered">	
-	  <img id="mainImg" class="mySlides" src="${path}/picture/main1.jpg">
-	  <img id="mainImg" class="mySlides" src="${path}/picture/main22.jpg">
-	  <img id="mainImg" class="mySlides" src="${path}/picture/main3.jpg">
-  	  <img id="mainImg" class="mySlides" src="${path}/picture/main4.jpg">
-  	  <img id="mainImg" class="mySlides" src="${path}/picture/main5.jpg">
-  	  </div></div>
-<div class="w3-content" style="max-width:1400px">
-<decorator:body/>
-</div>
+     </div>
+<c:if test="${!empty building}">
+<div class="mainImg"> <div class="centered">
+     <img id="mainImg" src="../picture/${building.sImg1}">
+</div></div>
+</c:if>
 <script>
 window.onscroll = function() {myFunction()};
 
@@ -132,8 +128,7 @@ function myFunction() {
   }
 }
 </script>  			 		
-  
-
+ 
 <script>
 //사진 이동
 var myIndex = 0;
@@ -161,6 +156,9 @@ function closeRightMenu() {
     document.getElementById("rightMenu").style.display = "none";
 }
 </script>
+<div class="w3-content" style="max-width:1400px">
+<decorator:body/>
+</div>
 <div class="w3-container w3-light-gray" align="right"><p>	
 <h2>
 This is Sparta!!!!!

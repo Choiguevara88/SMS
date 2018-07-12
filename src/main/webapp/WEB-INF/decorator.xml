@@ -3,7 +3,11 @@
 <decorators defaultdir="/decorator">
 	
 	<decorator page="decorator.jsp" name="main">
-		<pattern>*sms</pattern>
+		<pattern>*.sms</pattern>
+	</decorator>
+	<decorator page="decorator2.jsp" name="buildingDetail">
+		<pattern>/building/buildingDetail.sms*</pattern>
+		<pattern>/reserve/regReserve.sms*</pattern>
 	</decorator>
 	
 	

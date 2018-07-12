@@ -169,4 +169,5 @@ public class MemberDaoImpl implements MemberDao{
 		
 		return sqlSession.selectList(NS + "selectList", list);
 	}
+
 }
