@@ -125,4 +125,8 @@ public interface ProjectService {
 	List<Board> hostQuestionList1(String searchType, String searchContent);
 	
 	Room getRoom(Integer sNo, Integer sRNo);
+	
+	Favorite find(String id, Integer sNo);
+	void addfavorite(String id, Integer sNo);
+	void deletefavorite(String id, Integer sno);
 }

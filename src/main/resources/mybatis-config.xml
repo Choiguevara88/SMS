@@ -9,6 +9,7 @@
 		<typeAlias type="logic.Member" alias="Member"/>
 		<typeAlias type="logic.Reserve" alias="Reserve"/>		
 		<typeAlias type="logic.Room" alias="Room"/>
+		<typeAlias type="logic.Favorite" alias="Favorite" />
 		<typeAlias type="logic.TransactionHistory" alias="TransactionHistory" />
 	</typeAliases>
 	
@@ -18,6 +19,7 @@
 		<mapper resource="dao/mapper/Member.xml"/>
 		<mapper resource="dao/mapper/Reserve.xml"/>
 		<mapper resource="dao/mapper/Room.xml"/>
+		<mapper resource="dao/mapper/Favorite.xml"/>
 		<mapper resource="dao/mapper/TransactionHistory.xml"/>
 	</mappers>
 	

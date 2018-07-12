@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- main/resources/dao/mapper/Board.xml -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.mapper.FavoriteMapper">
+	<select id="find" resultType="Favorite" parameterType="map">
+	  select * from favorite where id=#{id} and sNo=#{sNo}
+	</select>
+</mapper>
