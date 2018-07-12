@@ -145,7 +145,7 @@ $(document).ready(function() {
 <c:forEach items="${room.sRImgNameList}" varStatus="i" var="sRImg">
 </c:forEach>
 
-<div class="w3-container w3-margin w3-border">
+<div class="w3-container w3-margin w3-border w3-round">
 	
 	<div class="w3-container w3-margin">
 		<h1 style="font-family:'Hanna'" class="w3-text-gray">${room.sRName}</h1>
@@ -154,20 +154,20 @@ $(document).ready(function() {
 	<div class="w3-container w3-margin">
 		<table class="w3-table w3-bordered">
 		<tr>
-			<td style="width:30%; vertical-align:middle;">한 줄 설명</td>
-			<td style="width:60%; vertical-align:middle;" class="w3-text-gray">${room.sRContent}</td>
+			<td style="width:30%; vertical-align:middle; font-size:large;">한 줄 설명</td>
+			<td style="width:60%; vertical-align:middle; font-size:large;" class="w3-text-gray">${room.sRContent}</td>
 		</tr>
 		<tr>
-			<td style="width:30%; vertical-align:middle;">공간유형</td>
-			<td style="width:60%; vertical-align:middle;" class="w3-text-gray">${room.sRType}</td>
+			<td style="width:30%; vertical-align:middle; font-size:large;">공간유형</td>
+			<td style="width:60%; vertical-align:middle; font-size:large;" class="w3-text-gray">${room.sRType}</td>
 		</tr>
 		<tr>
-			<td style="width:30%; vertical-align:middle;">최소 예약 인원</td>
-			<td style="width:60%; vertical-align:middle;" class="w3-text-gray">${room.sRPersonLimit}명</td>
+			<td style="width:30%; vertical-align:middle; font-size:large;">최대 인원</td>
+			<td style="width:60%; vertical-align:middle; font-size:large;" class="w3-text-gray">${room.sRPersonLimit}명</td>
 		</tr>
 		<tr>
-			<td style="width:30%; vertical-align:middle;">이용 가능 시간</td>
-			<td style="width:60%; vertical-align:middle;" class="w3-text-gray">
+			<td style="width:30%; vertical-align:middle; font-size:large;">이용 시간</td>
+			<td style="width:60%; vertical-align:middle; font-size:large;" class="w3-text-gray">
 			<c:forEach items="${building.sBHourList}" var="bu" varStatus="i">
 				${bu}<c:if test="${!(i.last)}"> ~ </c:if></c:forEach>&nbsp;까지
 			</td>
@@ -175,7 +175,7 @@ $(document).ready(function() {
 		
 		<tr>
 		<c:if test="${room.sResType == 0 }">
-			<td style="width:30%; vertical-align:middle;">예약 일시</td>
+			<td style="width:30%; vertical-align:middle; font-size:large;">예약 일시</td>
 			<td style="width:30%; vertical-align:middle;" class="w3-text-gray">
 				<input type="date" name="reDate1" class="w3-border-0 w3-hover-light-gray" placeholder="예약일자" id="selectReDate">
 			</td>
@@ -185,7 +185,7 @@ $(document).ready(function() {
 		</c:if>
 		
 		<c:if test="${room.sResType == 1 }">
-			<td style="width:30%; vertical-align:middle;">예약 일자</td>
+			<td style="width:30%; vertical-align:middle; font-size:large;">예약 일자</td>
 			<td style="width:60%; vertical-align:middle;" class="w3-text-gray">
 				<input type="date" name="reDate" class="w3-border-0 w3-hover-light-gray" placeholder="예약일자" id="selectReDate">
 			</td>
@@ -193,7 +193,7 @@ $(document).ready(function() {
 		</tr>
 		
 		<tr>
-			<td style="width:30%; vertical-align:middle;">예약 수량</td>
+			<td style="width:30%; vertical-align:middle; font-size:large;">예약 수량</td>
 			<td style="width:60%; vertical-align:middle;" class="w3-text-gray">
 				<form:select path="reCnt" class="w3-select" id="selectReCnt">
 				<c:if test="${room.sResType == 0 }">
@@ -218,7 +218,93 @@ $(document).ready(function() {
 			</td>
 		</tr>
 		</table>
+		
+	<div class="w3-row w3-margin">
+		<c:forEach items="${room.sRInfoList}" var="srInfo" varStatus="cnt">
+			<div class="w3-col s3 w3-margin">● <font style="font-family:'Hanna'; text-align:center; color:gray;">${srInfo}</font></div>
+		</c:forEach>	
 	</div>
+</div>
+<%-- 	<div class="w3-container w3-margin">
+	<c:forEach items="${room.sRImgNameList}" var="sRImg">
+		<div class="w3-container" style="text-align:center;">
+		<img src="../picture/${sRImg}" class="w3-image w3-hover-opacity" width="500" height="300">
+		</div>
+	</c:forEach>
+	</div> --%>
+</div>
+
+<div class="w3-container w3-margin w3-border w3-round">
+	<div class="w3-container w3-margin w3-light-gray">
+		<h3 style="font-family:'Hanna'; text-align:center;">호스트 정보</h3>
+	</div>
+	
+	
+	<div class="w3-row w3-margin">
+	<div class="w3-col s4">
+		<font style="font-family:'Hanna'; font-size:large;">상호명</font>
+	</div>
+	<div class="w3-col s8">
+		<font style="font-family:'Hanna'; font-size:large; color:gray;">${building.sName}</font>
+	</div>
+	</div>
+	
+	<div class="w3-row w3-margin">
+	<div class="w3-col s4">
+		<font style="font-family:'Hanna'; font-size:large;">사업자명</font>
+	</div>
+	<div class="w3-col s8">
+		<font style="font-family:'Hanna'; font-size:large; color:gray;">${hostMember.hostName}</font>
+	</div>
+	</div>
+
+	<div class="w3-row w3-margin">
+	<div class="w3-col s4">
+		<font style="font-family:'Hanna'; font-size:large;">소재지</font>
+	</div>
+	<div class="w3-col s8">
+		<font style="font-family:'Hanna'; font-size:large; color:gray;">${hostMember.address}</font>
+	</div>
+	</div>
+	
+	<div class="w3-row w3-margin">
+	<div class="w3-col s4">
+		<font style="font-family:'Hanna'; font-size:large;">사업자등록번호</font>
+	</div>
+	<div class="w3-col s8">
+		<font style="font-family:'Hanna'; font-size:large; color:gray;">${hostMember.hostRegNo}</font>
+	</div>
+	</div>
+	
+	<div class="w3-row w3-margin">
+	<div class="w3-col s4">
+		<font style="font-family:'Hanna'; font-size:large;">연락처</font>
+	</div>
+	<div class="w3-col s8">
+		<font style="font-family:'Hanna'; font-size:large; color:gray;">
+		${hostMember.tel}&nbsp;&nbsp;&nbsp;&nbsp;${hostMember.email}</font>
+	</div>
+	</div>
+</div>
+
+
+<div class="w3-container w3-margin w3-border w3-round">
+	<div class="w3-container w3-margin w3-light-gray">
+		<h3 style="font-family:'Hanna'; text-align:center;">이용 시 주의사항</h3>
+	</div>
+
+
+<c:forEach items="${building.sRuleList}" var="sRule" varStatus="cnt">
+<div class="w3-row w3-margin">
+	<div class="w3-col s2" style="vertical-align:middle; text-align:center;">
+		<font style="font-family:'Hanna'; font-size:large;">${cnt.count}.</font>
+	</div>
+	<div class="w3-col s10" style="vertical-align:middle;">
+		<font style="font-family:'Hanna'; font-size:large;">${sRule}</font>
+	</div>
+</div>
+</c:forEach>
+
 </div>
 
 </div>
@@ -227,43 +313,38 @@ $(document).ready(function() {
 	<div class="w3-container w3-margin">
 		<h2 style="font-family:'Hanna'" class="w3-text-gray">결제 예정 금액</h2>
 	</div>
-	<div class="w3-container w3-padding w3-border">
-		<table class="w3-table">
-			<tr>
-				<td>
-					<c:if test="${room.sResType == 0}">시간당</c:if>
-					<c:if test="${room.sResType == 1}">하루당</c:if>
-					금액
-				</td>
-				<td><fmt:formatNumber value="${room.sPrice}" pattern="###,###" />원</td>
-			</tr>
-			
-			<tr>
-				<td>예약일자</td>
-				<td>
-					<font id='chkReDate'></font>&nbsp;<font id='chkReTime'></font>
-				</td>
-			</tr>
-			
-			<tr>
-				<td>예약수량</td>
-				<td><font id="chkReCnt"></font>&nbsp;
-					<c:if test="${room.sResType == 0}">시간</c:if>
-					<c:if test="${room.sResType == 1}">일</c:if>
-				</td>
-			</tr>
-		</table>
-		<hr>
-		<table class="w3-table w3-large">
-			<tr>
-				<td>결제금액</td>
-				<td><font id="totPrice1"></font>원</td>
-			</tr>
-		</table>
+	<div class="w3-container w3-padding w3-border w3-round">
+	<table class="w3-table">
+	<tr>
+		<td>
+		<c:if test="${room.sResType == 0}">시간당</c:if>
+		<c:if test="${room.sResType == 1}">하루당</c:if>금액
+		</td>
+		<td><fmt:formatNumber value="${room.sPrice}" pattern="###,###" />원</td>
+	</tr>
+	<tr>
+		<td>예약일자</td>
+		<td><font id='chkReDate'></font>&nbsp;<font id='chkReTime'></font></td>
+	</tr>
+	<tr>
+		<td>예약수량</td>
+		<td><font id="chkReCnt"></font>&nbsp;
+		<c:if test="${room.sResType == 0}">시간</c:if>
+		<c:if test="${room.sResType == 1}">일</c:if>
+		</td>
+	</tr>
+	</table>
+	<hr>
+	<table class="w3-table w3-large">
+	<tr>
+		<td>결제금액</td>
+		<td><font id="totPrice1"></font>원</td>
+	</tr>
+	</table>
 	</div>
-	<div class="w3-container">
-	<input type="submit" value="등록하기" class="w3-button">
-	</div>
+	
+	<div class="w3-container w3-margin" style="text-align:center;">
+	<input type="submit" value="예약하기" class="btn btn-outline-primary btn-block" style="font-family:'Hanna';"></div>
 </div>
 
 <form:hidden path="totPrice" id="totalPrice1" value=""/>
@@ -276,6 +357,10 @@ $(document).ready(function() {
 <div class="w3-col s1"><p>&nbsp;</p></div><!-- 좌우공간확보용 -->
 </div>
 </body>
+
+
+
+
 
 <!-- 달력 스크립트 ::: 일단 봉인함. ㅠㅠ --> 
 <!-- <script type="text/javascript">
@@ -362,6 +447,7 @@ $(document).ready(function() {
              }
         }
 </script> -->
+
 <!-- 달력 스크립트 -->
 
 <!-- 달력 HTML 페이지 부분 ::: 눈물을 머금고 봉인 -->
@@ -388,4 +474,3 @@ $(document).ready(function() {
     buildCalendar();//
 </script>
 </div> -->
-</html>

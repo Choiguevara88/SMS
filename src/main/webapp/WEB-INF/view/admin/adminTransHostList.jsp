@@ -89,24 +89,24 @@
 		</tr>
 	<c:forEach var="th" items="${thList}">
 		<tr>
-			<td class="w3-small" style="text-align:center;">${th.host}</td>
-			<td class="w3-small" style="text-align:center;">${th.hostName}</td>
-			<td class="w3-small" style="text-align:center;">${th.sRName}</td>
-			<td class="w3-small" style="text-align:center;"><fmt:formatDate value="${th.reDate}" pattern="yyyy-MM-dd"/></td>
-			<td class="w3-small" style="text-align:center;"><fmt:formatNumber value="${th.totPrice}" pattern="###,###"/></td>
-			<td class="w3-small" style="text-align:center;">${th.guest}
+			<td style="text-align:center;">${th.host}</td>
+			<td style="text-align:center;">${th.hostName}</td>
+			<td style="text-align:center;">${th.sRName}</td>
+			<td style="text-align:center;"><fmt:formatDate value="${th.reDate}" pattern="yyyy-MM-dd"/></td>
+			<td style="text-align:center;"><fmt:formatNumber value="${th.totPrice}" pattern="###,###"/></td>
+			<td style="text-align:center;">${th.guest}
 			<c:set var="tAmount" value="${tAmount + th.totPrice}"/>
 			<c:set var="tCnt" value="${tCnt + 1}"/>
 			</td>
 		</tr>
 	</c:forEach>
 		<tr>
-			<th colspan="5" style="text-align:right;">기간 별 총 거래금액</th>
+			<th colspan="5" style="text-align:right; font-family:'Hanna';" >기간 별 총 거래금액</th>
 			<th><fmt:formatNumber value="${tAmount}" pattern="###,###"/></th>
 		</tr>
 		
 		<tr>
-			<th colspan="5" style="text-align:right;">기간 별 총 거래건수</th>
+			<th colspan="5" style="text-align:right; font-family:'Hanna';">기간 별 총 거래건수</th>
 			<th>${tCnt}</th>
 		</tr>
 	</table>

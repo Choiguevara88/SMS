@@ -199,7 +199,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void reserveInsert(Reserve reserve) {
-		reserve.setReNo(reserve.getSrNo() + Math.abs((int)new Date().getTime()));
+		reserve.setReNo(Math.abs((int)new Date().getTime()) + reserve.getSrNo());
 		reDao.insert(reserve);
 	}
 
@@ -622,7 +622,7 @@ if (room.getsRImgList() != null) {
 		List<String> infoList = new ArrayList<String>();
 		
 		if(returnRoom.getsRImg() != null && !returnRoom.getsRImg().equals("")) {
-			imgList = Arrays.asList(returnRoom.getsRImg().split("|"));
+			imgList = Arrays.asList(returnRoom.getsRImg().split("[|]"));
 		}
 		
 		if(returnRoom.getsRInfo() != null && !returnRoom.getsRInfo().equals("")) {
