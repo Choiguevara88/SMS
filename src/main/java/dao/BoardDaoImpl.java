@@ -166,5 +166,10 @@ public class BoardDaoImpl implements BoardDao{
 		map.put("sNo",sNo);
 		return sqlSession.selectOne(NS + "hostQuestCnt", map);
 	}
+
+	@Override
+	public void budelete(Integer sNo) {
+		sqlSession.getMapper(BoardMapper.class).budelete(sNo);
+	}
 	
 }

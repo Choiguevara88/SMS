@@ -129,4 +129,6 @@ public interface ProjectService {
 	Favorite find(String id, Integer sNo);
 	void addfavorite(String id, Integer sNo);
 	void deletefavorite(String id, Integer sno);
+	
+	void buildingDelete(Integer sNo);
 }

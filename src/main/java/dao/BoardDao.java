@@ -46,6 +46,8 @@ public interface BoardDao {
 	List<Board> guestQuestionList1();
 
 	List<Board> hostQuestionList1();
+
+	void budelete(Integer sNo);
 	
 }
 

@@ -65,7 +65,6 @@ td {
 <body>
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none;right:0;" id="rightMenu">
   <button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large w3-hover-light-grey">닫기 &times;</button>
-  <hr size="1">
   <c:if test="${empty sessionScope.loginMember.id}"><a href="${path }/login.sms" class="w3-bar-item w3-button w3-hover-light-grey">
   	<i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;로그인/회원가입!</a></c:if>
    <c:if test="${!empty sessionScope.loginMember.id }">

@@ -10,4 +10,6 @@ public interface FavoriteDao {
 
 	void deleteFavorite(String id, Integer sNo);
 
+	void budelete(Integer sNo);
+
 }
