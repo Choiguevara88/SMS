@@ -25,7 +25,7 @@ public class MainController {
 		ModelAndView mav = new ModelAndView("main");
 		int sNo[] = new int[6];
 		for(int i = 0; i< sNo.length;i++) {
-			sNo[i] = (int)(Math.random()*23)+1;
+			sNo[i] = (int)(Math.random()*12)+1;
 			for(int j = 0; j <i;j++) {
 				if(sNo[i] == sNo[j]) {
 					i--;
