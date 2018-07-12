@@ -10,7 +10,7 @@ public class Reserve {
 	private Integer sNo;			// 건물관리번호
 	private Integer srNo;			// Room번호
 	
-	@DateTimeFormat(pattern="yyyyMMddHH") // 입력받은 문자열을 정해진 포맷으로 날짜자료형으로 변환해주는 어노테이션
+	@DateTimeFormat(pattern="yyyyMMddHHmm") // 입력받은 문자열을 정해진 포맷으로 날짜자료형으로 변환해주는 어노테이션
 	private Date reDate;			// 예약 일자
 	private Date regDate;			// 예약 관리 일자
 	private Integer totPrice;		// 금액
