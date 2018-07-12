@@ -80,6 +80,49 @@ $("#res").click(function(){
 	location.href = "../reserve/regReserve.sms?sNo="+${param.sNo}+"&sRNo="+selectedRoom;
 });
 
+/*좋아요 관련 스크립트*/
+var a = "1";
+var id = "${sessionScope.loginMember.id}";
+var sNo = "${param.sNo}";
+var oheart = "<i class='fa fa-heart-o' style='font-size:36px; color:gray'></i>";
+var heart = "<i class='fa fa-heart' style='font-size:36px; color:purple'></i>";
+var fb = document.getElementById("fabtn");
+
+$.ajax({
+	data: {
+		id : id,
+		sNo: sNo
+	},
+	url : "favorite.sms",
+	success:function(data){
+		if(data=="1"){
+			fb.innerHTML = oheart;
+		} else{
+			fb.innerHTML = heart;
+		}
+	}
+});
+
+$("#fabtn").click(function(){
+	$.ajax({
+		data: {
+			id : id,
+			sNo: sNo
+		},
+		url : "favoriteclick.sms",
+		success:function(data){
+			if(data=="1"){
+				$("#fabtn").empty();
+				fabtn.innerHTML = heart;
+				alert("찜한 공간에 등록~");
+			} else{
+				$("#fabtn").empty();
+				fabtn.innerHTML = oheart;
+				alert("찜한 공간에서 제거~");
+			}
+		}
+    });
+
 });
 
 function listRlist(pageNum){
@@ -90,7 +133,7 @@ function listRlist(pageNum){
 			$("#listRlist").html(result)
 		}
 	});
-	}
+}
 function listQlist(pageNum){
 	$.ajax({
 		type: "get",
@@ -99,11 +142,9 @@ function listQlist(pageNum){
 			$("#listQlist").html(result)
 		}
 	});
+}
 
-function favorite() {
-	
-}
-}
+});
 </script>
 
 <!-- 지도관련 스크립트 -->
@@ -118,9 +159,8 @@ function favorite() {
 <div class="w3-col s11">
 <div><span><font class="w3-xxlarge">${building.sName}</font></span>
      <span class="w3-right">
-     <a href="javascript:">
-     <i class="fa fa-heart-o" style="font-size:36px; color:gray"></i>
-     </a>
+        <a id="fabtn" style="cursor:pointer">
+        </a>
      </span>
 </div>
 <div><h4>${building.sPreview}</h4></div>
@@ -220,7 +260,9 @@ function favorite() {
 <hr>
 <input type="radio" name="room" value="${room.sRNo}">
 <span>${room.sRName}</span>
-<span class="w3-right"><font class="w3-xlarge w3-text-purple">￦ ${room.sPrice}</font> &nbsp;/
+<span class="w3-right"><font class="w3-xlarge w3-text-purple">
+￦<fmt:formatNumber value="${room.sPrice}" groupingUsed="true"/>
+ </font> &nbsp;/
   <c:if test="${room.sResType == 0}">시간</c:if>
   <c:if test="${room.sResType == 1}">일</c:if>
 </span>

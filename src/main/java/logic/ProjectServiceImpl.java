@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import dao.BoardDao;
 import dao.BuildingDao;
+import dao.FavoriteDao;
 import dao.MemberDao;
 import dao.ReserveDao;
 import dao.RoomDao;
@@ -36,6 +37,8 @@ public class ProjectServiceImpl implements ProjectService {
 	private RoomDao roomDao;
 	@Autowired
 	private TransactionHistoryDao tranDao;
+	@Autowired
+	private FavoriteDao faDao;
 
 	@Override
 	public Member getMember(String id) {
@@ -633,6 +636,21 @@ if (room.getsRImgList() != null) {
 		returnRoom.setsRInfoList(infoList);
 	
 		return returnRoom;
+	}
+
+	@Override
+	public Favorite find(String id, Integer sNo) {
+		return faDao.find(id, sNo);
+	}
+
+	@Override
+	public void addfavorite(String id, Integer sNo) {
+		faDao.addFavorite(id, sNo);
+	}
+
+	@Override
+	public void deletefavorite(String id, Integer sNo) {
+		faDao.deleteFavorite(id, sNo);
 	}
 
 }// ProjectServiceImpl end
