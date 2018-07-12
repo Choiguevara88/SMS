@@ -39,28 +39,14 @@ background: #ADD8E6;
     width: 280px;
     margin: 0 auto 10px;
 }
-h1 {
-	align: center;
-    display: block;
-    position: relative;
-    height: 60px;
-    width: 650px;
-    margin: 0 auto 10px;
-    
-}
-h3 {
-	align: center;
-    display: block;
-    position: relative;
-    height: 70px;
-    width: 400px;
-    margin: 0 auto 10px;
-} 
 </style>
 </head> 
 <body>
-<h1>Guest,Host님을 위한 문의 게시판입니다.</h1>
-<h3>※사이트에 관한 건의 및 불만사항<br>
+<c:if test="${kind == 5 }">
+<h1 align="center">HOST님을 위한 문의 게시판 입니다.</h1></c:if>
+<c:if test="${kind == 4 }">
+<h1 align="center">GUEST님을 위한 문의 게시판 입니다.</h1></c:if>
+<h3 align="center">※사이트에 관한 건의 및 불만사항<br>
 	※허위 공간이나 사기 거래등 신고 </h3>
 <hr size="1">
 <div id="main">

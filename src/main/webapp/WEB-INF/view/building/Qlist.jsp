@@ -85,12 +85,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <form:hidden path="id" value="${sessionScope.loginMember.id}"/>
 	<div align="center" id="table2"><table cellpadding="0" cellspacing="0" align="center" >
 		<caption><h3>질문 글 등록하기</h3></caption>
-		<tr><td align="center">제목</td>
-			<td><form:input path="subject"/>
-			<font color="red">
-			<form:errors path="subject"/>
-			</font></td>
-		</tr>
 		
 		<tr><td align="center" colspan="2">내용</td></tr>
         <tr><td colspan="2"><form:textarea rows="15" cols="80" path="content"/>
@@ -138,7 +132,7 @@ window.onclick = function(event) {
 <c:if test="${listcount > 0}">
 <c:forEach var="board" items="${boardlist}">
 	<tr>
-		<td width="50%" colspan="2">${board.subject}</td></tr>
+		<td width="50%" colspan="2">${board.id}</td></tr>
 	<tr><td colspan="2">${board.content}</td> 
 	</tr>
 	<tr>

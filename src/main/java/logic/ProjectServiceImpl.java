@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import dao.BoardDao;
 import dao.BuildingDao;
+import dao.FavoriteDao;
 import dao.MemberDao;
 import dao.ReserveDao;
 import dao.RoomDao;
@@ -36,6 +37,8 @@ public class ProjectServiceImpl implements ProjectService {
 	private RoomDao roomDao;
 	@Autowired
 	private TransactionHistoryDao tranDao;
+	@Autowired
+	private FavoriteDao faDao;
 
 	@Override
 	public Member getMember(String id) {
@@ -350,8 +353,8 @@ public class ProjectServiceImpl implements ProjectService {
 		return boDao.guestQuestionList();
 	}
 	@Override
-	public List<Board> guestQuestionList1() {
-		return boDao.guestQuestionList1();
+	public List<Board> guestQuestionList1(String searchType, String searchContent) {
+		return boDao.guestQuestionList1(searchType, searchContent);
 	}
 
 	@Override
@@ -359,8 +362,8 @@ public class ProjectServiceImpl implements ProjectService {
 		return boDao.hostQuestionList();
 	}
 	@Override
-	public List<Board> hostQuestionList1() {
-		return boDao.hostQuestionList1();
+	public List<Board> hostQuestionList1(String searchType, String searchContent) {
+		return boDao.hostQuestionList1(searchType, searchContent);
 	}
 
 	@Override
@@ -583,7 +586,14 @@ if (room.getsRImgList() != null) {
 
 	@Override
 	public Building getbuilding_mainpage(int sNo) {
-		return buDao.getbuilding_mainpage(sNo);
+		Building building = buDao.getbuilding_mainpage(sNo);
+		String sTypes = building.getsType();
+		String sTags = building.getsTag();
+		List<String> sTypeList = new ArrayList<String>(Arrays.asList(sTypes.split("[|]")));
+		List<String> sTagList = new ArrayList<String>(Arrays.asList(sTags.split("[|]")));
+		building.setsTypeList(sTypeList);
+		building.setsTagList(sTagList);
+		return building;
 	}
 
 	@Override
@@ -633,6 +643,21 @@ if (room.getsRImgList() != null) {
 		returnRoom.setsRInfoList(infoList);
 	
 		return returnRoom;
+	}
+
+	@Override
+	public Favorite find(String id, Integer sNo) {
+		return faDao.find(id, sNo);
+	}
+
+	@Override
+	public void addfavorite(String id, Integer sNo) {
+		faDao.addFavorite(id, sNo);
+	}
+
+	@Override
+	public void deletefavorite(String id, Integer sNo) {
+		faDao.deleteFavorite(id, sNo);
 	}
 
 }// ProjectServiceImpl end

@@ -11,8 +11,6 @@ public class Board {
 	private Integer sNo;					// 빌딩번호
 	private String id;						// 작성자 ID
 	private String email;					// 작성자 Email
-	
-	@NotEmpty(message = "제목을 입력하세요.")
 	private String subject;					// 게시글 제목
 	
 	@NotEmpty(message = "내용을 입력하세요.")

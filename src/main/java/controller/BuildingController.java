@@ -13,11 +13,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.ProjectException;
 import logic.Board;
 import logic.Building;
+import logic.Favorite;
 import logic.ProjectService;
 import logic.Room;
 
@@ -255,7 +257,7 @@ public class BuildingController {
 		
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
-			return mav;
+			throw new ProjectException("다시 작성해 주세요.","buildingDetail.sms?sNo="+sNo);
 		}
 		
 		try {
@@ -362,4 +364,30 @@ public class BuildingController {
 		mav.addObject("board", board);
 		return mav;
 	}*/
+	
+	@RequestMapping(value="building/favorite")
+	public @ResponseBody String favorite(String id, String sNo, HttpSession session) {
+		Favorite favor = new Favorite();
+		Integer sno = Integer.parseInt(sNo);
+		favor = service.find(id, sno);
+		if(favor == null) {
+			return "1";
+		} else {
+			return "0";
+		}
+	}
+	
+	@RequestMapping(value="building/favoriteclick")
+	public @ResponseBody String favoriteclick(String id, String sNo, HttpSession session) {
+		Favorite favor = new Favorite();
+		Integer sno = Integer.parseInt(sNo);
+		favor = service.find(id, sno);
+		if(favor == null) {
+			service.addfavorite(id, sno);
+			return "1";
+		} else {
+			service.deletefavorite(id,sno);
+			return "0";
+		}
+	}
 }

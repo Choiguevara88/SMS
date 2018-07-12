@@ -8,6 +8,7 @@
 	<decorator page="decorator2.jsp" name="buildingDetail">
 		<pattern>/building/buildingDetail.sms*</pattern>
 		<pattern>/reserve/regReserve.sms*</pattern>
+		<pattern>/becomeahost_complete.sms*</pattern>
 	</decorator>
 	
 	
