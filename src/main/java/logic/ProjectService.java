@@ -92,7 +92,7 @@ public interface ProjectService {
 	
 	List<Room> getmyRoomList(Integer sNo);
 	
-	void updateRoom(Room room);
+	void updateRoom(Room room, HttpServletRequest request);
 	
 	void deleteRoom(Room room);
 	

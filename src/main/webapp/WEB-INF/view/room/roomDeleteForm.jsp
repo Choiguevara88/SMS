@@ -17,12 +17,22 @@
 <!-- 부트스트랩 사용 선언 -->
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>지울거야</title>
+<title>세부 공간 삭제</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 </script>
+
+<style>
+		.srinfo{
+			border:2px black solid;
+		
+		}
+	
+	</style>
+
+
 </head>
 <body>
 <p>패스워드를 입력하세요</p>
@@ -43,7 +53,13 @@
       <p>세부 공간 이름 : ${room.sRName}</p><br>	
       <p>설명 : ${room.sRContent}</p><br>
       <p>공간 유형 : ${room.sRType}</p><br>
-      <p>시설 안내 : ${room.sRInfo}</p><br>
+     <div class="srinfo">시설 안내
+      <c:forEach var="roomInfo" items="${room.sRInfoList}">
+      <div >
+    	 ${roomInfo}
+      </div>
+     	</c:forEach>
+     	</div>
       <p>예약 유형 : ${room.sResType}</p><br>
 	  <p>최소 인원 : ${room.sRPersonLimit}</p><br>
 	  <p>시간/일 가격 : ${room.sPrice}</p><br>
