@@ -570,7 +570,14 @@ if (room.getsRImgList() != null) {
 
 	@Override
 	public Building getbuilding_mainpage(int sNo) {
-		return buDao.getbuilding_mainpage(sNo);
+		Building building = buDao.getbuilding_mainpage(sNo);
+		String sTypes = building.getsType();
+		String sTags = building.getsTag();
+		List<String> sTypeList = new ArrayList<String>(Arrays.asList(sTypes.split("[|]")));
+		List<String> sTagList = new ArrayList<String>(Arrays.asList(sTags.split("[|]")));
+		building.setsTypeList(sTypeList);
+		building.setsTagList(sTagList);
+		return building;
 	}
 
 	@Override

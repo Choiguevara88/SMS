@@ -107,7 +107,7 @@ public class MemberController {
 	    System.out.println(code);
 	    String state = request.getParameter("state");
 	    System.out.println(state);
-	    String redirectURI = URLEncoder.encode("http://192.168.0.107:8080/TestProject/loginbysns.sms", "UTF-8");
+	    String redirectURI = URLEncoder.encode("http://localhost:8080/TestProject/loginbyNaver.sms", "UTF-8");
 	    String apiURL;
 	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
 	    apiURL += "client_id=" + clientId;
@@ -189,7 +189,7 @@ public class MemberController {
 		}
 		else {
 			session.setAttribute("loginMember", loginMember);
-			mav.setViewName("main");
+			mav.setViewName("redirect: main.sms");
 		}
 		return mav;
 	}
@@ -331,7 +331,7 @@ public class MemberController {
 		}
 		
 		if(dbmember.getPw().equals(member.getPw())) {
-			mav.setViewName("main");
+			mav.setViewName("redirect: main.sms");
 			mav.addObject("dbmember",dbmember);
 			session.setAttribute("loginMember", dbmember);
 		} else {
@@ -339,7 +339,6 @@ public class MemberController {
 			mav.getModel().putAll(bindingResult.getModel());
 			mav.setViewName("member/loginpage");
 		}
-		
 		
 		return mav;
 	}

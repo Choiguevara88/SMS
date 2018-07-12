@@ -33,20 +33,16 @@ public class MainController {
 				}
 			}
 		}
-		System.out.println("1111");
 		//랜덤으로 건물 넣기
 		//건물을 가져 오면서 동시에 관련 Room도 가져와야된다
-		List<Integer> sPrice1 = new ArrayList<Integer>();
+		List<Room> sPrice1 = new ArrayList<Room>();
 		List<Building> building1 = new ArrayList<Building>();
 		for(int i = 0; i< sNo.length;i++) { 
 			building1.add(service.getbuilding_mainpage(sNo[i]));
-			System.out.println(service.getmyRoom_lowestprice(sNo[i]).getsPrice());
-			sPrice1.add(service.getmyRoom_lowestprice(sNo[i]).getsPrice());
+			System.out.println(service.getbuilding_mainpage(sNo[i]).getsTagList());
+			sPrice1.add(service.getmyRoom_lowestprice(sNo[i]));
 		}
 		//building 리스트랑 sPrice리스트의 인덱스들은 같이 움직임
-		System.out.println("12345");
-		System.out.println(building1);
-		System.out.println(sPrice1);
 		
 		//건물 평점 평균 내서 건물 번호랑 평균 평점 가져오기
 		List<Integer> sPrice2 = new ArrayList<Integer>();
