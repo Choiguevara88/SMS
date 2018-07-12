@@ -1,3 +1,4 @@
+<%@page import="logic.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp" %>    
@@ -26,41 +27,53 @@
 </script>
 <div>
 	<div style="float:left; display:inliine;">
-	<h4>이용 후기 <strong><em>${listcount}</em>개</strong><span></span>
+	<h4>이용 후기 <strong class="w3-text-deep-purple"><em>${listcount}</em>개</strong><span></span>
 						평균 평점 <strong><em>
-	<div id="roundavg" style="display:inline"></div>					
+	<div id="roundavg" style="display:inline" class="w3-text-deep-purple"></div>					
 	<script>
 	roundavg.innerHTML =roundXL(${avgScore},1)
 	</script></em></strong>
 	</h4></div>
-	<span style="float:right">
+	<span style="float:right" >
 	</span>
 </div>
 <!--  리뷰 목록부분 -->
-<table border="1" style="margin-top:30px" width="80%" align="center">
+<br>
+<table style="margin-top:30px" width="80%" align="center">
 
 <c:if test="${listcount > 0}">
 <c:forEach var="board" items="${boardlist}" varStatus="i">
-	<tr>
-		<td>${board.id}</td>
-		<td align="right">${board.score}</td>
-	</tr>
-	<tr>
-		<td colspan="4">내용 : ${board.content}</td></tr>
+<hr size="1" style="color:red">
+	<div><b>
 	<c:if test="${board.refLevel == 0 }">
-	<tr><td><img src="${path }/picture/${board.img1}" style="width:25%; height:300px"></td>
-		<td><img src="${path }/picture/${board.img2}" style="width:25%; height:300px"></td>
-		<td><img src="${path }/picture/${board.img3}" style="width:25%; height:300px"></td>
-		<td><img src="${path }/picture/${board.img4}" style="width:25%; height:300px"></td>
-	</tr></c:if>
-	<tr>
-		<td colspan="3"><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd H:mm:ss"/></td>
-  		<td align="center" >
+		<span class="w3-xlarge w3-text-darkgrey">${board.id}</span></c:if>
+		<c:if test="${board.refLevel != 0 }">
+		<div class="w3-xlarge">${building.id}님의 답글입니다.</div>
+		</c:if></b>
+		<c:if test="${board.refLevel == 0 }">
+		<span style="float:right;">
+		<c:forEach begin="1" end="${board.score}"><i class="fa fa-thumbs-up" style="font-size:24px;"></i></c:forEach>
+		<c:forEach begin="${board.score+1}" end="5"><i class="fa fa-thumbs-o-up" style="font-size:24px;"></i></c:forEach>
+		 </span>
+		</c:if>
+	</div>
+	<div>
+		<div class="w3-large w3-text-deepgray"> ${board.content}</div></div>
+	<c:if test="${board.refLevel == 0 }">
+	<div><span><img src="${path }/picture/${board.img1}" style="width:150px; height:150px"></span>
+		<span><img src="${path }/picture/${board.img2}" style="width:150px; height:150px"></span>
+		<span><img src="${path }/picture/${board.img3}" style="width:150px; height:150px"></span>
+		<span><img src="${path }/picture/${board.img4}" style="width:150px; height:150px"></span>
+	</div></c:if>
+	<div>
+		<div class="w3-medium w3-text-grey"><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd H:mm:ss"/></div>
+  		<div align="center" >
   		<c:if test="${sessionScope.loginMember.id == building.id && board.sNo == building.sNo }">
   		<c:if test="${board.refLevel == 0  }">
   		<c:if test="${board.qType == 0 }">
   		<a href="javascript:win_openR('${board.bNo}')">[답변]</a></c:if></c:if></c:if>
-</tr>
+</div>
+</div>
 <!--  글 밑 부분 -->
 </c:forEach>
 <tr align="center" height="26"><td colspan="5">

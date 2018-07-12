@@ -241,11 +241,11 @@ function listQlist(pageNum){
 </div>
 
 <!-- 이용후기, Q&A -->
-<div id="listRlist"></div> 
+<div id="listQlist"></div>
 
 <hr size="1">
 
-<div id="listQlist"></div>
+<div id="listRlist"></div> 
 
 
 </div>
