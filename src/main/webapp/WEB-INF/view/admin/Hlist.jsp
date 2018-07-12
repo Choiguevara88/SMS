@@ -6,6 +6,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Host 문의 목록</title>
+<script type="text/javascript">
+	function list(pageNum) {
+		if(searchType == null || searchType.length == 0) {
+			document.searchform.searchContent.value = "";
+			document.searchform.pageNum.value = "1";
+			location.href="Hlist.sms?pageNum=" + pageNum+"&kind="+ 1;
+		}else{
+			document.searchform.pageNum.value = pageNum;
+			document.searchform.submit();
+			return true;
+		}
+		return false;
+	}
+</script>
 <style type="text/css">
 #main{
 background: #ADD8E6; 
@@ -42,6 +56,25 @@ background: #ADD8E6;
 </style>
 </head>
 <body>
+<br>
+<table width="80%" align="center" border="1" style="margin-top:10px">
+	<tr><td colspan="5" align="center">
+		<form action="Hlist.sms" method="post" name="searchform" onsubmit="return list(1)" >
+			<label for="notice_txt">Host Q&A 검색</label>
+			<input type="hidden" name="pageNum" value="1">
+			<select name="searchType" id="searchType">
+				<option value="">선택하세요</option>
+				<option value="id">아이디</option>
+				<option value="content">내용</option>
+			</select>&nbsp;
+		<script type="text/javascript">
+			if('${param.searchType}' != '') {
+				document.getElememntById("searchType").value='${param.searchType}'
+			}
+		</script>
+<input type="text" name="searchContent" value="${param.searchContent}">
+<input type="submit" value="검색">
+		</form></td></tr></table>
 <br>
 <div id="main">
 <% pageContext.setAttribute("newLineChar","\n"); %>

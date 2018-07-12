@@ -353,8 +353,8 @@ public class ProjectServiceImpl implements ProjectService {
 		return boDao.guestQuestionList();
 	}
 	@Override
-	public List<Board> guestQuestionList1() {
-		return boDao.guestQuestionList1();
+	public List<Board> guestQuestionList1(String searchType, String searchContent) {
+		return boDao.guestQuestionList1(searchType, searchContent);
 	}
 
 	@Override
@@ -362,8 +362,8 @@ public class ProjectServiceImpl implements ProjectService {
 		return boDao.hostQuestionList();
 	}
 	@Override
-	public List<Board> hostQuestionList1() {
-		return boDao.hostQuestionList1();
+	public List<Board> hostQuestionList1(String searchType, String searchContent) {
+		return boDao.hostQuestionList1(searchType, searchContent);
 	}
 
 	@Override
