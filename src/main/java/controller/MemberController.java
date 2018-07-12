@@ -95,7 +95,6 @@ public class MemberController {
 		}
 		return mav;
 	}
-	
 	@RequestMapping(value = "login", method = RequestMethod.GET) //URL濡� 寃����댁�� �ㅼ�� ���� ��
 	public String loginForm() {
 		return "member/loginpage";

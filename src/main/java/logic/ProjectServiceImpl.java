@@ -571,7 +571,7 @@ if (room.getsRImgList() != null) {
 	}
 
 	@Override
-	public List<Integer> getmyRoom_lowestprice(int i) {
+	public Room getmyRoom_lowestprice(int i) {
 		return roomDao.getmyRoom_lowestprice(i);
 	}
 

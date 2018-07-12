@@ -111,7 +111,7 @@ public interface ProjectService {
 			Integer limit);
 	Building getbuilding_mainpage(int sNo);
 	List<Board> getbuildingNo_by_score();
-	List<Integer> getmyRoom_lowestprice(int i);	
+	Room getmyRoom_lowestprice(int i);	
 	
 	List<Member> selectMemberList(String[] idchks);
 	
