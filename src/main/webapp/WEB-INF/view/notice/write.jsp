@@ -18,7 +18,7 @@
 	  	  <td><select name="mtype">
 	  	  	  <option value="text/html;charset=UTF-8">HTML</option>
 	  	  	  <option value="text/plain;charset=UTF-8">TEXT</option>
-	  	  </select></td><td align="center">제목</td><td><form:input path="subject"/><font color="red"><form:errors path="subject"/></font></td></tr>
+	  	  </select></td><td align="center">제목</td><td><form:input path="subject"/></td></tr>
 		
 		<tr><td align="center" colspan="2">내용</td><td colspan="2"><form:textarea path="content" cols="120" rows="10"/>
 	  <script type="text/javascript">CKEDITOR.replace('content');</script><font color="red"><form:errors path="content"/></font></td></tr>

@@ -33,6 +33,7 @@ public class MainController {
 				}
 			}
 		}
+		
 		//랜덤으로 건물 넣기
 		//건물을 가져 오면서 동시에 관련 Room도 가져와야된다
 		List<Room> sPrice1 = new ArrayList<Room>();

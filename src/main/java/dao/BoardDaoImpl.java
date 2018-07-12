@@ -129,8 +129,18 @@ public class BoardDaoImpl implements BoardDao{
 		return sqlSession.selectList(NS + "guestQuestion");
 	}
 	@Override
-	public List<Board> guestQuestionList1() {
-		return sqlSession.selectList(NS + "guestQuestion1");
+	public List<Board> guestQuestionList1(String searchType, String searchContent) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		if (searchType == null || searchType.equals(""))
+			searchType = null;
+		if (searchContent == null || searchContent.equals(""))
+			searchContent = null;
+
+		map.put("searchType", searchType);
+		map.put("searchContent", searchContent);
+
+		return sqlSession.selectList(NS + "guestQuestion1", map);
 	}
 
 	@Override
@@ -138,8 +148,18 @@ public class BoardDaoImpl implements BoardDao{
 		return sqlSession.selectList(NS + "hostQuestion");
 	}
 	@Override
-	public List<Board> hostQuestionList1() {
-		return sqlSession.selectList(NS + "hostQuestion1");
+	public List<Board> hostQuestionList1(String searchType, String searchContent) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		if (searchType == null || searchType.equals(""))
+			searchType = null;
+		if (searchContent == null || searchContent.equals(""))
+			searchContent = null;
+
+		map.put("searchType", searchType);
+		map.put("searchContent", searchContent);
+
+		return sqlSession.selectList(NS + "hostQuestion1", map);
 	}
 
 	@Override
@@ -165,6 +185,11 @@ public class BoardDaoImpl implements BoardDao{
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("sNo",sNo);
 		return sqlSession.selectOne(NS + "hostQuestCnt", map);
+	}
+
+	@Override
+	public void budelete(Integer sNo) {
+		sqlSession.getMapper(BoardMapper.class).budelete(sNo);
 	}
 	
 }
