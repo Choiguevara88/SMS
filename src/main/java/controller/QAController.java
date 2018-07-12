@@ -49,6 +49,7 @@ public class QAController {
 		List<Board> list = service.boardList(kind, id);
 		mav.setViewName("qa/questionList");
 		mav.addObject("list",list);
+		mav.addObject("kind",kind);
 		return mav;
 	}
 

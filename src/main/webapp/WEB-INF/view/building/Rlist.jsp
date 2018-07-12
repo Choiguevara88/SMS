@@ -42,7 +42,6 @@
 <c:if test="${listcount > 0}">
 <c:forEach var="board" items="${boardlist}" varStatus="i">
 	<tr>
-		<td colspan="2" width="50%">제목 : ${board.subject}</td>
 		<td>${board.id}</td>
 		<td align="right">${board.score}</td>
 	</tr>
