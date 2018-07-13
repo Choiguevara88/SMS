@@ -668,4 +668,9 @@ if (room.getsRImgList() != null) {
 		roomDao.budelete(sNo);
 	}
 
+	@Override
+	public List<Building> getMyWishBuildings(String id) {
+		return buDao.getMyWishBuildings(id);
+	}
+
 }// ProjectServiceImpl end

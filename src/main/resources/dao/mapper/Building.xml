@@ -25,5 +25,11 @@
 	<select id="mainpagebuilding" resultType="Building" parameterType="map">
 		select * from building where sNo=#{sNo}
 	</select>
+	
+	<select id="wishSelect" resultType="Building" parameterType="map">
+		select b.sNo, b.id, b.sName, b.sPreview, b.sContent, b.sType, b.sTag, b.sInfoSub, b.sRule, b.sBHour, b.sHDay, b.sImg1, b.sTel, b.sAddress 
+		from favorite f , Building b
+		where b.sNo = f.sNo and f.id = #{id}
+	</select>
 
 </mapper>

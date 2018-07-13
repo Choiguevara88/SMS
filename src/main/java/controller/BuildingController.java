@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -389,6 +390,26 @@ public class BuildingController {
 		String id = mem.getId();
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/building/myBuildingList.sms?id=" + id);
+		return mav;
+	}
+	
+	@RequestMapping(value="building/wishlist.sms", method=RequestMethod.GET) // 찜한 공간 목록 불러올 때 사용하는 메서드
+	public ModelAndView buildingWishList(HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		Member mem = (Member)session.getAttribute("loginMember");
+		String id = mem.getId();
+		
+		List<Building> list = service.getMyWishBuildings(id); // 찜한 건물 목록
+		
+		for(Building build : list) {
+			build.setRoom(service.getmyRoomList(build.getsNo()));
+			build.setsTagList(Arrays.asList(build.getsTag().split("[|]")));
+			build.setsTypeList(Arrays.asList(build.getsType().split("[|]")));
+		}
+		mav.addObject("list", list);
+		
 		return mav;
 	}
 }
