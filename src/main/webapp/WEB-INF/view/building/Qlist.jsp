@@ -1,7 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/view/jspHeader.jsp" %>    
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/view/jspHeader.jsp" %>
+
+<!-- 부트스트랩 사용 선언 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<!-- 부트스트랩 사용 선언-->
+
+<!-- w3 css 사용 선언 -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- w3 css 사용 선언-->
+
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+
 <script type="text/javascript">
 	function list(pageNum) {
 		location.href="Qlist.sms?pageNum=" + pageNum +"&sNo="+${param.sNo};
@@ -22,7 +34,9 @@
 			window.open("../building/Qreply.sms?bNo="+num,"reply",op);
 	}
 </script>
+
 <style>
+
 body {font-family: Arial, Helvetica, sans-serif;}
 
 /* The Modal (background) */
@@ -46,7 +60,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 50%;
 }
 
 /* The Close Button */
@@ -68,6 +82,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 	align:center;
 }
 </style>
+
 <!-- Trigger/Open The Modal -->
 <div align="right"><button id="myBtn">질문하기</button></div>
 
@@ -75,28 +90,39 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <div id="myModal" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-content">
+<div class="modal-content" style="text-align:right;">
     <span class="close">&times;</span>
-    <p>
+<p>
+
 <form:form modelAttribute="board" action="Qwrite.sms" method="post" name="f">
 <form:hidden path="kind" value="3"/>
 <input type="hidden" name="pageNum" value="1"/>
 <form:hidden path="sNo" value="${param.sNo }"/>
 <form:hidden path="id" value="${sessionScope.loginMember.id}"/>
-	<div align="center" id="table2"><table cellpadding="0" cellspacing="0" align="center" >
-		<caption><h3>질문 글 등록하기</h3></caption>
-		
-		<tr><td align="center" colspan="2">내용</td></tr>
-        <tr><td colspan="2"><form:textarea rows="15" cols="80" path="content"/>
-        <font color="red"><form:errors path="content"/></font></td></tr>
-        <tr><td colspan="2" align="center">
-        <a href="javascript:document.f.submit()">[질문등록]</a>
-		<a href="javascript:document.f.reset()">[다시작성]</a>
-		<a href="javascript:history.go(-1)">[뒤로가기]</a>
-		</td></tr>
-	</table></div>
-</form:form></p>
-  </div>
+
+
+<div align="center" id="table2">
+
+<table class="w3-table">
+        <tr><td>
+        <label style="font-family:'Hanna'; font-size:x-large;">상품문의하기</label>
+        <form:textarea rows="15" cols="80" path="content" class="w3-input w3-border"/></td></tr>
+        <tr><td><font color="red"><form:errors path="content"/></font></td></tr>
+        <tr><td style="text-align:center;">
+            <a href="javascript:document.f.submit()" class="btn btn-outline-primary btn-lg" style="font-family:'Hanna'; font-size:x-large;">질문등록</a>&nbsp;&nbsp;
+			<a href="javascript:document.f.reset()" class="btn btn-outline-danger btn-lg" style="font-family:'Hanna'; font-size:x-large;">다시작성</a>
+        </td></tr>
+</table>	
+
+
+</div>
+</form:form>
+</p>
+</div>
+
+
+
+
 
 </div>
 <script>
