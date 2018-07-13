@@ -33,9 +33,6 @@ public class MainController {
 				}
 			}
 		}
-
-
-		
 		//�������� �ǹ� �ֱ�
 		//�ǹ��� ���� ���鼭 ���ÿ� ���� Room�� �����;ߵȴ�
 		List<Room> sPrice1 = new ArrayList<Room>();

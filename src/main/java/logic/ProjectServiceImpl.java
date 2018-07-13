@@ -307,7 +307,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<Board> boardList(Integer kind, int sNo) {
+	public double boardList(Integer kind, Integer sNo) {
 		return boDao.list(kind, sNo);
 	}
 
