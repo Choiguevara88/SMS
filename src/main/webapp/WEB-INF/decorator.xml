@@ -10,8 +10,9 @@
 		<pattern>/reserve/regReserve.sms*</pattern>
 		<pattern>/becomeahost_complete.sms*</pattern>
 	</decorator>
-	<decorator page="decorator2.jsp" name="buildingDetail">
+	<decorator page="decorator3.jsp" name="buildingDetail">
 		<pattern>/login.sms*</pattern>
+		<pattern>/personal*</pattern>
 	</decorator>
 	
 	
