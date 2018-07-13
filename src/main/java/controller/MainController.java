@@ -33,11 +33,9 @@ public class MainController {
 				}
 			}
 		}
-
-
 		
-		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½ ï¿½Ö±ï¿½
-		//ï¿½Ç¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½é¼­ ï¿½ï¿½ï¿½Ã¿ï¿½ ï¿½ï¿½ï¿½ï¿½ Roomï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¾ßµÈ´ï¿½
+		//·£´ýÀ¸·Î °Ç¹° ³Ö±â
+		//°Ç¹°À» °¡Á® ¿À¸é¼­ µ¿½Ã¿¡ °ü·Ã Roomµµ °¡Á®¿Í¾ßµÈ´Ù
 		List<Room> sPrice1 = new ArrayList<Room>();
 		List<Building> building1 = new ArrayList<Building>();
 		for(int i = 0; i< sNo.length;i++) { 
@@ -45,22 +43,37 @@ public class MainController {
 			System.out.println(service.getbuilding_mainpage(sNo[i]).getsTagList());
 			sPrice1.add(service.getmyRoom_lowestprice(sNo[i]));
 		}
-		//building ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ sPriceï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		
-		//ï¿½Ç¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-		List<Integer> sPrice2 = new ArrayList<Integer>();
-		List<Building> building2 = new ArrayList<Building>(); 
-		List<Board> buildingNo = service.getbuildingNo_by_score();  //sNoï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
-		for(int i = 0; i< sNo.length;i++) {
-			//building2.add(service.getbuilding_mainpage(buildingNo.get(i).getsNo()));
-			//sPrice2 = service.getmyRoom_lowestprice(buildingNo.get(i).getsNo()); //sNoï¿½ß¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
-		}
-		mav.addObject(new Member());
 		mav.addObject("today_buildings", building1);
 		mav.addObject("today_buildings_price", sPrice1);
-		mav.addObject("boardScore_buildings", building2);
-		mav.addObject("boardScore_buildings_price", sPrice2);
-
+		//building ¸®½ºÆ®¶û sPrice¸®½ºÆ®ÀÇ ÀÎµ¦½ºµéÀº °°ÀÌ ¿òÁ÷ÀÓ
+		
+		//»ç¶÷µéÀÌ °¡Àå ¸¹ÀÌ ¿¹¾àÇÑ °÷! ÇÖÇÃ·¹ÀÌ½º 6°³
+		List<Room> sPrice2 = new ArrayList<Room>();
+		List<Building> building2 = new ArrayList<Building>();
+		List<Board> review = service.getbuilding_reviewCount();
+		for(int i = 0; i<sNo.length;i++) {
+			building2.add(service.getbuilding_mainpage_reviewCount(review.get(i).getsNo())); //review¼ø¼­´ë·Î ºôµùÀ» °¡Á®¿À°í
+			sPrice2.add(service.getmyRoom_lowestprice(building2.get(i).getsNo())); //±× ºôµùÀÇ sNo·Î lowest Price°¡Á®¿À±â
+		}
+		System.out.println(building2);
+		mav.addObject("buildings_review", building2);
+		mav.addObject("buildings_review_price", sPrice2);
+		
+		
+		//ÆòÁ¡ ÁÁÀº¼ø~
+		//Board¿¡¼­ Æò±Õ ÆòÁ¡À» °è»êÇÑµÚ Æò±ÕÆòÁ¡ÀÌ ³ôÀº ¼øÀ¸·Î 6°³ÀÇ ºôµù sNo°¡Á®¿À±â
+		//sNo·Î Building °¡Á®¿À°í, Room°¡Á®¿À±â
+		//º¸³»±â
+		List<Room> sPrice3 = new ArrayList<Room>();
+		List<Building> building3 = new ArrayList<Building>();
+		List<Board> board = service.getSNo_byScore(); // Board 6°³ µé¾î¿È ÆòÁ¡ ¼øÀ¸·Î
+		for(int i = 0; i<sNo.length;i++) {
+			building3.add(service.getbuilding_mainpage(board.get(i).getsNo()));
+			sPrice3.add(service.getmyRoom_lowestprice(building3.get(i).getsNo()));
+		}
+		mav.addObject("building_score",building3);
+		mav.addObject("building_score_price",sPrice3);
+		mav.addObject(new Member());
 		return mav;
 	}
 	

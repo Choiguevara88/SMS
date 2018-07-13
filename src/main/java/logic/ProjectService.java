@@ -9,10 +9,13 @@ public interface ProjectService {
 
 	int boardcount(String searchType, String searchContent, int kind);
 	int boardcount(Integer kind, int sNo);
+	int boardcountNR(int kind, Integer sNo);
 
 	List<Board> boardList(String searchType, String searchContent, Integer pageNum, int limit, int kind);
 	List<Board> boardList(Integer kind, int sNo, Integer pageNum, int limit);
-	List<Board> boardList(Integer kind, int sNo);
+	List<Board> boardListNR(int kind, Integer sNo, Integer pageNum, int limit);
+	
+	double boardList(Integer kind, Integer sNo);
 	
 	Board getBoard(int num);
 
@@ -131,4 +134,10 @@ public interface ProjectService {
 	void deletefavorite(String id, Integer sno);
 	
 	void buildingDelete(Integer sNo);
+	Building getbuilding_mainpage_reviewCount(Integer integer);
+	List<Board> getbuilding_reviewCount();
+	List<Board> getSNo_byScore();
+	
+	List<Building> getMyWishBuildings(String id);
+	
 }

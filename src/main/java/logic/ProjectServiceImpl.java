@@ -59,6 +59,19 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Board> boardList(String searchType, String searchContent, Integer pageNum, int limit, int kind) {
 		return boDao.list(searchType, searchContent, pageNum, limit, kind);
 	}
+	
+	
+	@Override
+	public int boardcountNR(int kind, Integer sNo) {
+		return boDao.countNR(kind, sNo);
+	}
+
+	@Override
+	public List<Board> boardListNR(int kind, Integer sNo, Integer pageNum, int limit) {
+		return boDao.listNR(kind, sNo, pageNum, limit);
+	}
+
+	
 
 	@Override // board Write Method()
 	public void boardWrite(Board board, HttpServletRequest request) {
@@ -307,7 +320,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<Board> boardList(Integer kind, int sNo) {
+	public double boardList(Integer kind, Integer sNo) {
 		return boDao.list(kind, sNo);
 	}
 
@@ -677,6 +690,33 @@ if (room.getsRImgList() != null) {
 		faDao.budelete(sNo);
 		boDao.budelete(sNo);
 		roomDao.budelete(sNo);
+	}
+
+	@Override
+	public Building getbuilding_mainpage_reviewCount(Integer Integer) {
+		Building building = buDao.getbuilding_mainpage(Integer);
+		String sTypes = building.getsType();
+		String sTags = building.getsTag();
+		List<String> sTypeList = new ArrayList<String>(Arrays.asList(sTypes.split("[|]")));
+		List<String> sTagList = new ArrayList<String>(Arrays.asList(sTags.split("[|]")));
+		building.setsTypeList(sTypeList);
+		building.setsTagList(sTagList);
+		return building;
+	}
+
+	@Override
+	public List<Board> getbuilding_reviewCount() {
+		return boDao.getbuilding_reviewCount();
+	}
+
+	@Override
+	public List<Board> getSNo_byScore() {
+		return boDao.getSno_byScore();
+	}
+
+	@Override
+	public List<Building> getMyWishBuildings(String id) {
+		return buDao.getMyWishBuildings(id);
 	}
 
 }// ProjectServiceImpl end

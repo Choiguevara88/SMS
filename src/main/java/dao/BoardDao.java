@@ -27,7 +27,7 @@ public interface BoardDao {
 
 	List<Board> list(Integer kind, int sNo, Integer pageNum, int limit);
 	
-	List<Board> list(Integer kind, int sNo);
+	double list(Integer kind, Integer sNo);
 
 	List<Board> guestQuestionList();
 
@@ -48,6 +48,14 @@ public interface BoardDao {
 	List<Board> hostQuestionList1(String searchType, String searchContent);
 
 	void budelete(Integer sNo);
+
+	int countNR(int kind, Integer sNo);
+
+	List<Board> listNR(int kind, Integer sNo, Integer pageNum, int limit);
+
+	List<Board> getbuilding_reviewCount();
+
+	List<Board> getSno_byScore();
 	
 }
 

@@ -25,4 +25,8 @@ public interface BuildingDao {
 	Building getbuilding_mainpage(int sNo);
 
 	void budelete(Integer sNo);
+
+	Building getbuilding_mainpage_reviewCount(Integer integer);
+
+	List<Building> getMyWishBuildings(String id);
 }

@@ -81,4 +81,20 @@ public class BuildingDaoImpl implements BuildingDao {
 		sqlSession.getMapper(BuildingMapper.class).delete(sNo);
 	}
 
+	@Override
+	public Building getbuilding_mainpage_reviewCount(Integer integer) {
+		Map <String, Integer> map = new HashMap<String, Integer>();
+		map.put("sNo", integer);
+		return sqlSession.selectOne(NS+"mainpage_reviewCount",map);
+	}
+
+	@Override
+	public List<Building> getMyWishBuildings(String id) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		map.put("id", id);
+		
+		return sqlSession.selectList(NS+"wishSelect", map);
+	}
 }

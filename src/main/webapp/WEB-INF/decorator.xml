@@ -10,6 +10,9 @@
 		<pattern>/reserve/regReserve.sms*</pattern>
 		<pattern>/becomeahost_complete.sms*</pattern>
 	</decorator>
+	<decorator page="decorator2.jsp" name="buildingDetail">
+		<pattern>/login.sms*</pattern>
+	</decorator>
 	
 	
 	<!-- layout 설정을 제외 함. -->
@@ -24,5 +27,6 @@
 		<pattern>/building/Rlist.sms*</pattern>
 		<pattern>/building/Rreply.sms*</pattern>
 		<pattern>/building/Qreply.sms*</pattern>
+		<pattern>/building/QlistNotRead.sms*</pattern>
 	</excludes>
 </decorators>

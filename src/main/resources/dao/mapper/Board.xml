@@ -33,8 +33,8 @@
 	</select>
 
 
-	<select id="list2" resultType="Board" parameterType="map">
-		select * from board
+	<select id="avg" resultType="Double" parameterType="map">
+		select round(avg(score),1) from board
 
 		<if test="kind != null and sNo != null">
 			where kind= #{kind} and sNo = #{sNo} and refLevel=0
@@ -94,5 +94,20 @@
 		select sno,
 		avg(score) from board order by avg(score) desc limit 6
 	</select>
+	
+	<select id="listNR" resultType="Board" parameterType="map">
+		select * from board where kind = #{kind} and qType=0 and sNo = #{sNo} order by ref desc limit #{startrow}, #{limit}
+	</select>
+	
+	<select id="countNR" resultType="Integer" parameterType="map">
+		select count(*) from board where kind = #{kind} and qType=0 and sNo = #{sNo} 
+	</select>
 
+	<select id="buidling_reviewCount" resultType="Board">
+		select * from Board where kind=2 group by sNo order by count(sNo) desc limit 6
+	</select>
+	
+	<select id="getSNo_byScore" resultType="Board">
+		select sno, avg(score) 'avgscore' from Board group by sno order by 2 desc limit 6
+	</select>
 </mapper>

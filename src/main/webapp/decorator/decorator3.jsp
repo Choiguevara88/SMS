@@ -235,13 +235,6 @@ td {
    		<h1><strong><a href="${path }/main.sms" style="text-decoration:none">Share My Space</a></strong>
    			<button class="w3-button w3-deep-purple w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button></h1></div>
       </div>
-      <div class="mainImg"> <div class="centered">	
-	  <img id="mainImg" class="mySlides" src="${path}/picture/main1.jpg">
-	  <img id="mainImg" class="mySlides" src="${path}/picture/main22.jpg">
-	  <img id="mainImg" class="mySlides" src="${path}/picture/main3.jpg">
-  	  <img id="mainImg" class="mySlides" src="${path}/picture/main4.jpg">
-  	  <img id="mainImg" class="mySlides" src="${path}/picture/main5.jpg">
-  	  </div></div>
 <div class="w3-content" style="max-width:1400px">
 <decorator:body/>
 </div>
