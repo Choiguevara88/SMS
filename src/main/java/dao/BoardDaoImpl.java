@@ -191,5 +191,15 @@ public class BoardDaoImpl implements BoardDao{
 	public void budelete(Integer sNo) {
 		sqlSession.getMapper(BoardMapper.class).budelete(sNo);
 	}
+
+	@Override
+	public List<Board> getbuilding_reviewCount() {
+		return sqlSession.selectList(NS+"buidling_reviewCount");
+	}
+
+	@Override
+	public List<Board> getSno_byScore() {
+		return sqlSession.selectList(NS+"getSNo_byScore");
+	}
 	
 }

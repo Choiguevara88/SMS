@@ -668,4 +668,26 @@ if (room.getsRImgList() != null) {
 		roomDao.budelete(sNo);
 	}
 
+	@Override
+	public Building getbuilding_mainpage_reviewCount(Integer Integer) {
+		Building building = buDao.getbuilding_mainpage(Integer);
+		String sTypes = building.getsType();
+		String sTags = building.getsTag();
+		List<String> sTypeList = new ArrayList<String>(Arrays.asList(sTypes.split("[|]")));
+		List<String> sTagList = new ArrayList<String>(Arrays.asList(sTags.split("[|]")));
+		building.setsTypeList(sTypeList);
+		building.setsTagList(sTagList);
+		return building;
+	}
+
+	@Override
+	public List<Board> getbuilding_reviewCount() {
+		return boDao.getbuilding_reviewCount();
+	}
+
+	@Override
+	public List<Board> getSNo_byScore() {
+		return boDao.getSno_byScore();
+	}
+
 }// ProjectServiceImpl end
