@@ -17,6 +17,7 @@ $(document).ready(function(){
 	listRlist(1);
 	listQlist(1);
 	
+
 /*태그 관련 스크립트*/
 var tagih = "";
 var tagstag = document.getElementById("tags");
@@ -125,11 +126,13 @@ $("#fabtn").click(function(){
 
 });
 
+
+});
 function listRlist(pageNum){
 	$.ajax({
 		type: "get",
 		url : "${path}/building/Rlist.sms?sNo=${param.sNo}&pageNum="+pageNum,
-		success: function(result){
+	success: function(result){
 			$("#listRlist").html(result)
 		}
 	});
@@ -143,8 +146,6 @@ function listQlist(pageNum){
 		}
 	});
 }
-
-});
 </script>
 
 <!-- 지도관련 스크립트 -->
@@ -241,11 +242,11 @@ function listQlist(pageNum){
 </div>
 
 <!-- 이용후기, Q&A -->
-<div id="listRlist"></div> 
+<div id="listQlist"></div>
 
 <hr size="1">
 
-<div id="listQlist"></div>
+<div id="listRlist"></div> 
 
 
 </div>

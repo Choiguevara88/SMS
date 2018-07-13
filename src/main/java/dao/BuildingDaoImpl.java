@@ -88,4 +88,13 @@ public class BuildingDaoImpl implements BuildingDao {
 		return sqlSession.selectOne(NS+"mainpage_reviewCount",map);
 	}
 
+	@Override
+	public List<Building> getMyWishBuildings(String id) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		map.put("id", id);
+		
+		return sqlSession.selectList(NS+"wishSelect", map);
+	}
 }
