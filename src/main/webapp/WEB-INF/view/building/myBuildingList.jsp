@@ -10,6 +10,11 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
+function budelete(sNo) {
+	console.log(sNo)
+	confirm("삭제하시면 공간정보, 세부공간정보, 공간에 달린 댓글, 리뷰정보가 모두 삭제됩니다. 정말로 삭제하시겠습니까?")
+	location.href="buildingDelete.sms?sNo="+sNo
+}
 </script>
 </head>
 <body>
@@ -31,7 +36,7 @@
       <div class="w3-container w3-center w3-margin-top">
       <a href="buildingUpdate.sms?sNo=${build.sNo}" class="w3-btn w3-black">공간수정</a>
       <a href="roomList.sms?sNo=${build.sNo}" class="w3-btn w3-black">세부공간추가/수정</a>
-      <a href="buildingDelete.sms?sNo=${build.sNo}" class="w3-btn w3-black">삭제</a>
+      <a href="javascript:budelete(${build.sNo})" class="w3-btn w3-black">삭제</a>
       </div>
     <br>
   </div>

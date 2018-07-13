@@ -46,6 +46,8 @@ public interface BoardDao {
 	List<Board> guestQuestionList1(String searchType, String searchContent);
 
 	List<Board> hostQuestionList1(String searchType, String searchContent);
+
+	void budelete(Integer sNo);
 	
 }
 

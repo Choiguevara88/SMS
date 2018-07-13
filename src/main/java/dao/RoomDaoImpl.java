@@ -78,4 +78,8 @@ public class RoomDaoImpl implements RoomDao{
 		map.put("sRNo", sRNo);
 		return sqlSession.selectOne(NS + "one", map);
 	}
+		@Override
+		public void budelete(Integer sNo) {
+			sqlSession.getMapper(RoomMapper.class).budelete(sNo);
+		}
 }

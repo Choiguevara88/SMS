@@ -20,6 +20,7 @@ import exception.ProjectException;
 import logic.Board;
 import logic.Building;
 import logic.Favorite;
+import logic.Member;
 import logic.ProjectService;
 import logic.Room;
 
@@ -227,12 +228,13 @@ public class BuildingController {
 		}
 		
 		try {
+			service.reserveStatusUpdate(reNo);
 			service.boardWrite(board, request);
-			mav.setViewName("redirect:/building/builidingDetail.sms");
+			mav.setViewName("redirect:/building/buildingDetail.sms");
 			
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new ProjectException("오류가 발생하였습니다." , "/building/buildingDetail.sms");
+//			e.printStackTrace();
 		}
 		mav.addObject("sNo",sNo);
 		mav.addObject("kind",kind);
@@ -329,7 +331,6 @@ public class BuildingController {
 	}
 	@RequestMapping(value="building/delete", method=RequestMethod.POST)
 	public ModelAndView delete(Integer bNo, Integer sNo,Integer kind) {
-		
 		ModelAndView mav = new ModelAndView();
 		service.boardDelete(bNo);
 		mav.setViewName("redirect:/building/buildingDetail.sms?sNo="+sNo);
@@ -380,5 +381,16 @@ public class BuildingController {
 			service.deletefavorite(id,sno);
 			return "0";
 		}
+	}
+	
+	@RequestMapping(value="building/buildingDelete")
+	public ModelAndView buildingDelete(HttpServletRequest request, HttpSession session) {
+		Integer sNo = Integer.parseInt(request.getParameter("sNo"));
+		service.buildingDelete(sNo);
+		Member mem  = (Member) session.getAttribute("loginMember");
+		String id = mem.getId();
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/building/myBuildingList.sms?id=" + id);
+		return mav;
 	}
 }

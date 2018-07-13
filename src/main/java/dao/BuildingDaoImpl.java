@@ -76,4 +76,9 @@ public class BuildingDaoImpl implements BuildingDao {
 		return sqlSession.selectOne(NS+"mainpagebuilding", map);
 	}
 
+	@Override
+	public void budelete(Integer sNo) {
+		sqlSession.getMapper(BuildingMapper.class).delete(sNo);
+	}
+
 }

@@ -44,4 +44,7 @@ public interface BuildingMapper {
 	@Update("update building set sName=#{sName}, sPreview=#{sPreview}, sContent=#{sContent}, sType=#{sType}, sTag=#{sTag}, sInfoSub=#{sInfoSub}, sRule=#{sRule}, sBHour=#{sBHour}, sHDay=#{sHDay}, sImg1=#{sImg1}, sImg2=#{sImg2}, sTel=#{sTel}, sAddress=#{sAddress} where sNo=#{sNo}")
 	void update(Building building);
 
+	@Delete("delete from building where sNo=#{value}")
+	void delete(Integer sNo);
+
 }

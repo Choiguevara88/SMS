@@ -40,5 +40,10 @@ public class FavoriteDaoImpl implements FavoriteDao{
 		map.put("sNo", sNo);
 		sqlSession.getMapper(FavoriteMapper.class).delete(map);
 	}
+
+	@Override
+	public void budelete(Integer sNo) {
+		sqlSession.getMapper(FavoriteMapper.class).budelete(sNo);
+	}
 	
 }
