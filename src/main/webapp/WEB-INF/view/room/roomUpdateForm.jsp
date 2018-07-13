@@ -20,8 +20,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-$("#sRImg").attr('disabled', true)
-
+	$("#sRImg").attr('disabled', true)
 $("#img1_btn").click(function() {
        $("#sImg1").val("");
        $("#file1_desc").empty();
@@ -59,6 +58,7 @@ function chkboxcheck2() {
 		}
 	}
 }
+
 
 </script>
 </head>
@@ -115,26 +115,22 @@ function chkboxcheck2() {
 	
 	<div class="w3-container w3-margin">
 		<label style="font-family:'Hanna'">사진 업로드(여러 장 가능)</label>
-		<c:if test="${!empty room.sRImg }">
+	<c:if test="${!empty room.sRImg }">
             <div id="file1_desc">
-            <c:forEach var="roomImg" items="${room.sRImgNameList}">
-      <div >
-      <img src="../picture/${roomImg}" style="width:100%; height:250px">
+      <div>
       </div>
-      </c:forEach>
-              <div>
-              <input type="button" id="img1_btn" value="기존이미지삭제" /> 
-              </div>
+       <div>
+         <input type="button" id="img1_btn" value="기존이미지삭제" /> 
+        </div>
+              
             </div> 
           </c:if>
-		<div>
-		<input type="file" multiple="multiple" id="sRImg" name="sRImgList" class="w3-button">
-		</div>
+          <form:input type="file" path="sRImgList" multiple="multiple"/>
+ 
 	</div>
-	
 	<div class="w3-container w3-margin">
 	<p style="font-family:'Hanna'">편의 시설</p>
-	<table class="w3-table w3-border" cellpadding="1px" >
+	<table class="w3-table w3-border">
 	
 	<tr><td >
 		<form:checkboxes path="sRInfoList" items="${sRInfoNames1}" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="w3-checkbox"/>
@@ -189,7 +185,6 @@ function chkboxcheck2() {
 		<input type="submit" value="수정하기" class="w3-btn w3-black" style="font-family:'Hanna'; width:30%;">
 	</div>
 </div>
-
 <div>
 <form:hidden path="sNo" value="${room.sNo}"/>
 </div>

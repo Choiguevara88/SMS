@@ -27,6 +27,7 @@
       </c:forEach>
       <p>세부 공간 이름 : ${room.sRName}</p><br>	
       <p>설명 : ${room.sRContent}</p><br>
+      <p>${room.sRInfo }</p>
       <p>공간 유형 : ${room.sRType}</p><br>
    			<form:hidden path="sNo" value="${room.sNo}" />
    		<form:hidden path="sRNo" value="${room.sRNo}" />
