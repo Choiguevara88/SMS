@@ -131,4 +131,6 @@ public interface ProjectService {
 	void deletefavorite(String id, Integer sno);
 	
 	void buildingDelete(Integer sNo);
+	
+	List<Building> getMyWishBuildings(String id);
 }

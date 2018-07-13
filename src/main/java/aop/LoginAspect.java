@@ -126,11 +126,11 @@ public class LoginAspect {
 				loginMember = (Member)session.getAttribute("loginMember");
 				
 				if(loginMember == null) {
-					throw new ProjectException("관리자로 로그인 하세요.", "../main.sms");
+					throw new ProjectException("관리자로 로그인 하세요.", "../login.sms");
 				}
 				
 				if(!loginMember.getId().equals("admin")) {
-					throw new ProjectException("관리자만 가능한 거래입니다.", "../main.sms");
+					throw new ProjectException("관리자만 가능한 거래입니다.", "../login.sms");
 				}
 				
 				adminable = true; 
@@ -146,8 +146,6 @@ public class LoginAspect {
 		return ret;
 	}
 	
-	
-	
 	//HostLoginCheck() 메서드 : HOST 계정 업무 메서드에 대한 AOP
 	@Around("execution(* controller.*.host*(..))") // host로 시작하는 메서드에 적용
 		public Object hostLoginCheck(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -162,11 +160,11 @@ public class LoginAspect {
 					loginMember = (Member)session.getAttribute("loginMember");
 					
 					if(loginMember == null) {
-						throw new ProjectException("로그인 하세요.", "../main.sms");
+						throw new ProjectException("로그인 하세요.", "../login.sms");
 					}
 					
 					if(loginMember.getHostName() == null && !loginMember.getId().equals("admin")) {
-						throw new ProjectException("호스트 계정으로 가능한 업무입니다.", "../main.sms");
+						throw new ProjectException("호스트 계정으로 가능한 업무입니다.", "../login.sms");
 					}
 					
 					hostable = true;
@@ -198,7 +196,7 @@ public class LoginAspect {
 				loginMember = (Member)session.getAttribute("loginMember");
 				
 				if(loginMember == null) {
-					throw new ProjectException("로그인이 필요합니다.", "../main.sms");
+					throw new ProjectException("로그인이 필요합니다.", "../login.sms");
 				}
 				reservable = true;
 				break;
