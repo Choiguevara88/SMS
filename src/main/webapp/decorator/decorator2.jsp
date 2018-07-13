@@ -41,7 +41,7 @@
     width: 180px;
     height: 180px;
 }
-input,h2,a,td {
+input,h2,a {
 	font-family: 'Gothic A1', sans-serif;
 }
 
@@ -49,10 +49,7 @@ input {
 	font-family: 'Gothic A1', sans-serif;
 	color: 'black'
 }
-td {
-	font-family: 'Hanna';
-	color: 'black'
-}
+
 .mainImg { position: relative; padding-top: 420px; /* 1:1 ratio */ overflow: hidden; } 
 .mainImg .centered { position: absolute; top: 0; left: 0; right: 0; bottom: 0; -webkit-transform: translate(50%,50%); -ms-transform: translate(50%,50%); transform: translate(50%,50%); } 
 .mainImg .centered #mainImg { position: absolute; top: 0; left: 0; max-width: 100%; height: auto; -webkit-transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); transform: translate(-50%,-50%); }
