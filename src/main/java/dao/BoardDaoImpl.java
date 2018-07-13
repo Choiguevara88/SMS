@@ -189,5 +189,29 @@ public class BoardDaoImpl implements BoardDao{
 	public void budelete(Integer sNo) {
 		sqlSession.getMapper(BoardMapper.class).budelete(sNo);
 	}
+
+	@Override
+	public int countNR(int kind, Integer sNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("kind",kind);
+		map.put("sNo",sNo);
+		
+		return sqlSession.selectOne(NS + "countNR", map);
+	}
+
+	@Override
+	public List<Board> listNR(int kind, Integer sNo, Integer pageNum, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int startrow = (pageNum - 1) * limit;
+		
+		map.put("kind",kind);
+		map.put("sNo",sNo);
+		map.put("startrow", startrow);
+		map.put("limit", limit);
+		
+		return sqlSession.selectList(NS + "listNR", map);
+	}
 	
 }

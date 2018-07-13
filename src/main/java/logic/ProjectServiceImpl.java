@@ -59,6 +59,19 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Board> boardList(String searchType, String searchContent, Integer pageNum, int limit, int kind) {
 		return boDao.list(searchType, searchContent, pageNum, limit, kind);
 	}
+	
+	
+	@Override
+	public int boardcountNR(int kind, Integer sNo) {
+		return boDao.countNR(kind, sNo);
+	}
+
+	@Override
+	public List<Board> boardListNR(int kind, Integer sNo, Integer pageNum, int limit) {
+		return boDao.listNR(kind, sNo, pageNum, limit);
+	}
+
+	
 
 	@Override // board Write Method()
 	public void boardWrite(Board board, HttpServletRequest request) {

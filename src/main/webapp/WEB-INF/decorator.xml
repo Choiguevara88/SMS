@@ -24,5 +24,6 @@
 		<pattern>/building/Rlist.sms*</pattern>
 		<pattern>/building/Rreply.sms*</pattern>
 		<pattern>/building/Qreply.sms*</pattern>
+		<pattern>/building/QlistNotRead.sms*</pattern>
 	</excludes>
 </decorators>

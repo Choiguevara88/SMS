@@ -48,6 +48,10 @@ public interface BoardDao {
 	List<Board> hostQuestionList1(String searchType, String searchContent);
 
 	void budelete(Integer sNo);
+
+	int countNR(int kind, Integer sNo);
+
+	List<Board> listNR(int kind, Integer sNo, Integer pageNum, int limit);
 	
 }
 
