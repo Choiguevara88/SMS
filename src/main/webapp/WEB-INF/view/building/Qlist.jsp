@@ -1,20 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/view/jspHeader.jsp" %>    
+<%@ include file="/WEB-INF/view/jspHeader.jsp" %>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-<script type="text/javascript">
-	function list(pageNum) {
-		location.href="Qlist.sms?pageNum=" + pageNum +"&sNo="+${param.sNo};
-		return false;
-	}
-</script>
 <script type="text/javascript">
 	function check5() {
 		confirm("정말 삭제 하시겠습니까?")
 		document.d.submit();
 		//return false;
 	}
-
 </script>
 <script type="text/javascript">
 	function win_openQ(num)	{
@@ -127,17 +121,23 @@ window.onclick = function(event) {
 }
 </script>
 <!--  리뷰 목록부분 -->
-<table border="1" style="margin-top:30px" width="80%" align="center">
+<table style="margin-top:30px" width="80%" align="center">
 
 <c:if test="${listcount > 0}">
 <c:forEach var="board" items="${boardlist}">
-	<tr>
-		<td width="50%" colspan="2">${board.id}</td></tr>
-	<tr><td colspan="2">${board.content}</td> 
-	</tr>
-	<tr>
-		<td><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd H:mm:ss"/></td>
-  	<td align="right">
+<hr size="1">
+	<div><b>
+	<c:if test="${board.refLevel == 0 }">
+		<span class="w3-xlarge w3-text-darkgrey">${board.id}</span></c:if>
+		<c:if test="${board.refLevel != 0 }">
+		<div class="w3-xlarge">${building.id}님의 답글입니다.</div>
+		</c:if></b>
+	</div>
+	<div>
+		<div class="w3-large w3-text-deepgray"> ${board.content}</div></div>
+	<div>
+		<div class="w3-medium w3-text-grey"><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd H:mm:ss"/></div>
+  	<div align="right" style="display:inline;">
   		<c:if test="${sessionScope.loginMember.id == building.id}">
   		<c:if test="${board.refLevel == 0  }">
   		<c:if test="${board.qType == 0 }">
@@ -148,10 +148,10 @@ window.onclick = function(event) {
 		<input type="hidden" name="sNo"	value="${board.sNo}">
 		<input type="hidden" name="kind" value="${board.kind}">
 		<input type="button" value="삭제" onclick="check5()" >
-	</form></c:if><br></td>
+	</form></c:if><br></div></div>
 <!--  글 밑 부분 -->
 </c:forEach>
-<tr align="center" height="26"><td colspan="2">
+<tr align="center" height="26"><td colspan="5">
 		<c:if test="${pageNum >1 }">
 			<a href="javascript:listQlist(${pageNum -1 })"> [이전]</a>
 		</c:if>&nbsp;

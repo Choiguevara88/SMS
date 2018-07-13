@@ -33,8 +33,8 @@
 	</select>
 
 
-	<select id="list2" resultType="Board" parameterType="map">
-		select * from board
+	<select id="avg" resultType="Double" parameterType="map">
+		select round(avg(score),1) from board
 
 		<if test="kind != null and sNo != null">
 			where kind= #{kind} and sNo = #{sNo} and refLevel=0

@@ -117,13 +117,13 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public List<Board> list(Integer kind, int sNo) {
+	public double list(Integer kind, Integer sNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
-
+		System.out.println(kind + " " + sNo);
 		map.put("kind", kind);
 		map.put("sNo", sNo);
 
-		return sqlSession.selectList(NS + "list2", map);
+		return sqlSession.selectOne(NS+"avg", map);
 	}
 
 	@Override

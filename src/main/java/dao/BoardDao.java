@@ -27,7 +27,7 @@ public interface BoardDao {
 
 	List<Board> list(Integer kind, int sNo, Integer pageNum, int limit);
 	
-	List<Board> list(Integer kind, int sNo);
+	double list(Integer kind, Integer sNo);
 
 	List<Board> guestQuestionList();
 
