@@ -75,8 +75,17 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <div class="modal-content" style="text-align:right;">
     <span class="close">&times;</span>
 <p>
-
-<form:form modelAttribute="board" action="Qwrite.sms" method="post" name="f">
+<script type="text/javascript">
+function check() {
+	if($('#content').val()==''){
+		alert("내용을 입력하세요~><");
+		document.getElementById('content').focus();
+	} else{
+		document.rf.submit();
+	}
+}
+</script>
+<form:form modelAttribute="board" action="Qwrite.sms" method="post" name="wf">
 <form:hidden path="kind" value="3"/>
 <input type="hidden" name="pageNum" value="1"/>
 <form:hidden path="sNo" value="${param.sNo }"/>
@@ -88,10 +97,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <table class="w3-table">
         <tr><td>
         <label style="font-family:'Hanna'; font-size:x-large;">공간문의하기</label>
-        <form:textarea rows="15" cols="80" path="content" class="w3-input w3-border"/></td></tr>
+        <form:textarea rows="15" cols="80" path="content" class="w3-input w3-border" id="content"/></td></tr>
         <tr><td><font color="red"><form:errors path="content"/></font></td></tr>
         <tr><td style="text-align:center;">
-            <a href="javascript:document.f.submit()" class="btn btn-outline-primary btn-lg" style="font-family:'Hanna'; font-size:x-large;">질문등록</a>&nbsp;&nbsp;
+            <input type="button" value="질문등록" onclick="check()" class="btn btn-outline-primary btn-lg" style="font-family:'Hanna'; font-size:x-large;">
 			<a href="javascript:document.f.reset()" class="btn btn-outline-danger btn-lg" style="font-family:'Hanna'; font-size:x-large;">다시작성</a>
         </td></tr>
 </table>	

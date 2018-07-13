@@ -19,7 +19,17 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- w3 css 사용 선언-->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>리뷰 답글 달기</title>
+<title>문의 답글 달기</title>
+<script type="text/javascript">
+function check() {
+	if($('#content').val()==''){
+		alert("내용을 입력하세요~><");
+		document.getElementById('content').focus();
+	} else{
+		document.qf.submit();
+	}
+}
+</script>
 </head>
 <body>
 
@@ -35,7 +45,7 @@
 	</table>
 </div>
 <div class="w3-container w3-margin">
-<form:form action="Qreply.sms" method="post" name="f" modelAttribute="board">
+<form:form action="Qreply.sms" method="post" name="qf" modelAttribute="board">
 	<input type="hidden" name="bNo" value="${board.bNo}">
 	<input type="hidden" name="sNo" value="${board.sNo}">
 	<input type="hidden" name="kind" value="3">
@@ -46,9 +56,9 @@
 	<table class="w3-table">
 		<tr><td>
 		<label style="font-family:'Hanna'; font-size:x-large;">문의 답변 달기</label>
-		<textarea rows="15" cols="80" name="content" class="w3-input w3-border"></textarea></td></tr>
+		<textarea rows="15" cols="80" name="content" class="w3-input w3-border" id="content"></textarea></td></tr>
 		<tr><td style="text-align:center">
-			<a href="javascript:document.f.submit()" class="btn btn-outline-primary btn-lg" style="font-family:'Hanna'; font-size:x-large;">답변등록</a>
+			<input type="button" value="답변등록" onclick="check()" class="btn btn-outline-primary btn-lg" style="font-family:'Hanna'; font-size:x-large;">
 			<a href="javascript:document.f.reset()" class="btn btn-outline-danger btn-lg" style="font-family:'Hanna'; font-size:x-large;">다시작성</a>
 		</td></tr>
 	</table>
