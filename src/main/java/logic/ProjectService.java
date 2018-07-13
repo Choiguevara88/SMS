@@ -9,9 +9,12 @@ public interface ProjectService {
 
 	int boardcount(String searchType, String searchContent, int kind);
 	int boardcount(Integer kind, int sNo);
+	int boardcountNR(int kind, Integer sNo);
 
 	List<Board> boardList(String searchType, String searchContent, Integer pageNum, int limit, int kind);
 	List<Board> boardList(Integer kind, int sNo, Integer pageNum, int limit);
+	List<Board> boardListNR(int kind, Integer sNo, Integer pageNum, int limit);
+	
 	double boardList(Integer kind, Integer sNo);
 	
 	Board getBoard(int num);
@@ -136,4 +139,5 @@ public interface ProjectService {
 	List<Board> getSNo_byScore();
 	
 	List<Building> getMyWishBuildings(String id);
+	
 }

@@ -191,6 +191,30 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
+	public int countNR(int kind, Integer sNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("kind",kind);
+		map.put("sNo",sNo);
+		
+		return sqlSession.selectOne(NS + "countNR", map);
+	}
+
+	@Override
+	public List<Board> listNR(int kind, Integer sNo, Integer pageNum, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int startrow = (pageNum - 1) * limit;
+		
+		map.put("kind",kind);
+		map.put("sNo",sNo);
+		map.put("startrow", startrow);
+		map.put("limit", limit);
+		
+		return sqlSession.selectList(NS + "listNR", map);
+	}
+
+	@Override
 	public List<Board> getbuilding_reviewCount() {
 		return sqlSession.selectList(NS+"buidling_reviewCount");
 	}
