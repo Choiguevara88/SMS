@@ -103,4 +103,11 @@
 		select count(*) from board where kind = #{kind} and qType=0 and sNo = #{sNo} 
 	</select>
 
+	<select id="buidling_reviewCount" resultType="Board">
+		select * from Board where kind=2 group by sNo order by count(sNo) desc limit 6
+	</select>
+	
+	<select id="getSNo_byScore" resultType="Board">
+		select sno, avg(score) 'avgscore' from Board group by sno order by 2 desc limit 6
+	</select>
 </mapper>

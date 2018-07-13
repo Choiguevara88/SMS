@@ -315,12 +315,10 @@ public class BuildingController {
 	public ModelAndView Rdetail(Integer bNo, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
+		
 		int kind = 2;
 		Board board = new Board();
-		
-		if(bNo != null) {
-			board = service.getBoard(bNo);
-		}
+		board = service.getBoard(bNo);
 		mav.addObject("kind",kind);
 		mav.addObject("board", board);
 		return mav;
@@ -351,7 +349,6 @@ public class BuildingController {
 		
 		Board board = new Board();
 		int kind = 3;
-		System.out.println(bNo);
 		board = service.getBoard(bNo);
 		mav.addObject("kind",kind);
 		mav.addObject("board", board);
@@ -378,6 +375,7 @@ public class BuildingController {
 	@RequestMapping(value="building/delete", method=RequestMethod.POST)
 	public ModelAndView delete(Integer bNo, Integer sNo,Integer kind) {
 		ModelAndView mav = new ModelAndView();
+		System.out.println(bNo);
 		service.boardDelete(bNo);
 		mav.setViewName("redirect:/building/buildingDetail.sms?sNo="+sNo);
 		return mav;

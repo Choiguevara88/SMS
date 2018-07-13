@@ -10,14 +10,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- w3 css 사용 선언-->
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-
-<script type="text/javascript">
-	function check5() {
-		confirm("정말 삭제 하시겠습니까?")
-		document.d.submit();
-		//return false;
-	}
-</script>
 <script type="text/javascript">
 	function win_openQ(num)	{
 		var op = "width=800,height=700,scrollbars=yes,left=50,top=150";
@@ -83,8 +75,17 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <div class="modal-content" style="text-align:right;">
     <span class="close">&times;</span>
 <p>
-
-<form:form modelAttribute="board" action="Qwrite.sms" method="post" name="f">
+<script type="text/javascript">
+function check() {
+	if($('#content').val()==''){
+		alert("내용을 입력하세요~><");
+		document.getElementById('content').focus();
+	} else{
+		document.rf.submit();
+	}
+}
+</script>
+<form:form modelAttribute="board" action="Qwrite.sms" method="post" name="wf">
 <form:hidden path="kind" value="3"/>
 <input type="hidden" name="pageNum" value="1"/>
 <form:hidden path="sNo" value="${param.sNo }"/>
@@ -95,25 +96,18 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 <table class="w3-table">
         <tr><td>
-        <label style="font-family:'Hanna'; font-size:x-large;">상품문의하기</label>
-        <form:textarea rows="15" cols="80" path="content" class="w3-input w3-border"/></td></tr>
+        <label style="font-family:'Hanna'; font-size:x-large;">공간문의하기</label>
+        <form:textarea rows="15" cols="80" path="content" class="w3-input w3-border" id="content"/></td></tr>
         <tr><td><font color="red"><form:errors path="content"/></font></td></tr>
         <tr><td style="text-align:center;">
-            <a href="javascript:document.f.submit()" class="btn btn-outline-primary btn-lg" style="font-family:'Hanna'; font-size:x-large;">질문등록</a>&nbsp;&nbsp;
+            <input type="button" value="질문등록" onclick="check()" class="btn btn-outline-primary btn-lg" style="font-family:'Hanna'; font-size:x-large;">
 			<a href="javascript:document.f.reset()" class="btn btn-outline-danger btn-lg" style="font-family:'Hanna'; font-size:x-large;">다시작성</a>
         </td></tr>
 </table>	
-
-
 </div>
 </form:form>
 </p>
 </div>
-
-
-
-
-
 </div>
 <script>
 // Get the modal
@@ -141,20 +135,38 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+function check5(bno,sno,kind) {
+	confirm("정말 삭제 하시겠습니까?");
+	f = document.df;
+	f.bNo.value=bno;
+	f.sNo.value=sno;
+	f.kind.value=kind;	
+	f.submit();
+//	return false;
+}
+
 </script>
 <!--  리뷰 목록부분 -->
-<table style="margin-top:30px" width="80%" align="center">
+ 	<form name="df" method="post" action="delete.sms">
+  		<input type="hidden" name="bNo"	value="">
+		<input type="hidden" name="sNo"	value="">
+		<input type="hidden" name="kind" value="">
+	</form>
+
 
 <c:if test="${listcount > 0}">
 <c:forEach var="board" items="${boardlist}">
 <hr size="1">
 	<div><b>
-	<c:if test="${board.refLevel == 0 }">
+	<c:if test="${empty board.id }">
+		<span class="w3-xlarge w3-text-darkgrey">비회원의 질문입니다.</span></c:if>
+	<c:if test="${!empty board.id && board.refLevel == 0 }">
 		<span class="w3-xlarge w3-text-darkgrey">${board.id}</span></c:if>
-		<c:if test="${board.refLevel != 0 }">
-		<div class="w3-xlarge">${building.id}님의 답글입니다.</div>
-		</c:if></b>
+	<c:if test="${!empty board.id && board.refLevel != 0 }">
+		<div class="w3-xlarge">└─${building.id}님의 답글입니다.</div></c:if>
+		</b>
 	</div>
+
 	<div>
 		<div class="w3-large w3-text-deepgray"> ${board.content}</div></div>
 	<div>
@@ -164,15 +176,15 @@ window.onclick = function(event) {
   		<c:if test="${board.refLevel == 0  }">
   		<c:if test="${board.qType == 0 }">
   	<a href="javascript:win_openQ('${board.bNo}')">[답변]</a></c:if></c:if></c:if>
-  		<c:if test="${sessionScope.loginMember.id == board.id}">
-  	<form name="d" method="post" action="delete.sms">
-  		<input type="hidden" name="bNo"	value="${board.bNo}">
-		<input type="hidden" name="sNo"	value="${board.sNo}">
-		<input type="hidden" name="kind" value="${board.kind}">
-		<input type="button" value="삭제" onclick="check5()" >
-	</form></c:if><br></div></div>
+		<c:if test="${sessionScope.loginMember.id == board.id && !empty board.id}">
+		<input type="button" value="삭제" onclick="check5('${board.bNo}','${board.sNo}','${board.kind}')">
+	</c:if>
+	<br>
+	</div>
+</div>
 <!--  글 밑 부분 -->
 </c:forEach>
+<table style="margin-top:30px" width="80%" align="center">
 <tr align="center" height="26"><td colspan="5">
 		<c:if test="${pageNum >1 }">
 			<a href="javascript:listQlist(${pageNum -1 })"> [이전]</a>

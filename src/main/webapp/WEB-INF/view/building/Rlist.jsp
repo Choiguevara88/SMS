@@ -5,7 +5,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <script type="text/javascript">
 	function win_openR(num)	{
-		var op = "width=800,height=700,scrollbars=yes,left=50,top=150";
+		var op = "width=800,height=850,scrollbars=yes,left=50";
 			window.open("../building/Rreply.sms?bNo="+num,"reply",op);
 	}
 </script>
@@ -29,7 +29,7 @@
 	<c:if test="${board.refLevel == 0 }">
 		<span class="w3-xlarge w3-text-darkgrey">${board.id}</span></c:if>
 		<c:if test="${board.refLevel != 0 }">
-		<div class="w3-xlarge">${building.id}님의 답글입니다.</div>
+		<div class="w3-xlarge">└─${building.id}님의 답글입니다.</div>
 		</c:if></b>
 		<c:if test="${board.refLevel == 0 }">
 		<span style="float:right;">
@@ -56,7 +56,7 @@
   		<span style="float:right; display: inline;">
   		<c:if test="${sessionScope.loginMember.id == building.id && board.sNo == building.sNo }">
   		<c:if test="${board.refLevel == 0  }">
-  		<c:if test="${board.qType == 0 }">
+  		<c:if test="${board.qType == 0 || board.qType == null}">
   		<a href="javascript:win_openR('${board.bNo}')">[답변]</a></c:if></c:if></c:if>
 </span>
 </div>

@@ -134,6 +134,9 @@ public interface ProjectService {
 	void deletefavorite(String id, Integer sno);
 	
 	void buildingDelete(Integer sNo);
+	Building getbuilding_mainpage_reviewCount(Integer integer);
+	List<Board> getbuilding_reviewCount();
+	List<Board> getSNo_byScore();
 	
 	List<Building> getMyWishBuildings(String id);
 	

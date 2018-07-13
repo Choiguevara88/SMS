@@ -142,6 +142,7 @@ function listQlist(pageNum){
 		type: "get",
 		url : "${path}/building/Qlist.sms?sNo=${param.sNo}&pageNum="+pageNum,
 		success: function(result){
+			console.log(result)
 			$("#listQlist").html(result)
 		}
 	});
