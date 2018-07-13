@@ -230,18 +230,19 @@ public class BuildingController {
 		System.out.println(sNo);
 		System.out.println(kind);
 		
-		service.reserveStatusUpdate(reNo);
-		
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
 			return mav;
 		}
+		
 		try {
+			service.reserveStatusUpdate(reNo);
 			service.boardWrite(board, request);
-			mav.setViewName("redirect:/building/builidingDetail.sms");
+			mav.setViewName("redirect:/building/buildingDetail.sms");
+			
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new ProjectException("오류가 발생하였습니다." , "/building/buildingDetail.sms");
+//			e.printStackTrace();
 		}
 		mav.addObject("sNo",sNo);
 		mav.addObject("kind",kind);
