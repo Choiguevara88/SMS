@@ -24,12 +24,22 @@ public class MainController {
 	public ModelAndView mainPage() {
 		ModelAndView mav = new ModelAndView("main");
 		int sNo[] = new int[6];
-		for(int i = 0; i< sNo.length;i++) {
-			sNo[i] = (int)(Math.random()*12)+1;
-			for(int j = 0; j <i;j++) {
-				if(sNo[i] == sNo[j]) {
-					i--;
-					break;
+		for (int i = 0; i < sNo.length; i++) {
+			sNo[i] = (int) (Math.random() * service.getBuildingCount()) + 1;
+			if (service.getBuildingCount() >= sNo.length) {
+				for (int j = 0; j < i; j++) {
+					if (sNo[i] == sNo[j]) {
+						i--;
+						break;
+					}
+				}
+			} else {
+				sNo = new int[service.getBuildingCount()];
+				for (int j = 0; j < i; j++) {
+					if (sNo[i] == sNo[j]) {
+						i--;
+						break;
+					}
 				}
 			}
 		}

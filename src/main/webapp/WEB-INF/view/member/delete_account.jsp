@@ -6,8 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script>
-function confirm(){
+function confirmm(){
 	confirm("누르시면 회원탈퇴를 진행합니다...또르르르...ㅜㅜ");
+	document.f.submit();
 }
 </script>
 </head>
@@ -19,12 +20,13 @@ function confirm(){
 
 <div class="w3-col s6">
 <label style="font-family:'Hanna';" class="w3-xxlarge w3-center">탈퇴 실화&nbsp;.&nbsp;.&nbsp;.&nbsp;? ㅠㅠ</label>
-<form action="personal_info_delete_confirm.sms" method="POST" name="f">
+<form action="delete_confirm.sms" method="POST" name="f">
+	<input type="hidden" name="id" id="id" value="${sessionScope.loginMember.id}">
 	<div class="w3-container w3-border w3-round-large w3-padding">
 	<table class="w3-table" style="height:80; width:100;">
 		<tr><td colspan="1" class="w3-center w3-large">비밀번호</td><td><input class="w3-input" type="password" name="pw" id="pw"></td></tr>
-		<tr><td class="w3-center"  colspan="2"><input type="button" onclick="confirm()" class="w3-button w3-black" value="탈퇴하기"> &nbsp;&nbsp;
-		<a href="javascript:history.go(-1)" class="w3-button w3-black">뒤로가기</a>
+		<tr><td class="w3-center"  colspan="2"><input type="button" onclick="confirmm()" class="w3-button  w3-deep-purple" value="탈퇴하기"> &nbsp;&nbsp;
+		<a href="javascript:history.go(-1)" class="w3-button w3-deep-purple">뒤로가기</a>
 	</table>
 </div>
 </form>

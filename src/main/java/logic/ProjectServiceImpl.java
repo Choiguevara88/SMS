@@ -719,4 +719,9 @@ if (room.getsRImgList() != null) {
 		return buDao.getMyWishBuildings(id);
 	}
 
+	@Override
+	public Integer getBuildingCount() {
+		return buDao.getBuildingCount();
+	}
+
 }// ProjectServiceImpl end

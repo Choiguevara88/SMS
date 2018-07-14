@@ -97,4 +97,9 @@ public class BuildingDaoImpl implements BuildingDao {
 		
 		return sqlSession.selectList(NS+"wishSelect", map);
 	}
+
+	@Override
+	public Integer getBuildingCount() {
+		return sqlSession.selectOne(NS+"buildingCount");
+	}
 }

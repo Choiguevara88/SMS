@@ -139,5 +139,6 @@ public interface ProjectService {
 	List<Board> getSNo_byScore();
 	
 	List<Building> getMyWishBuildings(String id);
+	Integer getBuildingCount();
 	
 }

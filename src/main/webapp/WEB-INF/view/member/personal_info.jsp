@@ -14,7 +14,7 @@
 <div class="w3-col s3"><p>&nbsp;</p></div>
 <div class="w3-col w3-white s6">
 <div class="container">
-<label style="font-family:'Hanna';" class="w3-xxlarge w3-center">소중한 개인정보</label>
+<label style="font-family:'Hanna';" class="w3-xxlarge w3-center">소중한 개인정보 !</label>
 <div class="w3-container w3-border w3-round-large w3-padding">
 	<table class="w3-table" style="height:80; width:100;">
 		<tr><td colspan="1" class="w3-center w3-large">이름&nbsp;.&nbsp;.&nbsp;.</td><td colspan="1" class="w3-center w3-large">${sessionScope.loginMember.name}</td></tr>
@@ -27,8 +27,8 @@
 			<tr><td colspan="1" class="w3-center w3-large">계정 타입&nbsp;.&nbsp;.&nbsp;.</td><td colspan="1" class="w3-center w3-large">호스트</td></tr></c:if>
 		<c:if test="${sessionScope.loginMember.regStatus == '0' }">
 			<tr><td colspan="1" class="w3-center w3-large">계정 전환 상태&nbsp;.&nbsp;.&nbsp;.</td><td colspan="1" class="w3-center w3-large">승인 대기중</td></tr></c:if>
-		<tr><td colspan="2" class="w3-center"><a href="personal_info_update.sms?id=${sessionScope.loginMember.id }" class="w3-button w3-deep-purple w3-center w3-large">정보 수정</a>
-			<a href="personal_info_delete.sms?id=${sessionScope.loginMember.id }" class="w3-button w3-deep-purple w3-center w3-large">회원 탈퇴</a></td></tr>
+		<tr><td colspan="2" class="w3-center"><a href="personal_info_update.sms?id=${sessionScope.loginMember.id }" style="font-family:'Hanna';" class="w3-button w3-deep-purple w3-center w3-large">정보 수정</a>
+			<a style="font-family:'Hanna';" href="personal_info_delete.sms?id=${sessionScope.loginMember.id }" class="w3-button w3-deep-purple w3-center w3-large">회원 탈퇴</a></td></tr>
 	</table>
 </div>
 <br>

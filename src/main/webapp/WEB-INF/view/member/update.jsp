@@ -29,6 +29,32 @@ function checkPwd(){
 		$("#repwd").css("background-color","#FFCECE");
 	}
 }
+function autohypen(){
+	var x = document.getElementById("mob"); //tel을 선택해서
+	x.value = x.value.replace(/[^0-9]/g, ''); //0-9이 아닌 모든걸 ''으로 바꾼다 x.value는 뭐 암것도 없음. 그냥 변수
+	console.log(x.value); //11111111111 이렇게 나옴
+	var tmp = "";
+
+	if (x.value.length > 3 && x.value.length <= 7) { //length구해서 -필요한 곳마다 넣기
+		tmp += x.value.substr(0, 3);
+		tmp += '-';
+		tmp += x.value.substr(3);
+		x.value = tmp;
+		return x.value;
+	} else if (x.value.length > 7) {
+		tmp += x.value.substr(0, 3);
+		tmp += '-';
+		tmp += x.value.substr(3, 4);
+		tmp += '-';
+		tmp += x.value.substr(7);
+		x.value = tmp;
+		return x.value;
+	}
+}
+function confirmm(){
+	confirm("확인을 누르시면 정보수정이 완료됩니다 ! ><");
+	document.f.submit();
+}
 </script>
 <script type="text/javascript">
 $(document).ready(function() { //이메일 자동 완성
@@ -64,7 +90,7 @@ $(document).ready(function() { //이메일 자동 완성
 
 <div class="w3-col s6">
 <label style="font-family:'Hanna';" class="w3-xxlarge w3-center">Share my space 정보수정</label>
-<form:form modelAttribute="member" action="personal_info_new.sms" method="post">
+<form:form modelAttribute="member" name="f" action="personal_info_new.sms" method="post">
 	<spring:hasBindErrors name="member">
 		<font color="red">
 			<c:forEach items="${error.globalErrors }" var="errors">
@@ -81,9 +107,9 @@ $(document).ready(function() { //이메일 자동 완성
 		<tr><td colspan="1" class="w3-center w3-large">새 비밀번호 확인</td><td colspan="1"><input type="password" class="w3-input" name="pw-repeat" id="repwd" placeholder="한번 더 가즈아!!" onkeyup="checkPwd()"></td></tr>
 		<tr><td colspan="1" class="w3-center w3-large">이메일</td><td><form:input path="email" class="w3-input" value="${sessionScope.loginMember.email }"/>
 				<font color="red"><form:errors path="email"/></font></td></tr>
-		<tr><td colspan="1" class="w3-center w3-large">전화번호</td><td colspan="1"><form:input path="mob" class="w3-input" value="${sessionScope.loginMember.mob }"/>
+		<tr><td colspan="1" class="w3-center w3-large">전화번호</td><td colspan="1"><form:input path="mob" oninput="autohypen()" maxlength="13" class="w3-input" value="${sessionScope.loginMember.mob }"/>
 				<font color="red"><form:errors path="mob"/></font></td></tr>
-		<tr><td colspan="2" class="w3-center"><input type="submit" value="수정 완료" id= "edit" class="w3-button w3-deep-purple w3-center w3-large">
+		<tr><td colspan="2" class="w3-center"><input type="button" value="수정 완료" onclick= "confirmm()" id="edit" class="w3-button w3-deep-purple w3-center w3-large">
 			<a href="main.sms" class="w3-button w3-deep-purple w3-center w3-large">메인으로 가기</a></td>
 	</table>
 	</div>

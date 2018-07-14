@@ -9,10 +9,14 @@
 		<pattern>/building/buildingDetail.sms*</pattern>
 		<pattern>/reserve/regReserve.sms*</pattern>
 		<pattern>/becomeahost_complete.sms*</pattern>
+		<pattern>/lets*</pattern>
 	</decorator>
 	<decorator page="decorator3.jsp" name="buildingDetail">
 		<pattern>/login.sms*</pattern>
 		<pattern>/personal*</pattern>
+		<pattern>/after_delete*</pattern>
+		<pattern>/joinForm.sms*</pattern>
+		<pattern>/find*</pattern>
 	</decorator>
 	
 	

@@ -88,6 +88,7 @@ public class MemberController {
 		}
 		try {
 		service.joinsms(member);
+		System.out.println("11234");
 		mav.setViewName("redirect: ../login.sms");
 		mav.addObject("member",member);
 		} catch(DataIntegrityViolationException e) {
@@ -363,7 +364,7 @@ public class MemberController {
 		return mav;
 	}
 	@RequestMapping(value="personal_info_new")
-	public ModelAndView personal_info_new(@Valid Member member, BindingResult bindingResult, HttpSession session) {
+	public ModelAndView personal_info_new(@Valid Member member, HttpSession session, BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
@@ -371,6 +372,7 @@ public class MemberController {
 			return mav;
 		}
 		service.updateMember(member);
+		session.setAttribute("loginMember", member);
 		mav.setViewName("redirect: personal_info.sms?id=" + member.getId());
 		return mav;
 	}
@@ -382,14 +384,14 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping(value="personal_info_delete_confirm" )
-	public ModelAndView personal_info_delete_confirm(String id, String pw, HttpSession session) {
+	@RequestMapping(value="delete_confirm" )
+	public ModelAndView delete_confirm(String id, String pw, HttpSession session) {
 		ModelAndView mav  = new ModelAndView();
 		Member member = service.getMember(id);
 		if(member.getPw().equals(pw)) {
 			service.deleteAccount(member);
+			mav.setViewName("member/after_delete_account");
 			session.invalidate();
-			mav.setViewName("after_delete_account");
 			return mav;
 		}
 		else {
