@@ -130,6 +130,7 @@ public class BuildingController {
 		ModelAndView mav = new ModelAndView();
 		String address = building.getsAddress().split(",")[1];
 		String address1 = building.getsAddress().split(",")[1] +" "+building.getsAddress().split(",")[2];
+		System.out.println(building);
 		mav.addObject("building", building);
 		mav.addObject("address",address);
 		mav.addObject("address1", address1);

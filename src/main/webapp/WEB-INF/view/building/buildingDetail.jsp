@@ -150,7 +150,12 @@ function listQlist(pageNum){
 }
 /*룸 정보 보이고 안보이게 하는 스크립트*/
 function dispifo(srno) {
-	$("#info" + srno).toggle();
+	<c:forEach items="${roomList}" var="room">
+    $("#info${room.sRNo}").hide();
+    $("#i${room.sRNo}").removeClass("w3-border w3-border-purple");
+    </c:forEach>
+	$("#i" + srno).addClass("w3-border w3-border-purple");
+	$("#info" + srno).show();
 }
 </script>
 <style>
@@ -270,6 +275,12 @@ function dispifo(srno) {
 <h5><b>세부공간 선택</b></h5>
 <div class="w3-panel w3-border w3-border-gray">
 <br>
+<c:if test="${roomList.size() == 0}">
+<p align="center">등록된 세부공간이 없습니다.</p>
+<p align="center">세부공간을 등록하려면 <a href="roomList.sms?sNo=${param.sNo}">[세부공간 등록하기]</a> 를 눌러주세요.</p>
+</c:if>
+
+<c:if test="${roomList.size() != 0}">
 <p align="center">세부공간의 상세한 정보를 확인하시고</p>
 <p align="center">예약을 신청하시면 예약 페이지로 넘어갑니다.</p>
 
@@ -315,10 +326,11 @@ function dispifo(srno) {
 </div>
 </c:forEach>
 
-<hr style="border: solid 2px black; margin-top:0px; margin-bottom:10px;">
+<hr style="border: solid 2px purple; margin-top:0px; margin-bottom:10px;">
 <div class="w3-center w3-margin-bottom">
 <input type="button" class="w3-btn w3-deep-purple" id="res" value="예약신청하기">
 </div>
+</c:if>
 </div>
 </div>
 </div>
