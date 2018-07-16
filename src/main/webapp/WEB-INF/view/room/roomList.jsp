@@ -20,7 +20,7 @@
 <br>
 <br>
 <h3>
-등록된 세부공관공간이 없습니다. 세부공간 추가하기를 눌러 세부공간을 추가해주세요.
+등록된 세부공간이 없습니다. 세부공간 추가하기를 눌러 세부공간을 추가해주세요.
 </h3>
 <br>
 <br>
@@ -42,18 +42,10 @@
       <img src="../picture/${roomImg}" style="width:100%; height:250px">
       </div>
       </c:forEach>
-<<<<<<< HEAD
       <div class="w3-container w3-margin-left w3-margin-top">
        <font class="w3-large">${room.sRName}</font>
       </div>
    		<form:hidden path="sNo" value="${room.sNo}" />
-=======
-      <p>세부 공간 이름 : ${room.sRName}</p><br>	
-      <p>설명 : ${room.sRContent}</p><br>
-      <p>${room.sRInfo }</p>
-      <p>공간 유형 : ${room.sRType}</p><br>
-   			<form:hidden path="sNo" value="${room.sNo}" />
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
    		<form:hidden path="sRNo" value="${room.sRNo}" />
   <div class="w3-container w3-center w3-margin-top">
   <input type="submit" value="세부정보 보기" class="w3-button w3-black"/>
