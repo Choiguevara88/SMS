@@ -239,4 +239,35 @@ public class LoginAspect {
 		Object ret = joinPoint.proceed(); // CoreAlgolism 실행
 		return ret;
 	}
+	
+	
+	// 내가 찜한 공간 메서드 실행 할 때 중간에 갑자기 세션 나가버렸을 때를 대비한 체크
+	@Around("execution(* controller.*.*WishList*(..))")
+	public Object wishLoginCheck(ProceedingJoinPoint joinPoint) throws Throwable {
+
+		HttpSession session = null;
+		Member loginMember = null;
+		boolean reservable = false;
+		
+		for(int i = 0; i < joinPoint.getArgs().length; i++) {
+			
+			if(joinPoint.getArgs()[i] instanceof HttpSession) {
+				session = (HttpSession)joinPoint.getArgs()[i];
+				loginMember = (Member)session.getAttribute("loginMember");
+				
+				if(loginMember == null) {
+					throw new ProjectException("로그인이 필요합니다.", "../login.sms");
+				}
+				reservable = true;
+				break;
+			}
+		}
+		
+		if(!reservable) {
+			throw new ProjectException("전산부로 전화하세요. 세션 객체가 요구됨.", "../main.sms");
+		}
+		
+		Object ret = joinPoint.proceed(); // CoreAlgolism 실행
+		return ret;
+	}
 }

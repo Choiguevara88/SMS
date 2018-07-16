@@ -134,7 +134,7 @@
 		<th style="text-align:center;">가입일자</th>
 		<th style="text-align:center;">회원상태</th>
 		<th style="text-align:center;">전체선택&nbsp;&nbsp;
-			<input type="checkbox" name="allchk" onchange="allchkbox(this)" class="form-check"></th>
+			<input type="checkbox" name="allchk" onchange="allchkbox(this)"></th>
 	</tr>
 	
 	<c:if test="${listCnt == 0 }">
@@ -150,7 +150,7 @@
 		<td style="text-align:center;">${mem.mob}</td>
 		<td style="text-align:center;"><fmt:formatDate value="${mem.regDate}" pattern="yyyy-MM-dd"/></td>
 		<td style="text-align:center;">${mem.memType == 0 ? 'Guest' : mem.memType == 1 ? 'Host' : 'Host Cancel'}</td>
-		<td style="text-align:center;"><input type="checkbox" name="idchks" value="${mem.id}" class="form-check"></td>
+		<td style="text-align:center;"><input type="checkbox" name="idchks" value="${mem.id}"></td>
 	</tr>
 	</c:forEach>
 	</c:if>
@@ -182,7 +182,7 @@
 </div>
 
 <div class="w3-container w3-margin" style="text-align:center;">
-	<input type="submit" value="Send Email" class="w3-button w3-black" style="width:40%;">
+	<input type="submit" value="Email 보내기" class="w3-button w3-black" style="width:40%; font-family:'Hanna';">
 </div>
 
 </form>
