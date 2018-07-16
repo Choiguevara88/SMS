@@ -351,6 +351,8 @@ public class ProjectServiceImpl implements ProjectService {
 		building.setsRule(sRule);
 		building.setsBHour(sBHour);
 		System.out.println(sType);
+	
+	
 		buDao.buRegist(building);
 	}
 	private String listToString(List<String> list) {
@@ -360,7 +362,13 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 		return li;
 	}
-
+	private String listToString2(List<String> list) {
+		String li = "";
+		for (int i = 0; i < list.size(); i++) {
+			li += list.get(i) + ",";
+		}
+		return li;
+	}
 	@Override
 	public List<Board> guestQuestionList() {
 		return boDao.guestQuestionList();
@@ -575,15 +583,18 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void updateRoom(Room room,HttpServletRequest request) {
-if (room.getsRImgList() != null) {
-			
-			String img2 = uploadImgCreate2(room.getsRImgList(), request);
-			
+		
+		if (room.getsRImgList() != null) {
+			String img2 = uploadImgCreate2(room.getsRImgList(), request);	
 			if (img2 != null && !img2.equals(""))
 				room.setsRImg(img2);
 		} else {
 			room.setsRImg(listToString(room.getsRImgNameList()));
 		}
+		 
+		
+		String sRInfo = listToString2(room.getsRInfoList());
+		room.setsRInfo(sRInfo);
 		roomDao.updateRoom(room);
 		}
 
@@ -592,7 +603,6 @@ if (room.getsRImgList() != null) {
 		roomDao.deleteRoom(room);
 		
 	}
-
 
 	@Override
 	public void deleteAccount(Member member) {
@@ -671,7 +681,8 @@ if (room.getsRImgList() != null) {
 		}
 		
 		if(returnRoom.getsRInfo() != null && !returnRoom.getsRInfo().equals("")) {
-			infoList = Arrays.asList(returnRoom.getsRInfo().split(","));
+			infoList = Arrays.asList(returnRoom.getsRInfo());
+		
 		}
 		
 		returnRoom.setsRImgNameList(imgList);

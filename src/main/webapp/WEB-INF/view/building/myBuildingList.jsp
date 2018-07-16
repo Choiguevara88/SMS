@@ -18,11 +18,27 @@ function budelete(sNo) {
 </script>
 </head>
 <body>
+<br>
+<div class="w3-left">
 <h1>${id}님의 공간 정보 관리</h1>
 <c:if test="${buildCnt == 0}">
-등록된 건물이 없습니다.
+<br>
+<br>
+<div class="w3-center">
+<h3>
+등록된 공간이 없습니다. 공간 추가하기를 눌러 공간을 추가해주세요.
+</h3>
+</div>
+<br>
+<br>
 </c:if>
-<a href="../building/buildingForm.sms?id=${sessionScope.loginMember.id}">[공간등록하기]</a>
+</div>
+<div class="w3-right w3-margin-top w3-margin-right">
+<a href="../building/buildingForm.sms?id=${sessionScope.loginMember.id}">
+<input type="button" class="w3-btn w3-deep-purple" value="공간추가하기">
+</a>
+</div>
+
 <div class="w3-row-padding">
 <c:forEach var="build" items="${myBuildingList}">
 <div class = "w3-third">
