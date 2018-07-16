@@ -51,19 +51,21 @@
 
  <form:form modelAttribute="member" action="login.sms" method="post">
  	
- 	<!--<form:hidden path="id" value="의미없음"/><!-->
+ <!--<form:hidden path="id" value="의미없음"/><!-->
+ <div style="text-align:center; font-family:'Hanna'; font-size:large" class="w3-margin">
  	<spring:hasBindErrors name="member">
  		<font color="red">
- 			<c:forEach items="${errors.globalErrors }" var="error">
- 				<spring:message code="${error.code }"/>
- 			</c:forEach>	
+ 			<c:forEach items="${errors.globalErrors}" var="error">
+ 				<spring:message code="${error.code}"/>
+ 			</c:forEach>
  		</font>
  	</spring:hasBindErrors>
+ </div>
 <div class="w3-container w3-border w3-round-large w3-padding">
 <table class="w3-table" style="height:130; width:350;">
  		<tr>
  			<td colspan="3">
- 			<label style="font-family:'Hanna';">Share my space 로그인</label>
+ 			<label style="font-family:'Hanna'; font-size:large;">Share my space 로그인</label>
  			<form:input path="id" placeholder="아이디" class="w3-input"/></td>
  		</tr>
  		<tr>

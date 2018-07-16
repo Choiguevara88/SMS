@@ -72,7 +72,7 @@
         </div>
         </td></tr>
         <tr><td style="text-align:center;">
-            <a href="javascript:document.f.submit()" class="btn btn-outline-primary" style="width:400px; font-family:'Hanna'">리뷰 등록</a>
+            <a href="javascript:document.f.submit()" class="btn btn-outline-primary btn-lg" style="width:400px; font-family:'Hanna'">리뷰 등록</a>
         </td></tr>
 	</table>
 <div class="w3-container"><p>&nbsp;</p></div> <!-- 테이블 하단 공간 확보용 -->
