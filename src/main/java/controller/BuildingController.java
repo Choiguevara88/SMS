@@ -124,10 +124,14 @@ public class BuildingController {
 	public ModelAndView buildingDetail(Building building, HttpServletRequest request) {
 		String sNo = request.getParameter("sNo");
 		Integer ssNo = Integer.parseInt(sNo);
+		
 		building = service.getMyBuildingOne(sNo);
+		
 		List<Room> roomList = service.getmyRoomList(ssNo);
 		System.out.println(roomList);
+		
 		ModelAndView mav = new ModelAndView();
+		
 		String address = building.getsAddress().split(",")[1];
 		String address1 = building.getsAddress().split(",")[1] +" "+building.getsAddress().split(",")[2];
 		System.out.println(building);
