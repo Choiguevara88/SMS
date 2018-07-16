@@ -66,8 +66,11 @@ body {font-family: Arial, Helvetica, sans-serif;}
 </style>
 
 <!-- Trigger/Open The Modal -->
-<div align="right"><button id="myBtn">질문하기</button></div>
-
+<div>
+<div class="w3-leftbar w3-border-deep-purple w3-left">
+<h2>&nbsp;&nbsp;Q&A</h2>
+</div>
+<div class="w3-padding" align="right"><button class="w3-btn w3-deep-purple w3-round-large" id="myBtn"><b>질문 작성하기</b></button></div></div>
 <!-- The Modal -->
 <div id="myModal" class="modal">
 
