@@ -2,46 +2,31 @@ package logic;
 
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-
 import org.springframework.web.multipart.MultipartFile;
 
 public class Building {
 	private Integer sNo;				// 빌딩번호
 	private String id;					// 호스트계정의 아이디
-	@NotNull(message = "내용을 입력하세요.")
 	private String sName;				// 빌딩의 이름
-	@NotNull
 	private String sPreview;			// 빌딩의 한줄소개
-	@NotNull
 	private String sContent;			// 빌딩 설명 내용
 	private List<String> sTypeList;	    // 빌딩 유형 (연습실, 세미나실, 회의실 등등)
-	@NotNull
 	private String sType;               // 빌딩 유형 DB추가용 변수
 	private List<String> sTagList;		// 빌딩 태그
-	@NotNull
 	private String sTag;                // 빌딩 태그 DB 추가용 변수
 	private List<String> sInfoSubList;	// 기타 시설 안내 (시설안내는 개별적으로 Room에 설정)
-	@NotNull
 	private String sInfoSub;            // 기타 시설 안내 DB추가용 변수
 	private List<String> sRuleList;		// 이용 규칙
-	@NotNull
 	private String sRule;               // 이용 규칙 DB 추가용 변수
 	private List<String> sBHourList;	// 운영 시간 list0=시작시간 list1=종료시간
-	@NotNull
 	private String sBHour;              // 운영 시간 DB 추가용 변수
-	@NotNull
 	private String sHDay;				// 휴무요일
-	@NotNull
 	private String sImg1;					// 대표이미지파일명을 DB에 저장하기 위한 객체
 	private MultipartFile sImg1File;		// 대표이미지파일을 업로드 하기 위한 객체
-	@NotNull
 	private String sImg2;					// 이미지(여러장)파일명들을 DB에 저장하기 위한 객체
 	private List<MultipartFile> sImg2Files;	// 다중이미지파일을 업로드 하기 위한 객체
 	private List<String> sImg2Name;			// View단으로 이미지파일명들을 보내기 위한 List 객체
-	@NotNull
 	private String sAddress;			// 빌딩 주소
-	@NotNull
 	private String sTel;           //////////빌딩에 전화번호 추가!!!!!!
 	private List<Room> room;				// 화면에 표시할 Room 객체들
 	private Integer boCnt;					// 아직 읽지 않은 문의 갯수

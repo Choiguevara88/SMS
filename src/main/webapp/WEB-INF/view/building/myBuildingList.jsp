@@ -12,8 +12,10 @@
 <script type="text/javascript">
 function budelete(sNo) {
 	console.log(sNo)
-	confirm("삭제하시면 공간정보, 세부공간정보, 공간에 달린 댓글, 리뷰정보가 모두 삭제됩니다. 정말로 삭제하시겠습니까?")
+	var result = confirm("삭제하시면 공간정보, 세부공간정보, 공간에 달린 댓글, 리뷰정보가 모두 삭제됩니다. 정말로 삭제하시겠습니까?")
+	if(result == true){
 	location.href="buildingDelete.sms?sNo="+sNo
+	}
 }
 </script>
 </head>

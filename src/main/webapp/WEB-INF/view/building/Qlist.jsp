@@ -136,12 +136,14 @@ window.onclick = function(event) {
     }
 }
 function check5(bno,sno,kind) {
-	confirm("정말 삭제 하시겠습니까?");
+	var result = confirm("정말 삭제 하시겠습니까?");
+	if(result){
 	f = document.df;
 	f.bNo.value=bno;
 	f.sNo.value=sno;
 	f.kind.value=kind;	
 	f.submit();
+	}
 //	return false;
 }
 
