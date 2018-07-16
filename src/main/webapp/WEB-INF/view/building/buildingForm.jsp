@@ -218,16 +218,17 @@ $(document).ready(function() {
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 <script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=2bA8v55yYLf1omsHnKFk&submodules=geocoder"></script>
+
 </head>
 <body>
 <div>
-<form:form id="sss" modelAttribute="building" method="post" action="buildingReg.sms" enctype="multipart/form-data">
+<form:form id="sss" modelAttribute="building" method="post" action="buildingReg.sms" enctype="multipart/form-data" name="bf">
 <input type="hidden" name="id" value="${param.id}" />
   <table cellpadding="0" cellspacing="1" align="center">
   <tr><td colspan="2" align="center">공간정보</td></tr>
     <tr><td>공간 유형(최대 3개)</td>
         <td>
-        <form:checkboxes path="sTypeList" items="${sTypeNames}" onchange="chkboxcheck()" />  
+        <form:checkboxes path="sTypeList" items="${sTypeNames}" onchange="chkboxcheck()"  />  
         </td></tr>
            
     <tr><td>공간 이름(최대 20자)</td><td><form:input path="sName" /></td></tr>
@@ -260,10 +261,10 @@ $(document).ready(function() {
     <tr>
 			<td><strong>사업자 주소지</strong></td></tr>
 		<tr>
-			<td>우편번호</td><td><input type="text" name="sAddress" id="zipcode" class="postcodify_postcode5" value="" />
+			<td>우편번호</td><td><input type="text" name="sAddress" id="zipcode" class="postcodify_postcode5" value="" readonly/>
 				<input type="button" id="postcodify_search_button" value="검색"></td></tr>
 		<tr>
-			<td>도로명 주소</td><td><input type="text" id="asdf" name="sAddress" class="postcodify_address" value=""/></td></tr>
+			<td>도로명 주소</td><td><input type="text" id="asdf" name="sAddress" class="postcodify_address" value="" readonly/></td></tr>
 		<tr>
 			<td>상세 주소</td><td><input type="text" name="sAddress" id="details" class="postcodify_details" value="" onfocus="drawmap()"/></td></tr>
 		<tr><td colspan="2"><div id="map" style="width:100%;height:200px;"></div></td></tr>
@@ -304,7 +305,7 @@ $(document).ready(function() {
               <!-- 이용시 주의사항 추가시 웹상에서 보여지는 부분 -->
             </div>
      
-     <tr><td colspan="2" align="center"><input type="submit" value="공간등록"></td></tr>
+     <tr><td colspan="2" align="center"><input type="button" value="공간등록" onclick="checkb()" id="request"></td></tr>
   </table>
 
 <!-- 지도관련 스크립트 -->

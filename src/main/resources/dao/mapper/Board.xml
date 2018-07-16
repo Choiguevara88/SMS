@@ -34,7 +34,7 @@
 
 
 	<select id="avg" resultType="Double" parameterType="map">
-		select round(avg(score),1) from board
+		select ifnull(round(avg(score),1),0.0) from board
 
 		<if test="kind != null and sNo != null">
 			where kind= #{kind} and sNo = #{sNo} and refLevel=0
