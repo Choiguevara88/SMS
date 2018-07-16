@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,11 +14,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import exception.ProjectException;
 import logic.Board;
 import logic.Building;
+import logic.Favorite;
+import logic.Member;
 import logic.ProjectService;
 import logic.Room;
 
@@ -148,18 +152,13 @@ public class BuildingController {
 		int limit = 5;		// 한 페이지에 나올 게시글의 숫자
 		int listcount = service.boardcount(kind,sNo);	// 표시될 총 게시글의 수
 		List<Board> boardlist = service.boardList(kind, sNo, pageNum, limit);
-		double avg = 0;
-		if(kind == 2) {	// 리뷰 게시글인 경우 MAV 객체에 해당 Building의 평점을 추가하는 로직
-			if(boardlist != null && !boardlist.isEmpty() ) {
-				 List<Board> boardlist2 = service.boardList(kind, sNo);
-				 avg = boardlist2.stream().mapToInt(Board :: getScore).average().getAsDouble();
-			}
-			mav.addObject("avgScore",avg);
-		}
+		double avg = service.boardList(kind, sNo);
+		//avg = boardlist2.stream().mapToInt(Board :: getScore).average().getAsDouble();
+		mav.addObject("avgScore",avg);
 		Building building = service.getMyBuildingOne(sNo.toString());
 		
 		int maxpage = (int)((double)listcount/limit + 0.95);
-		int startpage = ((int)((pageNum/5.0 + 0.9) - 1)) * 5 + 1; // 시작페이지
+		int startpage = ((int)((pageNum/10.0 + 0.9) - 1)) * 10 + 1; // 시작페이지
 		int endpage = startpage + 4;	// 마지막 페이지
 		if(endpage > maxpage) endpage = maxpage;
 		int boardcnt = listcount - (pageNum - 1) * limit;
@@ -211,9 +210,7 @@ public class BuildingController {
 	public ModelAndView write(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		int kind = 2;
-		Board board = new Board();
 		mav.addObject("kind",kind);
-		mav.addObject("board", board);
 		return mav;
 	}
 	@RequestMapping(value="building/Rwrite", method=RequestMethod.POST) // 게시글 작성 시 호출되는 메서드
@@ -224,9 +221,6 @@ public class BuildingController {
 		int kind = Integer.parseInt(request.getParameter("kind"));
 		int reNo = Integer.parseInt(request.getParameter("reNo"));
 		
-		System.out.println(sNo);
-		System.out.println(kind);
-		
 		service.reserveStatusUpdate(reNo);
 		
 		if(bindingResult.hasErrors()) {
@@ -235,15 +229,17 @@ public class BuildingController {
 		}
 		
 		try {
+			service.reserveStatusUpdate(reNo);
 			service.boardWrite(board, request);
-			mav.setViewName("redirect:/building/builidingDetail.sms");
+			mav.setViewName("redirect:/building/buildingDetail.sms");
 			
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new ProjectException("오류가 발생하였습니다." , "/building/buildingDetail.sms");
+//			e.printStackTrace();
 		}
 		mav.addObject("sNo",sNo);
 		mav.addObject("kind",kind);
+		mav.addObject("board",board);
 		return mav;
 	}
 	@RequestMapping(value="building/Qwrite", method=RequestMethod.POST) // 게시글 작성 시 호출되는 메서드
@@ -255,7 +251,7 @@ public class BuildingController {
 		
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
-			return mav;
+			throw new ProjectException("다시 작성해 주세요.","buildingDetail.sms?sNo="+sNo);
 		}
 		
 		try {
@@ -274,12 +270,10 @@ public class BuildingController {
 	public ModelAndView Rdetail(Integer bNo, HttpServletRequest request) {
 		
 		ModelAndView mav = new ModelAndView();
+		
 		int kind = 2;
 		Board board = new Board();
-		
-		if(bNo != null) {
-			board = service.getBoard(bNo);
-		}
+		board = service.getBoard(bNo);
 		mav.addObject("kind",kind);
 		mav.addObject("board", board);
 		return mav;
@@ -310,7 +304,6 @@ public class BuildingController {
 		
 		Board board = new Board();
 		int kind = 3;
-		System.out.println(bNo);
 		board = service.getBoard(bNo);
 		mav.addObject("kind",kind);
 		mav.addObject("board", board);
@@ -336,8 +329,8 @@ public class BuildingController {
 	}
 	@RequestMapping(value="building/delete", method=RequestMethod.POST)
 	public ModelAndView delete(Integer bNo, Integer sNo,Integer kind) {
-		
 		ModelAndView mav = new ModelAndView();
+		System.out.println(bNo);
 		service.boardDelete(bNo);
 		mav.setViewName("redirect:/building/buildingDetail.sms?sNo="+sNo);
 		return mav;
@@ -362,4 +355,61 @@ public class BuildingController {
 		mav.addObject("board", board);
 		return mav;
 	}*/
+	
+	@RequestMapping(value="building/favorite")
+	public @ResponseBody String favorite(String id, String sNo, HttpSession session) {
+		Favorite favor = new Favorite();
+		Integer sno = Integer.parseInt(sNo);
+		favor = service.find(id, sno);
+		if(favor == null) {
+			return "1";
+		} else {
+			return "0";
+		}
+	}
+	
+	@RequestMapping(value="building/favoriteclick")
+	public @ResponseBody String favoriteclick(String id, String sNo, HttpSession session) {
+		Favorite favor = new Favorite();
+		Integer sno = Integer.parseInt(sNo);
+		favor = service.find(id, sno);
+		if(favor == null) {
+			service.addfavorite(id, sno);
+			return "1";
+		} else {
+			service.deletefavorite(id,sno);
+			return "0";
+		}
+	}
+	
+	@RequestMapping(value="building/buildingDelete")
+	public ModelAndView buildingDelete(HttpServletRequest request, HttpSession session) {
+		Integer sNo = Integer.parseInt(request.getParameter("sNo"));
+		service.buildingDelete(sNo);
+		Member mem  = (Member) session.getAttribute("loginMember");
+		String id = mem.getId();
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/building/myBuildingList.sms?id=" + id);
+		return mav;
+	}
+	
+	@RequestMapping(value="building/wishlist.sms", method=RequestMethod.GET) // 찜한 공간 목록 불러올 때 사용하는 메서드
+	public ModelAndView buildingWishList(HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		Member mem = (Member)session.getAttribute("loginMember");
+		String id = mem.getId();
+		
+		List<Building> list = service.getMyWishBuildings(id); // 찜한 건물 목록
+		
+		for(Building build : list) {
+			build.setRoom(service.getmyRoomList(build.getsNo()));
+			build.setsTagList(Arrays.asList(build.getsTag().split("[|]")));
+			build.setsTypeList(Arrays.asList(build.getsType().split("[|]")));
+		}
+		mav.addObject("list", list);
+		
+		return mav;
+	}
 }

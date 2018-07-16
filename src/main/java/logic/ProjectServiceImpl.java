@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import dao.BoardDao;
 import dao.BuildingDao;
+import dao.FavoriteDao;
 import dao.MemberDao;
 import dao.ReserveDao;
 import dao.RoomDao;
@@ -36,6 +37,8 @@ public class ProjectServiceImpl implements ProjectService {
 	private RoomDao roomDao;
 	@Autowired
 	private TransactionHistoryDao tranDao;
+	@Autowired
+	private FavoriteDao faDao;
 
 	@Override
 	public Member getMember(String id) {
@@ -199,7 +202,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void reserveInsert(Reserve reserve) {
-		reserve.setReNo(reserve.getSrNo() + Math.abs((int)new Date().getTime()));
+		reserve.setReNo(Math.abs((int)new Date().getTime()) + reserve.getSrNo());
 		reDao.insert(reserve);
 	}
 
@@ -279,7 +282,6 @@ public class ProjectServiceImpl implements ProjectService {
 			room.setsRImg(listToString(room.getsRImgNameList()));
 		}
 		int sRNo = roomDao.maxNum();
-		
 		room.setsRNo(++sRNo);
 		roomDao.insertRoom(room);
 	}
@@ -305,7 +307,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<Board> boardList(Integer kind, int sNo) {
+	public double boardList(Integer kind, Integer sNo) {
 		return boDao.list(kind, sNo);
 	}
 
@@ -336,6 +338,8 @@ public class ProjectServiceImpl implements ProjectService {
 		building.setsRule(sRule);
 		building.setsBHour(sBHour);
 		System.out.println(sType);
+	
+	
 		buDao.buRegist(building);
 	}
 	private String listToString(List<String> list) {
@@ -357,8 +361,8 @@ public class ProjectServiceImpl implements ProjectService {
 		return boDao.guestQuestionList();
 	}
 	@Override
-	public List<Board> guestQuestionList1() {
-		return boDao.guestQuestionList1();
+	public List<Board> guestQuestionList1(String searchType, String searchContent) {
+		return boDao.guestQuestionList1(searchType, searchContent);
 	}
 
 	@Override
@@ -366,8 +370,8 @@ public class ProjectServiceImpl implements ProjectService {
 		return boDao.hostQuestionList();
 	}
 	@Override
-	public List<Board> hostQuestionList1() {
-		return boDao.hostQuestionList1();
+	public List<Board> hostQuestionList1(String searchType, String searchContent) {
+		return boDao.hostQuestionList1(searchType, searchContent);
 	}
 
 	@Override
@@ -436,24 +440,32 @@ public class ProjectServiceImpl implements ProjectService {
 		myBuildingOne.setsTagList(sTagList);
 		myBuildingOne.setsInfoSubList(sInfoSubList);
 		myBuildingOne.setsRuleList(sRuleList);
-		myBuildingOne.setsBHourList(sBHourList);	
+		myBuildingOne.setsBHourList(sBHourList);
+		
 		return myBuildingOne;
 	}
+
 	@Override
 	public void buildingUpdateReg(Building building, HttpServletRequest request) {
 		
 		if (building.getsImg1File() != null) {
+			
 			String img1 = uploadImgCreate(building.getsImg1File(), request);
+			
 			if (img1 != null)
 				building.setsImg1(img1);
 		}
+
 		if (building.getsImg2Files() != null) {
+			
 			String img2 = uploadImgCreate2(building.getsImg2Files(), request);
+			
 			if (img2 != null && !img2.equals(""))
 				building.setsImg2(img2);
 		} else {
 			building.setsImg2(listToString(building.getsImg2Name()));
 		}
+		
 		String sType = listToString(building.getsTypeList());
 		String sTag = listToString(building.getsTagList());
 		String sInfoSub = listToString(building.getsInfoSubList());
@@ -496,8 +508,6 @@ public class ProjectServiceImpl implements ProjectService {
 			myRoom.setsRInfoList(sRInfoList);
 		
 		}
-		
-		
 		return myRoom;
 	}
 
@@ -538,14 +548,16 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void updateRoom(Room room,HttpServletRequest request) {
-if (room.getsRImgList() != null) {
-			
-			String img2 = uploadImgCreate2(room.getsRImgList(), request);
-			
+		
+		if (room.getsRImgList() != null) {
+			String img2 = uploadImgCreate2(room.getsRImgList(), request);	
 			if (img2 != null && !img2.equals(""))
 				room.setsRImg(img2);
-}
-
+		} else {
+			room.setsRImg(listToString(room.getsRImgNameList()));
+		}
+		 
+		
 		String sRInfo = listToString2(room.getsRInfoList());
 		room.setsRInfo(sRInfo);
 		roomDao.updateRoom(room);
@@ -584,7 +596,14 @@ if (room.getsRImgList() != null) {
 
 	@Override
 	public Building getbuilding_mainpage(int sNo) {
-		return buDao.getbuilding_mainpage(sNo);
+		Building building = buDao.getbuilding_mainpage(sNo);
+		String sTypes = building.getsType();
+		String sTags = building.getsTag();
+		List<String> sTypeList = new ArrayList<String>(Arrays.asList(sTypes.split("[|]")));
+		List<String> sTagList = new ArrayList<String>(Arrays.asList(sTags.split("[|]")));
+		building.setsTypeList(sTypeList);
+		building.setsTagList(sTagList);
+		return building;
 	}
 
 	@Override
@@ -623,16 +642,68 @@ if (room.getsRImgList() != null) {
 		List<String> infoList = new ArrayList<String>();
 		
 		if(returnRoom.getsRImg() != null && !returnRoom.getsRImg().equals("")) {
-			imgList = Arrays.asList(returnRoom.getsRImg().split("|"));
+			imgList = Arrays.asList(returnRoom.getsRImg().split("[|]"));
 		}
-		
 		
 		if(returnRoom.getsRInfo() != null && !returnRoom.getsRInfo().equals("")) {
 			infoList = Arrays.asList(returnRoom.getsRInfo());
 		
 		}
+		
+		returnRoom.setsRImgNameList(imgList);
+		returnRoom.setsRInfoList(infoList);
+	
 		return returnRoom;
 	}
-}
-	
-		// ProjectServiceImpl end
+
+	@Override
+	public Favorite find(String id, Integer sNo) {
+		return faDao.find(id, sNo);
+	}
+
+	@Override
+	public void addfavorite(String id, Integer sNo) {
+		faDao.addFavorite(id, sNo);
+	}
+
+	@Override
+	public void deletefavorite(String id, Integer sNo) {
+		faDao.deleteFavorite(id, sNo);
+	}
+
+	@Override
+	public void buildingDelete(Integer sNo) {
+		buDao.budelete(sNo);
+		faDao.budelete(sNo);
+		boDao.budelete(sNo);
+		roomDao.budelete(sNo);
+	}
+
+	@Override
+	public Building getbuilding_mainpage_reviewCount(Integer Integer) {
+		Building building = buDao.getbuilding_mainpage(Integer);
+		String sTypes = building.getsType();
+		String sTags = building.getsTag();
+		List<String> sTypeList = new ArrayList<String>(Arrays.asList(sTypes.split("[|]")));
+		List<String> sTagList = new ArrayList<String>(Arrays.asList(sTags.split("[|]")));
+		building.setsTypeList(sTypeList);
+		building.setsTagList(sTagList);
+		return building;
+	}
+
+	@Override
+	public List<Board> getbuilding_reviewCount() {
+		return boDao.getbuilding_reviewCount();
+	}
+
+	@Override
+	public List<Board> getSNo_byScore() {
+		return boDao.getSno_byScore();
+	}
+
+	@Override
+	public List<Building> getMyWishBuildings(String id) {
+		return buDao.getMyWishBuildings(id);
+	}
+
+}// ProjectServiceImpl end

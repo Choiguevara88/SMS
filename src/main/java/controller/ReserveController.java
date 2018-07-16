@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +47,9 @@ public class ReserveController {
 		return mav;
 	}
 
-	// 예약을 등록할 때 호출되는 메서드 : POST
+	// 예약을 등록할 때 호출되는 메서드
 	@RequestMapping(value = "reserve/regReserve", method = RequestMethod.POST)
-	public ModelAndView regReserve(Reserve reserve, HttpSession session) {
-
+	public ModelAndView registerReserve(Reserve reserve, String reDate, HttpSession session, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 
 		try {
@@ -96,22 +96,22 @@ public class ReserveController {
 		int listcount = service.reserveCount(id, searchType, searchContent); // 표시될 총 게시글의 수
 
 
-	      List<Reserve> reservelist = service.selectReserveList(id, searchType, searchContent, pageNum, limit, startDate, endDate);
+	    List<Reserve> reservelist = service.selectReserveList(id, searchType, searchContent, pageNum, limit, startDate, endDate);
 
 
-			int maxpage = (int) ((double) listcount / limit + 0.95);
-			int startpage = ((int) ((pageNum / 10.0 + 0.9) - 1)) * 10 + 1; // 시작페이지
-			int endpage = startpage + 9; // 마지막 페이지
-			if (endpage > maxpage)
-				endpage = maxpage;
-			int reservecnt = listcount - (pageNum - 1) * limit;
-			mav.addObject("pageNum", pageNum);
-			mav.addObject("maxpage", maxpage);
-			mav.addObject("startpage", startpage);
-			mav.addObject("endpage", endpage);
-			mav.addObject("listcount", listcount);
-			mav.addObject("list", reservelist);
-			mav.addObject("reservecnt", reservecnt);
+		int maxpage = (int) ((double) listcount / limit + 0.95);
+		int startpage = ((int) ((pageNum / 10.0 + 0.9) - 1)) * 10 + 1; // 시작페이지
+		int endpage = startpage + 9; // 마지막 페이지
+		if (endpage > maxpage)	endpage = maxpage;
+		int reservecnt = listcount - (pageNum - 1) * limit;
+			
+		mav.addObject("pageNum", pageNum);
+		mav.addObject("maxpage", maxpage);
+		mav.addObject("startpage", startpage);
+		mav.addObject("endpage", endpage);
+		mav.addObject("listcount", listcount);
+		mav.addObject("list", reservelist);
+		mav.addObject("reservecnt", reservecnt);
 
 		return mav;
 	}

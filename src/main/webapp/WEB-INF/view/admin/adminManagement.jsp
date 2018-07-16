@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <!-- 부트스트랩 사용 선언 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -57,7 +58,7 @@
 	<table class="w3-table w3-striped w3-small">
 		<tr align="center" valign="middle">
 			<td colspan="4" style=" font-size:medium;">
-			<a href="GList.sms" class="btn btn-outline-danger btn-block" style="font-family:'Hanna'; text-align:center;">Guest 고객 문의</a>
+			<a href="Glist.sms" class="btn btn-outline-danger btn-block" style="font-family:'Hanna'; text-align:center;">Guest 고객 문의</a>
 			</td>
 		</tr>
 
@@ -88,7 +89,7 @@
 	<table class="w3-table w3-striped w3-small">
 		<tr align="center" valign="middle">
 			<td colspan="4" style="font-size:medium;">
-			<a href="HList.sms" class="btn btn-outline-primary btn-block" style="font-family:'Hanna'; text-align:center;">Host 고객 문의</a>
+			<a href="Hlist.sms" class="btn btn-outline-primary btn-block" style="font-family:'Hanna'; text-align:center;">Host 고객 문의</a>
 			</td>
 		</tr>
 	<c:if test="${!empty hList}">

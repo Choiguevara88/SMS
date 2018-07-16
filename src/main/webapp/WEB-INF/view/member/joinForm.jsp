@@ -133,7 +133,7 @@ $(document).ready(function() { //이메일 자동 완성
     });
 });
 function signup(){
-	confirm("회원가입 완료!!! ><");
+	confirm("회원가입 완료!!! >< 로그인창으로 이동합니다~ ><");
 	document.f.submit();
 }
 </script>
@@ -175,8 +175,7 @@ function signup(){
 	<tr>
 		<td colspan="2" align="center">
 			<input type="button" class="signup" onclick="signup()" disabled="disabled" value="가입하기">
-			<input type="button" onclick="javascript:history.go(-1)" value="뒤로가기"></td>
-	</tr>
+			<input type="button" onclick="javascript:history.go(-1)" value="뒤로가기"></td></tr>
 </table>
 </form:form>
 </body>

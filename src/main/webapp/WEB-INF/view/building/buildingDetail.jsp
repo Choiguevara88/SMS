@@ -17,6 +17,7 @@ $(document).ready(function(){
 	listRlist(1);
 	listQlist(1);
 	
+
 /*태그 관련 스크립트*/
 var tagih = "";
 var tagstag = document.getElementById("tags");
@@ -80,17 +81,62 @@ $("#res").click(function(){
 	location.href = "../reserve/regReserve.sms?sNo="+${param.sNo}+"&sRNo="+selectedRoom;
 });
 
+/*좋아요 관련 스크립트*/
+var a = "1";
+var id = "${sessionScope.loginMember.id}";
+var sNo = "${param.sNo}";
+var oheart = "<i class='fa fa-heart-o' style='font-size:36px; color:gray'></i>";
+var heart = "<i class='fa fa-heart' style='font-size:36px; color:purple'></i>";
+var fb = document.getElementById("fabtn");
+
+$.ajax({
+	data: {
+		id : id,
+		sNo: sNo
+	},
+	url : "favorite.sms",
+	success:function(data){
+		if(data=="1"){
+			fb.innerHTML = oheart;
+		} else{
+			fb.innerHTML = heart;
+		}
+	}
 });
 
+$("#fabtn").click(function(){
+	$.ajax({
+		data: {
+			id : id,
+			sNo: sNo
+		},
+		url : "favoriteclick.sms",
+		success:function(data){
+			if(data=="1"){
+				$("#fabtn").empty();
+				fabtn.innerHTML = heart;
+				alert("찜한 공간에 등록~");
+			} else{
+				$("#fabtn").empty();
+				fabtn.innerHTML = oheart;
+				alert("찜한 공간에서 제거~");
+			}
+		}
+    });
+
+});
+
+
+});
 function listRlist(pageNum){
 	$.ajax({
 		type: "get",
 		url : "${path}/building/Rlist.sms?sNo=${param.sNo}&pageNum="+pageNum,
-		success: function(result){
+	success: function(result){
 			$("#listRlist").html(result)
 		}
 	});
-	}
+}
 function listQlist(pageNum){
 	$.ajax({
 		type: "get",
@@ -107,12 +153,23 @@ function listQlist(pageNum){
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=2bA8v55yYLf1omsHnKFk&submodules=geocoder"></script>
 </head>
 <body>
-<!-- 공간(Building)헤더정보 -->
 
-<div><h1>${building.sName}</h1></div>
+<!-- 공간(Building)헤더정보 -->
+<br>
+<br>
+<div class="w3-row">
+<div class="w3-col s11">
+<div><span><font class="w3-xxlarge">${building.sName}</font></span>
+     <span class="w3-right">
+        <a id="fabtn" style="cursor:pointer">
+        </a>
+     </span>
+</div>
 <div><h4>${building.sPreview}</h4></div>
 <div id="tags">
 <!-- 태그가 보여질 곳 -->
+</div>
+</div>
 </div>
 <hr>
 
@@ -122,8 +179,10 @@ function listQlist(pageNum){
 <!-- 공간(Building)정보 -->
 <div>
 
+<div class="w3-padding">
 <div id="img0"></div>
 <div id="img1"></div>
+</div>
 
 <div class="w3-panel w3-leftbar w3-border-purple">
  <h3>공간소개</h3>
@@ -131,8 +190,10 @@ function listQlist(pageNum){
 <div class="w3-margin-left">${building.sContent}</div>
 <hr>
 
+<div class="w3-padding">
 <div id="img2"></div>
 <div id="img3"></div>
+</div>
 
 <div class="w3-panel w3-leftbar w3-border-purple">
 <h3>시설안내</h3>
@@ -142,8 +203,10 @@ function listQlist(pageNum){
 </div>
 <hr>
 
+<div class="w3-padding">
 <div id="img4"></div>
 <div id="img5"></div>
+</div>
 
 <div class="w3-panel w3-leftbar w3-border-purple">
 <h3>이용안내</h3>
@@ -161,8 +224,10 @@ function listQlist(pageNum){
 <div id="map" style="width:100%;height:400px;"></div>
 <hr size="1">
 
+<div class="w3-padding">
 <div id="img6"></div>
 <div id="img7"></div>
+</div>
 
 <div class="w3-panel w3-leftbar w3-border-purple">
  <h3>공간 이용시 주의사항</h3>
@@ -171,16 +236,18 @@ function listQlist(pageNum){
 <!-- 이용규칙이 보여질 곳 -->
 </div>
  <hr>
- 
+
+<div class="w3-padding">
 <div id="img8"></div>
 <div id="img9"></div>
+</div>
 
 <!-- 이용후기, Q&A -->
-<div id="listRlist"></div> 
+<div id="listQlist"></div>
 
 <hr size="1">
 
-<div id="listQlist"></div>
+<div id="listRlist"></div> 
 
 
 </div>
@@ -195,9 +262,11 @@ function listQlist(pageNum){
 <hr>
 <input type="radio" name="room" value="${room.sRNo}">
 <span>${room.sRName}</span>
-<span class="w3-right">￦ ${room.sPrice} /
-  <c:if test="'${room.sResType}' == 0"><span>일</span></c:if>
-  <c:if test="'${room.sResType}' == 1"><span>월</span></c:if>
+<span class="w3-right"><font class="w3-xlarge w3-text-purple">
+￦<fmt:formatNumber value="${room.sPrice}" groupingUsed="true"/>
+ </font> &nbsp;/
+  <c:if test="${room.sResType == 0}">시간</c:if>
+  <c:if test="${room.sResType == 1}">일</c:if>
 </span>
 </c:forEach>
 <hr style="border: solid 1px gray;">

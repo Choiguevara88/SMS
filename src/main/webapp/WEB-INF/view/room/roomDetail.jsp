@@ -10,17 +10,21 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
+function roomDelete(sNo,sRNo) {
+	confirm("정말로 삭제하시겠습니까?")
+	location.href="roomDeleteSuccess.sms?sNo="+sNo+"&sRNo="+sRNo
+}
 </script>
-
 	<style>
 		.srinfo{
 			border:2px black solid;
-		
 		}
-	
 	</style>
-
 </head>
+
+
+
+
 <body>
 <h1>세부공간 정보</h1>
 
@@ -50,7 +54,7 @@
 </div>
 <a href="roomList.sms?sNo=${room.sNo}" class="w3-button w3-black">리스트로 가기</a>
 <a href="roomUpdateForm.sms?sRNo=${room.sRNo }&sNo=${room.sNo}" class="w3-button w3-black">수정</a>
-<a href="roomDeleteForm.sms?sRNo=${room.sRNo }&sNo=${room.sNo}" class="w3-button w3-black">삭제</a>
+<a href="javascript:roomDelete(${room.sNo}, ${room.sRNo })" class="w3-btn w3-black">삭제</a>
 
 
 </body>

@@ -7,16 +7,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- w3 css 사용 선언 -->
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- w3 css 사용 선언-->
-
 <!-- 부트스트랩 사용 선언 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <!-- 부트스트랩 사용 선언 -->
+
+<!-- w3 css 사용 선언 -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- w3 css 사용 선언-->
+
 <title>세부 선언</title>
 
 <script type="text/javascript">
@@ -89,24 +90,24 @@
 		</tr>
 	<c:forEach var="th" items="${thList}">
 		<tr>
-			<td class="w3-small" style="text-align:center;">${th.host}</td>
-			<td class="w3-small" style="text-align:center;">${th.hostName}</td>
-			<td class="w3-small" style="text-align:center;">${th.sRName}</td>
-			<td class="w3-small" style="text-align:center;"><fmt:formatDate value="${th.reDate}" pattern="yyyy-MM-dd"/></td>
-			<td class="w3-small" style="text-align:center;"><fmt:formatNumber value="${th.totPrice}" pattern="###,###"/></td>
-			<td class="w3-small" style="text-align:center;">${th.guest}
+			<td style="text-align:center;">${th.host}</td>
+			<td style="text-align:center;">${th.hostName}</td>
+			<td style="text-align:center;">${th.sRName}</td>
+			<td style="text-align:center;"><fmt:formatDate value="${th.reDate}" pattern="yyyy-MM-dd"/></td>
+			<td style="text-align:center;"><fmt:formatNumber value="${th.totPrice}" pattern="###,###"/></td>
+			<td style="text-align:center;">${th.guest}
 			<c:set var="tAmount" value="${tAmount + th.totPrice}"/>
 			<c:set var="tCnt" value="${tCnt + 1}"/>
 			</td>
 		</tr>
 	</c:forEach>
 		<tr>
-			<th colspan="5" style="text-align:right;">기간 별 총 거래금액</th>
+			<th colspan="5" style="text-align:right; font-family:'Hanna';" >기간 별 총 거래금액</th>
 			<th><fmt:formatNumber value="${tAmount}" pattern="###,###"/></th>
 		</tr>
 		
 		<tr>
-			<th colspan="5" style="text-align:right;">기간 별 총 거래건수</th>
+			<th colspan="5" style="text-align:right; font-family:'Hanna';">기간 별 총 거래건수</th>
 			<th>${tCnt}</th>
 		</tr>
 	</table>

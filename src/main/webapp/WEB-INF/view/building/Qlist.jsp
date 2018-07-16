@@ -1,28 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/view/jspHeader.jsp" %>    
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/view/jspHeader.jsp" %>
+<!-- 부트스트랩 사용 선언 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<!-- 부트스트랩 사용 선언-->
+<!-- w3 css 사용 선언 -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- w3 css 사용 선언-->
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-<script type="text/javascript">
-	function list(pageNum) {
-		location.href="Qlist.sms?pageNum=" + pageNum +"&sNo="+${param.sNo};
-		return false;
-	}
-</script>
-<script type="text/javascript">
-	function check5() {
-		confirm("정말 삭제 하시겠습니까?")
-		document.d.submit();
-		//return false;
-	}
-
-</script>
 <script type="text/javascript">
 	function win_openQ(num)	{
 		var op = "width=800,height=700,scrollbars=yes,left=50,top=150";
 			window.open("../building/Qreply.sms?bNo="+num,"reply",op);
 	}
 </script>
+
 <style>
+
 body {font-family: Arial, Helvetica, sans-serif;}
 
 /* The Modal (background) */
@@ -46,7 +42,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 50%;
 }
 
 /* The Close Button */
@@ -68,6 +64,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 	align:center;
 }
 </style>
+
 <!-- Trigger/Open The Modal -->
 <div align="right"><button id="myBtn">질문하기</button></div>
 
@@ -75,35 +72,42 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <div id="myModal" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-content">
+<div class="modal-content" style="text-align:right;">
     <span class="close">&times;</span>
-    <p>
-<form:form modelAttribute="board" action="Qwrite.sms" method="post" name="f">
+<p>
+<script type="text/javascript">
+function check() {
+	if($('#content').val()==''){
+		alert("내용을 입력하세요~><");
+		document.getElementById('content').focus();
+	} else{
+		document.rf.submit();
+	}
+}
+</script>
+<form:form modelAttribute="board" action="Qwrite.sms" method="post" name="wf">
 <form:hidden path="kind" value="3"/>
 <input type="hidden" name="pageNum" value="1"/>
 <form:hidden path="sNo" value="${param.sNo }"/>
 <form:hidden path="id" value="${sessionScope.loginMember.id}"/>
-	<div align="center" id="table2"><table cellpadding="0" cellspacing="0" align="center" >
-		<caption><h3>질문 글 등록하기</h3></caption>
-		<tr><td align="center">제목</td>
-			<td><form:input path="subject"/>
-			<font color="red">
-			<form:errors path="subject"/>
-			</font></td>
-		</tr>
-		
-		<tr><td align="center" colspan="2">내용</td></tr>
-        <tr><td colspan="2"><form:textarea rows="15" cols="80" path="content"/>
-        <font color="red"><form:errors path="content"/></font></td></tr>
-        <tr><td colspan="2" align="center">
-        <a href="javascript:document.f.submit()">[질문등록]</a>
-		<a href="javascript:document.f.reset()">[다시작성]</a>
-		<a href="javascript:history.go(-1)">[뒤로가기]</a>
-		</td></tr>
-	</table></div>
-</form:form></p>
-  </div>
 
+
+<div align="center" id="table2">
+
+<table class="w3-table">
+        <tr><td>
+        <label style="font-family:'Hanna'; font-size:x-large;">공간문의하기</label>
+        <form:textarea rows="15" cols="80" path="content" class="w3-input w3-border" id="content"/></td></tr>
+        <tr><td><font color="red"><form:errors path="content"/></font></td></tr>
+        <tr><td style="text-align:center;">
+            <input type="button" value="질문등록" onclick="check()" class="btn btn-outline-primary btn-lg" style="font-family:'Hanna'; font-size:x-large;">
+			<a href="javascript:document.f.reset()" class="btn btn-outline-danger btn-lg" style="font-family:'Hanna'; font-size:x-large;">다시작성</a>
+        </td></tr>
+</table>	
+</div>
+</form:form>
+</p>
+</div>
 </div>
 <script>
 // Get the modal
@@ -131,33 +135,57 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+function check5(bno,sno,kind) {
+	confirm("정말 삭제 하시겠습니까?");
+	f = document.df;
+	f.bNo.value=bno;
+	f.sNo.value=sno;
+	f.kind.value=kind;	
+	f.submit();
+//	return false;
+}
+
 </script>
 <!--  리뷰 목록부분 -->
-<table border="1" style="margin-top:30px" width="80%" align="center">
+ 	<form name="df" method="post" action="delete.sms">
+  		<input type="hidden" name="bNo"	value="">
+		<input type="hidden" name="sNo"	value="">
+		<input type="hidden" name="kind" value="">
+	</form>
+
 
 <c:if test="${listcount > 0}">
 <c:forEach var="board" items="${boardlist}">
-	<tr>
-		<td width="50%" colspan="2">${board.subject}</td></tr>
-	<tr><td colspan="2">${board.content}</td> 
-	</tr>
-	<tr>
-		<td><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd H:mm:ss"/></td>
-  	<td align="right">
+<hr size="1">
+	<div><b>
+	<c:if test="${empty board.id }">
+		<span class="w3-xlarge w3-text-darkgrey">비회원의 질문입니다.</span></c:if>
+	<c:if test="${!empty board.id && board.refLevel == 0 }">
+		<span class="w3-xlarge w3-text-darkgrey">${board.id}</span></c:if>
+	<c:if test="${!empty board.id && board.refLevel != 0 }">
+		<div class="w3-xlarge">└─${building.id}님의 답글입니다.</div></c:if>
+		</b>
+	</div>
+
+	<div>
+		<div class="w3-large w3-text-deepgray"> ${board.content}</div></div>
+	<div>
+		<div class="w3-medium w3-text-grey"><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd H:mm:ss"/></div>
+  	<div align="right" style="display:inline;">
   		<c:if test="${sessionScope.loginMember.id == building.id}">
   		<c:if test="${board.refLevel == 0  }">
   		<c:if test="${board.qType == 0 }">
   	<a href="javascript:win_openQ('${board.bNo}')">[답변]</a></c:if></c:if></c:if>
-  		<c:if test="${sessionScope.loginMember.id == board.id}">
-  	<form name="d" method="post" action="delete.sms">
-  		<input type="hidden" name="bNo"	value="${board.bNo}">
-		<input type="hidden" name="sNo"	value="${board.sNo}">
-		<input type="hidden" name="kind" value="${board.kind}">
-		<input type="button" value="삭제" onclick="check5()" >
-	</form></c:if><br></td>
+		<c:if test="${sessionScope.loginMember.id == board.id && !empty board.id}">
+		<input type="button" value="삭제" onclick="check5('${board.bNo}','${board.sNo}','${board.kind}')">
+	</c:if>
+	<br>
+	</div>
+</div>
 <!--  글 밑 부분 -->
 </c:forEach>
-<tr align="center" height="26"><td colspan="2">
+<table style="margin-top:30px" width="80%" align="center">
+<tr align="center" height="26"><td colspan="5">
 		<c:if test="${pageNum >1 }">
 			<a href="javascript:listQlist(${pageNum -1 })"> [이전]</a>
 		</c:if>&nbsp;

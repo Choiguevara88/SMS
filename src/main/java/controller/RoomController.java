@@ -27,7 +27,6 @@ import logic.Room;
 public class RoomController {
 	@Autowired
 	private ProjectService service;
-
 	@ModelAttribute
 	public Room getRoom() {
 		return new Room();
@@ -70,7 +69,6 @@ public class RoomController {
 			Integer sNo = building.getsNo();
 		try {
 			List<Room> myRoomList = service.getmyRoomList(sNo);
-			
 			mav.addObject("sNo",sNo);
 			mav.addObject("myRoomList",myRoomList);
 			String sNo1 = Integer.toString(sNo);
@@ -97,11 +95,9 @@ public class RoomController {
 		}
 	return mav;
 	}
-	
 	@RequestMapping("building/roomUpdateForm")
 	public ModelAndView roomUpdateForm(HttpServletRequest request,Room room) {
 		ModelAndView mav = new ModelAndView();
-
 			String sNo = Integer.toString(room.getsNo());
 			Building building = service.getMyBuildingOne(sNo);
 			mav.addObject("building", building);
@@ -136,11 +132,9 @@ public class RoomController {
 			mav.addObject("sRInfoNames3", sRInfoNames3);
 			mav.addObject("sRInfoNames4", sRInfoNames4);
 			mav.addObject("sRInfoNames5", sRInfoNames5);
-			
-			List<String> sRImgNameList = myRoom.getsRImgNameList();
-			
-			mav.addObject("sRImgNameList",sRImgNameList );
+			System.out.println("UPDATEFORM"+myRoom);
 		mav.addObject("room", myRoom);
+		
 		mav.setViewName("room/roomUpdateForm");
 	return mav;	
 	}
@@ -164,40 +158,24 @@ public class RoomController {
 		}
 	return mav;
 }
-	@RequestMapping("building/roomDeleteForm")
-	public ModelAndView roomDeleteForm(HttpServletRequest request,Room room) {
-		ModelAndView mav = new ModelAndView("room/roomDeleteForm");
-		
-		Room myRoom = service.getMyRoom(room);
 
-		mav.addObject("room", myRoom);
-	return mav;	
-	}
-	
 	@RequestMapping("building/roomDeleteSuccess")
 	public ModelAndView roomDelete(HttpSession session,Integer sRNo,Integer sNo, String pass)throws ProjectException {
 		ModelAndView mav = new ModelAndView();
-		try{
-			
 			Member loginMember = (Member) session.getAttribute("loginMember");
-			String loginMemberPass = loginMember.getPw();
-				if(pass.equals(loginMemberPass)) {
+			if(loginMember != null) {
 				Room room = new Room(); 
 				room.setsRNo(sRNo);
 				room.setsNo(sNo);
-				room =service.getMyRoom(room);
 				Room myRoom = service.getMyRoom(room);
 				service.deleteRoom(myRoom);
-				mav.setViewName("redirect:roomList.sms?sNo="+sNo);
-				}else {
-					throw new ProjectException("비밀 번호를 확인하세요.","redirect:roomDeleteForm");
-					
-				}
-			}catch(Exception e) {
-			e.printStackTrace();
-			throw new ProjectException("로그인하세요.","redirect:roomDeleteForm");
-		}
-	return mav;
-	}
+				mav.setViewName("roomList.sms?sNo="+sNo);
+			}else {
+				throw new ProjectException("로그인하세요.","roomList.sms?sNo="+sNo);
+			}
+			mav.setViewName("redirect:roomList.sms?sNo="+sNo);
+			return mav;
 }
+}
+
 

@@ -24,8 +24,5 @@ public interface RoomDao {
 
 	Room getRoom(Integer sNo, Integer sRNo);
 
-
-
-	
-
+	void budelete(Integer sNo);
 }

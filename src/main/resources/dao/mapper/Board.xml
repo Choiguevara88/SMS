@@ -2,82 +2,104 @@
 <!-- main/resources/dao/mapper/Board.xml -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.mapper.BoardMapper">
-	
+
 	<select id="list" resultType="Board" parameterType="map">
 		select * from board
-		
+
 		<if test="kind != null and sNo != null">
 			where kind= #{kind} and sNo = #{sNo}
 		</if>
 
 		<if test="bNo != null">
 			where bNo = #{bNo}
-		</if> 
-		
-		<if test ="kind != null and sNo == null">
+		</if>
+
+		<if test="kind != null and sNo == null">
 			where kind = #{kind}
 		</if>
-		
+
 		<if test="id != null">
-			and id = #{id} 
-		</if> 
-		
+			and id = #{id}
+		</if>
+
 		<if test="searchType != null and searchContent != null">
 			and ${searchType} like '%${searchContent}%'
 		</if>
-		
+
 		<if test="startrow != null and limit != null">
-			order by ref desc limit #{startrow}, #{limit}	
+			order by ref desc limit #{startrow}, #{limit}
 		</if>
-		
+
 	</select>
-	
-	
-	<select id="list2" resultType="Board" parameterType="map">
-		select * from board
-		
+
+
+	<select id="avg" resultType="Double" parameterType="map">
+		select round(avg(score),1) from board
+
 		<if test="kind != null and sNo != null">
 			where kind= #{kind} and sNo = #{sNo} and refLevel=0
 		</if>
-		
+
 	</select>
-	
-	
+
+
 	<select id="count" resultType="Integer" parameterType="map">
-		select count(*) from board 
-		
+		select count(*) from board
+
 		<if test="kind != null and sNo != null">
-			where kind = #{kind} and sNo = #{sNo}	
+			where kind = #{kind} and sNo = #{sNo}
 		</if>
-		
+
 		<if test="kind != null and sNo == null">
-			where kind = #{kind}	
+			where kind = #{kind}
 		</if>
 		<if test="searchType != null and searchContent != null">
-			and ${searchType} like '%${searchContent}%'	
+			and ${searchType} like '%${searchContent}%'
 		</if>
 	</select>
-	
+
 	<select id="guestQuestion" resultType="Board">
-		select * from board where kind = 4 and qType=0
+		select * from board where
+		kind = 4 and qType=0
 	</select>
+	
 	<select id="guestQuestion1" resultType="Board">
-		select * from board where kind = 4 
+		select * from board where kind = 4
+
+		<if test="searchType != null and searchContent != null">
+			and ${searchType} like '%${searchContent}%'
+		</if>
 	</select>
 	
 	<select id="hostQuestion" resultType="Board">
-		select * from board where kind = 5 and qType=0
+		select * from board where
+		kind = 5 and qType=0
 	</select>
+	
 	<select id="hostQuestion1" resultType="Board">
-		select * from board where kind = 5 
+		select * from board where kind = 5
+
+		<if test="searchType != null and searchContent != null">
+			and ${searchType} like '%${searchContent}%'
+		</if>
 	</select>
 	
-	<select id="hostQuestCnt" resultType="Integer" parameterType="map">
-		select count(*) from board where qType=0 and sNo = #{sNo}
+	<select id="hostQuestCnt" resultType="Integer"
+		parameterType="map">
+		select count(*) from board where qType=0 and sNo =
+		#{sNo}
 	</select>
-	
+
 	<select id="buildingNo_by_score" resultType="Board">
-		select sno, avg(score) from board order by avg(score) desc limit 6
+		select sno,
+		avg(score) from board order by avg(score) desc limit 6
+	</select>
+
+	<select id="buidling_reviewCount" resultType="Board">
+		select * from Board where kind=2 group by sNo order by count(sNo) desc limit 6
 	</select>
 	
+	<select id="getSNo_byScore" resultType="Board">
+		select sno, avg(score) 'avgscore' from Board group by sno order by 2 desc limit 6
+	</select>
 </mapper>

@@ -21,11 +21,23 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#sRImg").attr('disabled', true)
-$("#img1_btn").click(function() {
+
+	img2idx = 0;
+	img2arr = new Array();
+	<c:forEach items="${room.sRImgNameList}" var="item">
+	img2arr[img2idx++] = ("${item}");
+    </c:forEach>
+    console.log(img2arr)
+    $("#sRImgNameList").val(img2arr);
+	
+	
+	
+	$("#img1_btn").click(function() {
        $("#sImg1").val("");
        $("#file1_desc").empty();
        $("#sRImg").attr('disabled', false)
     });
+	
 });
 
 function chkboxcheck() {
@@ -43,9 +55,6 @@ function chkboxcheck() {
 //$(document).ready(function() {
 	//$(".sRInfo").att("checked",true)
 //});
-
-
-
 function chkboxcheck2() {
 	var sResType = document.getElementsByName("sResType")
 	var cnt = 0;
@@ -69,7 +78,7 @@ function chkboxcheck2() {
 <form:form modelAttribute="room" action="roomUpdateSuccess.sms" method="post" commandName="room" enctype="multipart/form-data">
 <input type="hidden" name="sNo" value="${building.sNo}">
 <input type="hidden" name="sRNo" value="${room.sRNo}">
-
+<input type="hidden" id="sRImgNameList" name="sRImgNameList">
 
 <spring:hasBindErrors name="room"> <!-- ? -->
 		<font color="tomato">
@@ -87,12 +96,12 @@ function chkboxcheck2() {
 <div class="w3-container w3-margin w3-card w3-padding-16">
 <p>
     <div class="w3-container w3-margin w3-row">
-    	<div class="w3-col s8"><label style="font-family:'Hanna'">세부 공간 이름</label><form:input path="sRName" class="w3-input" placeholder="공간의 이름을 작성해주세요." value="${sRName }"/></div>
+    	<div class="w3-col s8"><label style="font-family:'Hanna'">세부 공간 이름</label><form:input path="sRName" class="w3-input" placeholder="공간의 이름을 작성해주세요." value="${room.sRName }"/></div>
     	<div class="w3-cols s4"><font color="red"><form:errors path="sRName"/></font>
     </div>
 	</div>
 	<div class="w3-row w3-container w3-margin">
-    	<div class="w3-col s8"><label style="font-family:'Hanna'">세부 공간 내용</label><form:input path="sRContent" class="w3-input" placeholder="공간에 대한 설명을 작성해주세요." value="${sRContent }"/></div>
+    	<div class="w3-col s8"><label style="font-family:'Hanna'">세부 공간 내용</label><form:input path="sRContent" class="w3-input" placeholder="공간에 대한 설명을 작성해주세요." value="${room.sRContent }"/></div>
 		<div class="w3-col s4"><font color="red"><form:errors path="sRContent"/></font></div>
 	</div>
 	
@@ -119,13 +128,14 @@ function chkboxcheck2() {
             <div id="file1_desc">
       <div>
       </div>
-       <div>
-         <input type="button" id="img1_btn" value="기존이미지삭제" /> 
-        </div>
-              
+    
+             
             </div> 
           </c:if>
-          <form:input type="file" path="sRImgList" multiple="multiple"/>
+             <div>
+          <input type="button" id="img1_btn" value="기존이미지삭제" /> 
+        </div>
+          <input type="file" id="sRImg" name="sRImgList" multiple="multiple"/>
  
 	</div>
 	<div class="w3-container w3-margin">
@@ -180,13 +190,11 @@ function chkboxcheck2() {
     		<font color="red"><form:errors path="sPrice"/></font>
     	</div>
 	</div>
-	
 	<div class="w3-container w3-section w3-padding" style="text-align:center;">
 		<input type="submit" value="수정하기" class="w3-btn w3-black" style="font-family:'Hanna'; width:30%;">
 	</div>
 </div>
 <div>
-<form:hidden path="sNo" value="${room.sNo}"/>
 </div>
 </div>
 </form:form>

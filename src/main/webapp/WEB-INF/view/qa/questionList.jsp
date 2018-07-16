@@ -6,9 +6,51 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>1:1 문의</title>
-
+<style type="text/css">
+#main{
+background: #ADD8E6; 
+}
+.balloon {
+    display: inline-block;
+    position: relative;
+    background: #F8F8FF;
+    height: 70px;
+    width: 600px;
+    margin: 0 auto 10px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    padding: 10px;
+}
+.balloon1 {
+    display: inline-block;
+    position: relative;
+    background: #EEE8AA;
+    height: 70px;
+    width: 600px;
+    margin: 0 auto 10px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    padding: 10px;
+}
+ .writer {
+    display: inline-block;
+    position: relative;
+    height: 30px;
+    width: 280px;
+    margin: 0 auto 10px;
+}
+</style>
 </head> 
 <body>
+<c:if test="${kind == 5 }">
+<h1 align="center">HOST님을 위한 문의 게시판 입니다.</h1></c:if>
+<c:if test="${kind == 4 }">
+<h1 align="center">GUEST님을 위한 문의 게시판 입니다.</h1></c:if>
+<h3 align="center">※사이트에 관한 건의 및 불만사항<br>
+	※허위 공간이나 사기 거래등 신고 </h3>
+<hr size="1">
+<div id="main">
+<br>
 <% pageContext.setAttribute("newLineChar","\n"); %>
 	<c:forEach var="board" items="${list}">
 	<c:if test="${board.refLevel != 0 }">
@@ -16,11 +58,11 @@
 	<c:set var="str" value="${fn:replace(board.content,'  ','&nbsp;&nbsp;') }"/>
 	<c:set var="str" value="${fn:replace(board.content,newLineChar,'<br>') }"/>
 		<div>
-			<div>관리자 
+			<div class="writer">관리자 
 			(<fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd a hh:mm:ss"/>)<br>
-		<div>
-		${str}
 		</div>
+		<div class="balloon">
+		${str}
 		</div>
 		</div>
 </div>
@@ -30,16 +72,16 @@
 	<c:set var="str" value="${fn:replace(board.content,'  ','&nbsp;&nbsp;') }"/>
 	<c:set var="str" value="${fn:replace(board.content,newLineChar,'<br>') }"/>
 		<div>
-			<div>${board.id} 
-			(<fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd a hh:mm:ss"/>)<br>
-		<div>
+		<div class="balloon1">
 		${str}
 		</div>
+			<div class="writer">${board.id} 
+			(<fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd a hh:mm:ss"/>)<br>
 		</div>
 		</div>
 </div>
 	</c:if>
 	</c:forEach>
-	
+</div>	
 </body>
 </html>

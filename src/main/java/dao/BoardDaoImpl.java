@@ -115,13 +115,11 @@ public class BoardDaoImpl implements BoardDao{
 	}
 	
 	@Override
-	public List<Board> list(Integer kind, int sNo) {
+	public double list(Integer kind, Integer sNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		
 		map.put("kind", kind);
-		map.put("sNo",sNo);
-		
-		return sqlSession.selectList(NS + "list2", map);
+		map.put("sNo", sNo);
+		return sqlSession.selectOne(NS+"avg", map);
 	}
 
 	@Override
@@ -129,8 +127,18 @@ public class BoardDaoImpl implements BoardDao{
 		return sqlSession.selectList(NS + "guestQuestion");
 	}
 	@Override
-	public List<Board> guestQuestionList1() {
-		return sqlSession.selectList(NS + "guestQuestion1");
+	public List<Board> guestQuestionList1(String searchType, String searchContent) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		if (searchType == null || searchType.equals(""))
+			searchType = null;
+		if (searchContent == null || searchContent.equals(""))
+			searchContent = null;
+
+		map.put("searchType", searchType);
+		map.put("searchContent", searchContent);
+
+		return sqlSession.selectList(NS + "guestQuestion1", map);
 	}
 
 	@Override
@@ -138,8 +146,18 @@ public class BoardDaoImpl implements BoardDao{
 		return sqlSession.selectList(NS + "hostQuestion");
 	}
 	@Override
-	public List<Board> hostQuestionList1() {
-		return sqlSession.selectList(NS + "hostQuestion1");
+	public List<Board> hostQuestionList1(String searchType, String searchContent) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		if (searchType == null || searchType.equals(""))
+			searchType = null;
+		if (searchContent == null || searchContent.equals(""))
+			searchContent = null;
+
+		map.put("searchType", searchType);
+		map.put("searchContent", searchContent);
+
+		return sqlSession.selectList(NS + "hostQuestion1", map);
 	}
 
 	@Override
@@ -165,6 +183,21 @@ public class BoardDaoImpl implements BoardDao{
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("sNo",sNo);
 		return sqlSession.selectOne(NS + "hostQuestCnt", map);
+	}
+
+	@Override
+	public void budelete(Integer sNo) {
+		sqlSession.getMapper(BoardMapper.class).budelete(sNo);
+	}
+
+	@Override
+	public List<Board> getbuilding_reviewCount() {
+		return sqlSession.selectList(NS+"buidling_reviewCount");
+	}
+
+	@Override
+	public List<Board> getSno_byScore() {
+		return sqlSession.selectList(NS+"getSNo_byScore");
 	}
 	
 }
