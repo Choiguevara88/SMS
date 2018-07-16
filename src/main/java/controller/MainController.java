@@ -43,7 +43,6 @@ public class MainController {
 				}
 			}
 		}
-		
 		//랜덤으로 건물 넣기
 		//건물을 가져 오면서 동시에 관련 Room도 가져와야된다
 		List<Room> sPrice1 = new ArrayList<Room>();
@@ -55,8 +54,8 @@ public class MainController {
 		}
 		mav.addObject("today_buildings", building1);
 		mav.addObject("today_buildings_price", sPrice1);
-		//building 리스트랑 sPrice리스트의 인덱스들은 같이 움직임
 		
+		//building 리스트랑 sPrice리스트의 인덱스들은 같이 움직임
 		//사람들이 가장 많이 예약한 곳! 핫플레이스 6개
 		List<Room> sPrice2 = new ArrayList<Room>();
 		List<Building> building2 = new ArrayList<Building>();
