@@ -17,7 +17,6 @@ $(document).ready(function(){
 	listRlist(1);
 	listQlist(1);
 	
-
 /*태그 관련 스크립트*/
 var tagih = "";
 var tagstag = document.getElementById("tags");
@@ -73,9 +72,14 @@ if(imgidx < 5) {
 	}
 }
 
-/*룸 선택 관련 스크립트*/
+/*룸 관련 스크립트*/
+<c:forEach items="${roomList}" var="room">
+    $("#info${room.sRNo}").hide();
+</c:forEach>
+ 
 $("input:radio[name=room]").click(function(){
 selectedRoom = $("input:radio[name=room]:checked").val();
+
 });
 $("#res").click(function(){
 	location.href = "../reserve/regReserve.sms?sNo="+${param.sNo}+"&sRNo="+selectedRoom;
@@ -125,14 +129,12 @@ $("#fabtn").click(function(){
     });
 
 });
-
-
 });
 function listRlist(pageNum){
 	$.ajax({
 		type: "get",
 		url : "${path}/building/Rlist.sms?sNo=${param.sNo}&pageNum="+pageNum,
-	success: function(result){
+		success: function(result){
 			$("#listRlist").html(result)
 		}
 	});
@@ -142,13 +144,28 @@ function listQlist(pageNum){
 		type: "get",
 		url : "${path}/building/Qlist.sms?sNo=${param.sNo}&pageNum="+pageNum,
 		success: function(result){
-			console.log(result)
 			$("#listQlist").html(result)
 		}
 	});
 }
+/*룸 정보 보이고 안보이게 하는 스크립트*/
+function dispifo(srno) {
+	<c:forEach items="${roomList}" var="room">
+    $("#info${room.sRNo}").hide();
+    $("#i${room.sRNo}").removeClass("w3-border w3-border-purple");
+    </c:forEach>
+	$("#i" + srno).addClass("w3-border w3-border-purple");
+	$("#info" + srno).show();
+}
 </script>
+<style>
+/* 룸이미지관련css */
+.thumbnail { position: relative; padding-top: 100%; /* 1:1 ratio */ overflow: hidden; } 
+.thumbnail .centered { position: absolute; top: 0; left: 0; right: 0; bottom: 0; -webkit-transform: translate(50%,50%); -ms-transform: translate(50%,50%); transform: translate(50%,50%); } 
+.thumbnail .centered img { position: absolute; top: 0; left: 0; width: auto; height: 120px; -webkit-transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); transform: translate(-50%,-50%); }
 
+출처: http://webdir.tistory.com/487 [WEBDIR]
+</style>
 <!-- 지도관련 스크립트 -->
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=2bA8v55yYLf1omsHnKFk&submodules=geocoder"></script>
 </head>
@@ -184,7 +201,7 @@ function listQlist(pageNum){
 <div id="img1"></div>
 </div>
 
-<div class="w3-panel w3-leftbar w3-border-purple">
+<div class="w3-panel w3-leftbar w3-border-deep-purple">
  <h3>공간소개</h3>
 </div>
 <div class="w3-margin-left">${building.sContent}</div>
@@ -195,7 +212,7 @@ function listQlist(pageNum){
 <div id="img3"></div>
 </div>
 
-<div class="w3-panel w3-leftbar w3-border-purple">
+<div class="w3-panel w3-leftbar w3-border-deep-purple">
 <h3>시설안내</h3>
 </div>
 <div id="infoSubs" class="w3-margin-left">
@@ -208,7 +225,7 @@ function listQlist(pageNum){
 <div id="img5"></div>
 </div>
 
-<div class="w3-panel w3-leftbar w3-border-purple">
+<div class="w3-panel w3-leftbar w3-border-deep-purple">
 <h3>이용안내</h3>
 </div>
 <div class="w3-margin-left w3-margin-bottom">
@@ -217,7 +234,7 @@ function listQlist(pageNum){
 <div class="w3-margin-top"><span><b>연락처</b></span>&nbsp;&nbsp;&nbsp;<span>${building.sTel}</span></div>
 </div>
 <br>
-<div class="w3-light-gray w3-padding">
+<div class="w3-light-gray w3-border-deep-purple">
 <div><h3>${building.sName}</h3></div>
 <div>${address1}</div>
 </div>
@@ -229,7 +246,7 @@ function listQlist(pageNum){
 <div id="img7"></div>
 </div>
 
-<div class="w3-panel w3-leftbar w3-border-purple">
+<div class="w3-panel w3-leftbar w3-border-deep-purple">
  <h3>공간 이용시 주의사항</h3>
 </div>
 <div id = "rules" class="w3-margin-left">
@@ -243,40 +260,81 @@ function listQlist(pageNum){
 </div>
 
 <!-- 이용후기, Q&A -->
-<div id="listQlist"></div>
+<div id="listRlist"></div> 
 
 <hr size="1">
 
-<div id="listRlist"></div> 
+<div id="listQlist"></div>
 
 
 </div>
 </div>
 
 <!-- 세부공간(Room)정보 -->
-<div class="w3-col s5 w3-padding">
+<div class="w3-col s5">
 <h5><b>세부공간 선택</b></h5>
-<div class="w3-panel w3-border w3-border-purple">
+<div class="w3-panel w3-border w3-border-gray">
+<br>
+<c:if test="${roomList.size() == 0}">
+<p align="center">등록된 세부공간이 없습니다.</p>
+<p align="center">세부공간을 등록하려면 <a href="roomList.sms?sNo=${param.sNo}">[세부공간 등록하기]</a> 를 눌러주세요.</p>
+</c:if>
+
+<c:if test="${roomList.size() != 0}">
+<p align="center">세부공간의 상세한 정보를 확인하시고</p>
+<p align="center">예약을 신청하시면 예약 페이지로 넘어갑니다.</p>
 
 <c:forEach items="${roomList}" var="room">
-<hr>
-<input type="radio" name="room" value="${room.sRNo}">
-<span>${room.sRName}</span>
+<div id="i${room.sRNo}">
+<div class="w3-padding-24 w3-border-top w3-border-gray">
+<span>
+&nbsp;&nbsp;
+<input type="radio" name="room" id="room${room.sRNo}" value="${room.sRNo}" onchange="dispifo('${room.sRNo}')">
+</span>&nbsp;
+<span class="w3-large"><b>${room.sRName}</b></span>
 <span class="w3-right"><font class="w3-xlarge w3-text-purple">
-￦<fmt:formatNumber value="${room.sPrice}" groupingUsed="true"/>
+￦&nbsp;<fmt:formatNumber value="${room.sPrice}" groupingUsed="true"/>
  </font> &nbsp;/
-  <c:if test="${room.sResType == 0}">시간</c:if>
-  <c:if test="${room.sResType == 1}">일</c:if>
+  <c:if test="${room.sResType == 0}">시간&nbsp;&nbsp;&nbsp;</c:if>
+  <c:if test="${room.sResType == 1}">일&nbsp;&nbsp;&nbsp;</c:if>
 </span>
+
+</div>
+
+<div id="info${room.sRNo}" >
+<hr style="margin-top: 10px">
+   <table>
+   <tr><td><div class="w3-border w3-margin-left" style="width:120px"> <div class="thumbnail"> <div class="centered"> 
+   <img class="w3-border" src="../picture/${room.sRImgNameList[0]}"/> </div> </div> </div></td>
+   <td><div class="w3-margin-left">${room.sRContent}</div></td></tr>
+   </table>
+   <hr>
+   &nbsp;<span class="w3-margin-left"><b>공간유형</b></span><span class="w3-margin-left">${room.sRType}</span>
+   <hr>
+   &nbsp;<span class="w3-margin-left"><b>최소인원</b></span><span class="w3-margin-left">${room.sRPersonLimit}명 이상</span>
+   <hr>
+   <table><tr><td><span class="w3-margin-left"><b>편의시설</b></span></td>
+   <td>
+   <c:forEach items="${room.sRInfoList}" var="item">
+   <span class="w3-margin-left">${item}</span>
+   </c:forEach>
+   </td>
+   </table>
+   <br>
+   <br>
+</div>
+</div>
 </c:forEach>
-<hr style="border: solid 1px gray;">
+
+<hr style="border: solid 2px purple; margin-top:0px; margin-bottom:10px;">
 <div class="w3-center w3-margin-bottom">
-<input type="button" class="w3-btn w3-purple" id="res" value="예약하기">
+<input type="button" class="w3-btn w3-deep-purple" id="res" value="예약신청하기">
+</div>
+</c:if>
 </div>
 </div>
 </div>
 
-</div>
 
 <!-- 지도관련 스크립트 -->
 <script>

@@ -130,6 +130,7 @@ public class BuildingController {
 		ModelAndView mav = new ModelAndView();
 		String address = building.getsAddress().split(",")[1];
 		String address1 = building.getsAddress().split(",")[1] +" "+building.getsAddress().split(",")[2];
+		System.out.println(building);
 		mav.addObject("building", building);
 		mav.addObject("address",address);
 		mav.addObject("address1", address1);
@@ -211,6 +212,51 @@ public class BuildingController {
 				
 		return mav;
 	}
+	
+	
+	@RequestMapping("building/QlistNotRead")
+	public ModelAndView hostQlistNotRead(Integer pageNum, Integer sNo, HttpSession session) {
+		
+		int kind = 3;
+		
+		if(pageNum == null || pageNum.toString().equals("")) {
+			pageNum = 1;
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		
+		int limit = 5;		// 한 페이지에 나올 게시글의 숫자
+		
+		int listcount = service.boardcountNR(kind, sNo);	// 표시될 총 게시글의 수
+		
+		List<Board> boardlist = service.boardListNR(kind, sNo, pageNum, limit);
+		
+		Building building = service.getMyBuildingOne(sNo.toString());
+		int maxpage = (int)((double)listcount/limit + 0.95);
+		int startpage = ((int)((pageNum/5.0 + 0.9) - 1)) * 5 + 1; // 시작페이지
+		int endpage = startpage + 4;	// 마지막 페이지
+		if(endpage > maxpage) endpage = maxpage;
+		int boardcnt = listcount - (pageNum - 1) * limit;
+		
+		mav.addObject("pageNum", pageNum);
+		mav.addObject("maxpage", maxpage);
+		mav.addObject("startpage", startpage);
+		mav.addObject("endpage", endpage);
+		mav.addObject("listcount",listcount);
+		mav.addObject("boardlist",boardlist);
+		mav.addObject("boardcnt",boardcnt);
+		mav.addObject("kind",kind);
+		mav.addObject("sNo",sNo);
+		mav.addObject("building",building);
+				
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value="building/Rwrite", method=RequestMethod.GET) // 게시글 작성 시 호출되는 메서드
 	public ModelAndView write(HttpSession session) {
 		ModelAndView mav = new ModelAndView();

@@ -40,7 +40,7 @@
 <title>쉐마쉐 로그인! &gt;&lt;</title>
 </head>
 <body>
-
+<div class="w3-container w3-margin-top w3-margin-bottom">
 <div class="w3-container w3-margin" style="text-align:center;">
 	<h1 style="font-family:'Hanna'">쉐마쉐에 오신 것을 환영합니다! &#42;&#94;&#94;&#42; </h1>
 </div>
@@ -131,9 +131,8 @@
 </form:form>
 </div>
 
-
-
 <div class="w3-col s3"><p>&nbsp;</p></div>
+</div>
 </div>
 </body>
 </html>

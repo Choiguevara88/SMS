@@ -35,4 +35,8 @@
 	<select id="mainpage_reviewCount" resultType="Building" parameterType="map">
 		select * from building where sNo=#{sNo}
 	</select>
+	
+	<select id="buildingCount" resultType="Integer">
+		select count(*) from building
+	</select>
 </mapper>
