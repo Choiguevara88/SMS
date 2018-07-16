@@ -147,4 +147,6 @@ public interface ProjectService {
 
 	List<Reserve> getReserveDateChkList(String startChkDate, String endChkDate, Integer sNo, Integer sRNo);
 	
+	int getbuilding_mainpage_2(int sNo);
+	
 }

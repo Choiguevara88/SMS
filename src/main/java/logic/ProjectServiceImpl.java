@@ -681,7 +681,7 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 		
 		if(returnRoom.getsRInfo() != null && !returnRoom.getsRInfo().equals("")) {
-			infoList = Arrays.asList(returnRoom.getsRInfo());
+			infoList = Arrays.asList(returnRoom.getsRInfo().split(","));
 		
 		}
 		
@@ -759,6 +759,11 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<Reserve> getReserveDateChkList(String startChkDate, String endChkDate, Integer sNo, Integer sRNo) {
 		return reDao.dateChkList(startChkDate, endChkDate, sNo, sRNo);
+	}
+
+	@Override
+	public int getbuilding_mainpage_2(int sNo) {
+		return buDao.getbuilding_mainpage_2(sNo);
 	}
 
 }// ProjectServiceImpl end

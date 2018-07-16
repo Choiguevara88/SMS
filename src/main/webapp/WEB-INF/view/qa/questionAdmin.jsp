@@ -80,7 +80,7 @@ function listReply(){
 		<td><textarea id="content" placeholder="문의사항을 입력해 주세요." class="w3-input"></textarea>
 	</td>
 	<td>
-		<input type="button" id="btnReply" value="댓글쓰기" class="btn btn-outline-primary btn-lg btn-block">
+		<input type="button" id="btnReply" value="문의하기" class="btn btn-outline-primary btn-lg btn-block">
 	</td>
 	</tr>
 </table>
