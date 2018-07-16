@@ -463,6 +463,7 @@ public class BuildingController {
 			build.setsTagList(Arrays.asList(build.getsTag().split("[|]")));
 			build.setsTypeList(Arrays.asList(build.getsType().split("[|]")));
 		}
+		
 		mav.addObject("list", list);
 		
 		return mav;

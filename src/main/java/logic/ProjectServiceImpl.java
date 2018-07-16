@@ -681,7 +681,7 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 		
 		if(returnRoom.getsRInfo() != null && !returnRoom.getsRInfo().equals("")) {
-			infoList = Arrays.asList(returnRoom.getsRInfo());
+			infoList = Arrays.asList(returnRoom.getsRInfo().split(","));
 		
 		}
 		
