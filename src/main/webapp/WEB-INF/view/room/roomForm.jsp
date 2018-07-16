@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <!-- w3 css 사용 선언 -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- w3 css 사용 선언-->
