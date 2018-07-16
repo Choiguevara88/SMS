@@ -54,7 +54,7 @@ public class ReserveController {
 		ModelAndView mav = new ModelAndView();
 		
 		if(!resCheckDate(reserve)) { // 예약날짜 중복 체크 하는 메서드
-			throw new ProjectException("예약날짜가 중복됩니다.", "regReserve.sms?sNo=" + reserve.getsNo() +"&sRNo=" + reserve.getSrNo());
+			throw new ProjectException("예약 날짜가 중복됩니다.", "regReserve.sms?sNo=" + reserve.getsNo() +"&sRNo=" + reserve.getSrNo());
 		}
 
 		try {
