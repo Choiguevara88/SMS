@@ -152,9 +152,14 @@ public class BuildingController {
 		int limit = 5;		// 한 페이지에 나올 게시글의 숫자
 		int listcount = service.boardcount(kind,sNo);	// 표시될 총 게시글의 수
 		List<Board> boardlist = service.boardList(kind, sNo, pageNum, limit);
-		double avg = service.boardList(kind, sNo);
+		double avg;
+		if(service.boardList(kind, sNo) == 0.0d) {
+			mav.addObject("avgScore",0.0d);			
+		}else {
+			avg = service.boardList(kind, sNo);
+			mav.addObject("avgScore",avg);
+		}
 		//avg = boardlist2.stream().mapToInt(Board :: getScore).average().getAsDouble();
-		mav.addObject("avgScore",avg);
 		Building building = service.getMyBuildingOne(sNo.toString());
 		
 		int maxpage = (int)((double)listcount/limit + 0.95);

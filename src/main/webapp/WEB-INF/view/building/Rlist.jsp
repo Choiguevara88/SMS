@@ -33,8 +33,8 @@
 		</c:if></b>
 		<c:if test="${board.refLevel == 0 }">
 		<span style="float:right;">
-		<c:forEach begin="1" end="${board.score}"><i class="fa fa-thumbs-up w3-text-deep-purple" style="font-size:24px;"></i></c:forEach>
-		<c:forEach begin="${board.score+1}" end="5"><i class="fa fa-thumbs-o-up w3-text-deep-purple" style="font-size:24px;"></i></c:forEach>
+		<c:forEach begin="1" end="${board.score}"><i class="fa fa-thumbs-up w3-text-deep-purple" style="font-size:24px;"></i>&nbsp;</c:forEach>
+		<c:forEach begin="${board.score+1}" end="5"><i class="fa fa-thumbs-o-up w3-text-deep-purple" style="font-size:24px;"></i>&nbsp;</c:forEach>
 		 </span>
 		</c:if>
 	</div>
