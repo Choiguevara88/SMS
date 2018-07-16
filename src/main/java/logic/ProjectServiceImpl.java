@@ -548,21 +548,24 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public List<Room> getmyRoomList(Integer sNo) {
-		List<Room> roomlist = roomDao.getmyRoomList(sNo);
+		
+		List<Room> roomlist = roomDao.getmyRoomList(sNo);  
+		String s = new String();
+		String i = new String();
 		
 		for(Room room : roomlist) {
 			List<String> imglist = new ArrayList<String>();
-			String s = room.getsRImg();
-			
-			if(!s.equals("") && s != null) {
+			s = room.getsRImg();
+				
+			if(s != null && !(s.equals(""))) {
 				imglist = Arrays.asList(s.split("[|]"));
 				room.setsRImgNameList(imglist);
 			}
 					
 			List<String> infolist = new ArrayList<String>();
-			String i = room.getsRInfo();
+			i = room.getsRInfo();
 			
-			if(!i.equals("") && i != null) {
+			if(i != null && !(i.equals(""))) {
 				infolist = Arrays.asList(i.split(","));
 				room.setsRInfoList(infolist);
 			}
