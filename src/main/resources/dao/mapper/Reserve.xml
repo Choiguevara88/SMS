@@ -97,6 +97,19 @@
 		
 	</select>
 	
+	<select id="chkCnt" resultType="Integer" parameterType="map">
+		select count(*) from reserve where sNo = #{sNo} and sRNo = #{sRNo}
+	</select>
+	
+	<select id="chkList" resultType="Reserve" parameterType="map">
+		select * from reserve where sNo = #{sNo} and sRNo = #{sRNo} order by reDate desc limit 0, 50
+	</select>
+	
+	<select id="chkDateList" resultType="Reserve" parameterType="map">
+		select * from reserve 
+		where reDate &gt; #{startChkDate} and reDate &lt; #{endChkDate} and sNo = #{sNo} and sRNo = #{sRNo}
+	</select>
+	
 	<update id="cancel" parameterType="map">
 		update Reserve set reStat = 
 			<if test="reStat == 0">	4 </if>

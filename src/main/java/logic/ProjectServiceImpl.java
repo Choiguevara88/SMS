@@ -351,6 +351,8 @@ public class ProjectServiceImpl implements ProjectService {
 		building.setsRule(sRule);
 		building.setsBHour(sBHour);
 		System.out.println(sType);
+	
+	
 		buDao.buRegist(building);
 	}
 	private String listToString(List<String> list) {
@@ -360,7 +362,13 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 		return li;
 	}
-
+	private String listToString2(List<String> list) {
+		String li = "";
+		for (int i = 0; i < list.size(); i++) {
+			li += list.get(i) + ",";
+		}
+		return li;
+	}
 	@Override
 	public List<Board> guestQuestionList() {
 		return boDao.guestQuestionList();
@@ -548,31 +556,45 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public List<Room> getmyRoomList(Integer sNo) {
-		List<Room> roomlist = roomDao.getmyRoomList(sNo);
+		
+		List<Room> roomlist = roomDao.getmyRoomList(sNo);  
+		String s = new String();
+		String i = new String();
+		
 		for(Room room : roomlist) {
 			List<String> imglist = new ArrayList<String>();
-			String s = room.getsRImg();
-			imglist = Arrays.asList(s.split("[|]"));
-			room.setsRImgNameList(imglist);
+			s = room.getsRImg();
+				
+			if(s != null && !(s.equals(""))) {
+				imglist = Arrays.asList(s.split("[|]"));
+				room.setsRImgNameList(imglist);
+			}
+					
 			List<String> infolist = new ArrayList<String>();
-			String i = room.getsRInfo();
-			infolist = Arrays.asList(i.split(","));
-			room.setsRInfoList(infolist);
+			i = room.getsRInfo();
+			
+			if(i != null && !(i.equals(""))) {
+				infolist = Arrays.asList(i.split(","));
+				room.setsRInfoList(infolist);
+			}
 		}
 		return roomlist;
 	}
 
 	@Override
 	public void updateRoom(Room room,HttpServletRequest request) {
-if (room.getsRImgList() != null) {
-			
-			String img2 = uploadImgCreate2(room.getsRImgList(), request);
-			
+		
+		if (room.getsRImgList() != null) {
+			String img2 = uploadImgCreate2(room.getsRImgList(), request);	
 			if (img2 != null && !img2.equals(""))
 				room.setsRImg(img2);
 		} else {
 			room.setsRImg(listToString(room.getsRImgNameList()));
 		}
+		 
+		
+		String sRInfo = listToString2(room.getsRInfoList());
+		room.setsRInfo(sRInfo);
 		roomDao.updateRoom(room);
 		}
 
@@ -581,7 +603,6 @@ if (room.getsRImgList() != null) {
 		roomDao.deleteRoom(room);
 		
 	}
-
 
 	@Override
 	public void deleteAccount(Member member) {
@@ -660,7 +681,8 @@ if (room.getsRImgList() != null) {
 		}
 		
 		if(returnRoom.getsRInfo() != null && !returnRoom.getsRInfo().equals("")) {
-			infoList = Arrays.asList(returnRoom.getsRInfo().split(","));
+			infoList = Arrays.asList(returnRoom.getsRInfo());
+		
 		}
 		
 		returnRoom.setsRImgNameList(imgList);
@@ -722,6 +744,21 @@ if (room.getsRImgList() != null) {
 	@Override
 	public Integer getBuildingCount() {
 		return buDao.getBuildingCount();
+	}
+
+	@Override
+	public int reserveChkCnt(Integer sNo, Integer sRNo) {
+		return reDao.chkCnt(sNo, sRNo);
+	}
+
+	@Override
+	public List<Reserve> reserveChkList(Integer sNo, Integer sRNo) {
+		return reDao.chkList(sNo, sRNo);
+	}
+
+	@Override
+	public List<Reserve> getReserveDateChkList(String startChkDate, String endChkDate, Integer sNo, Integer sRNo) {
+		return reDao.dateChkList(startChkDate, endChkDate, sNo, sRNo);
 	}
 
 }// ProjectServiceImpl end

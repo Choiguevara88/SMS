@@ -2,6 +2,7 @@ package controller;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,6 @@ import logic.Room;
 public class RoomController {
 	@Autowired
 	private ProjectService service;
-
 	@ModelAttribute
 	public Room getRoom() {
 		return new Room();
@@ -58,7 +58,8 @@ public class RoomController {
 			mav.setViewName("redirect:roomList.sms?sNo="+sNo);
 		}catch(Exception e) {
 			e.printStackTrace();
-			throw new ProjectException("throw new ProjectException(string,string주소)","roomForm.sms");
+			Integer sNo = room.getsNo();
+			throw new ProjectException("세부 공간 작성에 실패했습니다.","roomList.sms?sNo="+sNo);
 		}
 	return mav;
 }
@@ -72,8 +73,10 @@ public class RoomController {
 			mav.addObject("myRoomList",myRoomList);
 			String sNo1 = Integer.toString(sNo);
 			building = service.getMyBuildingOne(sNo1);
+			int roomCnt = myRoomList.size();
 			mav.addObject("building", building);
 			mav.addObject("sNo", sNo); 
+			mav.addObject("roomCnt", roomCnt);
 			mav.setViewName("room/roomList");
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -94,11 +97,9 @@ public class RoomController {
 		}
 	return mav;
 	}
-	
 	@RequestMapping("building/roomUpdateForm")
 	public ModelAndView roomUpdateForm(HttpServletRequest request,Room room) {
 		ModelAndView mav = new ModelAndView();
-		try {
 			String sNo = Integer.toString(room.getsNo());
 			Building building = service.getMyBuildingOne(sNo);
 			mav.addObject("building", building);
@@ -133,13 +134,10 @@ public class RoomController {
 			mav.addObject("sRInfoNames3", sRInfoNames3);
 			mav.addObject("sRInfoNames4", sRInfoNames4);
 			mav.addObject("sRInfoNames5", sRInfoNames5);
-			
+			System.out.println("UPDATEFORM"+myRoom);
 		mav.addObject("room", myRoom);
+		
 		mav.setViewName("room/roomUpdateForm");
-		}catch (Exception e){
-			e.printStackTrace();
-			throw new ProjectException("안돼", "redirect:roomUpdateForm");
-		}
 	return mav;	
 	}
 	@RequestMapping("building/roomUpdateSuccess.sms")
@@ -153,48 +151,33 @@ public class RoomController {
 		try{
 			Integer sNo= room.getsNo();
 			Integer sRNo = room.getsRNo();
-			System.out.println(room);
 			service.updateRoom(room,request);
-			
 			mav.setViewName("redirect:roomDetail.sms?sRNo="+sRNo+"&sNo="+sNo); 
 		}catch(Exception e) {
 			e.printStackTrace();
-			throw new ProjectException("throw new ProjectException(string,string주소)","roomForm.sms");
+			Integer sNo= room.getsNo();
+			throw new ProjectException("수정에 실패 했습니다.","roomList.sms?sNo="+sNo);
 		}
-	
 	return mav;
 }
-	@RequestMapping("building/roomDeleteForm")
-	public ModelAndView roomDeleteForm(HttpServletRequest request,Room room) {
-		ModelAndView mav = new ModelAndView("room/roomDeleteForm");
-		
-		Room myRoom = service.getMyRoom(room);
 
-		mav.addObject("room", myRoom);
-	return mav;	
-	}
-	
 	@RequestMapping("building/roomDeleteSuccess")
 	public ModelAndView roomDelete(HttpSession session,Integer sRNo,Integer sNo, String pass)throws ProjectException {
 		ModelAndView mav = new ModelAndView();
-		try{
-			
 			Member loginMember = (Member) session.getAttribute("loginMember");
-			String loginMemberPass = loginMember.getPw();
-				if(pass.equals(loginMemberPass)) {
+			if(loginMember != null) {
 				Room room = new Room(); 
 				room.setsRNo(sRNo);
 				room.setsNo(sNo);
-				room =service.getMyRoom(room);
 				Room myRoom = service.getMyRoom(room);
 				service.deleteRoom(myRoom);
-				mav.setViewName("redirect:roomList.sms?sNo="+sNo);
-				}
-			}catch(Exception e) {
-			e.printStackTrace();
-			throw new ProjectException("로그인하세요.","redirect:roomDeleteForm");
-		}
-	return mav;
-	}
+				mav.setViewName("roomList.sms?sNo="+sNo);
+			}else {
+				throw new ProjectException("로그인하세요.","roomList.sms?sNo="+sNo);
+			}
+			mav.setViewName("redirect:roomList.sms?sNo="+sNo);
+			return mav;
 }
+}
+
 

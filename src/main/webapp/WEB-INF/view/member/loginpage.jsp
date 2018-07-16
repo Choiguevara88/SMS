@@ -108,7 +108,7 @@
 		<tr><td><input type="hidden"></td></tr>
 		<tr>
 			<td colspan="2" style="font-family:'Hanna'; vertical-align:middle; font-size:large;">
-				쉐마세가 처음이신가요?
+				쉐마쉐가 처음이신가요?
 			</td>
 			<td><a href="joinForm.sms" class="btn btn-outline-danger btn-block" style="font-family:'Hanna'">가입하기!</a></td>
 		</tr>

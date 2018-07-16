@@ -72,10 +72,10 @@ $(document).ready(function() {
 		
 		if (sres == 1) {
 			reserveDate = document.getElementById("reserveDate1")
-			var dateTime = selDate.replace(/-/gi, "") + "000000"
+			var dateTime = selDate.replace(/-/gi, "") + "0000"
 			console.log(typeof dateTime)
 			console.log(dateTime)
-			reserveDate.value = dateTime
+			reserveDate1.value = dateTime
 		}
 	})
 	
@@ -99,7 +99,7 @@ $(document).ready(function() {
 			var dateTime = selDate.replace(/-/gi, "") + selTime.replace(":","")
 			console.log(typeof dateTime)
 			console.log(dateTime)
-			reserveDate.value = dateTime 
+			reserveDate1.value = dateTime 
 		}
 	})
 	
@@ -126,7 +126,16 @@ $(document).ready(function() {
 	}
 
 })
+
+	function win_open_rList()	{
+		var op = "width=450, height=550, scrollbars=yes, top=200, left=1150";
+			window.open("reserveCheckList.sms?sNo=" + ${param.sNo} + "&sRNo=" + ${param.sRNo}, "reserveCheckList", op);
+	}
 </script>
+
+<style type="text/css">
+	td {	font-family:'Hanna';	}
+</style>
 
 <title>예약 등록 화면</title>
 </head>
@@ -151,7 +160,7 @@ $(document).ready(function() {
 	</div>
 	
 	<div class="w3-container w3-margin w3-padding">
-		<table class="w3-table w3-bordered">
+		<table class="w3-table w3-bordered" style="font-family:'Hanna';">
 		<tr>
 			<td style="width:30%; vertical-align:middle; font-size:large;">한 줄 설명</td>
 			<td style="width:60%; vertical-align:middle; font-size:large;" class="w3-text-gray">${room.sRContent}</td>
@@ -186,7 +195,7 @@ $(document).ready(function() {
 		<c:if test="${room.sResType == 1 }">
 			<td style="width:30%; vertical-align:middle; font-size:large;">예약 일자</td>
 			<td style="width:60%; vertical-align:middle;" class="w3-text-gray">
-				<input type="date" name="reDate" class="w3-border-0 w3-hover-light-gray" placeholder="예약일자" id="selectReDate">
+				<input type="date" name="reDate1" class="w3-border-0 w3-hover-light-gray" placeholder="예약일자" id="selectReDate">
 				<input type="hidden" id="selectReTime">
 			</td>
 		</c:if>
@@ -215,6 +224,10 @@ $(document).ready(function() {
 					<option value="6">6일</option>
 				</c:if>
 				</form:select>
+			</td>
+			<td style="width:60%; vertical-align:middle;">
+				<input type="button" value="예약정보확인" class="btn btn-outline-danger btn-block" style="font-family:'Hanna';"
+				onclick="javascript:win_open_rList()">
 			</td>
 		</tr>
 		</table>
@@ -314,7 +327,7 @@ $(document).ready(function() {
 		<h2 style="font-family:'Hanna'" class="w3-text-gray">결제 예정 금액</h2>
 	</div>
 	<div class="w3-container w3-padding w3-border w3-round">
-	<table class="w3-table">
+	<table class="w3-table" style="font-family:'Hanna';">
 	<tr>
 		<td>
 		<c:if test="${room.sResType == 0}">시간당</c:if>
@@ -335,7 +348,7 @@ $(document).ready(function() {
 	</tr>
 	</table>
 	<hr>
-	<table class="w3-table w3-large">
+	<table class="w3-table w3-large" style="font-family:'Hanna';'">
 	<tr>
 		<td>결제금액</td>
 		<td><font id="totPrice1"></font>원</td>

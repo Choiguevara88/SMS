@@ -20,13 +20,24 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-$("#sRImg").attr('disabled', true)
+	$("#sRImg").attr('disabled', true)
 
-$("#img1_btn").click(function() {
+	img2idx = 0;
+	img2arr = new Array();
+	<c:forEach items="${room.sRImgNameList}" var="item">
+	img2arr[img2idx++] = ("${item}");
+    </c:forEach>
+    console.log(img2arr)
+    $("#sRImgNameList").val(img2arr);
+	
+	
+	
+	$("#img1_btn").click(function() {
        $("#sImg1").val("");
        $("#file1_desc").empty();
        $("#sRImg").attr('disabled', false)
     });
+	
 });
 
 function chkboxcheck() {
@@ -44,9 +55,6 @@ function chkboxcheck() {
 //$(document).ready(function() {
 	//$(".sRInfo").att("checked",true)
 //});
-
-
-
 function chkboxcheck2() {
 	var sResType = document.getElementsByName("sResType")
 	var cnt = 0;
@@ -60,6 +68,7 @@ function chkboxcheck2() {
 	}
 }
 
+
 </script>
 </head>
 <body>
@@ -69,7 +78,7 @@ function chkboxcheck2() {
 <form:form modelAttribute="room" action="roomUpdateSuccess.sms" method="post" commandName="room" enctype="multipart/form-data">
 <input type="hidden" name="sNo" value="${building.sNo}">
 <input type="hidden" name="sRNo" value="${room.sRNo}">
-
+<input type="hidden" id="sRImgNameList" name="sRImgNameList">
 
 <spring:hasBindErrors name="room"> <!-- ? -->
 		<font color="tomato">
@@ -87,12 +96,12 @@ function chkboxcheck2() {
 <div class="w3-container w3-margin w3-card w3-padding-16">
 <p>
     <div class="w3-container w3-margin w3-row">
-    	<div class="w3-col s8"><label style="font-family:'Hanna'">세부 공간 이름</label><form:input path="sRName" class="w3-input" placeholder="공간의 이름을 작성해주세요." value="${sRName }"/></div>
+    	<div class="w3-col s8"><label style="font-family:'Hanna'">세부 공간 이름</label><form:input path="sRName" class="w3-input" placeholder="공간의 이름을 작성해주세요." value="${room.sRName }"/></div>
     	<div class="w3-cols s4"><font color="red"><form:errors path="sRName"/></font>
     </div>
 	</div>
 	<div class="w3-row w3-container w3-margin">
-    	<div class="w3-col s8"><label style="font-family:'Hanna'">세부 공간 내용</label><form:input path="sRContent" class="w3-input" placeholder="공간에 대한 설명을 작성해주세요." value="${sRContent }"/></div>
+    	<div class="w3-col s8"><label style="font-family:'Hanna'">세부 공간 내용</label><form:input path="sRContent" class="w3-input" placeholder="공간에 대한 설명을 작성해주세요." value="${room.sRContent }"/></div>
 		<div class="w3-col s4"><font color="red"><form:errors path="sRContent"/></font></div>
 	</div>
 	
@@ -115,26 +124,23 @@ function chkboxcheck2() {
 	
 	<div class="w3-container w3-margin">
 		<label style="font-family:'Hanna'">사진 업로드(여러 장 가능)</label>
-		<c:if test="${!empty room.sRImg }">
+	<c:if test="${!empty room.sRImg }">
             <div id="file1_desc">
-            <c:forEach var="roomImg" items="${room.sRImgNameList}">
-      <div >
-      <img src="../picture/${roomImg}" style="width:100%; height:250px">
+      <div>
       </div>
-      </c:forEach>
-              <div>
-              <input type="button" id="img1_btn" value="기존이미지삭제" /> 
-              </div>
+    
+             
             </div> 
           </c:if>
-		<div>
-		<input type="file" multiple="multiple" id="sRImg" name="sRImgList" class="w3-button">
-		</div>
+             <div>
+          <input type="button" id="img1_btn" value="기존이미지삭제" /> 
+        </div>
+          <input type="file" id="sRImg" name="sRImgList" multiple="multiple"/>
+ 
 	</div>
-	
 	<div class="w3-container w3-margin">
 	<p style="font-family:'Hanna'">편의 시설</p>
-	<table class="w3-table w3-border" cellpadding="1px" >
+	<table class="w3-table w3-border">
 	
 	<tr><td >
 		<form:checkboxes path="sRInfoList" items="${sRInfoNames1}" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="w3-checkbox"/>
@@ -184,14 +190,11 @@ function chkboxcheck2() {
     		<font color="red"><form:errors path="sPrice"/></font>
     	</div>
 	</div>
-	
 	<div class="w3-container w3-section w3-padding" style="text-align:center;">
 		<input type="submit" value="수정하기" class="w3-btn w3-black" style="font-family:'Hanna'; width:30%;">
 	</div>
 </div>
-
 <div>
-<form:hidden path="sNo" value="${room.sNo}"/>
 </div>
 </div>
 </form:form>
