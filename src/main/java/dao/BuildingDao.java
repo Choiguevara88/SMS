@@ -31,4 +31,6 @@ public interface BuildingDao {
 	List<Building> getMyWishBuildings(String id);
 
 	Integer getBuildingCount();
+
+	int getbuilding_mainpage_2(int sNo);
 }

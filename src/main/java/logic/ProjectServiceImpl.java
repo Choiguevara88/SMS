@@ -761,4 +761,9 @@ public class ProjectServiceImpl implements ProjectService {
 		return reDao.dateChkList(startChkDate, endChkDate, sNo, sRNo);
 	}
 
+	@Override
+	public int getbuilding_mainpage_2(int sNo) {
+		return buDao.getbuilding_mainpage_2(sNo);
+	}
+
 }// ProjectServiceImpl end

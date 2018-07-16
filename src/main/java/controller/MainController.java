@@ -23,9 +23,12 @@ public class MainController {
 	@RequestMapping("main")
 	public ModelAndView mainPage() {
 		ModelAndView mav = new ModelAndView("main");
+		
 		int sNo[] = new int[6];
+		
 		for (int i = 0; i < sNo.length; i++) {
 			sNo[i] = (int) (Math.random() * service.getBuildingCount()) + 1;
+			
 			if (service.getBuildingCount() >= sNo.length) {
 				for (int j = 0; j < i; j++) {
 					if (sNo[i] == sNo[j]) {
@@ -44,43 +47,73 @@ public class MainController {
 			}
 		}
 		
-		//·£´ýÀ¸·Î °Ç¹° ³Ö±â
-		//°Ç¹°À» °¡Á® ¿À¸é¼­ µ¿½Ã¿¡ °ü·Ã Roomµµ °¡Á®¿Í¾ßµÈ´Ù
+		int sNo2[] = new int [sNo.length];
+		
+		for(int i=0; i<sNo.length; i++) {
+			System.out.println("sNo[" + i + "]=" + sNo[i]);
+		}
+		
+		for(int i = 0; i < sNo2.length; i++) {
+			sNo2[i] = service.getbuilding_mainpage_2(sNo[i]);
+			System.out.println("sNo2[" + i + "]=" + sNo2[i]);
+		}
+		
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½ ï¿½Ö±ï¿½
+		//ï¿½Ç¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½é¼­ ï¿½ï¿½ï¿½Ã¿ï¿½ ï¿½ï¿½ï¿½ï¿½ Roomï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¾ßµÈ´ï¿½
 		List<Room> sPrice1 = new ArrayList<Room>();
 		List<Building> building1 = new ArrayList<Building>();
-		for(int i = 0; i< sNo.length;i++) { 
-			building1.add(service.getbuilding_mainpage(sNo[i]));
-			System.out.println(service.getbuilding_mainpage(sNo[i]).getsTagList());
-			sPrice1.add(service.getmyRoom_lowestprice(sNo[i]));
+		
+		for(int i = 0; i< sNo2.length;i++) { 
+			building1.add(service.getbuilding_mainpage(sNo2[i]));
+			System.out.println(service.getbuilding_mainpage(sNo2[i]).getsTagList());
+			sPrice1.add(service.getmyRoom_lowestprice(sNo2[i]));
 		}
+		
 		mav.addObject("today_buildings", building1);
 		mav.addObject("today_buildings_price", sPrice1);
-		//building ¸®½ºÆ®¶û sPrice¸®½ºÆ®ÀÇ ÀÎµ¦½ºµéÀº °°ÀÌ ¿òÁ÷ÀÓ
+		//building ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ sPriceï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		
-		//»ç¶÷µéÀÌ °¡Àå ¸¹ÀÌ ¿¹¾àÇÑ °÷! ÇÖÇÃ·¹ÀÌ½º 6°³
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½! ï¿½ï¿½ï¿½Ã·ï¿½ï¿½Ì½ï¿½ 6ï¿½ï¿½
 		List<Room> sPrice2 = new ArrayList<Room>();
 		List<Building> building2 = new ArrayList<Building>();
-		List<Board> review = service.getbuilding_reviewCount();
-		for(int i = 0; i<sNo.length;i++) {
-			building2.add(service.getbuilding_mainpage_reviewCount(review.get(i).getsNo())); //review¼ø¼­´ë·Î ºôµùÀ» °¡Á®¿À°í
-			sPrice2.add(service.getmyRoom_lowestprice(building2.get(i).getsNo())); //±× ºôµùÀÇ sNo·Î lowest Price°¡Á®¿À±â
+		List<Board> review = new ArrayList<Board>();
+		
+		review = service.getbuilding_reviewCount();
+		
+		if(review != null && !review.isEmpty()) {
+		
+			for(int i = 0; i<sNo2.length;i++) {
+				building2.add(service.getbuilding_mainpage_reviewCount(review.get(i).getsNo())); //reviewï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				sPrice2.add(service.getmyRoom_lowestprice(building2.get(i).getsNo())); //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ sNoï¿½ï¿½ lowest Priceï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			}
 		}
-		System.out.println(building2);
+		
+		System.out.println("building2 : " + building2);
+		
 		mav.addObject("buildings_review", building2);
 		mav.addObject("buildings_review_price", sPrice2);
 		
 		
-		//ÆòÁ¡ ÁÁÀº¼ø~
-		//Board¿¡¼­ Æò±Õ ÆòÁ¡À» °è»êÇÑµÚ Æò±ÕÆòÁ¡ÀÌ ³ôÀº ¼øÀ¸·Î 6°³ÀÇ ºôµù sNo°¡Á®¿À±â
-		//sNo·Î Building °¡Á®¿À°í, Room°¡Á®¿À±â
-		//º¸³»±â
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½~
+		//Boardï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 6ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ sNoï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//sNoï¿½ï¿½ Building ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, Roomï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		List<Room> sPrice3 = new ArrayList<Room>();
 		List<Building> building3 = new ArrayList<Building>();
-		List<Board> board = service.getSNo_byScore(); // Board 6°³ µé¾î¿È ÆòÁ¡ ¼øÀ¸·Î
-		for(int i = 0; i<sNo.length;i++) {
-			building3.add(service.getbuilding_mainpage(board.get(i).getsNo()));
-			sPrice3.add(service.getmyRoom_lowestprice(building3.get(i).getsNo()));
+		List<Board> board = new ArrayList<Board>();
+		board = service.getSNo_byScore(); // Board 6ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		
+		if(board != null && !board.isEmpty()) {
+		
+			for(int i = 0; i<sNo2.length;i++) {
+				building3.add(service.getbuilding_mainpage(board.get(i).getsNo()));
+				sPrice3.add(service.getmyRoom_lowestprice(building3.get(i).getsNo()));
+			}
+		
 		}
+		
+		System.out.println("building3 : " + building3);
+		
 		mav.addObject("building_score",building3);
 		mav.addObject("building_score_price",sPrice3);
 		mav.addObject(new Member());
