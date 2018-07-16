@@ -28,4 +28,10 @@ public interface ReserveDao {
 
 	void resStatUpdate(int reNo);
 
+	int chkCnt(Integer sNo, Integer sRNo);
+
+	List<Reserve> chkList(Integer sNo, Integer sRNo);
+
+	List<Reserve> dateChkList(String startChkDate, String endChkDate, Integer sNo, Integer sRNo);
+
 }
