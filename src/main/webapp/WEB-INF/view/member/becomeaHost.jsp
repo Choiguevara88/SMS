@@ -94,7 +94,7 @@ function find_address(){
 		<tr>
 			<td><strong>사업자 주소지</strong></td></tr>
 		<tr>
-			<td>우편번호</td><td><input type="text" name="address" id="zipcode" class="postcodify_postcode5" value="" />
+			<td>우편번호</td><td><input type="text" name="address" id="zipcode" class="postcodify_postcode5" value=""/>
 				<input type="button" id="postcodify_search_button" value="검색"></td></tr>
 		<tr>
 			<td>도로명 주소</td><td><input type="text" id="asdf" name="address" class="postcodify_address" value=""/></td></tr>

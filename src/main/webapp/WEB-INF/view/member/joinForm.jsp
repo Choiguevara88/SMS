@@ -139,6 +139,13 @@ function signup(){
 </script>
 </head>
 <body>
+<br>
+<br>
+<div class="w3-row w3-container w3-margin">
+<div class="w3-col s3"><p>&nbsp;</p></div>
+
+<div class="w3-col s6">
+<label style="font-family:'Hanna';" class="w3-xxlarge w3-center">쉐마쉐 가입 !</label>
 <form:form name="f" modelAttribute="member" action="member/join.sms" method="post">
 	<spring:hasBindErrors name="member">
 		<font color="tomato">
@@ -147,36 +154,40 @@ function signup(){
 			</c:forEach>
 		</font>
 	</spring:hasBindErrors>
-<table align="center" cellpadding="1" cellspacing="1" border = "1">
-	<tr><td>아이디 </td><td><form:input path="id" placeholder="영문과 숫자조합으로 가즈아!"/>
+<div class="w3-container w3-border w3-round-large w3-padding">
+<table class="w3-table" style="height:130; width:250;">
+	<tr><td class="w3-center w3-large">아이디 </td><td><form:input path="id" class="w3-input" placeholder="영문과 숫자조합으로 가즈아!"/>
 		<font color="red"><form:errors path="id"/></font></td></tr>
 	<tr>
-		<td>비밀번호 </td><td><form:password path="pw" placeholder="쉬운건 하지 말즈아!" onfocus="checkReg()" onkeyup="checkPwd()"/>
+		<td class="w3-center w3-large">비밀번호</td><td><form:password path="pw" class="w3-input" placeholder="쉬운건 하지 말즈아!" onfocus="checkReg()" onkeyup="checkPwd()"/>
 		 <font color="red"><form:errors path="pw"/></font></td></tr>
 	<tr>
-		<td>비번확인 </td><td><input type="password" placeholder="비번 입력 한번 더 가즈아!" name="pw-repeat" class="pass" id="repwd" onkeyup="checkPwd()"></td></tr>
+		<td class="w3-center w3-large">비번확인</td><td><input type="password" class="w3-input" placeholder="비번 입력 한번 더 가즈아!" name="pw-repeat" class="pass" id="repwd" onkeyup="checkPwd()"></td></tr>
 	<tr>
 		<c:if test="${!empty name }">
-			<td>이름 </td><td><form:input path="name" value="${name }" placeholder="틀릴리 없겠쥬?" readonly="true"/>
+			<td class="w3-center w3-large">이름</td><td><form:input path="name" class="w3-input" value="${name }" placeholder="틀릴리 없겠쥬?" readonly="true"/>
 			<font color="red"><form:errors path="name"/></font></td></c:if>
 		<c:if test="${empty name }">
-			<td>이름 </td><td><form:input path="name" placeholder="틀릴리 없겠쥬?"/>
+			<td class="w3-center w3-large">이름</td><td><form:input path="name" class="w3-input" placeholder="틀릴리 없겠쥬?"/>
 			<font color="red"><form:errors path="name"/></font></td></tr></c:if>
 	<tr>
 		<c:if test="${!empty email }">
-			<td>이메일 </td><td><form:input path="email" value= "${email }" placeholder="틀릴리 없겠쥬?" readonly="true"/>
+			<td class="w3-center w3-large">이메일</td><td><form:input path="email" class="w3-input" value= "${email }" placeholder="틀릴리 없겠쥬?" readonly="true"/>
 			<font color="red"><form:errors path="email"/></font></td></c:if>
 		<c:if test="${empty email }">
-			<td>이메일 </td><td><form:input path="email" placeholder="자주 쓰는걸로 가즈아!"/>
+			<td class="w3-center w3-large">이메일</td><td><form:input path="email" class="w3-input" placeholder="자주 쓰는걸로 가즈아!"/>
 			<font color="red"><form:errors path="email"/></font></td></tr></c:if>
 	<tr>
-		<td>휴대폰번호 </td><td><form:input path="mob" placeholder="예약시 필요!!" onfocus="emailcheck()" onkeyup="autohypen()" maxlength="13"/>
+		<td class="w3-center w3-large">휴대폰번호</td><td><form:input path="mob" class="w3-input" placeholder="예약시 필요!!" onfocus="emailcheck()" onkeyup="autohypen()" maxlength="13"/>
 		<font color="red"><form:errors path="mob"/></font></td></tr>
 	<tr>
-		<td colspan="2" align="center">
-			<input type="button" class="signup" onclick="signup()" disabled="disabled" value="가입하기">
-			<input type="button" onclick="javascript:history.go(-1)" value="뒤로가기"></td></tr>
+		<td colspan="2" align="center" class="w3-center">
+			<input type="button" onclick="signup()" class="signup w3-button w3-deep-purple w3-center w3-large" disabled="disabled" value="가입하기">
+			<input type="button" onclick="javascript:history.go(-1)" value="뒤로가기" class="w3-button w3-deep-purple w3-center w3-large"></td></tr>
 </table>
+</div>
 </form:form>
+</div>
+</div>
 </body>
 </html>

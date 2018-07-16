@@ -87,7 +87,15 @@
 					<td style="text-align:center; vertical-align:middle;" class='<c:if test="${build.boCnt != 0}">w3-text-red</c:if>'>[${build.boCnt}]</td>
 					<td style="text-align:center; vertical-align:middle;">
 						<a href="hostResList.sms?sNo=${build.sNo}" style="font-family:'Hanna'" class="btn btn-outline-secondary btn-sm"> 예약정보 </a>&nbsp;&nbsp;
-						<a href="../building/buildingDetail.sms?sNo=${build.sNo}" style="font-family:'Hanna'" class="btn btn-outline-success btn-sm"> 문의글 </a>
+						<a href="javascript:win_open('${build.sNo}')" style="font-family:'Hanna'" class="btn btn-outline-success btn-sm"> 문의글 </a>
+						<!-- 윈도우 OPEN -->
+						<script type="text/javascript">
+								function win_open(num)	{
+									var op = "width=800,height=700,scrollbars=yes,left=50,top=150";
+									window.open("../building/QlistNotRead.sms?sNo="+num,"reply",op);
+								}
+						</script>
+						<!-- 윈도우 OPEN -->
 					</td>			
 				</tr>
 			</c:forEach>

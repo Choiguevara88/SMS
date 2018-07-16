@@ -59,6 +59,19 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Board> boardList(String searchType, String searchContent, Integer pageNum, int limit, int kind) {
 		return boDao.list(searchType, searchContent, pageNum, limit, kind);
 	}
+	
+	
+	@Override
+	public int boardcountNR(int kind, Integer sNo) {
+		return boDao.countNR(kind, sNo);
+	}
+
+	@Override
+	public List<Board> boardListNR(int kind, Integer sNo, Integer pageNum, int limit) {
+		return boDao.listNR(kind, sNo, pageNum, limit);
+	}
+
+	
 
 	@Override // board Write Method()
 	public void boardWrite(Board board, HttpServletRequest request) {
@@ -543,7 +556,29 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public List<Room> getmyRoomList(Integer sNo) {
-		return roomDao.getmyRoomList(sNo);
+		
+		List<Room> roomlist = roomDao.getmyRoomList(sNo);  
+		String s = new String();
+		String i = new String();
+		
+		for(Room room : roomlist) {
+			List<String> imglist = new ArrayList<String>();
+			s = room.getsRImg();
+				
+			if(s != null && !(s.equals(""))) {
+				imglist = Arrays.asList(s.split("[|]"));
+				room.setsRImgNameList(imglist);
+			}
+					
+			List<String> infolist = new ArrayList<String>();
+			i = room.getsRInfo();
+			
+			if(i != null && !(i.equals(""))) {
+				infolist = Arrays.asList(i.split(","));
+				room.setsRInfoList(infolist);
+			}
+		}
+		return roomlist;
 	}
 
 	@Override
@@ -704,6 +739,11 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<Building> getMyWishBuildings(String id) {
 		return buDao.getMyWishBuildings(id);
+	}
+
+	@Override
+	public Integer getBuildingCount() {
+		return buDao.getBuildingCount();
 	}
 
 }// ProjectServiceImpl end

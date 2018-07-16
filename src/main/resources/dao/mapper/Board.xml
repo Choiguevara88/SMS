@@ -34,7 +34,7 @@
 
 
 	<select id="avg" resultType="Double" parameterType="map">
-		select round(avg(score),1) from board
+		select ifnull(round(avg(score),1),0.0) from board
 
 		<if test="kind != null and sNo != null">
 			where kind= #{kind} and sNo = #{sNo} and refLevel=0
@@ -93,6 +93,14 @@
 	<select id="buildingNo_by_score" resultType="Board">
 		select sno,
 		avg(score) from board order by avg(score) desc limit 6
+	</select>
+	
+	<select id="listNR" resultType="Board" parameterType="map">
+		select * from board where kind = #{kind} and qType=0 and sNo = #{sNo} order by ref desc limit #{startrow}, #{limit}
+	</select>
+	
+	<select id="countNR" resultType="Integer" parameterType="map">
+		select count(*) from board where kind = #{kind} and qType=0 and sNo = #{sNo} 
 	</select>
 
 	<select id="buidling_reviewCount" resultType="Board">

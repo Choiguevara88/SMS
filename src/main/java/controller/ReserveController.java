@@ -57,7 +57,7 @@ public class ReserveController {
 			mav.setViewName("redirect:/main.sms");
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new ProjectException("오류가 발생하였습니다.", "reserve/list.sms");
+			throw new ProjectException("전부 입력하셔야 합니다.", "regReserve.sms?sNo=" + reserve.getsNo() +"&sRNo=" + reserve.getSrNo());
 		}
 		
 		return mav;

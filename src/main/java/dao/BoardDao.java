@@ -49,6 +49,10 @@ public interface BoardDao {
 
 	void budelete(Integer sNo);
 
+	int countNR(int kind, Integer sNo);
+
+	List<Board> listNR(int kind, Integer sNo, Integer pageNum, int limit);
+
 	List<Board> getbuilding_reviewCount();
 
 	List<Board> getSno_byScore();
