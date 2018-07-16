@@ -13,31 +13,49 @@
 </script>
 </head>
 <body>
-<h1> ${building.sName}공간의 세부공간 관리</h1>
+<br>
+<div class="w3-left">
+<h1> ${building.sName}의 세부공간 관리</h1>
+<c:if test="${roomCnt == 0}">
+<br>
+<br>
+<h3>
+등록된 세부공간이 없습니다. 세부공간 추가하기를 눌러 세부공간을 추가해주세요.
+</h3>
+<br>
+<br>
+</c:if>
+</div>
+<div class="w3-right w3-margin-top w3-margin-right">
+<a href="roomForm.sms?sNo=${sNo}">
+<input type="button" class="w3-btn w3-deep-purple" value="세부공간 추가하기">
+</a>
+</div>
 
+<div class="w3-row-padding">
 <c:forEach var="room" items="${myRoomList}">
+<div class = "w3-third">
+<div class="w3-card-4 w3-margin-top w3-margin-bottom">
 <form:form modelAttribute="room" action="roomDetail.sms" method="post">
-<div class="w3-container">
-  <div class="w3-card-4" style="width:30%">
-    <div class="w3-container w3-center">
-      <c:forEach var="roomImg" items="${room.sRImgNameList}">
-      <div >
+      <c:forEach var="roomImg" items="${room.sRImgNameList}" end="0">
+      <div>
       <img src="../picture/${roomImg}" style="width:100%; height:250px">
       </div>
       </c:forEach>
-      <p>세부 공간 이름 : ${room.sRName}</p><br>	
-      <p>설명 : ${room.sRContent}</p><br>
-      <p>${room.sRInfo }</p>
-      <p>공간 유형 : ${room.sRType}</p><br>
-   			<form:hidden path="sNo" value="${room.sNo}" />
+      <div class="w3-container w3-margin-left w3-margin-top">
+       <font class="w3-large">${room.sRName}</font>
+      </div>
+   		<form:hidden path="sNo" value="${room.sNo}" />
    		<form:hidden path="sRNo" value="${room.sRNo}" />
-    </div>
+  <div class="w3-container w3-center w3-margin-top">
+  <input type="submit" value="세부정보 보기" class="w3-button w3-black"/>
   </div>
-</div>
-  <input type="submit" value="세부정보 보기" class="w3-button w3-black" style="font-family:'Hanna'; width:30%;"/>
+  <br>
 </form:form>
+</div>
+</div>
 </c:forEach>
-	<br>
-<a href="roomForm.sms?sNo=${sNo}" class="w3-button w3-black" style="font-family:'Hanna'; width:30%;">세부 공간 추가하기</a>
+</div>
+<br>
 </body>
 </html>

@@ -73,8 +73,10 @@ public class RoomController {
 			mav.addObject("myRoomList",myRoomList);
 			String sNo1 = Integer.toString(sNo);
 			building = service.getMyBuildingOne(sNo1);
+			int roomCnt = myRoomList.size();
 			mav.addObject("building", building);
 			mav.addObject("sNo", sNo); 
+			mav.addObject("roomCnt", roomCnt);
 			mav.setViewName("room/roomList");
 		}catch(Exception e) {
 			e.printStackTrace();
