@@ -221,8 +221,8 @@ function chk_tel(){
  } 
 	 
 /*유효성 관련 스크립트*/
-var reg1 =  /^[가-힣\s]+$/;
-      var reg2 =  /^[0-9]+$/;
+	var reg1 =  /^[가-힣\s]+$/;
+    var reg2 =  /^[0-9]+$/;
    function checkb() {
       var sType_chk = false;
       var sTypeList = document.getElementsByName("sTypeList")
@@ -368,7 +368,9 @@ var reg1 =  /^[가-힣\s]+$/;
               <!-- 이용시 주의사항 추가시 웹상에서 보여지는 부분 -->
             </div>
      
-     <tr><td colspan="2" align="center"><input type="button" value="공간등록" onclick="checkb()" id="request"></td></tr>
+     <tr><td colspan="2" align="center">
+     <input type="button" value="공간등록" onclick="checkb()" id="request">
+     <input type="button" value="등록취소" onclick="javascript:history.back()"></td></tr>
   </table>
 
 <!-- 지도관련 스크립트 -->

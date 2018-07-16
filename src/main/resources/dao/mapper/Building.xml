@@ -23,7 +23,11 @@
 	</select>
 	
 	<select id="mainpagebuilding" resultType="Building" parameterType="map">
-		select * from building where sNo=#{sNo}
+		select * from building where sNo = #{sNo}
+	</select>
+	
+	<select id="mainpagebuilding2" resultType="Integer" parameterType="map">
+		select sNo from building limit #{sNo}, 1
 	</select>
 	
 	<select id="wishSelect" resultType="Building" parameterType="map">
