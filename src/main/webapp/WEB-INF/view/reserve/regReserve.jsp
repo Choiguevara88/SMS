@@ -106,11 +106,13 @@ $(document).ready(function() {
 			reserveDate1.value = dateTime 
 		}
 	})
-	
+
+})
+
 	function check(f) {
-		if(f.reDate.value == '') {
+		if(f.reDate1.value == '') {
 			alert('날짜 입력 해주세요.');
-			f.reDate.focus();
+			f.reDate1.focus();
 			return false;
 		}
 		
@@ -129,7 +131,6 @@ $(document).ready(function() {
 		return f.submit();
 	}
 
-})
 
 	function win_open_rList()	{
 		var op = "width=450, height=550, scrollbars=yes, top=200, left=1150";

@@ -48,7 +48,7 @@
 		select count(*) from building
 		
 		<if test="searchType != null and searchContent != null">
-			where #{searchType} like '%${searchContent}%'
+			where ${searchType} like '%${searchContent}%'
 		</if>
 	</select>
 	

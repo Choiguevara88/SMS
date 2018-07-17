@@ -151,13 +151,13 @@ public class BuildingController {
 		
 		int limit = 12;
 		
-		if (pageNum == null || ("" + pageNum).equals("")) {
+		if (pageNum == null) {
 			pageNum = 1;
 		}
 
 		int listCnt = service.getBuildingCnt(searchType, searchContent);
 		List <Building> buildingList  = service.getBuildingList(searchType, searchContent, pageNum, limit);
-
+		
 		int maxpage = (int) ((double) listCnt / limit + 0.95);
 		
 		int startpage = ((((int) (pageNum / 10.0 + 0.9)) - 1) * 10) + 1;

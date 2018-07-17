@@ -31,9 +31,8 @@
 		if(searchType == null || searchType.length == 0) {
 			document.searchform.searchContent.value = "";
 			document.searchform.pageNum.value = "1";
-			location.href="buildingList.sms?pageNum=" + pageNum;
+			location.href="buildingList.sms";
 		} else {
-			document.searchform.pageNum.value = pageNum;
 			document.searchform.submit();
 			return true;
 		}
@@ -53,7 +52,7 @@
 <div class="w3-col s10">
 
 <form action="buildingList.sms" method="get" name="searchform" onsubmit="return list(1)" >
-<input type="hidden" name="pageNum" value="${param.pageNum}">
+<input type="hidden" name="pageNum" value="${pageNum}">
 <div class="w3-container w3-margin w3-padding-24" style="text-align:center;">
 	<table class="w3-table w3-border">
 	<tr>
@@ -67,11 +66,13 @@
 			<option value="sTag">태그</option>
 			<option value="sAddress">지역</option>
 		</select>
+	
 	<script type="text/javascript">
-			if('${param.searchType}' != '') {
-				document.getElememntById("searchType").value='${param.searchType}'
-			}
+		if('${param.searchType}' != '') {
+			document.getElementById("searchType").value='${param.searchType}'
+		}
 	</script>
+	
 	</td>
 	<td style="text-align:center; vertical-align:middle;">
 		<input type="text" name="searchContent" value="${param.searchContent}" class="w3-input">
@@ -82,15 +83,9 @@
 	</tr>
 	</table>	
 </div>
-</form>
 
 
-<c:set var="cnt" value="0"/>
 <c:forEach var="building" items="${list}">
-	
-	<%-- <c:if test="${cnt % 3 == 0}">
-		<div class="w3-row">
-	</c:if> --%>
 	
 	<div class="w3-col s4">
 		<div class="w3-card-2 w3-margin">
@@ -131,9 +126,11 @@
       			
       			<p align="left" style="margin-top: 5px;">
       			<i class="fa fa-krw"></i>
+      			<font style="font-family:'Hanna'">
       			<fmt:formatNumber value="${building.room[0].sPrice}" pattern="###,###"></fmt:formatNumber>~ /
       			<c:if test="${building.room[0].sResType == 0}">시간</c:if>
       			<c:if test="${building.room[0].sResType == 1}">일</c:if>
+      			</font>
 	      		</p>
 			</div>
 			<!-- 건물의 정보를 보여주는 구간 -->
@@ -141,12 +138,6 @@
 		
 	</div>
 	
-	<%-- <c:if test="${cnt % 3 == 2}">
-		</div>
-	</c:if>
-	
-	${cnt = cnt + 1;""}
- --%>	
 </c:forEach>
 
 <div class="w3-container w3-margin w3-padding-24">
@@ -155,8 +146,8 @@
 <tr>
 	<td style="text-align:center; font-size:large;">
 		
-		<c:if test="${pageNum > 1 }">
-			<a href="javascript:list(${pageNum -1 })"  style="font-family:'Hanna';">[이전]</a>
+		<c:if test="${pageNum > 1}">
+			<a href="javascript:list(${pageNum -1})"  style="font-family:'Hanna';">[이전]</a>
 		</c:if>&nbsp;
 		
 		<c:if test="${pageNum <= 1}">&nbsp;&nbsp;&nbsp;</c:if>&nbsp;
@@ -164,24 +155,25 @@
 		
 		<c:forEach var="a" begin="${startpage + 1}" end="${endpage}"> 
 			
-			<c:if test="${a == 0}">&nbsp;</c:if>
+		<c:if test="${a == 0}">&nbsp;</c:if>
 			
-			<c:if test="${a == pageNum}"><font class="w3-text-blue">[${a}]</font></c:if>
+		<c:if test="${a == pageNum}"><font class="w3-text-blue">[${a}]</font></c:if>
 			
-			<c:if test="${a != pageNum}">
-				<a href="javascript:list(${a})" style="font-family:'Hanna';">[${a}]</a></c:if>
+		<c:if test="${a != pageNum}">
+			<a href="javascript:list(${a})" style="font-family:'Hanna';">[${a}]</a></c:if>
 		</c:forEach>
 		
-			<c:if test="${pageNum < maxpage}">
-				<a href="javascript:list(${pageNum+1 })"  style="font-family:'Hanna';">[다음]</a>
-			</c:if>&nbsp;
-			<c:if test="${pageNum >= maxpage}">&nbsp;&nbsp;&nbsp;</c:if>&nbsp;
-		</td></tr>
+		<c:if test="${pageNum < maxpage}">
+			<a href="javascript:list(${pageNum + 1})"  style="font-family:'Hanna';">[다음]</a>
+		</c:if>&nbsp;
+		<c:if test="${pageNum >= maxpage}">&nbsp;&nbsp;&nbsp;</c:if>&nbsp;
+	</td>
+</tr>
 
 </table>
 </div>
 
-
+</form>
 </div>
 <div class="w3-col s1"><p>&nbsp;</p></div>
 </div>
