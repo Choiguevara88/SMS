@@ -174,6 +174,11 @@ for (i = 0; i < acc.length; i++) {
 </c:if>
 
 <c:if test="${listcount == 0}">
+	 <div class="w3-container w3-margin">
+	<c:if test="${sessionScope.loginMember.id == 'admin' }">
+		<a href="../notice/write.sms" class="btn btn-outline-danger btn-block" style="font-family:'Hanna';">공지사항 작성</a>
+	</c:if>
+</div>
 	<div class="w3-container w3-gray w3-margin" style="font-size:large; font-family:'Hanna';">
 	 	등록된 게시물이 없습니다.
 	 </div>
