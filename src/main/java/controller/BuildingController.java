@@ -97,6 +97,7 @@ public class BuildingController {
 		String address1 = myBuildingOne.getsAddress().split(",")[0];
 		String address2 = myBuildingOne.getsAddress().split(",")[1];
 		String address3 = myBuildingOne.getsAddress().split(",")[2];
+		System.out.println(myBuildingOne);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("building", myBuildingOne);
 		mav.addObject("sTypeNames", sTypeNames);
@@ -501,7 +502,7 @@ public class BuildingController {
 	}
 	
 	@RequestMapping(value="building/wishlist.sms", method=RequestMethod.GET) // 찜한 공간 목록 불러올 때 사용하는 메서드
-	public ModelAndView myWishList(HttpSession session) {
+	public ModelAndView WishList(HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
 		

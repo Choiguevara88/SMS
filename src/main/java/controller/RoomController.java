@@ -24,45 +24,181 @@ import logic.Room;
 
 @Controller
 public class RoomController {
-	@Autowired
-	private ProjectService service;
-	@ModelAttribute
-	public Room getRoom() {
-		return new Room();
-	}
-	@RequestMapping("room/roomForm")
-	public ModelAndView roomForm(Room room) {
-		ModelAndView mav = new ModelAndView();
-		String sNo = Integer.toString(room.getsNo());
-		Building building = service.getMyBuildingOne(sNo);
-		mav.addObject("building", building);
-		mav.addObject("room",room);
-		mav.setViewName("room/roomForm");
-	return mav;
-	}
-	@RequestMapping("room/roomSuccess")
-	public ModelAndView roomSuccess(HttpServletRequest request,@Valid Room room, BindingResult bindingResult) {
-		ModelAndView mav = new ModelAndView();
-		if(bindingResult.hasErrors()) {
-			mav.getModel().putAll(bindingResult.getModel());
-			String sNo = Integer.toString(room.getsNo());
-			Building building = service.getMyBuildingOne(sNo);
-			System.out.println("bindingresult####"+bindingResult.getModel());
-			mav.addObject("building", building);
-			mav.setViewName("room/roomForm");
-			return mav;
-		}
-		try{
-			Integer sNo = room.getsNo();
-			service.insertRoom(room,request);
-			mav.setViewName("redirect:roomList.sms?sNo="+sNo);
-		}catch(Exception e) {
-			e.printStackTrace();
-			Integer sNo = room.getsNo();
-			throw new ProjectException("ÏÑ∏Î∂Ä Í≥µÍ∞Ñ ÏûëÏÑ±Ïóê Ïã§Ìå®ÌñàÏäµÎãàÎã§.","roomList.sms?sNo="+sNo);
-		}
-	return mav;
+   @Autowired
+   private ProjectService service;
+   @ModelAttribute
+   public Room getRoom() {
+      return new Room();
+   }
+   @RequestMapping("room/roomForm")
+   public ModelAndView roomForm(Room room) {
+      ModelAndView mav = new ModelAndView();
+      String sNo = Integer.toString(room.getsNo());
+      Building building = service.getMyBuildingOne(sNo);
+      mav.addObject("building", building);
+      mav.addObject("room",room);
+      mav.setViewName("room/roomForm");
+   return mav;
+   }
+   @RequestMapping("room/roomSuccess")
+   public ModelAndView roomSuccess(HttpServletRequest request,@Valid Room room, BindingResult bindingResult) {
+      ModelAndView mav = new ModelAndView();
+      if(bindingResult.hasErrors()) {
+         mav.getModel().putAll(bindingResult.getModel());
+         String sNo = Integer.toString(room.getsNo());
+         Building building = service.getMyBuildingOne(sNo);
+         System.out.println("bindingresult####"+bindingResult.getModel());
+         mav.addObject("building", building);
+         mav.setViewName("room/roomForm");
+         return mav;
+      }
+      try{
+         Integer sNo = room.getsNo();
+         service.insertRoom(room,request);
+         mav.setViewName("redirect:roomList.sms?sNo="+sNo);
+      }catch(Exception e) {
+         e.printStackTrace();
+         Integer sNo = room.getsNo();
+         throw new ProjectException("ºº∫Œ ∞¯∞£ ¿€º∫ø° Ω«∆–«ﬂΩ¿¥œ¥Ÿ.","roomList.sms?sNo="+sNo);
+      }
+   return mav;
 }
+<<<<<<< HEAD
+   @RequestMapping(value="room/roomList", method=RequestMethod.GET)
+   public ModelAndView myBuildingList(HttpServletRequest request,Building building,HttpSession session) {      
+      ModelAndView mav = new ModelAndView();
+         Integer sNo = building.getsNo();
+      try {
+         List<Room> myRoomList = service.getmyRoomList(sNo);
+         mav.addObject("sNo",sNo);
+         mav.addObject("myRoomList",myRoomList);
+         String sNo1 = Integer.toString(sNo);
+         building = service.getMyBuildingOne(sNo1);
+         int roomCnt = myRoomList.size();
+         mav.addObject("building", building);
+         mav.addObject("sNo", sNo); 
+         mav.addObject("roomCnt", roomCnt);
+         mav.setViewName("room/roomList");
+      }catch(Exception e) {
+         e.printStackTrace();
+         throw new ProjectException("∏ÆΩ∫∆Æ∏¶ ∫“∑Øø¿¥¬µ• Ω«∆–«ﬂ¥Ÿ.","roomForm.sms");
+      }
+      return mav;
+   }
+   @RequestMapping("room/roomDetail")
+   public ModelAndView roomDetail(HttpServletRequest request,Room room,HttpSession session) {
+      ModelAndView mav = new ModelAndView();
+      try {
+      Room myRoom = service.getMyRoom(room);
+      mav.addObject("room", myRoom);
+      System.out.println(myRoom);
+      mav.setViewName("room/roomDetail");
+      }catch(Exception e){
+         Integer sNo = room.getsNo();
+         throw new ProjectException("throw new ProjectEx", "roomList.sms?sNo="+sNo);
+      }
+   return mav;
+   }
+   @RequestMapping("room/roomUpdateForm")
+   public ModelAndView roomUpdateForm(HttpServletRequest request,Room room) {
+      ModelAndView mav = new ModelAndView();
+         String sNo = Integer.toString(room.getsNo());
+         Building building = service.getMyBuildingOne(sNo);
+         mav.addObject("building", building);
+         Room myRoom = service.getMyRoom(room);
+         List<String> sRInfoNames1 = new ArrayList<String>();
+         sRInfoNames1.add("<i class='material-icons'>devices</i>TV/«¡∑Œ¡ß≈Õ");
+         sRInfoNames1.add("<i class='material-icons'>local_printshop</i>∫πªÁ±‚/¿Œº‚±‚");
+         sRInfoNames1.add("<i class='material-icons'>local_bar</i>¡÷∑˘π›¿‘∞°¥…");
+         sRInfoNames1.add("<i class='material-icons'>hot_tub</i>ª˛øˆΩ√º≥");
+         List<String> sRInfoNames2 = new ArrayList<String>();
+         sRInfoNames2.add("<i class='material-icons'>wifi</i>¿Œ≈Õ≥›/WIFI");
+         sRInfoNames2.add("<i class='material-icons'>airplay</i>»≠¿Ã∆Æ∫∏µÂ");
+         sRInfoNames2.add("<i class='material-icons'>settings_voice</i>¿Ω«‚/∏∂¿Ã≈©");
+         sRInfoNames2.add("<i class='material-icons'>kitchen</i>√ÎªÁΩ√º≥");
+         List<String> sRInfoNames3 = new ArrayList<String>();
+         sRInfoNames3.add("<i class='material-icons'>cake</i>¿ΩΩƒπ∞π›¿‘∞°¥…");
+         sRInfoNames3.add("<i class='material-icons'>time_to_leave</i>¡÷¬˜");
+         sRInfoNames3.add("<i class='material-icons'>smoke_free</i>±›ø¨");
+         sRInfoNames3.add("<i class='material-icons'>desktop_windows</i>PC/≥Î∆Æ∫œ");
+         List<String> sRInfoNames4 = new ArrayList<String>();
+         sRInfoNames4.add("<i class='material-icons'>event_seat</i>¿«¿⁄/≈◊¿Ã∫Ì");
+         sRInfoNames4.add("<i class='material-icons'>wc</i>≥ª∫Œ»≠¿ÂΩ«");
+         sRInfoNames4.add("<i class='material-icons'>accessibility</i>≈ª¿«Ω«");
+         sRInfoNames4.add("<i class='material-icons'>beach_access</i>≈◊∂ÛΩ∫/∑Á«¡≈æ");
+         List<String> sRInfoNames5 = new ArrayList<String>();
+         sRInfoNames5.add("<i class='material-icons'>weekend</i>∞¯øÎ∂ÛøÓ¡ˆ");
+         sRInfoNames5.add("<i class='material-icons'>nature_people</i>¿¸Ω≈∞≈øÔ");
+         sRInfoNames5.add("<i class='material-icons'>restaurant</i>πŸ∫£≈•Ω√º≥");
+         sRInfoNames5.add("<i class='material-icons'>dialpad</i>µµæÓ∂Ù");
+         mav.addObject("sRInfoNames1", sRInfoNames1);
+         mav.addObject("sRInfoNames2", sRInfoNames2);
+         mav.addObject("sRInfoNames3", sRInfoNames3);
+         mav.addObject("sRInfoNames4", sRInfoNames4);
+         mav.addObject("sRInfoNames5", sRInfoNames5);
+      mav.addObject("room", myRoom);
+      mav.setViewName("room/roomUpdateForm");
+   return mav;   
+   }
+   @RequestMapping("room/roomUpdateSuccess")
+   public ModelAndView roomroomUpdate(HttpServletRequest request,@Valid Room room, BindingResult bindingResult) {
+      ModelAndView mav = new ModelAndView();
+      if(bindingResult.hasErrors()) {
+         mav.getModel().putAll(bindingResult.getModel());
+         String sNo = Integer.toString(room.getsNo());
+         Integer sRNo = room.getsRNo();
+         Building building = service.getMyBuildingOne(sNo);
+         mav.addObject("building", building);
+         mav.addObject("room",room);
+         System.out.println("¿Ø»øº∫∞ÀªÁ"+room);
+         mav.setViewName("room/roomUpdateForm");
+         mav.addObject("sNo",sNo);
+         mav.addObject("sRNo",sRNo);
+         List<String> sRInfoNames1 = new ArrayList<String>();
+         sRInfoNames1.add("<i class='material-icons'>devices</i>TV/«¡∑Œ¡ß≈Õ");
+         sRInfoNames1.add("<i class='material-icons'>local_printshop</i>∫πªÁ±‚/¿Œº‚±‚");
+         sRInfoNames1.add("<i class='material-icons'>local_bar</i>¡÷∑˘π›¿‘∞°¥…");
+         sRInfoNames1.add("<i class='material-icons'>hot_tub</i>ª˛øˆΩ√º≥");
+         List<String> sRInfoNames2 = new ArrayList<String>();
+         sRInfoNames2.add("<i class='material-icons'>wifi</i>¿Œ≈Õ≥›/WIFI");
+         sRInfoNames2.add("<i class='material-icons'>airplay</i>»≠¿Ã∆Æ∫∏µÂ");
+         sRInfoNames2.add("<i class='material-icons'>settings_voice</i>¿Ω«‚/∏∂¿Ã≈©");
+         sRInfoNames2.add("<i class='material-icons'>kitchen</i>√ÎªÁΩ√º≥");
+         List<String> sRInfoNames3 = new ArrayList<String>();
+         sRInfoNames3.add("<i class='material-icons'>cake</i>¿ΩΩƒπ∞π›¿‘∞°¥…");
+         sRInfoNames3.add("<i class='material-icons'>time_to_leave</i>¡÷¬˜");
+         sRInfoNames3.add("<i class='material-icons'>smoke_free</i>±›ø¨");
+         sRInfoNames3.add("<i class='material-icons'>desktop_windows</i>PC/≥Î∆Æ∫œ");
+         List<String> sRInfoNames4 = new ArrayList<String>();
+         sRInfoNames4.add("<i class='material-icons'>event_seat</i>¿«¿⁄/≈◊¿Ã∫Ì");
+         sRInfoNames4.add("<i class='material-icons'>wc</i>≥ª∫Œ»≠¿ÂΩ«");
+         sRInfoNames4.add("<i class='material-icons'>accessibility</i>≈ª¿«Ω«");
+         sRInfoNames4.add("<i class='material-icons'>beach_access</i>≈◊∂ÛΩ∫/∑Á«¡≈æ");
+         List<String> sRInfoNames5 = new ArrayList<String>();
+         sRInfoNames5.add("<i class='material-icons'>weekend</i>∞¯øÎ∂ÛøÓ¡ˆ");
+         sRInfoNames5.add("<i class='material-icons'>nature_people</i>¿¸Ω≈∞≈øÔ");
+         sRInfoNames5.add("<i class='material-icons'>restaurant</i>πŸ∫£≈•Ω√º≥");
+         sRInfoNames5.add("<i class='material-icons'>dialpad</i>µµæÓ∂Ù");
+         mav.addObject("sRInfoNames1", sRInfoNames1);
+         mav.addObject("sRInfoNames2", sRInfoNames2);
+         mav.addObject("sRInfoNames3", sRInfoNames3);
+         mav.addObject("sRInfoNames4", sRInfoNames4);
+         mav.addObject("sRInfoNames5", sRInfoNames5);
+         return mav;
+      }
+      try{
+         Integer sNo= room.getsNo();
+         Integer sRNo = room.getsRNo();
+         service.updateRoom(room,request);
+         System.out.println(room);
+         mav.setViewName("redirect:/room/roomDetail.sms?sRNo="+sRNo+"&sNo="+sNo); 
+      }catch(Exception e) {
+         e.printStackTrace();
+         Integer sNo= room.getsNo();
+         throw new ProjectException("ºˆ¡§ø° Ω«∆– «ﬂΩ¿¥œ¥Ÿ.","roomList.sms?sNo="+sNo);
+      }
+   return mav;
+=======
 	@RequestMapping(value="room/roomList", method=RequestMethod.GET)
 	public ModelAndView myBuildingList(HttpServletRequest request,Building building,HttpSession session) {		
 		ModelAndView mav = new ModelAndView();
@@ -197,22 +333,23 @@ public class RoomController {
 			throw new ProjectException("ÏàòÏ†ïÏóê Ïã§Ìå® ÌñàÏäµÎãàÎã§.","roomList.sms?sNo="+sNo);
 		}
 	return mav;
+>>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
 }
-	@RequestMapping("room/roomDeleteSuccess")
-	public ModelAndView roomDelete(HttpSession session,Integer sRNo,Integer sNo, String pass)throws ProjectException {
-		ModelAndView mav = new ModelAndView();
-			Member loginMember = (Member) session.getAttribute("loginMember");
-			if(loginMember != null) {
-				Room room = new Room(); 
-				room.setsRNo(sRNo);
-				room.setsNo(sNo);
-				Room myRoom = service.getMyRoom(room);
-				service.deleteRoom(myRoom);
-				mav.setViewName("roomList.sms?sNo="+sNo);
-			}else {
-				throw new ProjectException("Î°úÍ∑∏Ïù∏ÌïòÏÑ∏Ïöî.","roomList.sms?sNo="+sNo);
-			}
-			mav.setViewName("redirect:roomList.sms?sNo="+sNo);
-			return mav;
+   @RequestMapping("room/roomDeleteSuccess")
+   public ModelAndView roomDelete(HttpSession session,Integer sRNo,Integer sNo, String pass)throws ProjectException {
+      ModelAndView mav = new ModelAndView();
+         Member loginMember = (Member) session.getAttribute("loginMember");
+         if(loginMember != null) {
+            Room room = new Room(); 
+            room.setsRNo(sRNo);
+            room.setsNo(sNo);
+            Room myRoom = service.getMyRoom(room);
+            service.deleteRoom(myRoom);
+            mav.setViewName("roomList.sms?sNo="+sNo);
+         }else {
+            throw new ProjectException("∑Œ±◊¿Œ«œººø‰.","roomList.sms?sNo="+sNo);
+         }
+         mav.setViewName("redirect:roomList.sms?sNo="+sNo);
+         return mav;
 }
 }

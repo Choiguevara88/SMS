@@ -71,7 +71,7 @@ td {
   <c:if test="${empty sessionScope.loginMember.id}"><a href="${path }/login.sms" class="w3-bar-item w3-button w3-hover-light-grey">
   	<i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;로그인/회원가입!</a><hr></c:if>
    <c:if test="${!empty sessionScope.loginMember.id }">
-  	<a href="#" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;${sessionScope.loginMember.name }님 환영해여~&gt;&lt;</a><hr size="1"></c:if>
+  	<a href="#" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;${sessionScope.loginMember.name }님 환영해여 !</a><hr size="1"></c:if>
   	
   <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.id != 'admin' }">
   	<a href="${path }/personal_info.sms?id=${sessionScope.loginMember.id }" class="w3-bar-item w3-button w3-hover-light-grey"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;나의 소중한 정보 !</a><hr size="1"></c:if>
