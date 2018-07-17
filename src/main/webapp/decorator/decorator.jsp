@@ -233,7 +233,10 @@ td {
 <div class="w3-deep-purple" style="height:90px" >
    <div class="header w3-deep-purple" id="myHeader" style="height:90px;">
    		<h1><strong><a href="${path }/main.sms" style="text-decoration:none">Share My Space</a></strong>
-   			<button class="w3-button w3-deep-purple w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button></h1></div>
+   			<button class="w3-button w3-deep-purple w3-xlarge w3-right" onclick="openRightMenu()">&#9776;</button>
+   			<a class="w3-button w3-deep-purple w3-xlarge w3-right" href="${path}/building/buildingList.sms"><i class="fa fa-search"></i></a>
+   			</h1></div>
+   			
       </div>
       <div class="mainImg"> <div class="centered">	
 	  <img id="mainImg" class="mySlides" src="${path}/picture/main1.jpg">

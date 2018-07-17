@@ -29,15 +29,26 @@
 
 <div class="w3-row w3-container w3-margin" id="context">
 <div class="w3-row">
-<div class="w3-col s2"><p>&nbsp;</p></div>
+<div class="w3-col s1"><p>&nbsp;</p></div>
 
-<div class="w3-col s8">
+<div class="w3-col s10">
+<c:if test="${chk == false }">
+	<div class="w3-container w3-margin w3-padding" style="text-align:center;">
+		<div class="w3-container w3-margin">
+		<h1 style="font-family:'Hanna';">저런~! 아직 찜한 공간이 없으시네요!</h1>
+		</div>
+		<div class="w3-container w3-center w3-padding w3-margin" style="text-align:center;">
+		<a href="buildingList.sms" class="btn btn-outline-primary btn-lg" style="font-family:'Hanna'; font-size:large;">공간보러가기</a>
+		</div>
+	</div>
+</c:if>
+
 <c:set var="cnt" value="0"/>
 <c:forEach var="building" items="${list}">
 	
-	<c:if test="${cnt % 3 == 0}">
+	<%-- <c:if test="${cnt % 3 == 0}">
 		<div class="w3-row">
-	</c:if>
+	</c:if> --%>
 	
 	<div class="w3-col s4">
 		<div class="w3-card-2 w3-margin" id="preview">
@@ -79,13 +90,20 @@
 			</div>
 			<!-- 건물의 정보를 보여주는 구간 -->
 		</div>
-		${cnt = cnt + 1;""}
+		
 	</div>
+	
+	<%-- <c:if test="${cnt % 3 == 2}">
+		</div>
+	</c:if>
+	
+	${cnt = cnt + 1;""}
+ --%>	
 </c:forEach>
 
 
 </div>
-<div class="w3-col s2"><p>&nbsp;</p></div>
+<div class="w3-col s1"><p>&nbsp;</p></div>
 </div>
 </div>
 

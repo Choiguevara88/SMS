@@ -4,9 +4,7 @@
 <html>
 <head>
 
-<!-- w3 css 사용 선언 -->
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- w3 css 사용 선언-->
+
 
 <!-- 부트스트랩 사용 선언 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -14,6 +12,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <!-- 부트스트랩 사용 선언 -->
+
+<!-- w3 css 사용 선언 -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- w3 css 사용 선언-->
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>세부 공간 등록</title>

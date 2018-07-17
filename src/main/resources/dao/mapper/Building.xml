@@ -8,7 +8,7 @@
 		(select count(*) from Board where qType = 0 and sNo = #{sNo} and kind = 3) 'boCnt',
 		(select count(*) from Reserve where sNo = #{sNo} and reStat = 0) 'reCnt'
 		from Building
-
+ 
 		<if test="id != null">
 			where id = #{id} and sNo = #{sNo}
 		</if>
@@ -43,4 +43,24 @@
 	<select id="buildingCount" resultType="Integer">
 		select count(*) from building
 	</select>
+	
+	<select id="buildingCnt" resultType="Integer" parameterType="map">
+		select count(*) from building
+		
+		<if test="searchType != null and searchContent != null">
+			where #{searchType} like '%${searchContent}%'
+		</if>
+	</select>
+	
+	<select id="buildingList" resultType="Building" parameterType="map">
+		select * from building
+		
+		<if test="searchType != null and searchContent != null">
+			where ${searchType} like '%${searchContent}%'
+		</if>
+		
+		order by sNo desc limit #{startrow}, #{limit}
+		 
+	</select>
+	
 </mapper>

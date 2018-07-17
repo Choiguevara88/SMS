@@ -84,7 +84,7 @@ function check() {
 		alert("내용을 입력하세요~><");
 		document.getElementById('content').focus();
 	} else{
-		document.rf.submit();
+		document.wf.submit();
 	}
 }
 </script>

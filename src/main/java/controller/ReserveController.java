@@ -59,7 +59,7 @@ public class ReserveController {
 
 		try {
 			service.reserveInsert(reserve);
-			mav.setViewName("redirect:/main.sms");
+			mav.setViewName("redirect:resList.sms?id=" + reserve.getId());
 			
 		} catch (Exception e) {
 			

@@ -766,4 +766,14 @@ public class ProjectServiceImpl implements ProjectService {
 		return buDao.getbuilding_mainpage_2(sNo);
 	}
 
+	@Override
+	public int getBuildingCnt(String searchType, String searchContent) {
+		return buDao.getBuildingCount(searchType, searchContent);
+	}
+
+	@Override
+	public List<Building> getBuildingList(String searchType, String searchContent, Integer pageNum, int limit) {
+		return buDao.getBuildingList(searchType, searchContent, pageNum, limit);
+	}
+
 }// ProjectServiceImpl end
