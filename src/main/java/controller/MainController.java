@@ -53,9 +53,7 @@ public class MainController {
 			sNo2[i] = service.getbuilding_mainpage_2(sNo[i]);
 			System.out.println("sNo2[" + i + "]=" + sNo2[i]);
 		}
-		
-		//�������� �ǹ� �ֱ�
-		//�ǹ��� ���� ���鼭 ���ÿ� ���� Room�� �����;ߵȴ�
+		 
 		List<Room> sPrice1 = new ArrayList<Room>();
 		List<Building> building1 = new ArrayList<Building>();
 		for(int i = 0; i< sNo.length;i++) { 
@@ -77,8 +75,8 @@ public class MainController {
 		if(review != null && !review.isEmpty()) {
 		
 			for(int i = 0; i<sNo2.length;i++) {
-				building2.add(service.getbuilding_mainpage_reviewCount(review.get(i).getsNo())); //review�������? ������ ��������
-				sPrice2.add(service.getmyRoom_lowestprice(building2.get(i).getsNo())); //�� ������ sNo�� lowest Price��������
+				building2.add(service.getbuilding_mainpage_reviewCount(review.get(i).getsNo()));
+				sPrice2.add(service.getmyRoom_lowestprice(building2.get(i).getsNo())); 
 			}
 		}
 		
