@@ -48,6 +48,7 @@ public class RoomController {
 			mav.getModel().putAll(bindingResult.getModel());
 			String sNo = Integer.toString(room.getsNo());
 			Building building = service.getMyBuildingOne(sNo);
+			System.out.println("bindingresult####"+bindingResult.getModel());
 			mav.addObject("building", building);
 			mav.setViewName("room/roomForm");
 			return mav;
@@ -80,7 +81,7 @@ public class RoomController {
 			mav.setViewName("room/roomList");
 		}catch(Exception e) {
 			e.printStackTrace();
-			throw new ProjectException("throw new ProjectException(string,string주소)","roomForm.sms");
+			throw new ProjectException("리스트를 불러오는데 실패했다.","roomForm.sms");
 		}
 		return mav;
 	}
@@ -97,7 +98,7 @@ public class RoomController {
 		}
 	return mav;
 	}
-	@RequestMapping("building/roomUpdateForm")
+	@RequestMapping("room/roomUpdateForm")
 	public ModelAndView roomUpdateForm(HttpServletRequest request,Room room) {
 		ModelAndView mav = new ModelAndView();
 			String sNo = Integer.toString(room.getsNo());
@@ -134,18 +135,54 @@ public class RoomController {
 			mav.addObject("sRInfoNames3", sRInfoNames3);
 			mav.addObject("sRInfoNames4", sRInfoNames4);
 			mav.addObject("sRInfoNames5", sRInfoNames5);
-			System.out.println("UPDATEFORM"+myRoom);
 		mav.addObject("room", myRoom);
-		
 		mav.setViewName("room/roomUpdateForm");
 	return mav;	
 	}
-	@RequestMapping("building/roomUpdateSuccess.sms")
+	@RequestMapping("room/roomUpdateSuccess")
 	public ModelAndView roomroomUpdate(HttpServletRequest request,@Valid Room room, BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
+			String sNo = Integer.toString(room.getsNo());
+			Integer sRNo = room.getsRNo();
+			Building building = service.getMyBuildingOne(sNo);
+			mav.addObject("building", building);
+			mav.addObject("room",room);
+			System.out.println("유효성검사"+room);
 			mav.setViewName("room/roomUpdateForm");
+			mav.addObject("sNo",sNo);
+			mav.addObject("sRNo",sRNo);
+			List<String> sRInfoNames1 = new ArrayList<String>();
+			sRInfoNames1.add("TV/프로젝터");
+			sRInfoNames1.add("복사기/인쇄기");
+			sRInfoNames1.add("주류반입가능");
+			sRInfoNames1.add("샤워시설");
+			List<String> sRInfoNames2 = new ArrayList<String>();
+			sRInfoNames2.add("인터넷/WIFI");
+			sRInfoNames2.add("화이트보드");
+			sRInfoNames2.add("음향/마이크");
+			sRInfoNames2.add("취사시설");
+			List<String> sRInfoNames3 = new ArrayList<String>();
+			sRInfoNames3.add("음식물반입가능");
+			sRInfoNames3.add("주차");
+			sRInfoNames3.add("금연");
+			sRInfoNames3.add("PC/노트북");
+			List<String> sRInfoNames4 = new ArrayList<String>();
+			sRInfoNames4.add("의자/테이블");
+			sRInfoNames4.add("내부화장실");
+			sRInfoNames4.add("탈의실");
+			sRInfoNames4.add("테라스/루프탑");
+			List<String> sRInfoNames5 = new ArrayList<String>();
+			sRInfoNames5.add("공용라운지");
+			sRInfoNames5.add("전신거울");
+			sRInfoNames5.add("바베큐시설");
+			sRInfoNames5.add("도어락");
+			mav.addObject("sRInfoNames1", sRInfoNames1);
+			mav.addObject("sRInfoNames2", sRInfoNames2);
+			mav.addObject("sRInfoNames3", sRInfoNames3);
+			mav.addObject("sRInfoNames4", sRInfoNames4);
+			mav.addObject("sRInfoNames5", sRInfoNames5);
 			return mav;
 		}
 		try{
@@ -160,7 +197,6 @@ public class RoomController {
 		}
 	return mav;
 }
-
 	@RequestMapping("building/roomDeleteSuccess")
 	public ModelAndView roomDelete(HttpSession session,Integer sRNo,Integer sNo, String pass)throws ProjectException {
 		ModelAndView mav = new ModelAndView();
@@ -179,5 +215,3 @@ public class RoomController {
 			return mav;
 }
 }
-
-

@@ -53,7 +53,7 @@ function roomDelete(sNo,sRNo) {
   </div>
 </div>
 <a href="roomList.sms?sNo=${room.sNo}" class="w3-button w3-black">리스트로 가기</a>
-<a href="roomUpdateForm.sms?sRNo=${room.sRNo }&sNo=${room.sNo}" class="w3-button w3-black">수정</a>
+<a href="/TestProject/room/roomUpdateForm.sms?sRNo=${room.sRNo }&sNo=${room.sNo}" class="w3-button w3-black">수정</a>
 <a href="javascript:roomDelete(${room.sNo}, ${room.sRNo })" class="w3-btn w3-black">삭제</a>
 
 
