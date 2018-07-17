@@ -102,7 +102,7 @@
 	</select>
 	
 	<select id="chkList" resultType="Reserve" parameterType="map">
-		select * from reserve where sNo = #{sNo} and sRNo = #{sRNo} order by reDate desc limit 0, 50
+		select * from reserve where sNo = #{sNo} and sRNo = #{sRNo} and reStat in (0,1) order by reDate desc limit 0, 50
 	</select>
 	
 	<select id="chkDateList" resultType="Reserve" parameterType="map">
