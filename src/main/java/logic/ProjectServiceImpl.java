@@ -293,7 +293,9 @@ public class ProjectServiceImpl implements ProjectService {
 				room.setsRImg(imgs);
 		} else {
 			room.setsRImg(listToString(room.getsRImgNameList()));
-		}
+		}		
+		
+		
 		int sRNo = roomDao.maxNum();
 		room.setsRNo(++sRNo);
 		roomDao.insertRoom(room);

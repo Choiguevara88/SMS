@@ -178,37 +178,80 @@ public class LoginAspect {
 	//HostLoginCheck() 메서드 : HOST 계정 업무 메서드에 대한 AOP
 	@Around("execution(* controller.*.host*(..))") // host로 시작하는 메서드에 적용
 		public Object hostLoginCheck(ProceedingJoinPoint joinPoint) throws Throwable {
-			
 			HttpSession session = null;
 			Member loginMember = null;
 			boolean hostable = false;
-			
 			for(int i = 0; i < joinPoint.getArgs().length; i++) {
 				if(joinPoint.getArgs()[i] instanceof HttpSession) {
 					session = (HttpSession)joinPoint.getArgs()[i];
 					loginMember = (Member)session.getAttribute("loginMember");
-					
 					if(loginMember == null) {
 						throw new ProjectException("로그인 하세요.", "../login.sms");
 					}
-					
 					if(loginMember.getHostName() == null && !loginMember.getId().equals("admin")) {
 						throw new ProjectException("호스트 계정으로 가능한 업무입니다.", "../login.sms");
 					}
-					
 					hostable = true;
 					break;
 				}
 			}
-			
 			if(!hostable) {
 				throw new ProjectException("전산부로 전화하세요. 세션 객체가 요구됨.", "../main.sms");
 			}
-			
 			Object ret = joinPoint.proceed();
-			
 			return ret;
 		}
+	
+	@Around("execution(* controller.*.building*(..))") // host로 시작하는 메서드에 적용
+	public Object buildingForm(ProceedingJoinPoint joinPoint) throws Throwable {
+		HttpSession session = null;
+		Member loginMember = null;
+		boolean hostable = false;
+		for(int i = 0; i < joinPoint.getArgs().length; i++) {
+			if(joinPoint.getArgs()[i] instanceof HttpSession) {
+				session = (HttpSession)joinPoint.getArgs()[i];
+				loginMember = (Member)session.getAttribute("loginMember");
+				if(loginMember == null) {
+					throw new ProjectException("로그인 하세요.", "../login.sms");
+				}
+				if(loginMember.getHostName() == null && !loginMember.getId().equals("admin")) {
+					throw new ProjectException("호스트 계정으로 가능한 업무입니다.", "../login.sms");
+				}
+				hostable = true;
+				break;
+			}
+		}
+		if(!hostable) {
+			throw new ProjectException("전산부로 전화하세요. 세션 객체가 요구됨.", "../main.sms");
+		}
+		Object ret = joinPoint.proceed();
+		return ret;
+	}
+	@Around("execution(* controller.*.myBuilding*(..))")
+	public Object myBuildingList(ProceedingJoinPoint joinPoint) throws Throwable{
+		HttpSession session = null;
+		Member loginMember = null;
+		boolean hostable = false;
+		for(int i = 0; i < joinPoint.getArgs().length; i++) {
+			if(joinPoint.getArgs()[i] instanceof HttpSession) {
+				session = (HttpSession)joinPoint.getArgs()[i];
+				loginMember = (Member)session.getAttribute("loginMember");
+				if(loginMember == null) {
+					throw new ProjectException("로그인 하세요.", "../login.sms");
+				}
+				if(loginMember.getHostName() == null && !loginMember.getId().equals("admin")) {
+					throw new ProjectException("호스트 계정으로 가능한 업무입니다.", "../login.sms");
+				}
+				hostable = true;
+				break;
+			}
+		}
+		if(!hostable) {
+			throw new ProjectException("전산부로 전화하세요. 세션 객체가 요구됨.", "../main.sms");
+		}
+		Object ret = joinPoint.proceed();
+		return ret;
+	}
 	
 	//예약정보를 실행하였을 때 거쳐가는 유효성 검증
 	@Around("execution(* controller.Reserve*.*(..))")
