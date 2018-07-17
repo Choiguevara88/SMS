@@ -18,8 +18,16 @@
 <title>세부 공간 등록</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-function alert() {
-
+function power4() {
+		if($('#sRImg').val()==''){
+			alert("이미지를 올려주세요~><");
+			document.getElementById('sRImg').focus();
+		}else{
+			var res=confirm("정보는 제대로 다 적으셨나여? ><");
+			if(res == true){
+				document.sp.submit();
+			}
+		}
 }
 function chkboxcheck() {
 	var sRType = document.getElementsByName("sRType")
@@ -53,7 +61,7 @@ function chkboxcheck2() {
 <div class="w3-row">
 <div class="w3-col s2"><p>&nbsp;</p></div>
 <div class="w3-col s8">
-<form:form modelAttribute="room" action="roomSuccess.sms" method="post" commandName="room" enctype="multipart/form-data" onsubmit="return alert">
+<form:form modelAttribute="room" action="roomSuccess.sms" method="post" commandName="room" enctype="multipart/form-data" name="sp" >
 
 <spring:hasBindErrors name="room"> <!-- ? -->
 		<font color="tomato">
@@ -165,7 +173,7 @@ function chkboxcheck2() {
 	</div>
 	
 	<div class="w3-container w3-section w3-padding" style="text-align:center;">
-		<input type="submit" value="등록하기" class="w3-btn w3-black" style="font-family:'Hanna'; width:30%;">
+		<input type="button" value="등록하기" class="w3-btn w3-black" style="font-family:'Hanna'; width:30%;" onclick="power4()">
 	</div>
 </div>
 <div>

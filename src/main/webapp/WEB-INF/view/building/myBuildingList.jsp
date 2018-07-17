@@ -53,7 +53,7 @@ function budelete(sNo) {
       </div>
       <div class="w3-container w3-center w3-margin-top">
       <a href="buildingUpdate.sms?sNo=${build.sNo}" class="w3-btn w3-black">공간수정</a>
-      <a href="roomList.sms?sNo=${build.sNo}" class="w3-btn w3-black">세부공간추가/수정</a>
+      <a href="/TestProject/room/roomList.sms?sNo=${build.sNo}" class="w3-btn w3-black">세부공간추가/수정</a>
       <a href="javascript:budelete(${build.sNo})" class="w3-btn w3-black">삭제</a>
       </div>
     <br>

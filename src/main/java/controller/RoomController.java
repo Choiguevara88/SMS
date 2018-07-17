@@ -31,7 +31,7 @@ public class RoomController {
 	public Room getRoom() {
 		return new Room();
 	}
-	@RequestMapping("building/roomForm")
+	@RequestMapping("room/roomForm")
 	public ModelAndView roomForm(Room room) {
 		ModelAndView mav = new ModelAndView();
 		String sNo = Integer.toString(room.getsNo());
@@ -41,7 +41,7 @@ public class RoomController {
 		mav.setViewName("room/roomForm");
 	return mav;
 	}
-	@RequestMapping("building/roomSuccess")
+	@RequestMapping("room/roomSuccess")
 	public ModelAndView roomSuccess(HttpServletRequest request,@Valid Room room, BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
@@ -64,7 +64,7 @@ public class RoomController {
 		}
 	return mav;
 }
-	@RequestMapping(value="building/roomList", method=RequestMethod.GET)
+	@RequestMapping(value="room/roomList", method=RequestMethod.GET)
 	public ModelAndView myBuildingList(HttpServletRequest request,Building building,HttpSession session) {		
 		ModelAndView mav = new ModelAndView();
 			Integer sNo = building.getsNo();
@@ -85,7 +85,7 @@ public class RoomController {
 		}
 		return mav;
 	}
-	@RequestMapping("building/roomDetail")
+	@RequestMapping("room/roomDetail")
 	public ModelAndView roomDetail(HttpServletRequest request,Room room,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		try {
@@ -189,7 +189,8 @@ public class RoomController {
 			Integer sNo= room.getsNo();
 			Integer sRNo = room.getsRNo();
 			service.updateRoom(room,request);
-			mav.setViewName("redirect:roomDetail.sms?sRNo="+sRNo+"&sNo="+sNo); 
+			System.out.println(room);
+			mav.setViewName("redirect:/room/roomDetail.sms?sRNo="+sRNo+"&sNo="+sNo); 
 		}catch(Exception e) {
 			e.printStackTrace();
 			Integer sNo= room.getsNo();
@@ -197,7 +198,7 @@ public class RoomController {
 		}
 	return mav;
 }
-	@RequestMapping("building/roomDeleteSuccess")
+	@RequestMapping("room/roomDeleteSuccess")
 	public ModelAndView roomDelete(HttpSession session,Integer sRNo,Integer sNo, String pass)throws ProjectException {
 		ModelAndView mav = new ModelAndView();
 			Member loginMember = (Member) session.getAttribute("loginMember");
