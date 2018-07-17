@@ -78,7 +78,7 @@ input {
   <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.id != 'admin' }">
   	<a href="${path }/reserve/resList.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button w3-hover-light-grey"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;나의 예약정보 !</a><hr size="1"></c:if>
   <c:if test="${!empty sessionScope.loginMember.id && sessionScope.loginMember.id != 'admin' }">
-  	<a href="wishlist.sms" class="w3-bar-item w3-button w3-hover-light-grey"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;내가 찜한 공간 !</a><hr size="1"></c:if>
+  	<a href="building/wishlist.sms" class="w3-bar-item w3-button w3-hover-light-grey"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;내가 찜한 공간 !</a><hr size="1"></c:if>
   <c:if test="${sessionScope.loginMember.memType == 1 }">
   	<a href="${path }/building/myBuildingList.sms?id=${sessionScope.loginMember.id}" class="w3-bar-item w3-button"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;공간 관리하기 !</a><hr size="1"></c:if>
   <c:if test="${sessionScope.loginMember.memType == 1 && sessionScope.loginMember.id != 'admin'}">
