@@ -110,11 +110,9 @@ public class BuildingController {
 	//鍮��⑹��蹂� �����ы�� �깅���湲�
 	@RequestMapping(value="building/buildingUpdateReg", method=RequestMethod.POST)
 	public ModelAndView buildingUpdateReg(Building building, HttpServletRequest request, HttpSession session) {
-		System.out.println(building);
 		service.buildingUpdateReg(building, request);
 		ModelAndView mav = new ModelAndView();
 		String id = building.getId();
-		System.out.println(id);
 		mav.setViewName("redirect:/building/myBuildingList.sms?id=" + id);
 		return mav;
 	}
@@ -128,16 +126,17 @@ public class BuildingController {
 		building = service.getMyBuildingOne(sNo);
 		
 		List<Room> roomList = service.getmyRoomList(ssNo);
-		System.out.println(roomList);
 		
 		ModelAndView mav = new ModelAndView();
+		String[] address = building.getsAddress().split(",");
+		String address1 = "";
+		for(int i=2;i<address.length;i++) {
+			address1 += " " + address[i]; 
+		}
 		
-		String address = building.getsAddress().split(",")[1];
-		String address1 = building.getsAddress().split(",")[1] +" "+building.getsAddress().split(",")[2];
-		System.out.println(building);
 		mav.addObject("building", building);
-		mav.addObject("address",address);
-		mav.addObject("address1", address1);
+		mav.addObject("address",address[1]);  //중간주소
+		mav.addObject("address1", address[1] + address1);  //전체주소
 		mav.addObject("roomList", roomList);
 		return mav;
 	}
@@ -168,7 +167,9 @@ public class BuildingController {
 		}
 		
 		for(Building build : buildingList) {
+			
 			build.setRoom(service.getmyRoomList(build.getsNo()));
+			build.setsAddress(build.getsAddress().substring(6, build.getsAddress().indexOf(" ", 12)));
 			build.setsTagList(Arrays.asList(build.getsTag().split("[|]")));
 			build.setsTypeList(Arrays.asList(build.getsType().split("[|]")));
 		}
@@ -439,8 +440,9 @@ public class BuildingController {
 	@RequestMapping(value="building/delete", method=RequestMethod.POST)
 	public ModelAndView delete(Integer bNo, Integer sNo,Integer kind) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println(bNo);
-		service.boardDelete(bNo);
+		Board bo = service.getBoard(bNo);
+		int num = bo.getRef();
+		service.boardDelete(num);
 		mav.setViewName("redirect:/building/buildingDetail.sms?sNo="+sNo);
 		return mav;
 	}
@@ -519,8 +521,10 @@ public class BuildingController {
 		
 		for(Building build : list) {
 			build.setRoom(service.getmyRoomList(build.getsNo()));
+			build.setsAddress(build.getsAddress().substring(6, build.getsAddress().indexOf(" ", 12)));
 			build.setsTagList(Arrays.asList(build.getsTag().split("[|]")));
 			build.setsTypeList(Arrays.asList(build.getsType().split("[|]")));
+
 		}
 		
 		mav.addObject("list", list);

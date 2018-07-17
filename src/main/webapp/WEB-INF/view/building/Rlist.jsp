@@ -10,8 +10,8 @@
 			window.open("../building/Rreply.sms?bNo="+num,"reply",op);
 	}
 </script>
-<div>
-	<div>
+
+<div class="w3-container">
 	<div class="w3-leftbar w3-border-deep-purple w3-left"><h3>&nbsp;&nbsp;이용 후기 <strong class="w3-text-deep-purple"><em>${listcount}</em>개</strong><span></span>
 	</h3>
 	</div>
@@ -19,15 +19,14 @@
 	<div class="w3-right"><h3>
 		평균 평점 <strong><em style="display:inline" class="w3-text-deep-purple">
 	${avgScore}</em></strong>
-	&nbsp;&nbsp;</h3></div></div>
+	&nbsp;&nbsp;</h3></div>
 </div>
+<hr>
 <!--  리뷰 목록부분 -->
-<br>
-<table style="margin-top:30px" width="80%" align="center">
-
+<div class="w3-container">
+<table width="80%" align="center">
 <c:if test="${listcount > 0}">
 <c:forEach var="board" items="${boardlist}" varStatus="i">
-<hr size="1">
 	<div><b>
 	<c:if test="${board.refLevel == 0 }">
 		<span class="w3-xlarge w3-text-darkgrey">${board.id}</span></c:if>
@@ -63,6 +62,7 @@
   		<a href="javascript:win_openR('${board.bNo}')">[답변]</a></c:if></c:if></c:if>
 </span>
 </div>
+<hr>
 <!--  글 밑 부분 -->
 </c:forEach>
 <tr align="center" height="26"><td colspan="5">
@@ -83,6 +83,7 @@
 	</c:if>
 <c:if test="${listcount == 0}">
 <tr><td>&nbsp;</td></tr>
-	 <tr><td colspan="5">&nbsp;&nbsp;&nbsp;등록된 게시물이 없습니다.</td></tr>
-	 </c:if>
+등록된 게시물이 없습니다.
+</c:if>
 </table>
+</div>

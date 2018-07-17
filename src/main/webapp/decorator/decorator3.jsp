@@ -103,6 +103,14 @@ div {
     <div class="w3-modal-content">
       <div class="w3-container">
         <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+          <script>
+        window.onclick = function(event) {
+        	var modal = document.getElementById('id01');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        </script>
         <div class="w3-container w3-margin w3-padding">
         
 <p><h1 style="font-family:'Hanna';">[쉐어 마이 스페이스] 에 오신 것을 환영합니다.</h1></p>

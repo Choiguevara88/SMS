@@ -66,11 +66,15 @@ body {font-family: Arial, Helvetica, sans-serif;}
 </style>
 
 <!-- Trigger/Open The Modal -->
-<div>
+<div class="w3-container">
 <div class="w3-leftbar w3-border-deep-purple w3-left">
-<h2>&nbsp;&nbsp;Q&A</h2>
+<h3>&nbsp;&nbsp;Q&A</h3>
 </div>
-<div class="w3-padding" align="right"><button class="w3-btn w3-deep-purple w3-round-large" id="myBtn"><b>질문 작성하기</b></button></div></div>
+
+<div class="w3-padding" align="right">
+<button class="w3-btn w3-deep-purple w3-round-large" id="myBtn"><b>질문 작성하기</b></button>
+</div></div>
+<hr>
 <!-- The Modal -->
 <div id="myModal" class="modal">
 
@@ -160,8 +164,9 @@ function check5(bno,sno,kind) {
 
 
 <c:if test="${listcount > 0}">
+<div class="w3-container">
 <c:forEach var="board" items="${boardlist}">
-<hr size="1">
+
 	<div><b>
 	<c:if test="${empty board.id }">
 		<span class="w3-xlarge w3-text-darkgrey">비회원의 질문입니다.</span></c:if>
@@ -184,11 +189,12 @@ function check5(bno,sno,kind) {
 		<c:if test="${sessionScope.loginMember.id == board.id && !empty board.id}">
 		<input type="button" value="삭제" onclick="check5('${board.bNo}','${board.sNo}','${board.kind}')">
 	</c:if>
-	<br>
 	</div>
 </div>
+<hr>
 <!--  글 밑 부분 -->
 </c:forEach>
+
 <table style="margin-top:30px" width="80%" align="center">
 <tr align="center" height="26"><td colspan="5">
 		<c:if test="${pageNum >1 }">
@@ -207,7 +213,7 @@ function check5(bno,sno,kind) {
 			</td></tr>
 </c:if>
 <c:if test="${listcount == 0}">
-     <tr><td>&nbsp;</td></tr>
-	 <tr><td colspan="5">등록된 게시물이 없습니다.</td></tr>
-	 </c:if>
+등록된 게시물이 없습니다.
+</c:if>
 </table>
+</div>
