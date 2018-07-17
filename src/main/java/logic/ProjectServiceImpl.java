@@ -293,7 +293,9 @@ public class ProjectServiceImpl implements ProjectService {
 				room.setsRImg(imgs);
 		} else {
 			room.setsRImg(listToString(room.getsRImgNameList()));
-		}
+		}		
+		
+		
 		int sRNo = roomDao.maxNum();
 		room.setsRNo(++sRNo);
 		roomDao.insertRoom(room);
@@ -681,7 +683,7 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 		
 		if(returnRoom.getsRInfo() != null && !returnRoom.getsRInfo().equals("")) {
-			infoList = Arrays.asList(returnRoom.getsRInfo());
+			infoList = Arrays.asList(returnRoom.getsRInfo().split(","));
 		
 		}
 		
@@ -764,6 +766,16 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public int getbuilding_mainpage_2(int sNo) {
 		return buDao.getbuilding_mainpage_2(sNo);
+	}
+
+	@Override
+	public int getBuildingCnt(String searchType, String searchContent) {
+		return buDao.getBuildingCount(searchType, searchContent);
+	}
+
+	@Override
+	public List<Building> getBuildingList(String searchType, String searchContent, Integer pageNum, int limit) {
+		return buDao.getBuildingList(searchType, searchContent, pageNum, limit);
 	}
 
 }// ProjectServiceImpl end

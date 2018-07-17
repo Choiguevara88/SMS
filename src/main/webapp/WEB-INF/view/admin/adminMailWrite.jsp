@@ -4,10 +4,6 @@
 <html>
 <head>
 
-<!-- w3 css 사용 선언 -->
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- w3 css 사용 선언-->
-
 <!-- 부트스트랩 사용 선언 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -15,13 +11,22 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <!-- 부트스트랩 사용 선언 -->
 
+<!-- w3 css 사용 선언 -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- w3 css 사용 선언-->
+
+<style type="text/css">
+	th { font-family:'Hanna'; }
+	td { font-family:'Hanna'; }
+</style>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>:::메일 보내기:::</title>
 <script type="text/javascript" src="//cdn.ckeditor.com/4.5.7/full/ckeditor.js"></script>
 </head>
 <body>
-<div class="w3-container w3-margin">
-<h2>메일 작성하기</h2>
+<div class="w3-container w3-margin w3-padding">
+<h1 style="font-family:'Hanna'">메일 작성하기</h1>
 </div>
 	<form name="mailform" method="post" action="mailSend.sms" enctype="multipart/form-data">
 	
@@ -29,37 +34,38 @@
 		<div class="row">
 		<div class="col-5"><input type="text" name="naverid" class="w3-input" placeholder="네이버 메일주소 @naver.com 이전까지 입력"></div>
 		<div class="col-5"><input type="password" name="naverpass" class="w3-input" placeholder="네이버 메일주소 비밀번호 입력"></div>
-		<div class="col-2"><input type="submit" value="메일 보내기" class="btn btn-outline-secondary" style="width:100%"></div>
+		<div class="col-2"><input type="submit" value="메일 보내기" class="btn btn-outline-secondary" style="width:100%; font-family:'Hanna'"></div>
 		</div>
 	</div>
 	
-	<div class="w3-container w3-margin w3-small">
+	<div class="w3-container w3-margin">
 		<table class="w3-table w3-striped w3-border">
 			<tr>
-				<th style="text-align:center; vertical-align:middle;">보내는 사람</th>
+				<td style="text-align:center; vertical-align:middle;">보내는 사람</td>
 				<td>${sessionScope.loginMember.email}</td>
 			</tr>
 			<tr>
-				<th style="text-align:center; vertical-align:middle;">받는 사람</th>
+				<td style="text-align:center; vertical-align:middle;">받는 사람</td>
 				<td><input type="text" name="recipient" size="100" 
 				value='<c:forEach items="${memberList}" var="mem" varStatus="i">${mem.name}&lt;${mem.email}&gt;<c:if test='${!i.last}'>,</c:if></c:forEach>' class="w3-input"></td>
 			</tr>
 			<tr>
-				<th style="text-align:center; vertical-align:middle;">제    목</th><td><input type="text" name="title" class="w3-input"></td>
+				<td style="text-align:center; vertical-align:middle;">제    목</td>
+				<td><input type="text" name="title" class="w3-input"></td>
 			</tr>
 			<tr>
-				<th style="text-align:center; vertical-align:middle;">메시지형식</th>
+				<td style="text-align:center; vertical-align:middle;">메시지형식</td>
 				<td><select name="mtype" class="w3-select" style="width:10%;">
 					<option value="text/html;charset=UTF-8" >HTML</option>
 					<option value="text/plain;charset=UTF-8" >TEXT</option>
 				</select></td>
 			</tr>
 			<tr>
-				<th style="text-align:center; vertical-align:middle;">첨부파일 1</th>
+				<td style="text-align:center; vertical-align:middle;">첨부파일 1</td>
 				<td><input type="file" name="file1" class="w3-button" style="width:30%;"></td>
 			</tr>
 			<tr>
-				<th style="text-align:center; vertical-align:middle;">첨부파일 2</th>
+				<td style="text-align:center; vertical-align:middle;">첨부파일 2</td>
 				<td><input type="file" name="file1" class="w3-button" style="width:30%;"></td>
 			</tr>
 			<tr>

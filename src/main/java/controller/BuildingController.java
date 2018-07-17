@@ -38,7 +38,7 @@ public class BuildingController {
 	
 	//鍮��⑺�� 留��ㅺ린
 	@RequestMapping(value="building/buildingForm")
-	public ModelAndView buildingForm(HttpServletRequest request) {
+	public ModelAndView buildingForm(HttpServletRequest request,HttpSession session) {
 		Building building = new Building();
 		List<String> sTypeNames = new ArrayList<String>();
 		sTypeNames.add("스터디룸");
@@ -59,7 +59,7 @@ public class BuildingController {
 	
 	//鍮��⑺�� �깅�
 	@RequestMapping(value="building/buildingReg", method=RequestMethod.POST)
-	public ModelAndView buildingReg(Building building, HttpServletRequest request) {
+	public ModelAndView buildingReg(Building building, HttpServletRequest request, HttpSession session) {
 
 		service.buildingReg(building, request);
 		ModelAndView mav = new ModelAndView();
@@ -69,7 +69,7 @@ public class BuildingController {
 	
 	//�깅��� �� 鍮��⑺�� 由ъ�ㅽ�� 遺��ъ�ㅺ린
 	@RequestMapping(value="building/myBuildingList", method=RequestMethod.GET)
-	public ModelAndView myBuildingList(HttpServletRequest request) {
+	public ModelAndView myBuildingList(HttpServletRequest request,HttpSession session) {
 		String id = request.getParameter("id");
 		ModelAndView mav = new ModelAndView();
 		List<Building> MyBuildingList = service.getMyBuildings(id);
@@ -82,7 +82,7 @@ public class BuildingController {
 	
 	//鍮��⑹��蹂� ������湲�
 	@RequestMapping(value="building/buildingUpdate", method=RequestMethod.GET)
-	public ModelAndView buildingUpdate(HttpServletRequest request) {
+	public ModelAndView buildingUpdate(HttpServletRequest request, HttpSession session) {
 		String sNo = request.getParameter("sNo");
 		Building myBuildingOne = service.getMyBuildingOne(sNo);
 		List<String> sTypeNames = new ArrayList<String>();
@@ -109,7 +109,7 @@ public class BuildingController {
 	
 	//鍮��⑹��蹂� �����ы�� �깅���湲�
 	@RequestMapping(value="building/buildingUpdateReg", method=RequestMethod.POST)
-	public ModelAndView buildingUpdateReg(Building building, HttpServletRequest request) {
+	public ModelAndView buildingUpdateReg(Building building, HttpServletRequest request, HttpSession session) {
 		System.out.println(building);
 		service.buildingUpdateReg(building, request);
 		ModelAndView mav = new ModelAndView();
@@ -121,7 +121,7 @@ public class BuildingController {
 	
 	//鍮��� ���몄��蹂� 蹂닿린
 	@RequestMapping(value="building/buildingDetail", method=RequestMethod.GET)
-	public ModelAndView buildingDetail(Building building, HttpServletRequest request) {
+	public ModelAndView watchbuildingDetail(Building building, HttpServletRequest request, HttpSession session) {
 		String sNo = request.getParameter("sNo");
 		Integer ssNo = Integer.parseInt(sNo);
 		
@@ -141,6 +141,60 @@ public class BuildingController {
 		mav.addObject("roomList", roomList);
 		return mav;
 	}
+	
+	
+	// 빌딩 검색 및 리스트용 메서드
+	@RequestMapping(value="building/buildingList", method=RequestMethod.GET)
+	public ModelAndView buildingList(String searchType, String searchContent, Integer pageNum, HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		int limit = 12;
+		
+		if (pageNum == null) {
+			pageNum = 1;
+		}
+
+		int listCnt = service.getBuildingCnt(searchType, searchContent);
+		List <Building> buildingList  = service.getBuildingList(searchType, searchContent, pageNum, limit);
+		
+		int maxpage = (int) ((double) listCnt / limit + 0.95);
+		
+		int startpage = ((((int) (pageNum / 10.0 + 0.9)) - 1) * 10) + 1;
+		int endpage = startpage + 9;
+
+		if (endpage > maxpage) {
+			endpage = maxpage;
+		}
+		
+		for(Building build : buildingList) {
+			build.setRoom(service.getmyRoomList(build.getsNo()));
+			build.setsTagList(Arrays.asList(build.getsTag().split("[|]")));
+			build.setsTypeList(Arrays.asList(build.getsType().split("[|]")));
+		}
+
+		mav.addObject("pageNum", pageNum);
+		mav.addObject("maxpage", maxpage);
+		mav.addObject("startpage ", startpage);
+		mav.addObject("endpage", endpage);
+		mav.addObject("listCnt", listCnt);
+		mav.addObject("list", buildingList);
+
+		if (searchType != null && searchType.equals("")) {
+			mav.addObject("searchType", searchType);
+		}
+
+		return mav;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	@ModelAttribute
 	public Board getBoard() {
 		return new Board();
@@ -455,15 +509,22 @@ public class BuildingController {
 		
 		Member mem = (Member)session.getAttribute("loginMember");
 		String id = mem.getId();
+		boolean chk = false;		
 		
 		List<Building> list = service.getMyWishBuildings(id); // 찜한 건물 목록
+		
+		if(list != null && !list.isEmpty()) {
+			chk = true;
+		}
 		
 		for(Building build : list) {
 			build.setRoom(service.getmyRoomList(build.getsNo()));
 			build.setsTagList(Arrays.asList(build.getsTag().split("[|]")));
 			build.setsTypeList(Arrays.asList(build.getsType().split("[|]")));
 		}
+		
 		mav.addObject("list", list);
+		mav.addObject("chk", chk);
 		
 		return mav;
 	}

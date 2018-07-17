@@ -34,7 +34,7 @@ background: #ADD8E6;
     display: inline-block;
     position: relative;
     height: 30px;
-    width: 280px;
+    width: 500px;
     margin: 0 auto 10px;
 }
 </style>
@@ -46,8 +46,8 @@ background: #ADD8E6;
 <h1 align="center" style="font-family:'Hanna';">${loginMember.id}님 반갑습니다! 무엇을 도와드릴까요?</h1>
 
 <div class="w3-container w3-margin w3-padding w3-border w3-round w3-row w3-text-dark-gray" style="text-align:center; font-family:'Hanna'; font-size:x-large;">
-	<div class="w3-col s6">	※사이트에 관한 건의 및 불만사항	</div>
-	<div class="w3-col s6">	※허위 공간이나 사기 거래 등 신고	</div> 
+	<div class="w3-col s6">	※ 사이트에 관한 건의 및 불만사항	</div>
+	<div class="w3-col s6">	※ 허위 공간이나 사기 거래 등 신고	</div> 
 </div>
 </div>
 <hr size="1">

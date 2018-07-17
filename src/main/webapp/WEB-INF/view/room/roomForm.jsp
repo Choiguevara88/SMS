@@ -4,9 +4,7 @@
 <html>
 <head>
 
-<!-- w3 css 사용 선언 -->
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- w3 css 사용 선언-->
+
 
 <!-- 부트스트랩 사용 선언 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -15,11 +13,66 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <!-- 부트스트랩 사용 선언 -->
 
+<!-- w3 css 사용 선언 -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- w3 css 사용 선언-->
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>세부 공간 등록</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-
+function power5() {
+	var sRType_chk = false;
+	var sRTypeList = document.getElementsByName("sRType")
+	for(var i=0;i<sRTypeList.length;i++) {
+	      if (sRTypeList[i].checked==true){
+	         sRType_chk = true;
+	         break;
+	         }
+	      }
+	      if(!sRType_chk){
+	         alert("세부 공간 유형을 하나 이상 체크하세요.")
+	      return false;
+	   }
+	      
+	      var sResType_chk = false;
+	  	var sResTypeList = document.getElementsByName("sResType")
+	  	for(var i=0;i<sResTypeList.length;i++) {
+	  	      if (sResTypeList[i].checked==true){
+	  	         sResType_chk = true;
+	  	         break;
+	  	         }
+	  	      }
+	  	      if(!sResType_chk){
+	  	         alert("예약 유형을 하나 이상 체크하세요.")
+	  	      return false;
+	  	   }      
+	
+	if($('#sRName').val()=='' ){
+	      alert("세부 공간 이름을 작성하세요~><");
+	      document.getElementById('sRName').focus();
+	  
+	}else if($('#sRImg').val()==''){
+			alert("이미지를 올려주세요~><");
+			document.getElementById('sRImg').focus();
+		
+	}else if($('#sRContent').val()=='' ){
+	      alert("세부 공간 소개를 작성하세요~><");
+	      document.getElementById('sRContent').focus();
+	   }
+	
+	else if($('#sPrice').val()=='' ){
+	      alert("가격을 설정하세요~><");
+	      document.getElementById('sPrice').focus();
+	   }
+	
+	else{
+			var res=confirm("정보는 제대로 다 적으셨나여? ><");
+			if(res == true){
+				document.sp.submit();
+			}
+		}
+}
 function chkboxcheck() {
 	var sRType = document.getElementsByName("sRType")
 	var cnt = 0;
@@ -52,7 +105,7 @@ function chkboxcheck2() {
 <div class="w3-row">
 <div class="w3-col s2"><p>&nbsp;</p></div>
 <div class="w3-col s8">
-<form:form modelAttribute="room" action="roomSuccess.sms" method="post" commandName="room" enctype="multipart/form-data">
+<form:form modelAttribute="room" action="roomSuccess.sms" method="post" commandName="room" enctype="multipart/form-data" name="sp" >
 
 <spring:hasBindErrors name="room"> <!-- ? -->
 		<font color="tomato">
@@ -84,6 +137,7 @@ function chkboxcheck2() {
 		<label style="font-family:'Hanna'">세부 공간 유형 (1개만 체크 가능)</label>
 		<div>
 		<form:checkboxes path="sRType" items="${building.sTypeList}" onchange="chkboxcheck()" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;" class="w3-checkbox"/>
+		<div class="w3-col s4"><font color="red"><form:errors path="sRType"/></font></div>
 		</div>
 		</div>
 		<div class="w3-col s2"><p>&nbsp;</p></div>
@@ -92,6 +146,7 @@ function chkboxcheck2() {
 		<div>
 		<form:checkbox path="sResType" value="0" label="시간 단위" onchange="chkboxcheck2()"/>&nbsp; &nbsp;
 		<form:checkbox path="sResType" value="1" label="일 단위" onchange="chkboxcheck2()"/>
+		<div class="w3-col s4"><font color="red"><form:errors path="sResType"/></font></div>
 		</div>
 		</div>
 	</div>
@@ -100,7 +155,7 @@ function chkboxcheck2() {
 		<label style="font-family:'Hanna'">사진 업로드(여러 장 가능)</label>
 		<div>
 		<input type="file" multiple="multiple" id="sRImg" name="sRImgList" class="w3-button">
-		</div>
+				</div>
 	</div>
 	
 	<div class="w3-container w3-margin">
@@ -162,10 +217,9 @@ function chkboxcheck2() {
 	</div>
 	
 	<div class="w3-container w3-section w3-padding" style="text-align:center;">
-		<input type="submit" value="등록하기" class="w3-btn w3-black" style="font-family:'Hanna'; width:30%;">
+		<input type="button" value="등록하기" class="w3-btn w3-black" style="font-family:'Hanna'; width:30%;" onclick="power5()">
 	</div>
 </div>
-
 <div>
 <form:hidden path="sNo" value="${room.sNo}"/>
 </div>

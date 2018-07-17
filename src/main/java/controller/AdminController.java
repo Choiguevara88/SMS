@@ -182,7 +182,17 @@ public class AdminController {
 
 		service.boardReply(answerBoard);
 
-		mav.setViewName("redirect:/admin/adminManagement.sms?id=admin");
+		mav.addObject("msg", "답변이 성공적으로 달렸습니다.");
+		
+		if(answerBoard.getKind() == 4) {
+			mav.addObject("url", "Glist.sms?id=admin");
+		}
+		
+		if(answerBoard.getKind() == 5) {
+			mav.addObject("url", "Hlist.sms?id=admin");
+		}
+		
+		mav.setViewName("admin/alert");
 
 		return mav;
 	}

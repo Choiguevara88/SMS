@@ -33,6 +33,11 @@
 		}
 		return false;
 	}
+	
+	function win_open(num)	{
+		var op = "width=800,height=850,scrollbars=yes,left=50";
+			window.open("adminAnswerQuestion.sms?bNo=" + num, "HostAnswer", op);
+	}
 </script>
 
 <style type="text/css">
@@ -66,7 +71,7 @@
     display: inline-block;
     position: relative;
     height: 30px;
-    width: 400px;
+    width: 500px;
     margin: 0 auto 10px;
 }
 </style>
@@ -151,7 +156,7 @@
 			<font class="w3-text-red">
 				(미답변)
 			</font>
-			<a href="adminAnswerQuestion.sms?bNo=${board.bNo}" style="font-family:'Hanna';">[답변달기]</a>
+			<a href="javascript:win_open('${board.bNo}')"  style="font-family:'Hanna';">[답변달기]</a>
 			</c:if>
 			
 			<c:if test="${board.qType == 1 }">
