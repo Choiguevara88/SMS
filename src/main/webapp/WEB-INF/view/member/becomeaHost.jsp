@@ -77,31 +77,47 @@ function find_address(){
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=2bA8v55yYLf1omsHnKFk&submodules=geocoder"></script>
 </head>
 <body>
+<br>
+<br>
+<div class="w3-row w3-container w3-margin">
+<div class="w3-col s3"><p>&nbsp;</p></div>
+
+<div class="w3-col s6">
+<label style="font-family:'Hanna';" class="w3-xxlarge w3-center">쉐마쉐 호스트 승인요청 !</label>
 <form:form modelAttribute="member" action="addhostdata.sms" name="f" method="POST" enctype="multipart/form-data">
 	<input type="hidden" id="regStatus" name="regStatus" value="0"/>
 	<input type="hidden" id="id" name="id" value="${sessionScope.loginMember.id }">
-	
-		<table align="center">
+	<div class="w3-container w3-border w3-round-large w3-padding">
+<table class="w3-table" style="height:130; width:250;">
 		<tr>
-			<td align="left">상호명/호스트이름</td><td style="width:auto;"><input type="text" name="hostName" id="hostName" placeholder="상호명/호스트이름"></td></tr>
+			<td class="w3-center w3-large">상호명/호스트이름</td><td style="width:auto;"><input class="w3-input" type="text" name="hostName" id="hostName" placeholder="상호명/호스트이름"></td></tr>
 		<tr>
-			<td align="left">사업자 등록번호</td><td><input type="text" name="hostRegNo" id="hostRegNo" placeholder="하이픈(-) 없이 숫자만!"></td></tr>
+			<td class="w3-center w3-large">사업자 등록번호</td><td><input class="w3-input" type="text" name="hostRegNo" id="hostRegNo" placeholder="하이픈(-) 없이 숫자만!"></td></tr>
 		<tr>
-			<td align="left"> 사업자 등록증</td><td><input type="file" name="picture" id="picture"></tr></table>
+			<td class="w3-center w3-large"> 사업자 등록증</td><td><input class="w3-input" type="file" name="picture" id="picture"></tr>
 			
-	<hr size="1" style="margin-top:1px; margin-bottom:1px">
-		<table align="center">
 		<tr>
-			<td><strong>사업자 주소지</strong></td></tr>
+			<td class="w3-center w3-large"><strong>사업자 주소지</strong></td></tr>
 		<tr>
-			<td>우편번호</td><td><input type="text" name="address" id="zipcode" class="postcodify_postcode5" value=""/>
+			<td class="w3-center w3-large">우편번호</td><td><input type="text" name="address" id="zipcode" class="postcodify_postcode5" value=""/>
 				<input type="button" id="postcodify_search_button" value="검색"></td></tr>
 		<tr>
-			<td>도로명 주소</td><td><input type="text" id="asdf" name="address" class="postcodify_address" value=""/></td></tr>
+			<td class="w3-center w3-large">도로명 주소</td><td><input type="text" id="asdf" name="address" class="postcodify_address" value=""/></td></tr>
 		<tr>
-			<td>상세 주소</td><td><input type="text" name="address" id="details" class="postcodify_details" value="" onfocus="drawmap()"/></td></tr>
+			<td class="w3-center w3-large">상세 주소</td><td><input type="text" name="address" id="details" class="postcodify_details" value="" onfocus="drawmap()"/></td></tr>
 		<tr><td colspan="2"><div id="map" style="width:100%;height:200px;"></div></td></tr>
-			</table>
+		<tr><td class="w3-center w3-large" rowspan="3" align="left">계좌정보</td>
+			<td class="w3-center w3-large"><input type="text" class="w3-input" name="accountNo" id="accountNo1"  placeholder="은행명 !"/></td></tr>
+		<tr>
+			<td class="w3-center w3-large"><input type="text" class="w3-input" name="accountNo" id="accountNo2" placeholder="계좌번호: 하이픈(-) 제외 !"/></td></tr>
+		<tr>
+			<td class="w3-center w3-large"><input type="text" class="w3-input" name="accountNo" id="accountNo3" placeholder="예금주 : 이름 !"/></td></tr>
+		<tr>
+			<td class="w3-center w3-large">사업자 연락처</td>
+				<td class="w3-center w3-large"><input type="text" class="w3-input" name="tel" id="tel" placeholder="하이픈(-) 없이 !" onkeyup="autohypen()" maxlength="13"></td></tr>
+		<tr><td colspan="3" class="w3-center w3-large">
+				<input type="button" value="호스트 승인 요청" class="w3-button w3-deep-purple w3-center w3-large"  onclick="check()" id="request">
+				<input type="button" class="w3-button w3-deep-purple w3-center w3-large" onclick="javascript:history.go(-1)" value="뒤로가기"></td></tr></table>
 <script>
 function drawmap(){ 
 	var map = new naver.maps.Map('map');
@@ -162,22 +178,9 @@ naver.maps.Service.geocode({address: myaddress}, function(status, response) {
     });
 });
 </script>
-	<hr size="1" style="margin-top:1px; margin-bottom:1px">
-		<table align="center">			
-		<tr><td rowspan="3" align="left">계좌정보</td>
-			<td><input type="text" name="accountNo" id="accountNo1"  placeholder="은행명 !"/></td></tr>
-		<tr>
-			<td><input type="text" name="accountNo" id="accountNo2" placeholder="계좌번호: 하이픈(-) 제외 !"/></td></tr>
-		<tr>
-			<td><input type="text" name="accountNo" id="accountNo3" placeholder="예금주 : 이름 !"/></td></tr>
-		<tr>
-			<td align="left">사업자 연락처</td>
-				<td><input type="text" name="tel" id="tel" placeholder="하이픈(-) 없이 !" onkeyup="autohypen()" maxlength="13"></td></tr></table>
-	<hr size="1" style="margin-top:1px; margin-bottom:1px">
-		<table align="center">
-		<tr><td></td><td align="left">
-				<input type="button" value="호스트 승인 요청" onclick="check()" id="request">
-				<input type="button" onclick="javascript:history.go(-1)" value="뒤로가기"></td></tr></table>
+</div>	
 </form:form>
+</div>
+</div>
 </body>
 </html>

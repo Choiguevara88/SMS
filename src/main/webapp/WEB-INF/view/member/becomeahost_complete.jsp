@@ -13,8 +13,8 @@
 <br>
  <div class="w3-center" id="complete" style="height:300px; width:100%;">
  <div>
- 	<div	 style="text-align:center;"><h1>Share My Space</h1></div>
- 	<div	 style="text-align:center;"><h2>빠른 시일 내에 호스트 등록 결과를 알려 드리겠습니다</h2></div>
+ 	<div	 style="text-align:center;"><h1 style="font-family:'Hanna'">Share My Space</h1></div>
+ 	<div	 style="text-align:center;"><h2 style="font-family:'Hanna'">빠른 시일 내에 호스트 등록 결과를 알려 드리겠습니다</h2></div>
  	<br>
  	<br>
  	<div>
@@ -35,7 +35,7 @@
 
 <p>'쉐어 마이 스페이스' 서비스는 매우 다양하므로 때로 추가약관 또는 제품 요구사항(연령 요건 포함)이 적용될 수 있습니다. 추가약관은 관련 서비스에 대하여 제공되며, 귀하가 해당 서비스를 이용하는 경우 이 추가약관은 귀하와 '쉐어 마이 스페이스' 간 계약의 일부가 됩니다.</p>
 
-<p><h5><strong>'쉐어 마이 스페이스' 서비스 이용</strong><h5></p>
+<p><h5><strong>'쉐어 마이 스페이스' 서비스 이용</strong></h5></p>
 <p>귀하는 서비스 내에서 적용되는 모든 정책을 준수해야 합니다.</p>
 
 <p>'쉐어 마이 스페이스' 서비스의 오용을 삼가시기 바랍니다. 
