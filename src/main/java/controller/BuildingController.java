@@ -167,7 +167,9 @@ public class BuildingController {
 		}
 		
 		for(Building build : buildingList) {
+			
 			build.setRoom(service.getmyRoomList(build.getsNo()));
+			build.setsAddress(build.getsAddress().substring(6, build.getsAddress().indexOf(" ", 12)));
 			build.setsTagList(Arrays.asList(build.getsTag().split("[|]")));
 			build.setsTypeList(Arrays.asList(build.getsType().split("[|]")));
 		}
@@ -519,8 +521,10 @@ public class BuildingController {
 		
 		for(Building build : list) {
 			build.setRoom(service.getmyRoomList(build.getsNo()));
+			build.setsAddress(build.getsAddress().substring(6, build.getsAddress().indexOf(" ", 12)));
 			build.setsTagList(Arrays.asList(build.getsTag().split("[|]")));
 			build.setsTypeList(Arrays.asList(build.getsType().split("[|]")));
+
 		}
 		
 		mav.addObject("list", list);
