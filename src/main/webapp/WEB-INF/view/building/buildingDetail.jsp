@@ -194,8 +194,8 @@ function dispifo(srno) {
 <div class="w3-row">
 <div class="w3-col s7 w3-padding">
 <!-- 공간(Building)정보 -->
-<div>
 
+<div>
 <div class="w3-padding">
 <div id="img0"></div>
 <div id="img1"></div>
@@ -205,6 +205,7 @@ function dispifo(srno) {
  <h3>공간소개</h3>
 </div>
 <div class="w3-margin-left">${building.sContent}</div>
+<br>
 <hr>
 
 <div class="w3-padding">
@@ -217,7 +218,7 @@ function dispifo(srno) {
 </div>
 <div id="infoSubs" class="w3-margin-left">
 <!-- 시설안내가 보여질 곳 -->
-</div>
+</div><br>
 <hr>
 
 <div class="w3-padding">
@@ -239,6 +240,7 @@ function dispifo(srno) {
 <div>${address1}</div>
 </div>
 <div id="map" style="width:100%;height:400px;"></div>
+<br>
 <hr size="1">
 
 <div class="w3-padding">
@@ -252,6 +254,7 @@ function dispifo(srno) {
 <div id = "rules" class="w3-margin-left">
 <!-- 이용규칙이 보여질 곳 -->
 </div>
+<br>
  <hr>
 
 <div class="w3-padding">
@@ -261,11 +264,11 @@ function dispifo(srno) {
 
 <!-- 이용후기, Q&A -->
 <div id="listQlist"></div>
-
+<br>
 <hr size="1">
-
+<br>
 <div id="listRlist"></div> 
-
+<br>
 
 </div>
 </div>

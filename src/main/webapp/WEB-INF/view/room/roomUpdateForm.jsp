@@ -19,6 +19,57 @@
 <title>세부 공간 수정</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
+function power5(){
+var sRType_chk = false;
+var sRTypeList = document.getElementsByName("sRType")
+for(var i=0;i<sRTypeList.length;i++) {
+      if (sRTypeList[i].checked==true){
+         sRType_chk = true;
+         break;
+         }
+      }
+      if(!sRType_chk){
+         alert("세부 공간 유형을 하나 이상 체크하세요.")
+      return false;
+   }
+      
+      var sResType_chk = false;
+  	var sResTypeList = document.getElementsByName("sResType")
+  	for(var i=0;i<sResTypeList.length;i++) {
+  	      if (sResTypeList[i].checked==true){
+  	         sResType_chk = true;
+  	         break;
+  	         }
+  	      }
+  	      if(!sResType_chk){
+  	         alert("예약 유형을 하나 이상 체크하세요.")
+  	      return false;
+  	   }      
+
+if($('#sRName').val()=='' ){
+      alert("세부 공간 이름을 작성하세요~><");
+      document.getElementById('sRName').focus();
+  
+}else if($('#sRContent').val()=='' ){
+    alert("세부 공간 소개를 작성하세요~><");
+    document.getElementById('sRContent').focus();
+ }
+
+else if($('#sPrice').val()=='' ){
+    alert("가격을 설정하세요~><");
+    document.getElementById('sPrice').focus();
+ }
+
+else{
+		var res=confirm("정보는 제대로 다 적으셨나여? ><");
+		if(res == true){
+			document.sp.submit();
+		}
+	}
+}
+
+
+
 $(document).ready(function() {
 	$("#sRImg").attr('disabled', true)
 
@@ -75,7 +126,7 @@ function chkboxcheck2() {
 <div class="w3-row">
 <div class="w3-col s2"><p>&nbsp;</p></div>
 <div class="w3-col s8">
-<form:form modelAttribute="room" action="roomUpdateSuccess.sms" method="post" commandName="room" enctype="multipart/form-data">
+<form:form modelAttribute="room" action="roomUpdateSuccess.sms" method="post" commandName="room" enctype="multipart/form-data" name="sp">
 <input type="hidden" name="sNo" value="${building.sNo}">
 <input type="hidden" name="sRNo" value="${room.sRNo}">
 <input type="hidden" id="sRImgNameList" name="sRImgNameList">
@@ -193,7 +244,7 @@ function chkboxcheck2() {
     	</div>
 	</div>
 	<div class="w3-container w3-section w3-padding" style="text-align:center;">
-		<input type="submit" value="수정하기" class="w3-btn w3-black" style="font-family:'Hanna'; width:30%;">
+		<input type="button" value="수정하기" class="w3-btn w3-black" style="font-family:'Hanna'; width:30%;" onclick="power5()">
 	</div>
 </div>
 <div>

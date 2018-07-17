@@ -141,6 +141,60 @@ public class BuildingController {
 		mav.addObject("roomList", roomList);
 		return mav;
 	}
+	
+	
+	// 빌딩 검색 및 리스트용 메서드
+	@RequestMapping(value="building/buildingList", method=RequestMethod.GET)
+	public ModelAndView buildingList(String searchType, String searchContent, Integer pageNum, HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		int limit = 12;
+		
+		if (pageNum == null) {
+			pageNum = 1;
+		}
+
+		int listCnt = service.getBuildingCnt(searchType, searchContent);
+		List <Building> buildingList  = service.getBuildingList(searchType, searchContent, pageNum, limit);
+		
+		int maxpage = (int) ((double) listCnt / limit + 0.95);
+		
+		int startpage = ((((int) (pageNum / 10.0 + 0.9)) - 1) * 10) + 1;
+		int endpage = startpage + 9;
+
+		if (endpage > maxpage) {
+			endpage = maxpage;
+		}
+		
+		for(Building build : buildingList) {
+			build.setRoom(service.getmyRoomList(build.getsNo()));
+			build.setsTagList(Arrays.asList(build.getsTag().split("[|]")));
+			build.setsTypeList(Arrays.asList(build.getsType().split("[|]")));
+		}
+
+		mav.addObject("pageNum", pageNum);
+		mav.addObject("maxpage", maxpage);
+		mav.addObject("startpage ", startpage);
+		mav.addObject("endpage", endpage);
+		mav.addObject("listCnt", listCnt);
+		mav.addObject("list", buildingList);
+
+		if (searchType != null && searchType.equals("")) {
+			mav.addObject("searchType", searchType);
+		}
+
+		return mav;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	@ModelAttribute
 	public Board getBoard() {
 		return new Board();
@@ -455,8 +509,13 @@ public class BuildingController {
 		
 		Member mem = (Member)session.getAttribute("loginMember");
 		String id = mem.getId();
+		boolean chk = false;		
 		
 		List<Building> list = service.getMyWishBuildings(id); // 찜한 건물 목록
+		
+		if(list != null && !list.isEmpty()) {
+			chk = true;
+		}
 		
 		for(Building build : list) {
 			build.setRoom(service.getmyRoomList(build.getsNo()));
@@ -465,6 +524,7 @@ public class BuildingController {
 		}
 		
 		mav.addObject("list", list);
+		mav.addObject("chk", chk);
 		
 		return mav;
 	}

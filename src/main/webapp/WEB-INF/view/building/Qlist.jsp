@@ -205,8 +205,9 @@ function check5(bno,sno,kind) {
 			</c:if>&nbsp;
 			<c:if test="${pageNum >= maxpage}">[다음]</c:if>&nbsp;
 			</td></tr>
-	</c:if>
+</c:if>
 <c:if test="${listcount == 0}">
+     <tr><td>&nbsp;</td></tr>
 	 <tr><td colspan="5">등록된 게시물이 없습니다.</td></tr>
 	 </c:if>
 </table>

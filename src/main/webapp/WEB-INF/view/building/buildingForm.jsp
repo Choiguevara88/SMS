@@ -146,7 +146,7 @@ $(document).ready(function() {
 	$("#direct").click(function(){
 		var chk = $("input:checkbox[id='direct']").is(":checked")
 		var dir = document.getElementById("directsHDay")
-		var dirTag = "<tr><td></td><td><input id='sHDaydir' name='sHDay'/></td></tr>";
+		var dirTag = "<tr><td></td><td><input id='sHDaydir' name='sHDay' style='width:300px'/></td></tr>";
 		if(chk) {
 			$("#sHDayList" ).attr('disabled', true );
 			dir.innerHTML = dirTag
@@ -287,63 +287,87 @@ function chk_tel(){
 <div>
 <form:form id="sss" modelAttribute="building" method="post" action="buildingReg.sms" enctype="multipart/form-data" name="bf">
 <input type="hidden" name="id" value="${param.id}" />
-  <table cellpadding="0" cellspacing="1" align="center">
-  <tr><td colspan="2" align="center">공간정보</td></tr>
-    <tr><td>공간 유형(최대 3개)</td>
+<br>
+<table cellpadding="5" cellspacing="5" align="center" width="75%">
+  <tr><td colspan="2"><h1>공간 등록하기</h1></td></tr>
+  <tr><td colspan="3" align="center" class="w3-border-bottom w3-border-gray"><h2>공간정보</h2></td></tr>
+  <tr><td colspan="3" align="center">&nbsp;</td></tr>
+    <tr><td><font class="w3-large">공간 유형</font></td>
         <td>
-        <form:checkboxes path="sTypeList" items="${sTypeNames}" onchange="chkboxcheck()" style="margin-left:10px;"/>  
-        </td></tr>
+        <form:checkboxes path="sTypeList" items="${sTypeNames}" onchange="chkboxcheck()" style="margin-left:15px;"/>  
+        </td>
+        <td>최대3개</td></tr>
            
-    <tr><td>공간 이름(최대 20자)</td><td><form:input path="sName" /></td></tr>
-    <tr><td>공간 한줄 소개(최대 30자)</td><td><form:input path="sPreview" /></td></tr>
-    <tr><td>공간 소개(최대 500자)</td><td><form:textarea cols="50px" rows="10px" path="sContent" /></td></tr>
-    
-    <tr><td>태그 설정(최대 5개)</td>
-        <td><input id="tag" />
-            <input type="button" id="addtag" value="추가" />
-            </td></tr>
+    <tr><td><font class="w3-large">공간 이름</font></td>
+        <td><form:input path="sName" class="w3-input" maxlength="30" placeholder="상호명을 입력해주세요. ex)쉐마쉐서울2호점"/></td>
+        <td>최대 20자</td></tr>
+        
+    <tr><td><font class="w3-large">공간 한줄 소개</font></td>
+        <td><form:input path="sPreview" class="w3-input" placeholder="한줄소개를 입력해주세요. ex)마포구 최고의 코워킹 스페이스"/></td>
+        <td>최대30자</td></tr>
+        
+    <tr><td valign="top"><font class="w3-large">공간 소개</font></td>
+        <td><form:textarea cols="83px" rows="5px" path="sContent" 
+                           placeholder="공간을 상세하게 소개해보세요. 공간의 특징이나 주변환경 등의 세부정보를 작성하시면 효과적입니다." /></td>
+        <td>최대 500자</td></tr>
+                           
+    <tr><td valign="top"><font class="w3-large">태그 설정</font></td>
+        <td><div class="w3-row"><div class="w3-col s7">
+        <input class="w3-input" id="tag" placeholder="공간 검색시 검색될 내용을 입력하세요.  ex)#마포구, #조용한"/></div>
+        <div class="w3-col s5">
+            <input type="button" id="addtag" class="w3-btn w3-deep-purple" value="추가" />
+            </div></div>
+            </td><td valign="top">최대 5개</td></tr>
     <tr><td></td><td> <div id="tagList">
               <!-- 태그 추가시 웹상 보여지는 부분 -->
             </div></td></tr>
 
         
-    <tr><td>시설안내(최대 10개)</td>
-        <td><input id="info" />
-            <input type="button" id="addinfo" value="추가" /></td></tr>
+    <tr><td valign="top"><font class="w3-large">시설안내</font></td>
+        <td><div class="w3-row">
+        <div class="w3-col s10">
+        <input class="w3-input" id="info" placeholder="이 공간에 구비된 시설을 입력하세요. ex)넓고 쾌적한 공간"/>
+        </div>
+        <div class="w3-col s2">
+            <input type="button" id="addinfo" class="w3-btn w3-deep-purple" value="추가" />
+           </div></div></td>
+            <td>최대 10개</td></tr>
     <tr><td></td><td> <div id="infoList">
               <!-- 시설안내 추가시 웹상에서 보여지는 부분 -->
             </div></td></tr>
     
-    <tr><td>대표이미지</td>
+    <tr><td><font class="w3-large">대표이미지</font></td>
         <td><input type="file" id="sImg1" name="sImg1File" accept="image/*"/></td></tr>
     
-    <tr><td>이미지</td>
+    <tr><td><font class="w3-large">이미지</font></td>
         <td>
         <input multiple="multiple" type="file" id="sImg2" name="sImg2Files" accept="image/*" /></td></tr>
     
-    <tr>
-			<td><strong>사업자 주소지</strong></td></tr>
-		<tr>
-			<td>우편번호</td><td><input type="text" name="sAddress" id="zipcode" class="postcodify_postcode5" value="" readonly/>
-				<input type="button" id="postcodify_search_button" value="검색"></td></tr>
-		<tr>
-			<td>도로명 주소</td><td><input type="text" id="asdf" name="sAddress" class="postcodify_address" value="" readonly/></td></tr>
-		<tr>
-			<td>상세 주소</td><td><input type="text" name="sAddress" id="details" class="postcodify_details" value="" onfocus="drawmap()"/></td></tr>
-		<tr><td colspan="2"><div id="map" style="width:100%;height:200px;"></div></td></tr>
-                
-     <tr><td colspan="2" align="center">이용정보</td></tr>
-     <tr><td>이용시간</td>
+    <tr><td><font class="w3-large">주소</font></td><td><input type="text" style="width:500px" name="sAddress" id="zipcode" class="postcodify_postcode5" value="" readonly/>
+				<input type="button" id="postcodify_search_button" class="w3-btn w3-deep-purple" value="주소검색"></td></tr>
+	<tr><td></td><td><input type="text" style="width:500px" id="asdf" name="sAddress" class="postcodify_address" value="" readonly/></td></tr>
+	<tr><td><font class="w3-large">상세주소 입력</font></td>
+	    <td><div class="w3-row"><div class="w3-col s8">
+	    <input type="text" class="w3-input" name="sAddress" id="details" class="postcodify_details" value="" onfocus="drawmap()"/>
+	        </div></div></td></tr>
+	<tr><td></td><td><div id="map" style="width:100%;height:200px;"></div></td></tr>
+      <tr><td></td></tr> 
+          
+     <tr><td colspan="3" align="center" class="w3-border-bottom w3-border-gray"><h2>이용정보</h2></td></tr>
+     <tr><td>&nbsp;</td></tr>
+     
+     <tr><td><font class="w3-large">이용시간</font></td>
          <td><select name="sBHourList">
          <c:forEach var="i" begin="0" end="23" >
-         <option>${i}시</option></c:forEach></select>부터
+         <option>${i}시</option></c:forEach></select>&nbsp;부터&nbsp;&nbsp;
          <select name="sBHourList">
          <c:forEach var="i" begin="1" end="24" >
-         <option>${i}시</option></c:forEach></select>까지</td></tr>
+         <option>${i}시</option></c:forEach></select>&nbsp;까지</td></tr>
      
-     <tr><td>정기휴무</td>
+     <tr><td valign="top"><font class="w3-large">정기휴무</font></td>
          <td>
-         <select id="sHDayList" name="sHDay">
+         <div class="w3-row"><div class="w3-col s5">
+         <select id="sHDayList" name="sHDay" class="w3-select">
          <option>휴무없음</option>
          <option>공휴일휴무</option>
          <option>명절연휴휴무</option>
@@ -351,25 +375,33 @@ function chk_tel(){
          <option>주말휴무</option>
          <option>토요일휴무</option>
          <option>일요일휴무</option>
-         </select>
+         </select></div></div>
+         
          <input type="checkbox" id="direct" /> 직접입력
          <div id="directsHDay"><!-- 직접입력을 누르면 input태그가 생기는 부분 -->
          <!-- <tr><td></td><td><input id="directInput" /></td></tr> -->
          </div></td></tr>
-    <tr><td align="left">공간 연락처</td>
+         
+    <tr><td><font class="w3-large">공간 연락처</font></td>
 		<td>
-		<input type="text" name="sTel" id="sTel"> 
-		</td></tr>
+		<div class="w3-row"><div class="w3-col s8">
+		<input type="text" name="sTel" id="sTel" class="w3-input" placeholder="하이픈(-) 없이 입력하세요">
+		</div></div></td></tr>
  
-    <tr><td>이용시 주의사항(최대 10개)</td>
-        <td><input id="rule"  onfocus="chk_tel()"/>
-            <input type="button" id="addrule" value="추가" /></td></tr>
+    <tr><td><font class="w3-large">이용시 주의사항</font></td>
+        <td><div class="w3-row">
+            <div class="w3-col s10">
+            <input id="rule" class="w3-input" onfocus="chk_tel()" placeholder="공간 이용시 주의사항을 입력하세요 ex)예약전 연락 부탁드립니다."/></div>
+            <div class="w3-col s2">
+            <input type="button" class="w3-btn w3-deep-purple" id="addrule" value="추가" /></div>
+            </div>
+            </td><td>최대10개</td></tr>
     <tr><td></td><td> <div id="ruleList">
               <!-- 이용시 주의사항 추가시 웹상에서 보여지는 부분 -->
             </div>
      
-     <tr><td colspan="2" align="center">
-     <input type="button" value="공간등록" onclick="checkb()" id="request">
+     <tr><td colspan="3" align="center">
+     <input type="button" value="공간등록" onclick="checkb()" id="request">&nbsp;&nbsp;&nbsp;&nbsp;
      <input type="button" value="등록취소" onclick="javascript:history.back()"></td></tr>
   </table>
 
