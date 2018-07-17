@@ -48,12 +48,36 @@ function roomDelete(sNo,sRNo) {
 <body>
 <form:form modelAttribute="room" commandName="room" name="sp">
 <div class="w3-container">
+<<<<<<< HEAD
 <div class="w3-container w3-margin w3-card w3-padding-16">
 	<h1 style="font-family:'Hanna'">세부 공간 정보</h1>
 
 <p>
     <div class="w3-container w3-margin w3-row">
     	<div class="w3-col s8"><label style="font-family:'Hanna'">세부 공간 이름</label><div style="border-bottom:1px solid black;" class="w3-sepia">${room.sRName }</div></div>
+=======
+  <div class="w3-card-4" style="width:30%">
+    <div class="w3-container w3-center">
+     <c:forEach var="roomImg" items="${room.sRImgNameList}">
+      <div >
+      <img src="../picture/${roomImg}" style="width:100%; height:250px"><br>
+      </div>
+      </c:forEach>
+      <p>세부 공간 이름 : ${room.sRName}</p><br>	
+      <p>설명 : ${room.sRContent}</p><br>
+      <p>공간 유형 : ${room.sRType}</p><br>
+      <div class="srinfo">시설 안내
+      <c:forEach var="roomInfo" items="${room.sRInfoList}">
+      <div >
+    	 ${roomInfo}
+      </div>
+     	</c:forEach>
+     	</div>
+     	
+      <p>예약 유형 : ${room.sResType}</p><br>
+	  <p>최소 인원 : ${room.sRPersonLimit}</p><br>
+	  <p>시간/일 가격 : ${room.sPrice}</p><br>
+>>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
     </div>
 	
 	<div class="w3-row w3-container w3-margin">

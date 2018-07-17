@@ -10,6 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script type="text/javascript">
 $(document).ready(function(){
 	
@@ -164,7 +165,6 @@ function dispifo(srno) {
 .thumbnail .centered { position: absolute; top: 0; left: 0; right: 0; bottom: 0; -webkit-transform: translate(50%,50%); -ms-transform: translate(50%,50%); transform: translate(50%,50%); } 
 .thumbnail .centered img { position: absolute; top: 0; left: 0; width: auto; height: 120px; -webkit-transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); transform: translate(-50%,-50%); }
 
-출처: http://webdir.tistory.com/487 [WEBDIR]
 </style>
 <!-- 지도관련 스크립트 -->
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=2bA8v55yYLf1omsHnKFk&submodules=geocoder"></script>
@@ -194,8 +194,8 @@ function dispifo(srno) {
 <div class="w3-row">
 <div class="w3-col s7 w3-padding">
 <!-- 공간(Building)정보 -->
-<div>
 
+<div>
 <div class="w3-padding">
 <div id="img0"></div>
 <div id="img1"></div>
@@ -205,6 +205,7 @@ function dispifo(srno) {
  <h3>공간소개</h3>
 </div>
 <div class="w3-margin-left">${building.sContent}</div>
+<br>
 <hr>
 
 <div class="w3-padding">
@@ -217,7 +218,7 @@ function dispifo(srno) {
 </div>
 <div id="infoSubs" class="w3-margin-left">
 <!-- 시설안내가 보여질 곳 -->
-</div>
+</div><br>
 <hr>
 
 <div class="w3-padding">
@@ -239,6 +240,7 @@ function dispifo(srno) {
 <div>${address1}</div>
 </div>
 <div id="map" style="width:100%;height:400px;"></div>
+<br>
 <hr size="1">
 
 <div class="w3-padding">
@@ -252,6 +254,7 @@ function dispifo(srno) {
 <div id = "rules" class="w3-margin-left">
 <!-- 이용규칙이 보여질 곳 -->
 </div>
+<br>
  <hr>
 
 <div class="w3-padding">
@@ -261,11 +264,11 @@ function dispifo(srno) {
 
 <!-- 이용후기, Q&A -->
 <div id="listQlist"></div>
-
+<br>
 <hr size="1">
-
+<br>
 <div id="listRlist"></div> 
-
+<br>
 
 </div>
 </div>
@@ -279,7 +282,7 @@ function dispifo(srno) {
 <p align="center">등록된 세부공간이 없습니다.</p>
 <p align="center"><font color="red">호스트의 업데이트를 기다려주세요.</font></p>
 <c:if test="${sessionScope.loginMember.id == building.id }">
-<p align="center">세부공간을 등록하려면 <a href="/TestProject/room/roomList.sms?sNo=${param.sNo}">[세부공간 등록하기]</a> 를 눌러주세요.</p>
+<p align="center">세부공간을 등록하려면 <a href="../room/roomList.sms?sNo=${param.sNo}">[세부공간 등록하기]</a> 를 눌러주세요.</p>
 </c:if>
 </c:if>
 
@@ -319,9 +322,9 @@ function dispifo(srno) {
    <table><tr><td><span class="w3-margin-left"><b>편의시설</b></span></td>
    <td>
    <c:forEach items="${room.sRInfoList}" var="item">
-   <span class="w3-margin-left">${item}</span>
+   <div class="w3-margin-left" style="border:solid 1px;">${item}</div>
    </c:forEach>
-   </td>
+	   </td>
    </table>
    <br>
    <br>

@@ -234,7 +234,7 @@ function chkboxcheck2() {
     		<label style="font-family:'Hanna'">예약 단위당 가격</label>
     		<form:input path="sPrice" class="w3-input" placeholder="숫자만 입력하세요." value="${room.sPrice }"/>
     		<font color="red"><form:errors path="sPrice"/></font>
-    	</div>
+    	</div> 
 	</div>
 	<div class="w3-container w3-section w3-padding" style="text-align:center;">
 		<input type="button" value="수정하기" class="w3-btn w3-black" style="font-family:'Hanna'; width:30%;" onclick="power5()">
