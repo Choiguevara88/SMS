@@ -267,10 +267,29 @@ function closeRightMenu() {
 <div class="w3-content" style="max-width:1400px">
 <decorator:body/>
 </div>
-<div class="w3-container w3-light-gray" align="right"><p>	
-<h2>
-This is Sparta!!!!!
-</h2>
+<div class="w3-container w3-light-gray">	
+<div class="w3-container w3-margin w3-padding w3-row">
+<div class="w3-col s2"><p>&nbsp;</p></div>
+
+<div class="w3-col s8 w3-margin">
+	<div class="w3-margin w3-container">
+		<font style="font-family:'Hanna'; font-size:xx-large;">Share My Space</font>
+	</div>
+	<div class="w3-container w3-margin w3-text-gray" style="font-size:small;">
+	<p>상호명 : 쉐어마이스페이스 | 사업자등록번호 : 100-10-10000</p>
+	<p>동신판매업신고번호:2018-서울금천구-1000 | 대표 : 박선민, 신진호, 이승환, 정인선, 최재원</p>
+	<p>영업소재지 : 서울특별시 금천구 가산디지털2로 115 509호 구디아카데미, 대륭테크노타운 3차</p>
+	<p>이메일 : shareMySpace@Andromeda.or.kr</p>
+	<p>대표전화 : 02-0000-1111 </p>
+	<c:if test="${loginMember != null }">
+		<p><a href="${path}/qa/questionAdmin.sms?id=${loginMember.id}">온라인 1:1 문의 바로가기</a> (평일 오전 10시 ~ 오후 6시 30분)</p>
+	</c:if>
+	<p>*공간에 대한 문의사항은 해당 공간 호스트에게 직접 문의해주세요.</p>
+	</div> 
+</div>
+</div>		
+		
+<div class="w3-col s2"><p>&nbsp;</p></div>
 </div>
 
 </body>
