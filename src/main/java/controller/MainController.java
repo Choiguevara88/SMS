@@ -56,16 +56,16 @@ public class MainController {
 		 
 		List<Room> sPrice1 = new ArrayList<Room>();
 		List<Building> building1 = new ArrayList<Building>();
-		for(int i = 0; i< sNo.length;i++) { 
-			building1.add(service.getbuilding_mainpage(sNo[i]));
-			System.out.println(service.getbuilding_mainpage(sNo[i]).getsTagList());
-			sPrice1.add(service.getmyRoom_lowestprice(sNo[i]));
+		for(int i = 0; i< sNo2.length;i++) { 
+			building1.add(service.getbuilding_mainpage(sNo2[i]));
+			System.out.println(service.getbuilding_mainpage(sNo2[i]).getsTagList());
+			sPrice1.add(service.getmyRoom_lowestprice(sNo2[i]));
 		}
 		mav.addObject("today_buildings", building1);
 		mav.addObject("today_buildings_price", sPrice1);
 		
-		//building ¸®½ºÆ®¶û sPrice¸®½ºÆ®ÀÇ ÀÎµ¦½ºµéÀº °°ÀÌ ¿òÁ÷ÀÓ
-		//»ç¶÷µéÀÌ °¡Àå ¸¹ÀÌ ¿¹¾àÇÑ °÷! ÇÖÇÃ·¹ÀÌ½º 6°³
+		//building ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ sPriceï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½! ï¿½ï¿½ï¿½Ã·ï¿½ï¿½Ì½ï¿½ 6ï¿½ï¿½
 		List<Room> sPrice2 = new ArrayList<Room>();
 		List<Building> building2 = new ArrayList<Building>();
 		List<Board> review = new ArrayList<Board>();
@@ -86,10 +86,10 @@ public class MainController {
 		mav.addObject("buildings_review_price", sPrice2);
 		
 		
-		//ÆòÁ¡ ÁÁÀº¼ø~
-		//Board¿¡¼­ Æò±Õ ÆòÁ¡À» °è»êÇÑµÚ Æò±ÕÆòÁ¡ÀÌ ³ôÀº ¼øÀ¸·Î 6°³ÀÇ ºôµù sNo°¡Á®¿À±â
-		//sNo·Î Building °¡Á®¿À°í, Room°¡Á®¿À±â
-		//º¸³»±â
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½~
+		//Boardï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 6ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ sNoï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//sNoï¿½ï¿½ Building ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, Roomï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		List<Room> sPrice3 = new ArrayList<Room>();
 		List<Building> building3 = new ArrayList<Building>();
 		List<Board> board = new ArrayList<Board>();
