@@ -24,12 +24,21 @@ var tagstag = document.getElementById("tags");
 var tag = "";
 <c:forEach items="${building.sTagList}" var="item">
     tag= ("${item}");
+<<<<<<< HEAD
 	tagih+="<span class='w3-tag w3-white w3-round-xlarge w3-border w3-border-gray w3-center'>"
 	+ "<a href='buildingList.sms?searchType=sTag&searchContent="+ tag + "' style='text-decoration:none'>#"
 	+ tag + "</a></span>&nbsp;&nbsp;"
 	</c:forEach>
 	tagstag.innerHTML = tagih;
 	
+=======
+   tagih+="<span class='w3-tag w3-white w3-round-xlarge w3-border w3-border-gray w3-center'>"
+   + "<a href='buildingList.sms?searchType=sTag&searchContent="+ tag + "' style='text-decoration:none'>#"
+   + tag + "</a></span>&nbsp;&nbsp;"
+</c:forEach>
+tagstag.innerHTML = tagih;
+
+>>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
 /*시설안내 스크립트*/
 var infoSubih="";
 var infoSubstag = document.getElementById("infoSubs");
@@ -236,7 +245,7 @@ function dispifo(srno) {
 <div class="w3-margin-top"><span><b>연락처</b></span>&nbsp;&nbsp;&nbsp;<span>${building.sTel}</span></div>
 </div>
 <br>
-<div class="w3-light-gray w3-border-deep-purple">
+<div class="w3-light-gray w3-border-deep-purple w3-padding">
 <div><h3>${building.sName}</h3></div>
 <div>${address1}</div>
 </div>
@@ -256,19 +265,21 @@ function dispifo(srno) {
 <!-- 이용규칙이 보여질 곳 -->
 </div>
 <br>
- <hr>
 
 <div class="w3-padding">
 <div id="img8"></div>
 <div id="img9"></div>
 </div>
+<hr style="border: solid 1px gray">
+<br>
 
 <!-- 이용후기, Q&A -->
 <div id="listQlist"></div>
+<hr style="border: solid 1px gray">
 <br>
-<hr size="1">
-<br>
+
 <div id="listRlist"></div> 
+<hr style="border: solid 1px gray">
 <br>
 
 </div>

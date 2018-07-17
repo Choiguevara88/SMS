@@ -4,9 +4,6 @@
 <html>
 <head>
 
-<!-- w3 css 사용 선언 -->
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- w3 css 사용 선언-->
 
 <!-- 부트스트랩 사용 선언 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -14,6 +11,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <!-- 부트스트랩 사용 선언 -->
+<!-- w3 css 사용 선언 -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<!-- w3 css 사용 선언-->
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>세부 공간 수정</title>
@@ -188,11 +189,34 @@ function chkboxcheck2() {
 	<p style="font-family:'Hanna'">편의 시설</p>
 	<table class="w3-table w3-border">
 	
-	<tr><td >
-		<form:checkboxes path="sRInfoList" items="${sRInfoNames1}" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="w3-checkbox"/>
-	<tr><td>
+	<tr>
+     <c:forEach items="${sRInfoNames1}" var="na">
+     <td style="width:25%;"><form:checkbox  path="sRInfoList" value="${na}"/>${na}</td>
+     </c:forEach>
+ 	</tr>
+	<tr>
+     <c:forEach items="${sRInfoNames2}" var="na">
+     <td style="width:25%;"><form:checkbox  path="sRInfoList" value="${na}"/>${na}</td>
+     </c:forEach>
+ 	</tr>
+	<tr>
+     <c:forEach items="${sRInfoNames3}" var="na">
+     <td style="width:25%;"><form:checkbox  path="sRInfoList" value="${na}"/>${na}</td>
+     </c:forEach>
+ 	</tr>
+	<tr>
+     <c:forEach items="${sRInfoNames4}" var="na">
+     <td style="width:25%;"><form:checkbox  path="sRInfoList" value="${na}"/>${na}</td>
+     </c:forEach>
+ 	</tr>
+	<tr>
+     <c:forEach items="${sRInfoNames5}" var="na">
+     <td style="width:25%;"><form:checkbox  path="sRInfoList" value="${na}"/>${na}</td>
+     </c:forEach>
+ 	</tr>
 	
-	<tr><td>
+<%-- <form:checkboxes path="sRInfoList" items="${sRInfoNames1}" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="w3-checkbox"/>--%>
+	<%-- <tr><td>
 		<form:checkboxes path="sRInfoList" items="${sRInfoNames2}" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="w3-checkbox"/>
 	<tr><td>
 	
@@ -206,7 +230,7 @@ function chkboxcheck2() {
 	
 	<tr><td>
 		<form:checkboxes path="sRInfoList" items="${sRInfoNames5}" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="w3-checkbox"/>
-	<tr><td>
+	<tr><td> --%>
 	
 	
 	

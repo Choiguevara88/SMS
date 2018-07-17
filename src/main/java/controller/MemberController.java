@@ -89,11 +89,11 @@ public class MemberController {
 		try {
 		service.joinsms(member);
 		System.out.println("11234");
-		mav.setViewName("redirect: ../login.sms");
 		mav.addObject("member",member);
 		} catch(DataIntegrityViolationException e) {
 			bindingResult.reject("error.duplicate.user");
 		}
+		mav.setViewName("redirect: ../login.sms");
 		return mav;
 	}
 	@RequestMapping(value = "login", method = RequestMethod.GET) //URL濡� 寃����댁�� �ㅼ�� ���� ��
@@ -235,7 +235,7 @@ public class MemberController {
 	    		return mav;
 	    } else {
 	    		session.setAttribute("loginMember", member);
-	    		mav.setViewName("main");
+	    		mav.setViewName("redirect: main.sms");
 	    		return mav;
 	    }
 	}
@@ -364,7 +364,7 @@ public class MemberController {
 		return mav;
 	}
 	@RequestMapping(value="personal_info_new")
-	public ModelAndView personal_info_new(@Valid Member member, HttpSession session, BindingResult bindingResult) {
+	public ModelAndView personal_info_new(@Valid Member member, BindingResult bindingResult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
 			mav.getModel().putAll(bindingResult.getModel());
@@ -378,7 +378,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="personal_info_delete")
-	public ModelAndView personal_info_delete(String id, HttpSession session) {
+	public ModelAndView personal_info_delete(String id,BindingResult bindingResult, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/delete_account");
 		return mav;

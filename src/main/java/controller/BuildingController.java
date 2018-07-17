@@ -441,8 +441,9 @@ public class BuildingController {
 	@RequestMapping(value="building/delete", method=RequestMethod.POST)
 	public ModelAndView delete(Integer bNo, Integer sNo,Integer kind) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println(bNo);
-		service.boardDelete(bNo);
+		Board bo = service.getBoard(bNo);
+		int num = bo.getRef();
+		service.boardDelete(num);
 		mav.setViewName("redirect:/building/buildingDetail.sms?sNo="+sNo);
 		return mav;
 	}
