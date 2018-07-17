@@ -13,6 +13,7 @@
 
 <!-- w3 css 사용 선언 -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!-- w3 css 사용 선언 -->
 
 <!-- fontAwesome Icon 사용 선언 -->
@@ -239,7 +240,7 @@ $(document).ready(function() {
 		
 	<div class="w3-row w3-margin">
 		<c:forEach items="${room.sRInfoList}" var="srInfo" varStatus="cnt">
-			<div class="w3-col s3 w3-margin">● <font style="font-family:'Hanna'; text-align:center; color:gray;">${srInfo}</font></div>
+			<div class="w3-col s3 w3-margin"><font style="font-family:'Hanna'; text-align:center; color:gray;">${srInfo}</font></div>
 		</c:forEach>	
 	</div>
 </div>
