@@ -113,24 +113,25 @@ $(document).ready(function() {
 })
 
 	function check(f) {
+		
 		if(f.reDate1.value == '') {
 			alert('날짜 입력 해주세요.');
 			f.reDate1.focus();
 			return false;
 		}
 		
-		if(f.reTime.value == '') {
+		if(f.selectReCnt.value == '') {
+			alert('수량 확인 해주세요.');
+			f.selectReCnt.focus();
+			return false;
+		} 
+
+ 		if(f.reTime.value == '') {
 			alert('시간을 체크 해주세요.');
 			f.reTime.focus();
 			return false;
 		}		
-		
-		if(f.reCnt.value =='') {
-			alert('수량 확인 해주세요.');
-			f.reCnt.focus();
-			return false;
-		}
-		
+ 
 		return f.submit();
 	}
 
