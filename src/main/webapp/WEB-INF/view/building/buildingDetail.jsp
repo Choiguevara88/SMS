@@ -24,12 +24,12 @@ var tagstag = document.getElementById("tags");
 var tag = "";
 <c:forEach items="${building.sTagList}" var="item">
     tag= ("${item}");
-   tagih+="<span class='w3-tag w3-white w3-round-xlarge w3-border w3-border-gray w3-center'>"
-   + "<a href='buildingList.sms?searchType=sTag&searchContent="+ tag + "' style='text-decoration:none'>#"
-   + tag + "</a></span>&nbsp;&nbsp;"
-</c:forEach>
-tagstag.innerHTML = tagih;
-
+	tagih+="<span class='w3-tag w3-white w3-round-xlarge w3-border w3-border-gray w3-center'>"
+	+ "<a href='buildingList.sms?searchType=sTag&searchContent="+ tag + "' style='text-decoration:none'>#"
+	+ tag + "</a></span>&nbsp;&nbsp;"
+	</c:forEach>
+	tagstag.innerHTML = tagih;
+	
 /*시설안내 스크립트*/
 var infoSubih="";
 var infoSubstag = document.getElementById("infoSubs");

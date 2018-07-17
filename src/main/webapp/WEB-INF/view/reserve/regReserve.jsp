@@ -13,11 +13,14 @@
 
 <!-- w3 css 사용 선언 -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!-- w3 css 사용 선언 -->
 
 <!-- fontAwesome Icon 사용 선언 -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 <!-- fontAwesome Icon 사용 선언 -->
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
@@ -110,24 +113,25 @@ $(document).ready(function() {
 })
 
 	function check(f) {
+		
 		if(f.reDate1.value == '') {
 			alert('날짜 입력 해주세요.');
 			f.reDate1.focus();
 			return false;
 		}
 		
-		if(f.reTime.value == '') {
+		if(f.selectReCnt.value == '') {
+			alert('수량 확인 해주세요.');
+			f.selectReCnt.focus();
+			return false;
+		} 
+
+ 		if(f.reTime.value == '') {
 			alert('시간을 체크 해주세요.');
 			f.reTime.focus();
 			return false;
 		}		
-		
-		if(f.reCnt.value =='') {
-			alert('수량 확인 해주세요.');
-			f.reCnt.focus();
-			return false;
-		}
-		
+ 
 		return f.submit();
 	}
 
@@ -239,7 +243,7 @@ $(document).ready(function() {
 		
 	<div class="w3-row w3-margin">
 		<c:forEach items="${room.sRInfoList}" var="srInfo" varStatus="cnt">
-			<div class="w3-col s3 w3-margin">● <font style="font-family:'Hanna'; text-align:center; color:gray;">${srInfo}</font></div>
+			<div class="w3-col s3 w3-margin"><font style="font-family:'Hanna'; text-align:center; color:gray;">${srInfo}</font></div>
 		</c:forEach>	
 	</div>
 </div>

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -164,7 +163,9 @@ public class BuildingController {
 		}
 		
 		for(Building build : buildingList) {
+			
 			build.setRoom(service.getmyRoomList(build.getsNo()));
+			build.setsAddress(build.getsAddress().substring(6, build.getsAddress().indexOf(" ", 12)));
 			build.setsTagList(Arrays.asList(build.getsTag().split("[|]")));
 			build.setsTypeList(Arrays.asList(build.getsType().split("[|]")));
 		}
@@ -435,7 +436,9 @@ public class BuildingController {
 	@RequestMapping(value="building/delete", method=RequestMethod.POST)
 	public ModelAndView delete(Integer bNo, Integer sNo,Integer kind) {
 		ModelAndView mav = new ModelAndView();
-		service.boardDelete(bNo);
+		Board bo = service.getBoard(bNo);
+		int num = bo.getRef();
+		service.boardDelete(num);
 		mav.setViewName("redirect:/building/buildingDetail.sms?sNo="+sNo);
 		return mav;
 	}
@@ -498,7 +501,7 @@ public class BuildingController {
 	}
 	
 	@RequestMapping(value="building/wishlist.sms", method=RequestMethod.GET) // 찜한 공간 목록 불러올 때 사용하는 메서드
-	public ModelAndView buildingWishList(HttpSession session) {
+	public ModelAndView myWishList(HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -514,8 +517,10 @@ public class BuildingController {
 		
 		for(Building build : list) {
 			build.setRoom(service.getmyRoomList(build.getsNo()));
+			build.setsAddress(build.getsAddress().substring(6, build.getsAddress().indexOf(" ", 12)));
 			build.setsTagList(Arrays.asList(build.getsTag().split("[|]")));
 			build.setsTypeList(Arrays.asList(build.getsType().split("[|]")));
+
 		}
 		
 		mav.addObject("list", list);

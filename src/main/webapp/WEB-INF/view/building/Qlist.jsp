@@ -108,7 +108,7 @@ function checkw() {
         <tr><td><font color="red"><form:errors path="content"/></font></td></tr>
         <tr><td style="text-align:center;">
             <input type="button" value="질문등록" onclick="checkw()" class="btn btn-outline-primary btn-lg" style="font-family:'Hanna'; font-size:x-large;">
-			<a href="javascript:document.f.reset()" class="btn btn-outline-danger btn-lg" style="font-family:'Hanna'; font-size:x-large;">다시작성</a>
+			<a href="javascript:document.wf.reset()" class="btn btn-outline-danger btn-lg" style="font-family:'Hanna'; font-size:x-large;">다시작성</a>
         </td></tr>
 </table>	
 </div>
