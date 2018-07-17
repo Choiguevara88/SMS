@@ -503,7 +503,7 @@ public class BuildingController {
 	}
 	
 	@RequestMapping(value="building/wishlist.sms", method=RequestMethod.GET) // 찜한 공간 목록 불러올 때 사용하는 메서드
-	public ModelAndView buildingWishList(HttpSession session) {
+	public ModelAndView WishList(HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
 		
