@@ -54,23 +54,15 @@ public class ReserveController {
    public ModelAndView registerReserve(Reserve reserve, HttpSession session, HttpServletRequest request) {
       ModelAndView mav = new ModelAndView();
       
+      Date date = new Date();
+      
+      if (date.after(reserve.getReDate())) {
+         throw new ProjectException("¿À´Ã ÀÌÀü ³¯Â¥·Î´Â ¿¹¾àÇÒ ¼ö ¾ø½À´Ï´Ù.", "regReserve.sms?sNo=" + reserve.getsNo() +"&sRNo=" + reserve.getSrNo());
+      }
+      
       if(!resCheckDate(reserve)) { // ¿¹¾à³¯Â¥ Áßº¹ Ã¼Å© ÇÏ´Â ¸Þ¼­µå
          throw new ProjectException("¿¹¾à ³¯Â¥°¡ Áßº¹µË´Ï´Ù.", "regReserve.sms?sNo=" + reserve.getsNo() +"&sRNo=" + reserve.getSrNo());
       }
-	// ???½ì?? ?±ë??? ?? ?¸ì????? ë©?????
-	@RequestMapping(value = "reserve/regReserve", method = RequestMethod.POST)
-	public ModelAndView registerReserve(Reserve reserve, HttpSession session, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
-		
-		Date date = new Date();
-		
-		if (date.after(reserve.getReDate())) {
-			throw new ProjectException("?¤ë?? ?´ì?? ??ì§?ë¡??? ???½í?? ?? ???µë????.", "regReserve.sms?sNo=" + reserve.getsNo() +"&sRNo=" + reserve.getSrNo());
-		}
-		
-		if(!resCheckDate(reserve)) { // ???½ë??ì§? ì¤?ë³? ì²´í?? ???? ë©?????
-			throw new ProjectException("???? ??ì§?ê°? ì¤?ë³µë?©ë????.", "regReserve.sms?sNo=" + reserve.getsNo() +"&sRNo=" + reserve.getSrNo());
-		}
 
       try {
          service.reserveInsert(reserve);
@@ -94,8 +86,6 @@ public class ReserveController {
       long endDateMiSec = 0;
       Date endChkDate = new Date();
       
-      System.out.println("chkRoomÀÇ resType : " + chkRoom.getsResType());
-      
       // ¿¹¾à ´ÜÀ§ Å¸ÀÔÀÌ ½Ã°£ÀÎ °æ¿ì
       if(chkRoom.getsResType() == 0) {
          SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH");
@@ -113,115 +103,76 @@ public class ReserveController {
                transFormat.format(endChkDate), reserve.getsNo(), reserve.getSrNo());
          
          System.out.println("list : " + list);
-		try {
-			service.reserveInsert(reserve);
-			mav.setViewName("redirect:resList.sms?id=" + reserve.getId());
-			
-		} catch (Exception e) {
-			
-			throw new ProjectException("??ë¶? ???¥í?????? ?©ë????.", "regReserve.sms?sNo=" + reserve.getsNo() +"&sRNo=" + reserve.getSrNo());
-		}
-		
-		return mav;
-	}
-	
-	// ???? ??ê°? ì¤?ë³? ì²´í?¬ë?? ???? ë©?????
-	private boolean resCheckDate(Reserve reserve) {
-		
-		Room chkRoom = service.getRoom(reserve.getsNo(), reserve.getSrNo());
-		
-		long startDateMiSec = 0;
-		Date startChkDate = new Date();
-		long endDateMiSec = 0;
-		Date endChkDate = new Date();
-		
-		// ???? ?¨ì?? ?????? ??ê°??? ê²½ì??
-		if(chkRoom.getsResType() == 0) {
-			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH");
-			
-			// ???? ???? ??ì§?ë¶??? 6??ê°? ?´ì??ê¹?ì§??? ???? ??ê°??? êµ¬í????.
-			startDateMiSec = reserve.getReDate().getTime() - (1000 * 60 * 60 * reserve.getReCnt());
-			startChkDate = new Date(startDateMiSec);
-						
-			// ???? ???? ??ì§?ë¶??? 6??ê°? ?´í??ê¹?ì§??? ì¢?ë£? ??ê°??? êµ¬í????.
-			endDateMiSec = reserve.getReDate().getTime() + (1000 * 60 * 60 * reserve.getReCnt());
-			endChkDate = new Date(endDateMiSec);
-			
-			// ???? ?¼ì??ë¶??? ì¢?ë£? ?¼ì??ê¹?ì§? ê¸°ê?(12??ê°?)?????? ???? ê°?ì²´ë?? ë¶??¬ì?¨ë??.
-			List <Reserve> list = service.getReserveDateChkList(transFormat.format(startChkDate), 
-					transFormat.format(endChkDate), reserve.getsNo(), reserve.getSrNo());
-			
-			System.out.println("list : " + list);
 
-			for(Reserve dbRes : list) {
-				
-				// DB?? ??ê°??? ???½ì??ê°? ?´ì???´ë?¼ë©´..!
-				if (dbRes.getReDate().before(reserve.getReDate())) {
-					
-					long a = reserve.getReDate().getTime();	// ???½ë??ì§?ë¥? ë°?ë¦¬ì?¸ì»¨?¼ë?
-					long b = dbRes.getReDate().getTime();	// DB??ì§?ë¥? ë°?ë¦¬ì?¸ì»¨?¼ë?
-					
-					int c = (int)(a - b / (1000 * 60 * 60)); // ?? ??ì§??? ì°¨ì?´ë?? ??ê°? ?¨ì??ë¡? ì¹???
-					
-					System.out.println("c:" + c);
-					
-					if(c <= dbRes.getReCnt()) { // DB???? ê°???ë³´ë?? ?? ??ì§??? ì°¨ì?´ê? ??ê±°ë?? ê°??¼ë©´ falseë¥? ë¦¬í??
-						return false;
-					}
-				}
-				
-				// ê°??? ??ê°????¼ë©´..!
-				if (transFormat.format(dbRes.getReDate()).equals(transFormat.format(reserve.getReDate()))) {
-					return false;
-				}
-				
-				// DB?? ??ê°??? ???½ì??ê°? ?´í???¼ë©´..!
-				if (dbRes.getReDate().after(reserve.getReDate())) {
-					
-					long a = dbRes.getReDate().getTime();	// DB??ì§?ë¥? ë°?ë¦¬ì?¸ì»¨?¼ë?
-					long b = reserve.getReDate().getTime();	// ???½ë??ì§?ë¥? ë°?ë¦¬ì?¸ì»¨?¼ë?
-					
-					int c = (int)(a - b / (1000 * 60 * 60)); // ?? ??ì§??? ì°¨ì?´ë?? ??ê°? ?¨ì??ë¡? ì¹???
-					
-					System.out.println("c:" + c);
-					
-					if(c <= reserve.getReCnt()) { // ???? ???½ê°¯??ë³´ë?? ?? ??ì§??? ì°¨ì?´ê? ??ê±°ë?? ê°??¼ë©´ falseë¥? ë¦¬í??
-						return false;
-					}
-				}
-			}
-		}
-		
-		// ???? ?¨ì?? ?????? ?¼ì???? ê²½ì??
-		else if(chkRoom.getsResType() == 1) {
-			
-			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-						
-			// ???? ???? ??ì§?ë¶??? 6?? ?´ì??ê¹?ì§??? ?????¼ì??ë¥? êµ¬í????.
-			startDateMiSec = reserve.getReDate().getTime() - (1000 * 60 * 60 * 24 * reserve.getReCnt());
-			startChkDate = new Date(startDateMiSec);
-			
-			// ???? ???? ??ì§?ë¶??? 6?? ?´í??ê¹?ì§??? ì¢?ë£??¼ì??ë¥? êµ¬í????.
-			endDateMiSec = reserve.getReDate().getTime() + (1000 * 60 * 60 * 24 * reserve.getReCnt());
-			endChkDate = new Date(endDateMiSec);
-			
-			// ???? ?¼ì??ë¶??? ì¢?ë£? ?¼ì??ê¹?ì§? ê¸°ê?(12??)?????? ???? ê°?ì²´ë?? ë¶??¬ì?¨ë??.
-			List <Reserve> list = service.getReserveDateChkList(transFormat.format(startChkDate), 
-					transFormat.format(endChkDate), reserve.getsNo(), reserve.getSrNo());
-			
-			for(Reserve dbRes : list) {
-				// DB?? ??ì§?ê°? ???½ë??ì§? ?´ì???´ë?¼ë©´..!
-				if (dbRes.getReDate().before(reserve.getReDate())) {
-					
-					long a = reserve.getReDate().getTime();	// ???½ë??ì§?ë¥? ë°?ë¦¬ì?¸ì»¨?¼ë?
-					long b = dbRes.getReDate().getTime();	// DB??ì§?ë¥? ë°?ë¦¬ì?¸ì»¨?¼ë?
-					
-					int c = (int)(a - b / (1000 * 60 * 60 * 24)); // ?? ??ì§??? ì°¨ì?´ë?? ?¼ì??ë¡? ì¹???
-					
-					if(c <= dbRes.getReCnt()) { // DB???? ê°???ë³´ë?? ?? ??ì§??? ì°¨ì?´ê? ??ê±°ë?? ê°??¼ë©´ falseë¥? ë¦¬í??
-						return false;
-					}
-				}
+         for(Reserve dbRes : list) {
+            
+            // DBÀÇ ½Ã°£ÀÌ ¿¹¾à½Ã°£ ÀÌÀüÀÌ¶ó¸é..!
+            if (dbRes.getReDate().before(reserve.getReDate())) {
+               
+               long a = reserve.getReDate().getTime();   // ¿¹¾à³¯Â¥¸¦ ¹Ð¸®¼¼ÄÁÀ¸·Î
+               long b = dbRes.getReDate().getTime();   // DB³¯Â¥¸¦ ¹Ð¸®¼¼ÄÁÀ¸·Î
+               
+               int c = (int)(a - b / (1000 * 60 * 60)); // µÎ ³¯Â¥ÀÇ Â÷ÀÌ¸¦ ½Ã°£ ´ÜÀ§·Î Ä¡È¯
+               
+               System.out.println("c:" + c);
+               
+               if(c <= dbRes.getReCnt()) { // DB»óÀÇ °¹¼öº¸´Ù µÎ ³¯Â¥ÀÇ Â÷ÀÌ°¡ ÀÛ°Å³ª °°À¸¸é false¸¦ ¸®ÅÏ
+                  return false;
+               }
+            }
+            
+            // °°Àº ½Ã°£´ë¶ó¸é..!
+            if (transFormat.format(dbRes.getReDate()).equals(transFormat.format(reserve.getReDate()))) {
+               return false;
+            }
+            
+            // DBÀÇ ½Ã°£ÀÌ ¿¹¾à½Ã°£ ÀÌÈÄ¶ó¸é..!
+            if (dbRes.getReDate().after(reserve.getReDate())) {
+               
+               long a = dbRes.getReDate().getTime();   // DB³¯Â¥¸¦ ¹Ð¸®¼¼ÄÁÀ¸·Î
+               long b = reserve.getReDate().getTime();   // ¿¹¾à³¯Â¥¸¦ ¹Ð¸®¼¼ÄÁÀ¸·Î
+               
+               int c = (int)(a - b / (1000 * 60 * 60)); // µÎ ³¯Â¥ÀÇ Â÷ÀÌ¸¦ ½Ã°£ ´ÜÀ§·Î Ä¡È¯
+               
+               System.out.println("c:" + c);
+               
+               if(c <= reserve.getReCnt()) { // ³ªÀÇ ¿¹¾à°¹¼öº¸´Ù µÎ ³¯Â¥ÀÇ Â÷ÀÌ°¡ ÀÛ°Å³ª °°À¸¸é false¸¦ ¸®ÅÏ
+                  return false;
+               }
+            }
+         }
+      }
+      
+      // ¿¹¾à ´ÜÀ§ Å¸ÀÔÀÌ ÀÏÀÚÀÎ °æ¿ì
+      else if(chkRoom.getsResType() == 1) {
+         
+         SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+                  
+         // ³ªÀÇ ¿¹¾à ³¯Â¥ºÎÅÍ 6ÀÏ ÀÌÀü±îÁöÀÇ ½ÃÀÛÀÏÀÚ¸¦ ±¸ÇÑ´Ù.
+         startDateMiSec = reserve.getReDate().getTime() - (1000 * 60 * 60 * 24 * reserve.getReCnt());
+         startChkDate = new Date(startDateMiSec);
+         
+         // ³ªÀÇ ¿¹¾à ³¯Â¥ºÎÅÍ 6ÀÏ ÀÌÈÄ±îÁöÀÇ Á¾·áÀÏÀÚ¸¦ ±¸ÇÑ´Ù.
+         endDateMiSec = reserve.getReDate().getTime() + (1000 * 60 * 60 * 24 * reserve.getReCnt());
+         endChkDate = new Date(endDateMiSec);
+         
+         // ½ÃÀÛ ÀÏÀÚºÎÅÍ Á¾·á ÀÏÀÚ±îÁö ±â°£(12ÀÏ)µ¿¾ÈÀÇ ¿¹¾à °´Ã¼¸¦ ºÒ·¯¿Â´Ù.
+         List <Reserve> list = service.getReserveDateChkList(transFormat.format(startChkDate), 
+               transFormat.format(endChkDate), reserve.getsNo(), reserve.getSrNo());
+         
+         for(Reserve dbRes : list) {
+            // DBÀÇ ³¯Â¥°¡ ¿¹¾à³¯Â¥ ÀÌÀüÀÌ¶ó¸é..!
+            if (dbRes.getReDate().before(reserve.getReDate())) {
+               
+               long a = reserve.getReDate().getTime();   // ¿¹¾à³¯Â¥¸¦ ¹Ð¸®¼¼ÄÁÀ¸·Î
+               long b = dbRes.getReDate().getTime();   // DB³¯Â¥¸¦ ¹Ð¸®¼¼ÄÁÀ¸·Î
+               
+               int c = (int)(a - b / (1000 * 60 * 60 * 24)); // µÎ ³¯Â¥ÀÇ Â÷ÀÌ¸¦ ÀÏÀÚ·Î Ä¡È¯
+               
+               if(c <= dbRes.getReCnt()) { // DB»óÀÇ °¹¼öº¸´Ù µÎ ³¯Â¥ÀÇ Â÷ÀÌ°¡ ÀÛ°Å³ª °°À¸¸é false¸¦ ¸®ÅÏ
+                  return false;
+               }
+            }
 
             // °°Àº ³¯Â¥¶ó¸é..!
             if (transFormat.format(dbRes.getReDate()).equals(transFormat.format(reserve.getReDate()))) {
