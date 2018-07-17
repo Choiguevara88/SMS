@@ -159,34 +159,34 @@ function chkboxcheck2() {
 	<p style="font-family:'Hanna'">편의 시설</p>
 	<table class="w3-table w3-border">
 	<tr>
-		<td><form:checkbox path="sRInfo" value="<i class='material-icons'>devices</i>TV/프로젝터" htmlEscape="${false}" label="<i class='material-icons'>devices</i>TV/프로젝터"/></td>
-    	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>local_printshop</i>복사기/인쇄기" htmlEscape="${false}" label="<i class='material-icons'>local_printshop</i>복사기/인쇄기" /></td>
-    	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>local_bar</i>주류반입가능" htmlEscape="${false}" label="<i class='material-icons'>local_bar</i>주류반입가능" /></td>
-        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>hot_tub</i>샤워시설" htmlEscape="${false}" label="<i class='material-icons'>hot_tub</i>샤워시설" /></td>
+		<td><form:checkbox path="sRInfo" value="<i class='material-icons'>devices</i> TV/프로젝터" htmlEscape="${false}" label="<i class='material-icons'>devices</i> TV/프로젝터"/></td>
+    	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>local_printshop</i> 복사기/인쇄기" htmlEscape="${false}" label="<i class='material-icons'>local_printshop</i> 복사기/인쇄기" /></td>
+    	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>local_bar</i> 주류반입가능" htmlEscape="${false}" label="<i class='material-icons'>local_bar</i> 주류반입가능" /></td>
+        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>hot_tub</i> 샤워시설" htmlEscape="${false}" label="<i class='material-icons'>hot_tub</i> 샤워시설" /></td>
     </tr>
     <tr>
-        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>wifi</i>인터넷/WIFI" htmlEscape="${false}" label="<i class='material-icons'>wifi</i>인터넷/WIFI"/></td>
-        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>airplay</i>화이트보드" htmlEscape="${false}" label="<i class='material-icons'>airplay</i>화이트보드"/></td>
-        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>settings_voice</i>음향/마이크" htmlEscape="${false}" label="<i class='material-icons'>settings_voice</i>음향/마이크"/></td>
-        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>kitchen</i>취사시설" htmlEscape="${false}" label="<i class='material-icons'>kitchen</i>취사시설"/></td>
+        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>wifi</i> 인터넷/WIFI" htmlEscape="${false}" label="<i class='material-icons'>wifi</i> 인터넷/WIFI"/></td>
+        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>airplay</i> 화이트보드" htmlEscape="${false}" label="<i class='material-icons'>airplay</i> 화이트보드"/></td>
+        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>settings_voice</i> 음향/마이크" htmlEscape="${false}" label="<i class='material-icons'>settings_voice</i> 음향/마이크"/></td>
+        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>kitchen</i> 취사시설" htmlEscape="${false}" label="<i class='material-icons'>kitchen</i> 취사시설"/></td>
     </tr>
     <tr>
-        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>cake</i>음식물반입가능" htmlEscape="${false}" label="<i class='material-icons'>cake</i>음식물반입가능"/></td>
-        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>time_to_leave</i>주차" htmlEscape="${false}" label="<i class='material-icons'>time_to_leave</i>주차"/></td>
-        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>smoke_free</i>금연" htmlEscape="${false}" label="<i class='material-icons'>smoke_free</i>금연"/></td>
-        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>desktop_windows</i>PC/노트북" htmlEscape="${false}" label="<i class='material-icons'>desktop_windows</i>PC/노트북"/></td>
+        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>cake</i> 음식물반입가능" htmlEscape="${false}" label="<i class='material-icons'>cake</i> 음식물반입가능"/></td>
+        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>time_to_leave</i> 주차" htmlEscape="${false}" label="<i class='material-icons'>time_to_leave</i> 주차"/></td>
+        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>smoke_free</i> 금연" htmlEscape="${false}" label="<i class='material-icons'>smoke_free</i> 금연"/></td>
+        <td><form:checkbox path="sRInfo" value="<i class='material-icons'>desktop_windows</i> PC/노트북" htmlEscape="${false}" label="<i class='material-icons'>desktop_windows</i> PC/노트북"/></td>
 	</tr>
 	<tr>
-     	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>event_seat</i>의자/테이블" htmlEscape="${false}" label="<i class='material-icons'>event_seat</i>의자/테이블"/></td>
-     	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>wc</i>내부화장실" htmlEscape="${false}" label="<i class='material-icons'>wc</i>내부화장실"/></td>
-     	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>accessibility</i>탈의실" htmlEscape="${false}" label="<i class='material-icons'>accessibility</i>탈의실"/></td>
-     	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>beach_access</i>테라스/루프탑" htmlEscape="${false}" label="<i class='material-icons'>beach_access</i>테라스/루프탑"/></td>
+     	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>event_seat</i> 의자/테이블" htmlEscape="${false}" label="<i class='material-icons'>event_seat</i> 의자/테이블"/></td>
+     	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>wc</i> 내부화장실" htmlEscape="${false}" label="<i class='material-icons'>wc</i> 내부화장실"/></td>
+     	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>accessibility</i> 탈의실" htmlEscape="${false}" label="<i class='material-icons'>accessibility</i> 탈의실"/></td>
+     	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>beach_access</i> 테라스/루프탑" htmlEscape="${false}" label="<i class='material-icons'>beach_access</i> 테라스/루프탑"/></td>
    	</tr>
    	<tr>
-     	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>weekend</i>공용라운지" htmlEscape="${false}" label="<i class='material-icons'>weekend</i>공용라운지"/></td>
-     	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>nature_people</i>전신거울" htmlEscape="${false}" label="<i class='material-icons'>nature_people</i>전신거울"/></td>
-     	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>restaurant</i>바베큐시설" htmlEscape="${false}" label="<i class='material-icons'>restaurant</i>바베큐시설"/></td>
-   		<td><form:checkbox path="sRInfo" value="<i class='material-icons'>dialpad</i>도어락" htmlEscape="${false}" label="<i class='material-icons'>dialpad</i>도어락"/></td>
+     	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>weekend</i> 공용라운지" htmlEscape="${false}" label="<i class='material-icons'>weekend</i> 공용라운지"/></td>
+     	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>nature_people</i> 전신거울" htmlEscape="${false}" label="<i class='material-icons'>nature_people</i> 전신거울"/></td>
+     	<td><form:checkbox path="sRInfo" value="<i class='material-icons'>restaurant</i> 바베큐시설" htmlEscape="${false}" label="<i class='material-icons'>restaurant</i> 바베큐시설"/></td>
+   		<td><form:checkbox path="sRInfo" value="<i class='material-icons'>dialpad</i> 도어락" htmlEscape="${false}" label="<i class='material-icons'>dialpad</i> 도어락"/></td>
 	</tr>
 	</table>
     </div>
