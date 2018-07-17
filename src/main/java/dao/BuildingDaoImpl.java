@@ -114,8 +114,11 @@ public class BuildingDaoImpl implements BuildingDao {
 	public int getBuildingCount(String searchType, String searchContent) {
 		Map<String, String> map = new HashMap<String, String>();
 		
-		map.put("searchType", searchType);
-		map.put("searchContent", searchContent);
+		if(searchType != null && !(searchType.equals(""))) {
+			map.put("searchType", searchType);
+			map.put("searchContent", searchContent);
+		}
+		
 		
 		return sqlSession.selectOne(NS + "buildingCnt" , map);
 	}
