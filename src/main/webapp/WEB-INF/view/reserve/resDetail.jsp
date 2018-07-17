@@ -108,10 +108,6 @@
 			<a href="../building/Rwrite.sms?sNo=${reserve.sNo}&reNo=${reserve.reNo}" style="font-family:'Hanna';" class="btn btn-outline-primary btn-lg">리뷰작성 하러가기</a>
 		</c:if>
 
-		<c:if test="${reserve.reStat==0 && today1 <= redate}">
-			<a href="resUpdate.sms?reNo=${reserve.reNo}" style="font-family:'Hanna';" class="btn btn-outline-dark btn-lg">예약정보수정</a>
-		</c:if>
-
 		<c:if test="${reserve.reStat==5}">
 			<a href="../building/buildingDetail.sms?sNo=${reserve.sNo}" style="font-family:'Hanna';" class="btn btn-outline-primary btn-lg">작성된 리뷰 보러가기</a>
 		</c:if>
