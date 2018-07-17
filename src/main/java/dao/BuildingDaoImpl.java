@@ -109,4 +109,35 @@ public class BuildingDaoImpl implements BuildingDao {
 		map.put("sNo", sNo - 1);
 		return sqlSession.selectOne(NS+"mainpagebuilding2", map);
 		}
+
+	@Override // 리스트용 BuildingCount
+	public int getBuildingCount(String searchType, String searchContent) {
+		Map<String, String> map = new HashMap<String, String>();
+		
+		if(searchType != null && !(searchType.equals(""))) {
+			map.put("searchType", searchType);
+			map.put("searchContent", searchContent);
+		}
+		
+		
+		return sqlSession.selectOne(NS + "buildingCnt" , map);
+	}
+
+	@Override // 리스트용 BuildingList
+	public List<Building> getBuildingList(String searchType, String searchContent, Integer pageNum, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		int startrow = (pageNum - 1) * limit;
+		
+		if(searchType != null && !(searchType.equals(""))) {
+			map.put("searchType", searchType);
+			map.put("searchContent", searchContent);
+		}
+		
+		map.put("startrow", startrow);
+		map.put("limit", limit);
+		
+		return sqlSession.selectList(NS + "buildingList", map);
+	}
 }
+

@@ -33,4 +33,8 @@ public interface BuildingDao {
 	Integer getBuildingCount();
 
 	int getbuilding_mainpage_2(int sNo);
+
+	int getBuildingCount(String searchType, String searchContent);
+
+	List<Building> getBuildingList(String searchType, String searchContent, Integer pageNum, int limit);
 }

@@ -574,7 +574,6 @@ public class ProjectServiceImpl implements ProjectService {
 					
 			List<String> infolist = new ArrayList<String>();
 			i = room.getsRInfo();
-			
 			if(i != null && !(i.equals(""))) {
 				infolist = Arrays.asList(i.split(","));
 				room.setsRInfoList(infolist);
@@ -766,6 +765,16 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public int getbuilding_mainpage_2(int sNo) {
 		return buDao.getbuilding_mainpage_2(sNo);
+	}
+
+	@Override
+	public int getBuildingCnt(String searchType, String searchContent) {
+		return buDao.getBuildingCount(searchType, searchContent);
+	}
+
+	@Override
+	public List<Building> getBuildingList(String searchType, String searchContent, Integer pageNum, int limit) {
+		return buDao.getBuildingList(searchType, searchContent, pageNum, limit);
 	}
 
 }// ProjectServiceImpl end

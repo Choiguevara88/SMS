@@ -15,6 +15,10 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- w3 css 사용 선언 -->
 
+<!-- fontAwesome Icon 사용 선언 -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+<!-- fontAwesome Icon 사용 선언 -->
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 $(document).ready(function() {
@@ -102,11 +106,13 @@ $(document).ready(function() {
 			reserveDate1.value = dateTime 
 		}
 	})
-	
+
+})
+
 	function check(f) {
-		if(f.reDate.value == '') {
+		if(f.reDate1.value == '') {
 			alert('날짜 입력 해주세요.');
-			f.reDate.focus();
+			f.reDate1.focus();
 			return false;
 		}
 		
@@ -125,7 +131,6 @@ $(document).ready(function() {
 		return f.submit();
 	}
 
-})
 
 	function win_open_rList()	{
 		var op = "width=450, height=550, scrollbars=yes, top=200, left=1150";

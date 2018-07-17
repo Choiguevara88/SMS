@@ -21,31 +21,71 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>:::나의위시리스트:::</title>
+<title>:::건물리스트:::</title>
 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+	function list(pageNum) {
+		
+		if(searchType == null || searchType.length == 0) {
+			document.searchform.searchContent.value = "";
+			document.searchform.pageNum.value = pageNum;
+			document.searchform.submit();
+			return true;
+		} else {
+			document.searchform.pageNum.value = pageNum;
+			document.searchform.submit();
+			return true;
+		}
+		
+		return false;
+	}
+	
+</script>
 </head>
 
 <body>
-
-<div class="w3-container w3-margin w3-padding" style="text-align:center;">
-	<h1 style="font-family:'Hanna'">${loginMember.id } 님께서 찜한 공간!! &#42;&gt;&nbsp;&lt;&#42;</h1>
-</div>
 
 <div class="w3-row w3-container w3-margin" id="context">
 <div class="w3-row">
 <div class="w3-col s1"><p>&nbsp;</p></div>
 
 <div class="w3-col s10">
-<c:if test="${chk == false }">
-	<div class="w3-container w3-margin w3-padding" style="text-align:center;">
-		<div class="w3-container w3-margin">
-		<h1 style="font-family:'Hanna';">저런~! 아직 찜한 공간이 없으시네요!</h1>
-		</div>
-		<div class="w3-container w3-center w3-padding w3-margin" style="text-align:center;">
-		<a href="buildingList.sms" class="btn btn-outline-primary btn-lg" style="font-family:'Hanna'; font-size:large;">공간보러가기</a>
-		</div>
-	</div>
-</c:if>
+
+<form action="buildingList.sms" method="get" name="searchform" onsubmit="return list(1)" >
+<input type="hidden" name="pageNum" value="${pageNum}">
+<div class="w3-container w3-margin w3-padding-24" style="text-align:center;">
+	<table class="w3-table w3-border">
+	<tr>
+	<td style="text-align:center; vertical-align:middle;"><font style="font-size:large; color:gray;">검 색</font></td>
+	
+	<td style="text-align:center; vertical-align:middle;">
+	<select name="searchType" id="searchType" class="w3-select">
+			<option value="">선택하세요</option>
+			<option value="sName">건물명</option>
+			<option value="sType">유형</option>
+			<option value="sTag">태그</option>
+			<option value="sAddress">지역</option>
+		</select>
+	
+	<script type="text/javascript">
+		if('${param.searchType}' != '') {
+			document.getElementById("searchType").value='${param.searchType}'
+		}
+	</script>
+	
+	</td>
+	<td style="text-align:center; vertical-align:middle;">
+		<input type="text" name="searchContent" value="${param.searchContent}" class="w3-input">
+	</td>
+	<td style="text-align:center; vertical-align:middle;">
+		<input type="submit" value="검색" class="btn btn-outline-primary btn-block">
+	</td>
+	</tr>
+	</table>	
+</div>
+
 
 <c:forEach var="building" items="${list}">
 	
@@ -102,8 +142,40 @@
 	
 </c:forEach>
 
+<div class="w3-container w3-margin w3-padding-24">
 
+<table class="w3-table" style="font-family:'Hanna';">
+<tr>
+	<td style="text-align:center; font-size:large;">
+		
+		<c:if test="${pageNum > 1}">
+			<a href="javascript:list(${pageNum -1})"  style="font-family:'Hanna';">[이전]</a>
+		</c:if>&nbsp;
+		
+		<c:if test="${pageNum <= 1}">&nbsp;&nbsp;&nbsp;</c:if>&nbsp;
+		
+		
+		<c:forEach var="a" begin="${startpage + 1}" end="${endpage}"> 
+			
+		<c:if test="${a == 0}">&nbsp;</c:if>
+			
+		<c:if test="${a == pageNum}"><font class="w3-text-blue">[${a}]</font></c:if>
+			
+		<c:if test="${a != pageNum}">
+			<a href="javascript:list(${a})" style="font-family:'Hanna';">[${a}]</a></c:if>
+		</c:forEach>
+		
+		<c:if test="${pageNum < maxpage}">
+			<a href="javascript:list(${pageNum + 1})"  style="font-family:'Hanna';">[다음]</a>
+		</c:if>&nbsp;
+		<c:if test="${pageNum >= maxpage}">&nbsp;&nbsp;&nbsp;</c:if>&nbsp;
+	</td>
+</tr>
 
+</table>
+</div>
+
+</form>
 </div>
 <div class="w3-col s1"><p>&nbsp;</p></div>
 </div>
