@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,6 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script type="text/javascript">
 $(document).ready(function(){
 	
@@ -164,7 +165,6 @@ function dispifo(srno) {
 .thumbnail .centered { position: absolute; top: 0; left: 0; right: 0; bottom: 0; -webkit-transform: translate(50%,50%); -ms-transform: translate(50%,50%); transform: translate(50%,50%); } 
 .thumbnail .centered img { position: absolute; top: 0; left: 0; width: auto; height: 120px; -webkit-transform: translate(-50%,-50%); -ms-transform: translate(-50%,-50%); transform: translate(-50%,-50%); }
 
-출처: http://webdir.tistory.com/487 [WEBDIR]
 </style>
 <!-- 지도관련 스크립트 -->
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=2bA8v55yYLf1omsHnKFk&submodules=geocoder"></script>
@@ -279,7 +279,7 @@ function dispifo(srno) {
 <p align="center">등록된 세부공간이 없습니다.</p>
 <p align="center"><font color="red">호스트의 업데이트를 기다려주세요.</font></p>
 <c:if test="${sessionScope.loginMember.id == building.id }">
-<p align="center">세부공간을 등록하려면 <a href="roomList.sms?sNo=${param.sNo}">[세부공간 등록하기]</a> 를 눌러주세요.</p>
+<p align="center">세부공간을 등록하려면 <a href="../room/roomList.sms?sNo=${param.sNo}">[세부공간 등록하기]</a> 를 눌러주세요.</p>
 </c:if>
 </c:if>
 
@@ -319,9 +319,9 @@ function dispifo(srno) {
    <table><tr><td><span class="w3-margin-left"><b>편의시설</b></span></td>
    <td>
    <c:forEach items="${room.sRInfoList}" var="item">
-   <span class="w3-margin-left">${item}</span>
+   <div class="w3-margin-left" style="border:solid 1px;">${item}</div>
    </c:forEach>
-   </td>
+	   </td>
    </table>
    <br>
    <br>

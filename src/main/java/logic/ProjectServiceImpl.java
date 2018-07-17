@@ -574,7 +574,6 @@ public class ProjectServiceImpl implements ProjectService {
 					
 			List<String> infolist = new ArrayList<String>();
 			i = room.getsRInfo();
-			
 			if(i != null && !(i.equals(""))) {
 				infolist = Arrays.asList(i.split(","));
 				room.setsRInfoList(infolist);

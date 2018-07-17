@@ -46,6 +46,7 @@ function roomDelete(sNo,sRNo) {
       </div>
      	</c:forEach>
      	</div>
+     	
       <p>예약 유형 : ${room.sResType}</p><br>
 	  <p>최소 인원 : ${room.sRPersonLimit}</p><br>
 	  <p>시간/일 가격 : ${room.sPrice}</p><br>
