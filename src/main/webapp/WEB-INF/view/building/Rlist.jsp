@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/jspHeader.jsp" %>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <script type="text/javascript">
 	function win_openR(num)	{
@@ -10,13 +11,15 @@
 	}
 </script>
 <div>
-	<div style="float:left; display:inliine;">
-	<h4>이용 후기 <strong class="w3-text-deep-purple"><em>${listcount}</em>개</strong><span></span>
+	<div>
+	<div class="w3-leftbar w3-border-deep-purple w3-left"><h3>&nbsp;&nbsp;이용 후기 <strong class="w3-text-deep-purple"><em>${listcount}</em>개</strong><span></span>
+	</h3>
+	</div>
+	
+	<div class="w3-right"><h3>
 		평균 평점 <strong><em style="display:inline" class="w3-text-deep-purple">
 	${avgScore}</em></strong>
-	</h4></div>
-	<span style="float:right" >
-	</span>
+	&nbsp;&nbsp;</h3></div></div>
 </div>
 <!--  리뷰 목록부분 -->
 <br>
@@ -79,6 +82,7 @@
 			</td></tr>
 	</c:if>
 <c:if test="${listcount == 0}">
-	 <tr><td colspan="5">등록된 게시물이 없습니다.</td></tr>
+<tr><td>&nbsp;</td></tr>
+	 <tr><td colspan="5">&nbsp;&nbsp;&nbsp;등록된 게시물이 없습니다.</td></tr>
 	 </c:if>
 </table>
