@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.SynthesizedAnnotation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,6 +54,12 @@ public class ReserveController {
 	public ModelAndView registerReserve(Reserve reserve, HttpSession session, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		
+		Date date = new Date();
+		
+		if (date.after(reserve.getReDate())) {
+			throw new ProjectException("오늘 이전 날짜로는 예약할 수 없습니다.", "regReserve.sms?sNo=" + reserve.getsNo() +"&sRNo=" + reserve.getSrNo());
+		}
+		
 		if(!resCheckDate(reserve)) { // 예약날짜 중복 체크 하는 메서드
 			throw new ProjectException("예약 날짜가 중복됩니다.", "regReserve.sms?sNo=" + reserve.getsNo() +"&sRNo=" + reserve.getSrNo());
 		}
@@ -78,8 +85,6 @@ public class ReserveController {
 		Date startChkDate = new Date();
 		long endDateMiSec = 0;
 		Date endChkDate = new Date();
-		
-		System.out.println("chkRoom의 resType : " + chkRoom.getsResType());
 		
 		// 예약 단위 타입이 시간인 경우
 		if(chkRoom.getsResType() == 0) {

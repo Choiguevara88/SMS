@@ -95,6 +95,14 @@ input {
     <div class="w3-modal-content">
       <div class="w3-container">
         <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+          <script>
+        window.onclick = function(event) {
+        	var modal = document.getElementById('id01');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        </script>
         <p><h4><strong>'쉐어 마이 스페이스'에 오신 것을 환영합니다.</strong></h4></p>
 	<p>'쉐어 마이 스페이스' 제품 및 서비스(‘서비스’)를 이용해 주셔서 감사합니다. 서비스는 1600 Amphitheatre Parkway, Mountain View, CA 94043, United States에 소재한 '쉐어 마이 스페이스' LLC(‘'쉐어 마이 스페이스'’)에서 제공합니다.</p>
 

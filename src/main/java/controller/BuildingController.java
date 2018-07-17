@@ -136,7 +136,6 @@ public class BuildingController {
 		mav.addObject("building", building);
 		mav.addObject("address",address[1]);  //중간주소
 		mav.addObject("address1", address[1] + address1);  //전체주소
-		System.out.println(address1);
 		mav.addObject("roomList", roomList);
 		return mav;
 	}
@@ -505,7 +504,7 @@ public class BuildingController {
 	}
 	
 	@RequestMapping(value="building/wishlist.sms", method=RequestMethod.GET) // 찜한 공간 목록 불러올 때 사용하는 메서드
-	public ModelAndView WishList(HttpSession session) {
+	public ModelAndView myWishList(HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
 		
