@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -97,7 +98,6 @@ public class BuildingController {
 		String address1 = myBuildingOne.getsAddress().split(",")[0];
 		String address2 = myBuildingOne.getsAddress().split(",")[1];
 		String address3 = myBuildingOne.getsAddress().split(",")[2];
-		System.out.println(myBuildingOne);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("building", myBuildingOne);
 		mav.addObject("sTypeNames", sTypeNames);
@@ -110,11 +110,9 @@ public class BuildingController {
 	//鍮��⑹��蹂� �����ы�� �깅���湲�
 	@RequestMapping(value="building/buildingUpdateReg", method=RequestMethod.POST)
 	public ModelAndView buildingUpdateReg(Building building, HttpServletRequest request, HttpSession session) {
-		System.out.println(building);
 		service.buildingUpdateReg(building, request);
 		ModelAndView mav = new ModelAndView();
 		String id = building.getId();
-		System.out.println(id);
 		mav.setViewName("redirect:/building/myBuildingList.sms?id=" + id);
 		return mav;
 	}
@@ -128,13 +126,11 @@ public class BuildingController {
 		building = service.getMyBuildingOne(sNo);
 		
 		List<Room> roomList = service.getmyRoomList(ssNo);
-		System.out.println(roomList);
 		
 		ModelAndView mav = new ModelAndView();
 		
 		String address = building.getsAddress().split(",")[1];
 		String address1 = building.getsAddress().split(",")[1] +" "+building.getsAddress().split(",")[2];
-		System.out.println(building);
 		mav.addObject("building", building);
 		mav.addObject("address",address);
 		mav.addObject("address1", address1);
@@ -439,7 +435,6 @@ public class BuildingController {
 	@RequestMapping(value="building/delete", method=RequestMethod.POST)
 	public ModelAndView delete(Integer bNo, Integer sNo,Integer kind) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println(bNo);
 		service.boardDelete(bNo);
 		mav.setViewName("redirect:/building/buildingDetail.sms?sNo="+sNo);
 		return mav;
@@ -526,6 +521,16 @@ public class BuildingController {
 		mav.addObject("list", list);
 		mav.addObject("chk", chk);
 		
+		return mav;
+	}
+	@RequestMapping(value="building/rImgList.sms", method=RequestMethod.GET) // 찜한 공간 목록 불러올 때 사용하는 메서드
+	public ModelAndView rImgList(HttpServletRequest request) {
+		String srno = request.getParameter("sRNo");
+		List<String> list = service.getImgList(srno);
+		System.out.println(list);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("building/rImgList");
 		return mav;
 	}
 }

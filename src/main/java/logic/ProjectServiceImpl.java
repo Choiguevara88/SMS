@@ -777,4 +777,9 @@ public class ProjectServiceImpl implements ProjectService {
 		return buDao.getBuildingList(searchType, searchContent, pageNum, limit);
 	}
 
+	@Override
+	public List<String> getImgList(String srno) {
+		return roomDao.getImgList(srno);
+	}
+
 }// ProjectServiceImpl end

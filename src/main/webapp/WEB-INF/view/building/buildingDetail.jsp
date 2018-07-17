@@ -159,6 +159,9 @@ function dispifo(srno) {
 	$("#i" + srno).addClass("w3-border w3-border-purple");
 	$("#info" + srno).show();
 }
+function imgListView(srno) {
+	window.open("${path}/building/rImgList.sms?sRNo="+srno)
+}
 </script>
 <style>
 /* 룸이미지관련css */
@@ -313,8 +316,13 @@ function dispifo(srno) {
 <div id="info${room.sRNo}" >
 <hr style="margin-top: 10px">
    <table>
-   <tr><td><div class="w3-border w3-margin-left" style="width:120px"> <div class="thumbnail"> <div class="centered"> 
-   <img class="w3-border" src="../picture/${room.sRImgNameList[0]}"/> </div> </div> </div></td>
+   <tr>
+   <td>
+   <div class="w3-border w3-margin-left" style="width:120px"> <div class="thumbnail"> <div class="centered"> 
+   <a href="javascript:imgListView('${room.sRNo}')">
+   <img class="w3-border" src="../picture/${room.sRImgNameList[0]}"/> 
+   </a>
+   </div> </div> </div></td>
    <td><div class="w3-margin-left">${room.sRContent}</div></td></tr>
    </table>
    <hr>
@@ -322,13 +330,13 @@ function dispifo(srno) {
    <hr>
    &nbsp;<span class="w3-margin-left"><b>최소인원</b></span><span class="w3-margin-left">${room.sRPersonLimit}명 이상</span>
    <hr>
-   <table><tr><td><span class="w3-margin-left"><b>편의시설</b></span></td>
-   <td>
+   
+   <div class="w3-container">
    <c:forEach items="${room.sRInfoList}" var="item">
-   <div class="w3-margin-left" style="border:solid 1px;">${item}</div>
+   <div class="w3-third w3-left w3-padding">${item}</div>
    </c:forEach>
-	   </td>
-   </table>
+   </div>
+   
    <br>
    <br>
 </div>

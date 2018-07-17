@@ -19,6 +19,9 @@ public interface RoomMapper {
 	
 	@Delete("delete from room where sNo=#{value}")
 	void budelete(Integer sNo);
+	
+	@Select("select sRImg from room where sRNo=#{value}")
+	String getImgList(String srno);
 
 	//@Select("select * from room where sRNo=#{value}")
 	//Room selectMyRoom(Integer sRNo);

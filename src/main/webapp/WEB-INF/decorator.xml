@@ -35,5 +35,6 @@
 		<pattern>/building/QlistNotRead.sms*</pattern>
 		<pattern>/reserve/reserveCheckList.sms*</pattern>
 		<pattern>/admin/adminAnswerQuestion.sms*</pattern>
+		<pattern>/building/rImgList.sms*</pattern>
 	</excludes>
 </decorators>

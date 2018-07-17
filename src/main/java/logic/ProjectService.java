@@ -153,4 +153,6 @@ public interface ProjectService {
 	
 	List<Building> getBuildingList(String searchType, String searchContent, Integer pageNum, int limit);
 	
+	List<String> getImgList(String srno);
+	
 }
