@@ -109,7 +109,7 @@
 				
 				<p align="left" style="margin-bottom: 0; margin-top: 0">
 				<span class="w3-medium w3-center"><i class="fas fa-map-marker-alt" style="font-color:purple;"></i>
-				<font style="font-family:'Hanna';">${fn:substring(building.sAddress,6,11)}</font>
+				<font style="font-family:'Hanna';">${building.sAddress}</font>
 				</span><br>
 				
 				<!-- 건물의 태그의 정보를 뿌리는 구간 -->

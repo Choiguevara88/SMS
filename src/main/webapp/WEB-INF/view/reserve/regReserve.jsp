@@ -19,6 +19,8 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 <!-- fontAwesome Icon 사용 선언 -->
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 $(document).ready(function() {
@@ -239,7 +241,7 @@ $(document).ready(function() {
 		
 	<div class="w3-row w3-margin">
 		<c:forEach items="${room.sRInfoList}" var="srInfo" varStatus="cnt">
-			<div class="w3-col s3 w3-margin">● <font style="font-family:'Hanna'; text-align:center; color:gray;">${srInfo}</font></div>
+			<div class="w3-col s3 w3-margin"><font style="font-family:'Hanna'; text-align:center; color:gray;">${srInfo}</font></div>
 		</c:forEach>	
 	</div>
 </div>
