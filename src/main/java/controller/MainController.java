@@ -72,7 +72,7 @@ public class MainController {
 		
 		review = service.getbuilding_reviewCount();
 		
-		if(review != null && !review.isEmpty()) {
+		if(review != null && !review.isEmpty() && review.size() >= sNo2.length) {
 		
 			for(int i = 0; i<sNo2.length;i++) {
 				building2.add(service.getbuilding_mainpage_reviewCount(review.get(i).getsNo()));
@@ -95,7 +95,7 @@ public class MainController {
 		List<Board> board = new ArrayList<Board>();
 		board = service.getSNo_byScore(); // Board 6�� ���� ���� ������
 		
-		if(board != null && !board.isEmpty()) {
+		if(board != null && !board.isEmpty() && board.size() >= sNo2.length) {
 		
 			for(int i = 0; i<sNo2.length;i++) {
 				building3.add(service.getbuilding_mainpage(board.get(i).getsNo()));
