@@ -45,21 +45,17 @@ for(var i=0;i<sRTypeList.length;i++) {
   	         alert("예약 유형을 하나 이상 체크하세요.")
   	      return false;
   	   }      
-
 if($('#sRName').val()=='' ){
       alert("세부 공간 이름을 작성하세요~><");
       document.getElementById('sRName').focus();
-  
 }else if($('#sRContent').val()=='' ){
     alert("세부 공간 소개를 작성하세요~><");
     document.getElementById('sRContent').focus();
  }
-
 else if($('#sPrice').val()=='' ){
     alert("가격을 설정하세요~><");
     document.getElementById('sPrice').focus();
  }
-
 else{
 		var res=confirm("정보는 제대로 다 적으셨나여? ><");
 		if(res == true){
@@ -67,9 +63,6 @@ else{
 		}
 	}
 }
-
-
-
 $(document).ready(function() {
 	$("#sRImg").attr('disabled', true)
 

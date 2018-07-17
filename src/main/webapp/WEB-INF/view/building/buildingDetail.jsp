@@ -279,7 +279,7 @@ function dispifo(srno) {
 <p align="center">등록된 세부공간이 없습니다.</p>
 <p align="center"><font color="red">호스트의 업데이트를 기다려주세요.</font></p>
 <c:if test="${sessionScope.loginMember.id == building.id }">
-<p align="center">세부공간을 등록하려면 <a href="roomList.sms?sNo=${param.sNo}">[세부공간 등록하기]</a> 를 눌러주세요.</p>
+<p align="center">세부공간을 등록하려면 <a href="/TestProject/room/roomList.sms?sNo=${param.sNo}">[세부공간 등록하기]</a> 를 눌러주세요.</p>
 </c:if>
 </c:if>
 
