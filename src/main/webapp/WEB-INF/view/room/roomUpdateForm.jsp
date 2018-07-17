@@ -80,6 +80,7 @@ function chkboxcheck2() {
 <input type="hidden" name="sRNo" value="${room.sRNo}">
 <input type="hidden" id="sRImgNameList" name="sRImgNameList">
 
+
 <spring:hasBindErrors name="room"> <!-- ? -->
 		<font color="tomato">
 			<c:forEach items="${errors.globalErrors }" var="error">
@@ -110,6 +111,7 @@ function chkboxcheck2() {
 		<label style="font-family:'Hanna'">세부 공간 유형 (1개만 체크 가능)</label>
 		<div>
 		<form:checkboxes path="sRType" items="${building.sTypeList}" onchange="chkboxcheck()" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;" class="w3-checkbox"/>
+		<div class="w3-col s4"><font color="red"><form:errors path="sRType"/></font></div>
 		</div>
 		</div>
 		<div class="w3-col s2"><p>&nbsp;</p></div>
@@ -118,6 +120,7 @@ function chkboxcheck2() {
 		<div>
 		<form:checkbox path="sResType" value="0" label="시간 단위" onchange="chkboxcheck2()"/>&nbsp; &nbsp;
 		<form:checkbox path="sResType" value="1" label="일 단위" onchange="chkboxcheck2()"/>
+		<div class="w3-col s4"><font color="red"><form:errors path="sResType"/></font></div>
 		</div>
 		</div>
 	</div>
@@ -136,8 +139,7 @@ function chkboxcheck2() {
           <input type="button" id="img1_btn" value="기존이미지삭제" /> 
         </div>
           <input type="file" id="sRImg" name="sRImgList" multiple="multiple"/>
- 
-	</div>
+ 			</div>
 	<div class="w3-container w3-margin">
 	<p style="font-family:'Hanna'">편의 시설</p>
 	<table class="w3-table w3-border">
