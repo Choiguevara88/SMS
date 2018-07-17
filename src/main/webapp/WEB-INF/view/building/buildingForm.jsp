@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/view/jspHeader.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/view/jspHeader.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -158,60 +158,123 @@ $(document).ready(function() {
 });
 
 /*전화번호 관련 스크립트*/
- function chk_tel(str, field){ 
-	  var str; 
-	  str = checkDigit(str); 
-	  len = str.length; 
-	  
-	  if(len==8){ 
-	  if(str.substring(0,2)==02){ 
-	    error_numbr(str, field); 
-	  }else{ 
-	    field.value  = phone_format(1,str); 
-	  }  
-	  }else if(len==9){ 
-	  if(str.substring(0,2)==02){ 
-	    field.value = phone_format(2,str); 
-	  }else{ 
-	    error_numbr(str, field); 
-	  } 
-	  }else if(len==10){ 
-	  if(str.substring(0,2)==02){ 
-	    field.value = phone_format(2,str); 
-	  }else{ 
-	    field.value = phone_format(3,str); 
-	  } 
-	  }else if(len==11){ 
-	  if(str.substring(0,2)==02){ 
-	    error_numbr(str, field); 
-	  }else{ 
-	    field.value  = phone_format(3,str); 
-	  } 
-	  }else{ 
-	  error_numbr(str, field); 
-	  } 
-	 } 
-	 function checkDigit(num){ 
-	  var Digit = "1234567890"; 
-	  var string = num; 
-	  var len = string.length 
-	  var retVal = ""; 
-	  for (i = 0; i < len; i++){ 
-	  if (Digit.indexOf(string.substring(i, i+1)) >= 0){ 
-	    retVal = retVal + string.substring(i, i+1); 
-	  } 
-	  } 
-	  return retVal; 
-	 } 
-	 function phone_format(type, num){ 
-	  if(type==1){ 
-	  return num.replace(/([0-9]{4})([0-9]{4})/,"$1-$2"); 
-	  }else if(type==2){ 
-	  return num.replace(/([0-9]{2})([0-9]+)([0-9]{4})/,"$1-$2-$3"); 
-	  }else{ 
-	  return num.replace(/(^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3"); 
-	  } 
-	 } 
+function chk_tel(){ 
+  var str = $('#sTel').val(); 
+  console.log(str);
+  var field = document.getElementById('sTel');
+  str = checkDigit(str); 
+  len = str.length; 
+  
+  if(len==8){ 
+  if(str.substring(0,2)==02){ 
+    error_numbr(str, field); 
+  }else{ 
+    field.value  = phone_format(1,str); 
+  }  
+  }else if(len==9){ 
+  if(str.substring(0,2)==02){ 
+    field.value = phone_format(2,str); 
+  }else{ 
+    error_numbr(str, field); 
+  } 
+  }else if(len==10){ 
+  if(str.substring(0,2)==02){ 
+    field.value = phone_format(2,str); 
+  }else{ 
+    field.value = phone_format(3,str); 
+  } 
+  }else if(len==11){ 
+  if(str.substring(0,2)==02){ 
+    error_numbr(str, field); 
+  }else{ 
+    field.value  = phone_format(3,str); 
+  } 
+  }else{ 
+  error_numbr(str, field); 
+  } 
+ } 
+ function checkDigit(num){ 
+  var Digit = "1234567890"; 
+  var string = num; 
+  var len = string.length 
+  var retVal = ""; 
+  for (i = 0; i < len; i++){ 
+  if (Digit.indexOf(string.substring(i, i+1)) >= 0){ 
+    retVal = retVal + string.substring(i, i+1); 
+  } 
+  } 
+  return retVal; 
+ } 
+ function phone_format(type, num){ 
+  if(type==1){ 
+  return num.replace(/([0-9]{4})([0-9]{4})/,"$1-$2"); 
+  }else if(type==2){ 
+  return num.replace(/([0-9]{2})([0-9]+)([0-9]{4})/,"$1-$2-$3"); 
+  }else{ 
+  return num.replace(/(^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3"); 
+  } 
+ } 
+ function error_numbr(str, field){ 
+  alert("정상적인 번호가 아닙니다."); 
+  field.value = ""; 
+  field.focus(); 
+ } 
+	 
+/*유효성 관련 스크립트*/
+	var reg1 =  /^[가-힣\s]+$/;
+    var reg2 =  /^[0-9]+$/;
+   function checkb() {
+      var sType_chk = false;
+      var sTypeList = document.getElementsByName("sTypeList")
+      var sTag = document.getElementsByName("sTag")
+      var sInfo = document.getElementsByName("sInfoSub")
+      var sRule = document.getElementsByName("sRule")
+   
+   for(var i=0;i<sTypeList.length;i++) {
+      if (sTypeList[i].checked==true){
+         sType_chk = true;
+         break;
+         }
+      }
+      if(!sType_chk){
+         alert("하나 이상 체크하세요.")
+      return false;
+   }
+   if($('#sName').val()=='' ){
+      alert("공간 이름을 작성하세요~><");
+      document.getElementById('sName').focus();
+   } else if($('#sPreview').val()=='' ){
+      alert("한줄 소개를 작성하세요~><");
+      document.getElementById('sPreview').focus();
+   } else if($('#sContent').val()=='' ){
+      alert("공간 소개를 작성하세요~><");
+      document.getElementById('sContent').focus();
+   }   else if(sTag.length == 0 ){
+      alert("태그 설정을 입력하세요~><");
+      document.getElementById('tag').focus();
+   } else if(sInfo.length==0){
+      alert("시설안내를 입력하세요~><");
+      document.getElementById('info').focus();
+   } else if($('#sImg1').val()=='' ){
+      alert("대표이미지를 확인하세요~><");
+      document.getElementById('info').focus();
+    } else if($('#zipcode').val()==''){
+      alert("우편번호를 확인하세요~><");
+      document.getElementById('details').focus();
+   }else if($('#sTel').val()==''|| reg2.test($('#sTel').val())){
+      alert("전화번호를 입력하세요~><");
+      document.getElementById('sTel').focus();
+   } else if(sRule.length==0){
+      alert("이용시 주의사항을 입력하세요~><");
+      document.getElementById('rule').focus();
+   }else{ 
+      var res = confirm("정보는 제대로 다 적으셨나여? ><");
+      if(res == true){
+      document.bf.submit();
+      }
+   }
+}
+
 </script>
 
 <!-- 지도관련 스크립트 -->
@@ -228,7 +291,7 @@ $(document).ready(function() {
   <tr><td colspan="2" align="center">공간정보</td></tr>
     <tr><td>공간 유형(최대 3개)</td>
         <td>
-        <form:checkboxes path="sTypeList" items="${sTypeNames}" onchange="chkboxcheck()"  />  
+        <form:checkboxes path="sTypeList" items="${sTypeNames}" onchange="chkboxcheck()" style="margin-left:10px;"/>  
         </td></tr>
            
     <tr><td>공간 이름(최대 20자)</td><td><form:input path="sName" /></td></tr>
@@ -295,17 +358,19 @@ $(document).ready(function() {
          </div></td></tr>
     <tr><td align="left">공간 연락처</td>
 		<td>
-		<input type="text" name="sTel" onkeyup="chk_tel(this.value,this);" > 
+		<input type="text" name="sTel" id="sTel"> 
 		</td></tr>
  
     <tr><td>이용시 주의사항(최대 10개)</td>
-        <td><input id="rule" />
+        <td><input id="rule"  onfocus="chk_tel()"/>
             <input type="button" id="addrule" value="추가" /></td></tr>
     <tr><td></td><td> <div id="ruleList">
               <!-- 이용시 주의사항 추가시 웹상에서 보여지는 부분 -->
             </div>
      
-     <tr><td colspan="2" align="center"><input type="button" value="공간등록" onclick="checkb()" id="request"></td></tr>
+     <tr><td colspan="2" align="center">
+     <input type="button" value="공간등록" onclick="checkb()" id="request">
+     <input type="button" value="등록취소" onclick="javascript:history.back()"></td></tr>
   </table>
 
 <!-- 지도관련 스크립트 -->
@@ -316,7 +381,10 @@ function drawmap(){
     console.log(myaddress);
     naver.maps.Service.geocode({address: myaddress}, function(status, response) {
         if (status !== naver.maps.Service.Status.OK) {
-            return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
+        	alert(myaddress + '의 지도검색 결과가 없거나 기타 네트워크 에러입니다. 우편번호를 다시 검색해주세요');
+        	$("#zipcode").val(null);
+        	$("#asdf").val(null);
+        	$("#details").focus();
         }
         var result = response.result;
         // 검색 결과 갯수: result.total

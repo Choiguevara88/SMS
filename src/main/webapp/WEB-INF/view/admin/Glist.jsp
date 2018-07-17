@@ -4,14 +4,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+<!-- 부트스트랩 사용 선언 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<!-- 부트스트랩 사용 선언-->
+
+<!-- w3 css 사용 선언 -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- w3 css 사용 선언-->
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>Guest 문의 목록</title>
+
 <script type="text/javascript">
 	function list(pageNum) {
 		if(searchType == null || searchType.length == 0) {
 			document.searchform.searchContent.value = "";
 			document.searchform.pageNum.value = "1";
-			location.href="Glist.sms?pageNum=" + pageNum+"&kind="+ 1;
+			location.href="Hlist.sms?pageNum=" + pageNum+"&kind="+ 1;
 		}else{
 			document.searchform.pageNum.value = pageNum;
 			document.searchform.submit();
@@ -19,76 +33,106 @@
 		}
 		return false;
 	}
+	
+	function win_open(num)	{
+		var op = "width=800,height=850,scrollbars=yes,left=50";
+			window.open("adminAnswerQuestion.sms?bNo=" + num, "HostAnswer", op);
+	}
 </script>
+
 <style type="text/css">
 #main{
-background: #ADD8E6; 
+	background: #FCE4EC;
+	font-family:'Hanna';
 }
 .balloon {
     display: inline-block;
     position: relative;
     background: #EEE8AA;
-    height: 70px;
-    width: 550px;
+    width: 500px;
     margin: 0 auto 10px;
     border-radius: 10px;
     border: 1px solid gray;
     padding: 10px;
+    font-size:large;
 }
 .balloon1 {
     display: inline-block;
     position: relative;
     background: #F8F8FF;
-    height: 70px;
-    width: 550px;
+    width: 500px;
     margin: 0 auto 10px;
     border-radius: 10px;
     border: 1px solid gray;
     padding: 10px;
+    font-size:large;
 }
  .writer {
     display: inline-block;
     position: relative;
     height: 30px;
-    width: 400px;
+    width: 500px;
     margin: 0 auto 10px;
 }
 </style>
 </head>
 <body>
-<br>
-<table width="80%" align="center" border="1" style="margin-top:10px">
-	<tr><td colspan="5" align="center">
-		<form action="Glist.sms" method="post" name="searchform" onsubmit="return list(1)" >
-			<label for="notice_txt">Guest Q&A 검색</label>
-			<input type="hidden" name="pageNum" value="1">
-			<select name="searchType" id="searchType">
-				<option value="">선택하세요</option>
-				<option value="id">아이디</option>
-				<option value="content">내용</option>
-			</select>&nbsp;
-		<script type="text/javascript">
-			if('${param.searchType}' != '') {
-				document.getElememntById("searchType").value='${param.searchType}'
-			}
-		</script>
-<input type="text" name="searchContent" value="${param.searchContent}">
-<input type="submit" value="검색">
-		</form></td></tr></table>
-		
+<div class="w3-container w3-margin w3-row">
+<div class="w3-col s2"><p>&nbsp;</p></div>
+<div class="w3-col s8">
+
+
+
+
+
+<div class="w3-container w3-margin">
+<h2 style="font-family:'Hanna';">Guest 계정 문의 내역</h2>
+<form action="Hlist.sms" method="post" name="searchform" onsubmit="return list(1)" >
+<div class="w3-container w3-margin w3-border w3-round" style="font-family:'Hanna';">
+<div class="w3-col s2 w3-margin" align="center">
+	<input type="hidden" name="pageNum" value="1">
+	
+	<select name="searchType" id="searchType" class="w3-select">
+	<option value="">Q&#38;A검색</option>
+	<option value="id">아이디</option>
+	<option value="content">내용</option>
+	</select>
+	
+	<script type="text/javascript">
+		if('${param.searchType}' != '') {
+			document.getElememntById("searchType").value='${param.searchType}'
+		}
+	</script>
+</div>
+<div class="w3-col s6 w3-margin">
+	<input type="text" name="searchContent" value="${param.searchContent}" class="w3-input">
+</div>
+<div class="w3-col s2 w3-margin">
+	<input type="submit" value="검 색" class="btn btn-outline-danger btn-block">
+</div>
+
+</div>
+</form>
+
+
+</div>
+<div id="main" class="w3-container w3-margin w3-padding w3-round">
 <% pageContext.setAttribute("newLineChar","\n"); %>
 	<c:forEach var="board" items="${gList}">
 	<c:if test="${board.refLevel != 0 }">
 <div align="left">
 	<c:set var="str" value="${fn:replace(board.content,'  ','&nbsp;&nbsp;') }"/>
 	<c:set var="str" value="${fn:replace(board.content,newLineChar,'<br>') }"/>
-		<div>
-			<div class="writer">관리자 (->${board.id})
-			(<fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd a hh:mm:ss"/>)<br>
-		</div>
 		<div class="balloon">
 		${str}
 		</div>
+		<div>
+			<div class="writer">${board.id}님께 답변
+			<font class="w3-text-gray">
+			(<fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd a hh:mm:ss"/>)<br>
+			</font>
+		</div>
+		
 		</div>
 </div>
 	</c:if>
@@ -100,16 +144,37 @@ background: #ADD8E6;
 		<div class="balloon1">
 		${str}
 		</div>
-			<div class="writer">${board.id} 
+			<div class="writer">
+			<font style="font-size:large">
+			${board.id}
+			</font>
+			<font class="w3-text-gray"> 
 			(<fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd a hh:mm:ss"/>)
-			<c:if test="${board.qType != 1 }">
-			<a href="adminAnswerQuestion.sms?bNo=${board.bNo}">답변하기</a><br></c:if>
-		</div>
-		</div>
+			</font>
+			
+			<c:if test="${board.qType == 0 }">
+			<font class="w3-text-red">
+				(미답변)
+			</font>
+			<a href="javascript:win_open('${board.bNo}')"  style="font-family:'Hanna';">[답변달기]</a>
+			</c:if>
+			
+			<c:if test="${board.qType == 1 }">
+			<font class="w3-text-blue">
+				(답변완료)
+			</font>
+			</c:if>
+	</div>
+	</div>
 </div>
 	</c:if>
-	<hr size="1">
 	</c:forEach>
-	
+</div>
+
+
+
+</div>
+<div class="w3-col s2"><p>&nbsp;</p></div>
+</div>
 </body>
 </html>

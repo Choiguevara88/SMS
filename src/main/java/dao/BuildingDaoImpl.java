@@ -102,4 +102,11 @@ public class BuildingDaoImpl implements BuildingDao {
 	public Integer getBuildingCount() {
 		return sqlSession.selectOne(NS+"buildingCount");
 	}
+
+	@Override
+	public int getbuilding_mainpage_2(int sNo) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("sNo", sNo - 1);
+		return sqlSession.selectOne(NS+"mainpagebuilding2", map);
+		}
 }

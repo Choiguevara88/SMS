@@ -18,6 +18,14 @@
 <!-- w3 css 사용 선언-->
 
 <title>관리자 페이지</title>
+
+<script type="text/javascript">
+	function win_open(num)	{
+		var op = "width=800,height=850,scrollbars=yes,left=50";
+			window.open("adminAnswerQuestion.sms?bNo=" + num, "HostAnswer", op);
+	}
+</script>
+
 </head>
 
 <body>
@@ -75,7 +83,8 @@
 			<td style="text-align:center; vertical-align:middle;">${gueQue.id}</td>
 			<td style="text-align:center; vertical-align:middle;">${fn:substring(gueQue.content,0,15)}...</td>
 			<td style="text-align:center; vertical-align:middle;"><fmt:formatDate value="${gueQue.regDate}" pattern="yy-MM-dd hh:mm:ss" /></td>
-			<td style="text-align:center; vertical-align:middle;"><a href="adminAnswerQuestion.sms?bNo=${gueQue.bNo}" style="font-family:'Hanna'" class="btn btn-outline-danger btn-sm">답변</a></td>
+			<td style="text-align:center; vertical-align:middle;">
+			<a href="javascript:win_open('${gueQue.bNo}')" style="font-family:'Hanna'" class="btn btn-outline-danger btn-sm">답변</a></td>
 		</tr>
 		</c:forEach>
 	</c:if>
@@ -104,7 +113,10 @@
 			<td style="text-align:center; vertical-align:middle;">${hosQue.id}</td>
 			<td style="text-align:center; vertical-align:middle;">${fn:substring(hosQue.content,0,15)}...</td>
 			<td style="text-align:center; vertical-align:middle;"><fmt:formatDate value="${hosQue.regDate}" pattern="yy-MM-dd hh:mm:ss" /></td>
-			<td style="text-align:center; vertical-align:middle;"><a href="adminAnswerQuestion.sms?bNo=${hosQue.bNo}" style="font-family:'Hanna'" class="btn btn-outline-primary btn-sm">답변</a></td>
+			<td style="text-align:center; vertical-align:middle;">
+			<a href="javascript:win_open('${hosQue.bNo}')" style="font-family:'Hanna'" class="btn btn-outline-primary btn-sm">답변</a>
+			
+			</td>
 		</tr>
 		</c:forEach>
 	</c:if>

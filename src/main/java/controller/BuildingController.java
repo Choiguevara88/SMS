@@ -60,7 +60,7 @@ public class BuildingController {
 	//鍮��⑺�� �깅�
 	@RequestMapping(value="building/buildingReg", method=RequestMethod.POST)
 	public ModelAndView buildingReg(Building building, HttpServletRequest request) {
-		System.out.println(building);
+
 		service.buildingReg(building, request);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/building/myBuildingList.sms?id="+building.getId());
@@ -463,6 +463,7 @@ public class BuildingController {
 			build.setsTagList(Arrays.asList(build.getsTag().split("[|]")));
 			build.setsTypeList(Arrays.asList(build.getsType().split("[|]")));
 		}
+		
 		mav.addObject("list", list);
 		
 		return mav;

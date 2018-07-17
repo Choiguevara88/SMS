@@ -1,5 +1,6 @@
 package controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -49,18 +50,130 @@ public class ReserveController {
 
 	// 예약을 등록할 때 호출되는 메서드
 	@RequestMapping(value = "reserve/regReserve", method = RequestMethod.POST)
-	public ModelAndView registerReserve(Reserve reserve, String reDate, HttpSession session, HttpServletRequest request) {
+	public ModelAndView registerReserve(Reserve reserve, HttpSession session, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
+		
+		if(!resCheckDate(reserve)) { // 예약날짜 중복 체크 하는 메서드
+			throw new ProjectException("예약 날짜가 중복됩니다.", "regReserve.sms?sNo=" + reserve.getsNo() +"&sRNo=" + reserve.getSrNo());
+		}
 
 		try {
 			service.reserveInsert(reserve);
 			mav.setViewName("redirect:/main.sms");
+			
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 			throw new ProjectException("전부 입력하셔야 합니다.", "regReserve.sms?sNo=" + reserve.getsNo() +"&sRNo=" + reserve.getSrNo());
 		}
 		
 		return mav;
+	}
+	
+	// 예약 시간 중복 체크를 하는 메서드
+	private boolean resCheckDate(Reserve reserve) {
+		
+		Room chkRoom = service.getRoom(reserve.getsNo(), reserve.getSrNo());
+		
+		long startDateMiSec = 0;
+		Date startChkDate = new Date();
+		long endDateMiSec = 0;
+		Date endChkDate = new Date();
+		
+		// 예약 단위 타입이 시간인 경우
+		if(chkRoom.getsResType() == 0) {
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH");
+			
+			// 나의 예약 날짜부터 6시간 이전까지의 시작 시간을 구한다.
+			startDateMiSec = reserve.getReDate().getTime() - (1000 * 60 * 60 * reserve.getReCnt());
+			startChkDate = new Date(startDateMiSec);
+						
+			// 나의 예약 날짜부터 6시간 이후까지의 종료 시간을 구한다.
+			endDateMiSec = reserve.getReDate().getTime() + (1000 * 60 * 60 * reserve.getReCnt());
+			endChkDate = new Date(endDateMiSec);
+			
+			// 시작 일자부터 종료 일자까지 기간(12시간)동안의 예약 객체를 불러온다.
+			List <Reserve> list = service.getReserveDateChkList(transFormat.format(startChkDate), 
+					transFormat.format(endChkDate), reserve.getsNo(), reserve.getSrNo());
+
+			for(Reserve dbRes : list) {
+				// DB의 시간이 예약시간 이전이라면..!
+				if (dbRes.getReDate().before(reserve.getReDate())) {
+					
+					long a = reserve.getReDate().getTime();	// 예약날짜를 밀리세컨으로
+					long b = dbRes.getReDate().getTime();	// DB날짜를 밀리세컨으로
+					
+					int c = (int)(a - b / (1000 * 60 * 60)); // 두 날짜의 차이를 시간 단위로 치환
+					
+					System.out.println("c:" + c);
+					
+					if(c <= dbRes.getReCnt()) { // DB상의 갯수보다 두 날짜의 차이가 작거나 같으면 false를 리턴
+						return false;
+					}
+				}
+				
+				// DB의 시간이 예약시간 이후라면..!
+				if (dbRes.getReDate().after(reserve.getReDate())) {
+					
+					long a = dbRes.getReDate().getTime();	// DB날짜를 밀리세컨으로
+					long b = reserve.getReDate().getTime();	// 예약날짜를 밀리세컨으로
+					
+					int c = (int)(a - b / (1000 * 60 * 60)); // 두 날짜의 차이를 시간 단위로 치환
+					
+					System.out.println("c:" + c);
+					
+					if(c <= reserve.getReCnt()) { // 나의 예약갯수보다 두 날짜의 차이가 작거나 같으면 false를 리턴
+						return false;
+					}
+				}
+			}
+		}
+		
+		// 예약 단위 타입이 일자인 경우
+		else if(chkRoom.getsResType() == 1) {
+			
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+						
+			// 나의 예약 날짜부터 6일 이전까지의 시작일자를 구한다.
+			startDateMiSec = reserve.getReDate().getTime() - (1000 * 60 * 60 * 24 * reserve.getReCnt());
+			startChkDate = new Date(startDateMiSec);
+			
+			// 나의 예약 날짜부터 6일 이후까지의 종료일자를 구한다.
+			endDateMiSec = reserve.getReDate().getTime() + (1000 * 60 * 60 * 24 * reserve.getReCnt());
+			endChkDate = new Date(endDateMiSec);
+			
+			// 시작 일자부터 종료 일자까지 기간(12일)동안의 예약 객체를 불러온다.
+			List <Reserve> list = service.getReserveDateChkList(transFormat.format(startChkDate), 
+					transFormat.format(endChkDate), reserve.getsNo(), reserve.getSrNo());
+			
+			for(Reserve dbRes : list) {
+				// DB의 날짜가 예약날짜 이전이라면..!
+				if (dbRes.getReDate().before(reserve.getReDate())) {
+					
+					long a = reserve.getReDate().getTime();	// 예약날짜를 밀리세컨으로
+					long b = dbRes.getReDate().getTime();	// DB날짜를 밀리세컨으로
+					
+					int c = (int)(a - b / (1000 * 60 * 60 * 24)); // 두 날짜의 차이를 일자로 치환
+					
+					if(c <= dbRes.getReCnt()) { // DB상의 갯수보다 두 날짜의 차이가 작거나 같으면 false를 리턴
+						return false;
+					}
+				}
+				
+				// DB의 날짜가 예약날짜 이후라면..!
+				if (dbRes.getReDate().after(reserve.getReDate())) {
+					
+					long a = dbRes.getReDate().getTime();	// DB날짜를 밀리세컨으로
+					long b = reserve.getReDate().getTime();	// 예약날짜를 밀리세컨으로
+					
+					int c = (int)(a - b / (1000 * 60 * 60 * 24)); // 두 날짜의 차이를 일자로 치환
+					
+					if(c <= reserve.getReCnt()) { // 나의 예약갯수보다 두 날짜의 차이가 작거나 같으면 false를 리턴
+						return false;
+					}
+				}
+			}
+		} 
+			return true;
 	}
 
 	// 예약을 수정할 때 호출되는 메서드
@@ -199,10 +312,8 @@ public class ReserveController {
 		Reserve reserve = service.getReserve(reNo);
 		
 		Room room = new Room();
-		
-		room.setsRNo(reserve.getSrNo());
-		room.setsNo(reserve.getsNo());
-		room = service.getMyRoom(room);
+
+		room = service.getRoom(reserve.getsNo(), reserve.getSrNo());
 		
 		Date endDate = new Date();
 		long plusTime = reserve.getReDate().getTime();
@@ -277,6 +388,25 @@ public class ReserveController {
 			throw new ProjectException("오류가 발생하였습니다.", "reserve/list.sms");
 		}
 		return mav;
+	}
+	
+	// 예약 등록 화면에서 특정 공간의 예약 확인 시 호출되는 메서드
+	@RequestMapping(value="reserve/reserveCheckList", method=RequestMethod.GET)
+	public ModelAndView resChkList(Integer sNo, Integer sRNo, HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		Room room = service.getRoom(sNo, sRNo);
+
+		int chkCnt = service.reserveChkCnt(sNo, sRNo);
+		List<Reserve> chkList = service.reserveChkList(sNo, sRNo);
+		
+		mav.addObject("chkCnt", chkCnt);
+		mav.addObject("chkList", chkList);
+		mav.addObject("sResType", room.getsResType());
+		
+		return mav;
+		
 	}
 
 	// 예약업무 관련하여 Default 호출값으로 지정한 메서드 : 특정 예약 보기, 예약 등록 화면

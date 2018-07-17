@@ -260,11 +260,11 @@ function dispifo(srno) {
 </div>
 
 <!-- 이용후기, Q&A -->
-<div id="listRlist"></div> 
+<div id="listQlist"></div>
 
 <hr size="1">
 
-<div id="listQlist"></div>
+<div id="listRlist"></div> 
 
 
 </div>
@@ -277,7 +277,10 @@ function dispifo(srno) {
 <br>
 <c:if test="${roomList.size() == 0}">
 <p align="center">등록된 세부공간이 없습니다.</p>
+<p align="center"><font color="red">호스트의 업데이트를 기다려주세요.</font></p>
+<c:if test="${sessionScope.loginMember.id == building.id }">
 <p align="center">세부공간을 등록하려면 <a href="roomList.sms?sNo=${param.sNo}">[세부공간 등록하기]</a> 를 눌러주세요.</p>
+</c:if>
 </c:if>
 
 <c:if test="${roomList.size() != 0}">

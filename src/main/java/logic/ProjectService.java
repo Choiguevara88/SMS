@@ -141,4 +141,12 @@ public interface ProjectService {
 	List<Building> getMyWishBuildings(String id);
 	Integer getBuildingCount();
 	
+	int reserveChkCnt(Integer sNo, Integer sRNo);
+	
+	List<Reserve> reserveChkList(Integer sNo, Integer sRNo);
+
+	List<Reserve> getReserveDateChkList(String startChkDate, String endChkDate, Integer sNo, Integer sRNo);
+	
+	int getbuilding_mainpage_2(int sNo);
+	
 }

@@ -125,4 +125,34 @@ public class ReserveDaoImpl implements ReserveDao {
 		map.put("reNo", reNo);
 		sqlSession.update(NS + "reviewWrite", map);
 	}
+
+	@Override
+	public int chkCnt(Integer sNo, Integer sRNo) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("sNo", sNo);
+		map.put("sRNo", sRNo);
+		return sqlSession.selectOne(NS + "chkCnt", map);
+	}
+
+	@Override
+	public List<Reserve> chkList(Integer sNo, Integer sRNo) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("sNo", sNo);
+		map.put("sRNo", sRNo);
+		return sqlSession.selectList(NS + "chkList", map);
+		
+	}
+
+	@Override
+	public List<Reserve> dateChkList(String startChkDate, String endChkDate, Integer sNo, Integer sRNo) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("startChkDate", startChkDate);
+		map.put("endChkDate", endChkDate);
+		map.put("sNo", sNo);
+		map.put("sRNo", sRNo);
+		
+		return sqlSession.selectList(NS + "chkDateList", map);
+	}
 }

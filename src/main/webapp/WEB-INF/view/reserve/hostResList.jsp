@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@ include file="/WEB-INF/view/jspHeader.jsp" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <fmt:requestEncoding value="UTF-8" />
 
@@ -138,16 +136,16 @@ select {width: 140px; /* 원하는 너비설정 */
 						<fmt:formatDate var="regdate" value="${res.regDate}" pattern="yyyyMMddhhmm" type="date" />
 
  						<c:if test="${today1 == redate}">
-							<td style="text-align:center; vertical-align:middle;"><fmt:formatDate value="${res.reDate}" pattern="hh:mm:ss" /></td>
+							<td style="text-align:center; vertical-align:middle;"><fmt:formatDate value="${res.reDate}" pattern="HH:mm:ss" /></td>
 						</c:if>
 
 						<c:if test="${today1 != redate}">
 							<td style="text-align:center; vertical-align:middle;"><fmt:formatDate value="${res.reDate}"
-									pattern="yyyy-MM-dd hh시" /></td>
+									pattern="yyyy-MM-dd HH시" /></td>
 						</c:if>
 						
 						<td style="text-align:center; vertical-align:middle;">
-							<fmt:formatDate value="${res.regDate}" pattern="yyyy-MM-dd hh:mm:ss" />
+							<fmt:formatDate value="${res.regDate}" pattern="yyyy-MM-dd HH:mm:ss" />
 						</td>
 						<td style="text-align:center; vertical-align:middle;">
 							<fmt:formatNumber value="${res.totPrice}" pattern="###,###"/>

@@ -5,6 +5,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<!-- 부트스트랩 사용 선언 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<!-- 부트스트랩 사용 선언-->
+
+<!-- w3 css 사용 선언 -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- w3 css 사용 선언 -->
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>1:1 문의</title>
 <script type="text/javascript"
@@ -51,16 +63,34 @@ function listReply(){
 </script>
 </head> 
 <body>
-<div id="listReply"></div>
+
+<div class="w3-row w3-margin">
+<div class="w3-col s2"><p>&nbsp;</p></div>
+<div class="w3-col s8">
+
+<div id="listReply" class="w3-container"></div>
+
+<div class="w3-container w3-padding">
 <form method="post" name="f" action="questionAdmin.sms">
-	<input type="hidden" name="kind" value="${kind}">
-	<input type="hidden" name="id" value="${sessionScope.loginMember.id }"/>
-	<table border="1" align="center" >
-		<tr><td><textarea rows="2" cols="80" id="content" placeholder="입력해 주세요."></textarea>
-	</td><td>
-		<input type="button" id="btnReply" value="댓글쓰기">
+<input type="hidden" name="kind" value="${kind}">
+<input type="hidden" name="id" value="${sessionScope.loginMember.id }"/>
+
+<table class="w3-table">
+	<tr>
+		<td><textarea id="content" placeholder="문의사항을 입력해 주세요." class="w3-input"></textarea>
+	</td>
+	<td>
+		<input type="button" id="btnReply" value="문의하기" class="btn btn-outline-primary btn-lg btn-block">
+	</td>
 	</tr>
 </table>
 </form>
+
+</div>
+
+</div>
+<div class="w3-col s2"><p>&nbsp;</p></div>
+</div>
+	
 </body>
 </html>
