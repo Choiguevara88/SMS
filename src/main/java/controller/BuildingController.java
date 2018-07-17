@@ -145,7 +145,7 @@ public class BuildingController {
 	
 	// 빌딩 검색 및 리스트용 메서드
 	@RequestMapping(value="building/buildingList", method=RequestMethod.GET)
-	public ModelAndView buildingList(String searchType, String searchContent, Integer pageNum, HttpSession session) {
+	public ModelAndView searchBuildingList(String searchType, String searchContent, Integer pageNum, HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
 		

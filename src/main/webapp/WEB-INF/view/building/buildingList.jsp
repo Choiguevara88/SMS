@@ -30,9 +30,11 @@
 		
 		if(searchType == null || searchType.length == 0) {
 			document.searchform.searchContent.value = "";
-			document.searchform.pageNum.value = "1";
-			location.href="buildingList.sms";
+			document.searchform.pageNum.value = pageNum;
+			document.searchform.submit();
+			return true;
 		} else {
+			document.searchform.pageNum.value = pageNum;
 			document.searchform.submit();
 			return true;
 		}

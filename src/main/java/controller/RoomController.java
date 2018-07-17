@@ -2,7 +2,6 @@ package controller;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -91,6 +90,7 @@ public class RoomController {
 		try {
 		Room myRoom = service.getMyRoom(room);
 		mav.addObject("room", myRoom);
+		System.out.println(myRoom);
 		mav.setViewName("room/roomDetail");
 		}catch(Exception e){
 			Integer sNo = room.getsNo();
