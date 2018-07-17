@@ -115,7 +115,7 @@
 				<!-- 건물의 태그의 정보를 뿌리는 구간 -->
 				<c:forEach items="${building.sTagList}" var="taglist">
 					<span class='w3-tag w3-tiny w3-pale-yellow w3-round-xlarge w3-border w3-border-pale-yellow w3-center'>#&nbsp;${taglist}</span>
-				</c:forEach><br/>
+				</c:forEach><br>
 				<!-- 건물의 태그의 정보를 뿌리는 구간 -->
 				
 				<!-- 건물 유형의 정보를 뿌리는 구간 -->
