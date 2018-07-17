@@ -128,15 +128,12 @@ public class BuildingController {
 		List<Room> roomList = service.getmyRoomList(ssNo);
 		
 		ModelAndView mav = new ModelAndView();
-		String[] address = building.getsAddress().split(",");
-		String address1 = "";
-		for(int i=2;i<address.length;i++) {
-			address1 += " " + address[i]; 
-		}
 		
+		String address = building.getsAddress().split(",")[1];
+		String address1 = building.getsAddress().split(",")[1] +" "+building.getsAddress().split(",")[2];
 		mav.addObject("building", building);
-		mav.addObject("address",address[1]);  //중간주소
-		mav.addObject("address1", address[1] + address1);  //전체주소
+		mav.addObject("address",address);
+		mav.addObject("address1", address1);
 		mav.addObject("roomList", roomList);
 		return mav;
 	}
@@ -530,6 +527,16 @@ public class BuildingController {
 		mav.addObject("list", list);
 		mav.addObject("chk", chk);
 		
+		return mav;
+	}
+	@RequestMapping(value="building/rImgList.sms", method=RequestMethod.GET) // 찜한 공간 목록 불러올 때 사용하는 메서드
+	public ModelAndView rImgList(HttpServletRequest request) {
+		String srno = request.getParameter("sRNo");
+		List<String> list = service.getImgList(srno);
+		System.out.println(list);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("building/rImgList");
 		return mav;
 	}
 }

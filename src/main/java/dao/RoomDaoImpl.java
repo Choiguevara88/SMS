@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,5 +83,12 @@ public class RoomDaoImpl implements RoomDao{
 		@Override
 		public void budelete(Integer sNo) {
 			sqlSession.getMapper(RoomMapper.class).budelete(sNo);
+		}
+		
+		@Override
+		public List<String> getImgList(String srno) {
+			String imgList = sqlSession.getMapper(RoomMapper.class).getImgList(srno);
+			List<String> list = new ArrayList<String>(Arrays.asList(imgList.split("[|]")));
+			return list;
 		}
 }
