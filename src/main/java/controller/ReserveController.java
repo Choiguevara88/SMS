@@ -79,6 +79,8 @@ public class ReserveController {
 		long endDateMiSec = 0;
 		Date endChkDate = new Date();
 		
+		System.out.println("chkRoom의 resType : " + chkRoom.getsResType());
+		
 		// 예약 단위 타입이 시간인 경우
 		if(chkRoom.getsResType() == 0) {
 			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH");
@@ -94,8 +96,11 @@ public class ReserveController {
 			// 시작 일자부터 종료 일자까지 기간(12시간)동안의 예약 객체를 불러온다.
 			List <Reserve> list = service.getReserveDateChkList(transFormat.format(startChkDate), 
 					transFormat.format(endChkDate), reserve.getsNo(), reserve.getSrNo());
+			
+			System.out.println("list : " + list);
 
 			for(Reserve dbRes : list) {
+				
 				// DB의 시간이 예약시간 이전이라면..!
 				if (dbRes.getReDate().before(reserve.getReDate())) {
 					
@@ -109,6 +114,11 @@ public class ReserveController {
 					if(c <= dbRes.getReCnt()) { // DB상의 갯수보다 두 날짜의 차이가 작거나 같으면 false를 리턴
 						return false;
 					}
+				}
+				
+				// 같은 시간대라면..!
+				if (transFormat.format(dbRes.getReDate()).equals(transFormat.format(reserve.getReDate()))) {
+					return false;
 				}
 				
 				// DB의 시간이 예약시간 이후라면..!
@@ -158,6 +168,11 @@ public class ReserveController {
 						return false;
 					}
 				}
+
+				// 같은 날짜라면..!
+				if (transFormat.format(dbRes.getReDate()).equals(transFormat.format(reserve.getReDate()))) {
+					return false;
+				}
 				
 				// DB의 날짜가 예약날짜 이후라면..!
 				if (dbRes.getReDate().after(reserve.getReDate())) {
@@ -172,8 +187,9 @@ public class ReserveController {
 					}
 				}
 			}
-		} 
-			return true;
+		}
+		System.out.println("!!!!!!!!!!!!!!예약 메서드 조건 충족 확인!!!!!!!!!!!!!!!!!");
+		return true;
 	}
 
 	// 예약을 수정할 때 호출되는 메서드
