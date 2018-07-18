@@ -106,65 +106,30 @@ public class RoomController {
          mav.addObject("building", building);
          Room myRoom = service.getMyRoom(room);
          List<String> sRInfoNames1 = new ArrayList<String>();
-<<<<<<< HEAD
-         sRInfoNames1.add("<i class='material-icons'>devices</i> TV/ÇÁ·ÎÁ§ÅÍ");
-         sRInfoNames1.add("<i class='material-icons'>local_printshop</i> º¹»ç±â/ÀÎ¼â±â");
-         sRInfoNames1.add("<i class='material-icons'>local_bar</i> ÁÖ·ù¹İÀÔ°¡´É");
-         sRInfoNames1.add("<i class='material-icons'>hot_tub</i> »ş¿ö½Ã¼³");
-=======
          sRInfoNames1.add("<i class='material-icons'>devices</i> TV/í”„ë¡œì í„°");
          sRInfoNames1.add("<i class='material-icons'>local_printshop</i> ë³µì‚¬ê¸°/ì¸ì‡„ê¸°");
          sRInfoNames1.add("<i class='material-icons'>local_bar</i> ì£¼ë¥˜ë°˜ì…ê°€ëŠ¥");
          sRInfoNames1.add("<i class='material-icons'>hot_tub</i> ìƒ¤ì›Œì‹œì„¤");
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
          List<String> sRInfoNames2 = new ArrayList<String>();
-<<<<<<< HEAD
-         sRInfoNames2.add("<i class='material-icons'>wifi</i> ÀÎÅÍ³İ/WIFI");
-         sRInfoNames2.add("<i class='material-icons'>airplay</i> È­ÀÌÆ®º¸µå");
-         sRInfoNames2.add("<i class='material-icons'>settings_voice</i> À½Çâ/¸¶ÀÌÅ©");
-         sRInfoNames2.add("<i class='material-icons'>kitchen</i> Ãë»ç½Ã¼³");
-=======
          sRInfoNames2.add("<i class='material-icons'>wifi</i> ì¸í„°ë„·/WIFI");
          sRInfoNames2.add("<i class='material-icons'>airplay</i> í™”ì´íŠ¸ë³´ë“œ");
          sRInfoNames2.add("<i class='material-icons'>settings_voice</i> ìŒí–¥/ë§ˆì´í¬");
          sRInfoNames2.add("<i class='material-icons'>kitchen</i> ì·¨ì‚¬ì‹œì„¤");
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
          List<String> sRInfoNames3 = new ArrayList<String>();
-<<<<<<< HEAD
-         sRInfoNames3.add("<i class='material-icons'>cake</i> À½½Ä¹°¹İÀÔ°¡´É");
-         sRInfoNames3.add("<i class='material-icons'>time_to_leave</i> ÁÖÂ÷");
-         sRInfoNames3.add("<i class='material-icons'>smoke_free</i> ±İ¿¬");
-         sRInfoNames3.add("<i class='material-icons'>desktop_windows</i> PC/³ëÆ®ºÏ");
-=======
          sRInfoNames3.add("<i class='material-icons'>cake</i> ìŒì‹ë¬¼ë°˜ì…ê°€ëŠ¥");
          sRInfoNames3.add("<i class='material-icons'>time_to_leave</i> ì£¼ì°¨");
          sRInfoNames3.add("<i class='material-icons'>smoke_free</i> ê¸ˆì—°");
          sRInfoNames3.add("<i class='material-icons'>desktop_windows</i> PC/ë…¸íŠ¸ë¶");
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
          List<String> sRInfoNames4 = new ArrayList<String>();
-<<<<<<< HEAD
-         sRInfoNames4.add("<i class='material-icons'>event_seat</i> ÀÇÀÚ/Å×ÀÌºí");
-         sRInfoNames4.add("<i class='material-icons'>wc</i> ³»ºÎÈ­Àå½Ç");
-         sRInfoNames4.add("<i class='material-icons'>accessibility</i> Å»ÀÇ½Ç");
-         sRInfoNames4.add("<i class='material-icons'>beach_access</i> Å×¶ó½º/·çÇÁÅ¾");
-=======
          sRInfoNames4.add("<i class='material-icons'>event_seat</i> ì˜ì/í…Œì´ë¸”");
          sRInfoNames4.add("<i class='material-icons'>wc</i> ë‚´ë¶€í™”ì¥ì‹¤");
          sRInfoNames4.add("<i class='material-icons'>accessibility</i> íƒˆì˜ì‹¤");
          sRInfoNames4.add("<i class='material-icons'>beach_access</i> í…Œë¼ìŠ¤/ë£¨í”„íƒ‘");
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
          List<String> sRInfoNames5 = new ArrayList<String>();
-<<<<<<< HEAD
-         sRInfoNames5.add("<i class='material-icons'>weekend</i> °ø¿ë¶ó¿îÁö");
-         sRInfoNames5.add("<i class='material-icons'>nature_people</i> Àü½Å°Å¿ï");
-         sRInfoNames5.add("<i class='material-icons'>restaurant</i> ¹Ùº£Å¥½Ã¼³");
-         sRInfoNames5.add("<i class='material-icons'>dialpad</i> µµ¾î¶ô");
-=======
          sRInfoNames5.add("<i class='material-icons'>weekend</i> ê³µìš©ë¼ìš´ì§€");
          sRInfoNames5.add("<i class='material-icons'>nature_people</i> ì „ì‹ ê±°ìš¸");
          sRInfoNames5.add("<i class='material-icons'>restaurant</i> ë°”ë² íì‹œì„¤");
          sRInfoNames5.add("<i class='material-icons'>dialpad</i> ë„ì–´ë½");
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
          mav.addObject("sRInfoNames1", sRInfoNames1);
          mav.addObject("sRInfoNames2", sRInfoNames2);
          mav.addObject("sRInfoNames3", sRInfoNames3);
@@ -189,65 +154,30 @@ public class RoomController {
          mav.addObject("sNo",sNo);
          mav.addObject("sRNo",sRNo);
          List<String> sRInfoNames1 = new ArrayList<String>();
-<<<<<<< HEAD
-         sRInfoNames1.add("<i class='material-icons'>devices</i> TV/ÇÁ·ÎÁ§ÅÍ");
-         sRInfoNames1.add("<i class='material-icons'>local_printshop</i> º¹»ç±â/ÀÎ¼â±â");
-         sRInfoNames1.add("<i class='material-icons'>local_bar</i> ÁÖ·ù¹İÀÔ°¡´É");
-         sRInfoNames1.add("<i class='material-icons'>hot_tub</i> »ş¿ö½Ã¼³");
-=======
          sRInfoNames1.add("<i class='material-icons'>devices</i> TV/í”„ë¡œì í„°");
          sRInfoNames1.add("<i class='material-icons'>local_printshop</i> ë³µì‚¬ê¸°/ì¸ì‡„ê¸°");
          sRInfoNames1.add("<i class='material-icons'>local_bar</i> ì£¼ë¥˜ë°˜ì…ê°€ëŠ¥");
          sRInfoNames1.add("<i class='material-icons'>hot_tub</i> ìƒ¤ì›Œì‹œì„¤");
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
          List<String> sRInfoNames2 = new ArrayList<String>();
-<<<<<<< HEAD
-         sRInfoNames2.add("<i class='material-icons'>wifi</i> ÀÎÅÍ³İ/WIFI");
-         sRInfoNames2.add("<i class='material-icons'>airplay</i> È­ÀÌÆ®º¸µå");
-         sRInfoNames2.add("<i class='material-icons'>settings_voice</i> À½Çâ/¸¶ÀÌÅ©");
-         sRInfoNames2.add("<i class='material-icons'>kitchen</i> Ãë»ç½Ã¼³");
-=======
          sRInfoNames2.add("<i class='material-icons'>wifi</i> ì¸í„°ë„·/WIFI");
          sRInfoNames2.add("<i class='material-icons'>airplay</i> í™”ì´íŠ¸ë³´ë“œ");
          sRInfoNames2.add("<i class='material-icons'>settings_voice</i> ìŒí–¥/ë§ˆì´í¬");
          sRInfoNames2.add("<i class='material-icons'>kitchen</i> ì·¨ì‚¬ì‹œì„¤");
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
          List<String> sRInfoNames3 = new ArrayList<String>();
-<<<<<<< HEAD
-         sRInfoNames3.add("<i class='material-icons'>cake</i> À½½Ä¹°¹İÀÔ°¡´É");
-         sRInfoNames3.add("<i class='material-icons'>time_to_leave</i> ÁÖÂ÷");
-         sRInfoNames3.add("<i class='material-icons'>smoke_free</i> ±İ¿¬");
-         sRInfoNames3.add("<i class='material-icons'>desktop_windows</i> PC/³ëÆ®ºÏ");
-=======
          sRInfoNames3.add("<i class='material-icons'>cake</i> ìŒì‹ë¬¼ë°˜ì…ê°€ëŠ¥");
          sRInfoNames3.add("<i class='material-icons'>time_to_leave</i> ì£¼ì°¨");
          sRInfoNames3.add("<i class='material-icons'>smoke_free</i> ê¸ˆì—°");
          sRInfoNames3.add("<i class='material-icons'>desktop_windows</i> PC/ë…¸íŠ¸ë¶");
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
          List<String> sRInfoNames4 = new ArrayList<String>();
-<<<<<<< HEAD
-         sRInfoNames4.add("<i class='material-icons'>event_seat</i> ÀÇÀÚ/Å×ÀÌºí");
-         sRInfoNames4.add("<i class='material-icons'>wc</i> ³»ºÎÈ­Àå½Ç");
-         sRInfoNames4.add("<i class='material-icons'>accessibility</i> Å»ÀÇ½Ç");
-         sRInfoNames4.add("<i class='material-icons'>beach_access</i> Å×¶ó½º/·çÇÁÅ¾");
-=======
          sRInfoNames4.add("<i class='material-icons'>event_seat</i> ì˜ì/í…Œì´ë¸”");
          sRInfoNames4.add("<i class='material-icons'>wc</i> ë‚´ë¶€í™”ì¥ì‹¤");
          sRInfoNames4.add("<i class='material-icons'>accessibility</i> íƒˆì˜ì‹¤");
          sRInfoNames4.add("<i class='material-icons'>beach_access</i> í…Œë¼ìŠ¤/ë£¨í”„íƒ‘");
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
          List<String> sRInfoNames5 = new ArrayList<String>();
-<<<<<<< HEAD
-         sRInfoNames5.add("<i class='material-icons'>weekend</i> °ø¿ë¶ó¿îÁö");
-         sRInfoNames5.add("<i class='material-icons'>nature_people</i> Àü½Å°Å¿ï");
-         sRInfoNames5.add("<i class='material-icons'>restaurant</i> ¹Ùº£Å¥½Ã¼³");
-         sRInfoNames5.add("<i class='material-icons'>dialpad</i> µµ¾î¶ô");
-=======
          sRInfoNames5.add("<i class='material-icons'>weekend</i> ê³µìš©ë¼ìš´ì§€");
          sRInfoNames5.add("<i class='material-icons'>nature_people</i> ì „ì‹ ê±°ìš¸");
          sRInfoNames5.add("<i class='material-icons'>restaurant</i> ë°”ë² íì‹œì„¤");
          sRInfoNames5.add("<i class='material-icons'>dialpad</i> ë„ì–´ë½");
->>>>>>> branch 'master' of https://github.com/Choiguevara88/SMS.git
          mav.addObject("sRInfoNames1", sRInfoNames1);
          mav.addObject("sRInfoNames2", sRInfoNames2);
          mav.addObject("sRInfoNames3", sRInfoNames3);
