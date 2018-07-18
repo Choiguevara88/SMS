@@ -25,7 +25,7 @@
 		if(searchType == null || searchType.length == 0) {
 			document.searchform.searchContent.value = "";
 			document.searchform.pageNum.value = "1";
-			location.href="Hlist.sms?pageNum=" + pageNum+"&kind="+ 1;
+			location.href="Hlist.sms?pageNum=" + pageNum+"&kind="+ 5;
 		}else{
 			document.searchform.pageNum.value = pageNum;
 			document.searchform.submit();

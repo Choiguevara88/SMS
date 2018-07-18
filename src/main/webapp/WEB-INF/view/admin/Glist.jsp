@@ -25,7 +25,7 @@
 		if(searchType == null || searchType.length == 0) {
 			document.searchform.searchContent.value = "";
 			document.searchform.pageNum.value = "1";
-			location.href="Hlist.sms?pageNum=" + pageNum+"&kind="+ 1;
+			location.href="Glist.sms?pageNum=" + pageNum+"&kind="+ 4;
 		}else{
 			document.searchform.pageNum.value = pageNum;
 			document.searchform.submit();
@@ -87,7 +87,7 @@
 
 <div class="w3-container w3-margin">
 <h2 style="font-family:'Hanna';">Guest 계정 문의 내역</h2>
-<form action="Hlist.sms" method="post" name="searchform" onsubmit="return list(1)" >
+<form action="Glist.sms" method="post" name="searchform" onsubmit="return list(1)" >
 <div class="w3-container w3-margin w3-border w3-round" style="font-family:'Hanna';">
 <div class="w3-col s2 w3-margin" align="center">
 	<input type="hidden" name="pageNum" value="1">
